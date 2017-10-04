@@ -7,8 +7,6 @@ import Store from './store';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-
-
 //we import our component from our component folder to use here
 import SignIn from './pages/Login/SignIn';
 import AddProp from './pages/AddProperty/AddProp';

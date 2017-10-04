@@ -3,6 +3,8 @@ import React from 'react';
 import axios from 'axios';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
+import API from '../../api/helpers.js';
+
 class BrowseListings extends React.Component{
 
     constructor(props){
@@ -15,7 +17,7 @@ class BrowseListings extends React.Component{
 
     componentDidMount=()=>{
         var self = this;
-        axios.get("http://localhost:8081/api/pics/getlistings").then((docs)=>{
+        API.getpics().then((docs)=>{
             this.setState({houses: docs.data});
         })
         

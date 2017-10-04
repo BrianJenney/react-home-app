@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import * as loginActions from '../../actions/login';
 import { createHashHistory } from 'history';
 
+import API from '../../api/helpers.js';
+
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
@@ -36,13 +38,11 @@ onChange=(e)=>{
 
 submitUser=()=>{
 
-  axios.post('http://localhost:8081/api/user/login/', this.state).then((response)=>{
+  API.login(this.state).then((response)=>{
     if(typeof response.data.errors !== `undefined`){ 
       this.setState({error: response.data.message});
       return;
     }
-
-    console.log(response);
   
     const user={
       isLogged: true,
