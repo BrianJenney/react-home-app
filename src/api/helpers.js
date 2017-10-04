@@ -2,6 +2,8 @@ import axios from "axios";
 
 const ENV = process.env.NODE_ENV;
 
+console.log(ENV);
+
 const url = (ENV === 'development' ? "http://localhost:8081" : "https://react-web-services.herokuapp.com/");
 
 export default {
