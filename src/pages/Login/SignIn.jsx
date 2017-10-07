@@ -153,7 +153,6 @@ render(){
 }
 
 function mapStateToProps(state){
-  console.log(state);
     return {
         id: state.loggedIn.id
     };

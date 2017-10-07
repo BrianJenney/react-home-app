@@ -4,7 +4,7 @@ const ENV = process.env.NODE_ENV;
 
 console.log(ENV);
 
-const url = (ENV === 'development' ? "http://localhost:8081" : "https://react-web-services.herokuapp.com/");
+const url = (window.location.href.indexOf('localhost') > -1 ? "http://localhost:8081" : "https://react-web-services.herokuapp.com/");
 
 export default {
 
