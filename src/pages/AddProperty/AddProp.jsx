@@ -1,5 +1,6 @@
 import React from 'react';
-import axios from 'axios';
+
+import API from '../../api/helpers.js';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -16,7 +17,6 @@ class AddProp extends React.Component {
     this.state={
       disabled: false,
       imgUrl: '',
-      disabled: true,
       price: 0,
       city:'',
       state: '',
@@ -32,8 +32,6 @@ class AddProp extends React.Component {
 
   submitPic=()=>{
 
-    console.log(this.props.id);
-
     const picItem = {
       userid: this.props.id,
       imgUrl: this.state.imgUrl,
@@ -43,18 +41,15 @@ class AddProp extends React.Component {
       zip: this.state.zip 
     }
 
-    axios.post("http://localhost:8081/api/pics/upload/", picItem).then(function(response){
-      console.log(response.data);
+    API.posthome(picItem).then(function(response){
+      this.props.history.push("/nav");
     });
   };
 
    render() {
      
-      return (
-
-        
+      return (     
          <div>
-
             <div className="text-center">
               <img src={this.state.imgUrl} alt="Upload a Pic of Your House"/>
             </div>

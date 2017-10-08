@@ -1,8 +1,7 @@
 
 import React from 'react';
-import axios from 'axios';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import { createHashHistory } from 'history';
+import {Card, CardHeader, CardMedia, CardTitle} from 'material-ui/Card';
+
 
 class NavPage extends React.Component{
 

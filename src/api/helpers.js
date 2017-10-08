@@ -9,8 +9,10 @@ const url = (window.location.href.indexOf('localhost') > -1 ? "http://localhost:
 export default {
 
   login: function(user) {
-    console.log(user);
     return axios.post(url + "/api/user/login/", user);
+  },
+  register: function(user){
+    return axios.post(url + "/api/user/register/", user);
   },
   posthome: function(home) {
     return axios.post(url + "/api/pics/upload/", home);

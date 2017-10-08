@@ -1,10 +1,8 @@
 
 import React from 'react';
-import axios from 'axios';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as loginActions from '../../actions/login';
-import { createHashHistory } from 'history';
 
 import API from '../../api/helpers.js';
 
@@ -12,7 +10,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
-const history = createHashHistory();
 
 class SignIn extends React.Component{
 
@@ -36,11 +33,23 @@ onChange=(e)=>{
   this.setState(user);
 };
 
-submitUser=()=>{
+submitUser=(type)=>{
+  if(type === 'login'){
+    this.login();
+  }else{
+    this.register();
+  }
+};
 
+login=()=>{
   API.login(this.state).then((response)=>{
     if(typeof response.data.errors !== `undefined`){ 
       this.setState({error: response.data.message});
+      return;
+    }
+
+    if(response.data.length === 0){
+      this.setState({error: 'This user does not exist'});
       return;
     }
   
@@ -48,6 +57,25 @@ submitUser=()=>{
       isLogged: true,
       name: this.state.email,
       id: response.data[0]._id
+    };
+
+    this.props.actions.login(user); 
+    this.props.history.push("/nav");
+
+  })
+};
+
+register=()=>{
+  API.register(this.state).then((response)=>{
+    if(typeof response.data.errmsg !== `undefined`){ 
+      this.setState({error: response.data.errmsg});
+      return;
+    }
+  
+    const user={
+      isLogged: true,
+      name: this.state.email,
+      id: response.data._id
     };
 
     this.props.actions.login(user); 
@@ -136,14 +164,21 @@ render(){
 
         </div>
 
-        <p>{this.state.error}</p>
+        <p className="text-muted">{this.state.error}</p>
 
         <RaisedButton 
           primary={true}
           disabled={this.state.password.length < 1 ||
           this.state.email.length < 1}
-          onClick={this.submitUser}
-          label="Enter"/>
+          onClick={this.submitUser.bind(this, 'login')}
+          label="Login"/>
+
+        <RaisedButton 
+          primary={true}
+          disabled={this.state.password.length < 1 ||
+          this.state.email.length < 1}
+          onClick={this.submitUser.bind(this, 'register')}
+          label="Register"/>
       </div>
 
     </div>

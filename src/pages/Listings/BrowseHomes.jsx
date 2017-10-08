@@ -1,7 +1,6 @@
 
 import React from 'react';
-import axios from 'axios';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardMedia, CardTitle} from 'material-ui/Card';
 
 import API from '../../api/helpers.js';
 
@@ -16,7 +15,6 @@ class BrowseListings extends React.Component{
     };
 
     componentDidMount=()=>{
-        var self = this;
         API.getpics().then((docs)=>{
             this.setState({houses: docs.data});
         })
@@ -43,7 +41,7 @@ class BrowseListings extends React.Component{
                     return(
                         <Card key={i}>
                             <CardMedia
-                            overlay={<CardTitle title={'$'  + house.price} subtitle={house.city.toUpperCase()} />}
+                            overlay={<CardTitle title={'$'  + house.price} subtitle={house.city.toUpperCase() + ", " + house.zip} />}
                             >
                             <img width="50" src={house.imgUrl} alt="house" />
                             </CardMedia>
