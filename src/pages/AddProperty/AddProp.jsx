@@ -1,6 +1,7 @@
 import React from 'react';
 
 import API from '../../api/helpers.js';
+import NavBar from '../../components/NavBar';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -50,6 +51,7 @@ class AddProp extends React.Component {
      
       return (     
          <div>
+          <NavBar selectedIndex={1}/>
             <div className="text-center">
               <img src={this.state.imgUrl} alt="Upload a Pic of Your House"/>
             </div>
@@ -103,6 +105,7 @@ class AddProp extends React.Component {
               disabled={this.state.price < 1 || this.state.city.length < 1 || this.state.zip.toString().length < 5 || this.state.imgUrl.length < 3}/>
                 
             </div>
+            
          </div>
       );
    }

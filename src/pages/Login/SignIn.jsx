@@ -10,7 +10,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
-
 class SignIn extends React.Component{
 
 constructor(props){
@@ -68,7 +67,7 @@ login=()=>{
 register=()=>{
   API.register(this.state).then((response)=>{
     if(typeof response.data.errmsg !== `undefined`){ 
-      this.setState({error: response.data.errmsg});
+      this.setState({error: response.data.errmsg.indexOf('duplicate') ? 'That username is already taken' : response.data.errmsg});
       return;
     }
   
@@ -167,6 +166,7 @@ render(){
         <p className="text-muted">{this.state.error}</p>
 
         <RaisedButton 
+          style={{marginRight: `5%`}}
           primary={true}
           disabled={this.state.password.length < 1 ||
           this.state.email.length < 1}
@@ -176,10 +176,12 @@ render(){
         <RaisedButton 
           primary={true}
           disabled={this.state.password.length < 1 ||
-          this.state.email.length < 1}
+          this.state.email.length < 1 || this.state.SSN.toString().length < 8 || this.state.userType === '' || Number(this.state.income) < 1}
           onClick={this.submitUser.bind(this, 'register')}
           label="Register"/>
       </div>
+
+      
 
     </div>
   )

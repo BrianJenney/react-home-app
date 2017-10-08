@@ -24,7 +24,7 @@ ReactDOM.render(
         <Route path="/addproperty" component={AddProp} />
         <Route path="/nav" component={Nav} /> 
         <Route path="/listings" component={Listings}/>
-      </div>
+      </div>    
     </Router >
   </Provider>
   </MuiThemeProvider>,

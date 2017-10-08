@@ -3,6 +3,7 @@ import React from 'react';
 import {Card, CardMedia, CardTitle} from 'material-ui/Card';
 
 import API from '../../api/helpers.js';
+import NavBar from '../../components/NavBar';
 
 class BrowseListings extends React.Component{
 
@@ -35,19 +36,24 @@ class BrowseListings extends React.Component{
 
     render(){
         return(
-            <div className="col-md-4 col-md-offset-4">
-                <h1>House Listings</h1>
-                {this.state.houses.map((house, i)=>{
-                    return(
-                        <Card key={i}>
-                            <CardMedia
-                            overlay={<CardTitle title={'$'  + house.price} subtitle={house.city.toUpperCase() + ", " + house.zip} />}
-                            >
-                            <img width="50" src={house.imgUrl} alt="house" />
-                            </CardMedia>
-                        </Card>
-                    )
-                })}
+            <div>
+                <NavBar selectedIndex={2}/>
+                <div className="col-md-4 col-md-offset-4">
+                    <h1>House Listings</h1>
+                    {this.state.houses.map((house, i)=>{
+                        return(
+                            <Card key={i}>
+                                <CardMedia
+                                overlay={<CardTitle title={'$'  + house.price} subtitle={house.city.toUpperCase() + ", " + house.zip} />}
+                                >
+                                <img width="50" src={house.imgUrl} alt="house" />
+                                </CardMedia>
+                            </Card>
+                        )
+                    })}
+                    
+                </div>
+                
             </div>
         )
     };
