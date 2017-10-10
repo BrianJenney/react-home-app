@@ -1,9 +1,13 @@
 
 import React from 'react';
-import {Card, CardMedia, CardTitle} from 'material-ui/Card';
+import {Card, CardActions, CardMedia, CardTitle} from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import API from '../../api/helpers.js';
 import NavBar from '../../components/NavBar';
+
+const message = <i className="material-icons">message</i>
+const search = <i className="material-icons">search</i>
 
 class BrowseListings extends React.Component{
 
@@ -39,7 +43,7 @@ class BrowseListings extends React.Component{
             <div>
                 <NavBar selectedIndex={2}/>
                 <div className="col-md-4 col-md-offset-4">
-                    <h1>House Listings</h1>
+                    <h1 style={{textAlign: 'center'}}>House Listings</h1>
                     {this.state.houses.map((house, i)=>{
                         return(
                             <Card key={i}>
@@ -48,6 +52,21 @@ class BrowseListings extends React.Component{
                                 >
                                 <img width="50" src={house.imgUrl} alt="house" />
                                 </CardMedia>
+                                <CardActions>
+                                    <RaisedButton
+                                    secondary={true}
+                                    icon={message}
+                                    style={{color: 'white'}}
+                                    />
+
+                                    <RaisedButton
+                                    className="text-right"
+                                    secondary={true}
+                                    icon={search}
+                                    style={{color: 'white'}}
+                                    />
+                                    
+                                </CardActions>
                             </Card>
                         )
                     })}
