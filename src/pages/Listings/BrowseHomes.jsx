@@ -64,8 +64,7 @@ class BrowseListings extends React.Component{
                                     secondary={true}
                                     icon={search}
                                     style={{color: 'white'}}
-                                    />
-                                    
+                                    />       
                                 </CardActions>
                             </Card>
                         )
