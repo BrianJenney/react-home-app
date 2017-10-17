@@ -3,6 +3,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as loginActions from '../../actions/login';
+import * as logoutActions from '../../actions/logout';
 
 import API from '../../api/helpers.js';
 
@@ -24,6 +25,10 @@ constructor(props){
     error: '',
     display: 'none'
   };
+};
+
+componentDidMount=()=>{
+  this.props.logoutaction.logout();
 };
 
 onChange=(e)=>{
@@ -58,7 +63,7 @@ login=()=>{
       id: response.data[0]._id
     };
 
-    this.props.actions.login(user); 
+    this.props.loginaction.login(user); 
     this.props.history.push("/nav");
 
   })
@@ -92,6 +97,7 @@ showRegister=()=>{
 
 
 render(){
+  console.log(this.props);
   return(
     <div>
 
@@ -197,7 +203,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(loginActions, dispatch)
+        loginaction: bindActionCreators(loginActions, dispatch),
+        logoutaction: bindActionCreators(logoutActions, dispatch)
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

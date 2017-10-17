@@ -8,8 +8,10 @@ export default(state = {}, action) => {
                 loggedIn: action.isLogged,
                 name: action.name,
                 id: action.id
-            });
+            })
+        case 'LOGOUT':
+            return Object.assign({})
         default:
-            return state;
+            return state
     }
 };

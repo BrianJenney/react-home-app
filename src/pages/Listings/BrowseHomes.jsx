@@ -5,6 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import API from '../../api/helpers.js';
 import NavBar from '../../components/NavBar';
+import MessageBox from './modals/Message';
+
 
 const message = <i className="material-icons">message</i>
 const search = <i className="material-icons">search</i>
@@ -15,15 +17,19 @@ class BrowseListings extends React.Component{
         super(props)
 
         this.state = {
-            houses: []
+            houses: [],
+            open: false
         }
     };
 
     componentDidMount=()=>{
         API.getpics().then((docs)=>{
             this.setState({houses: docs.data});
-        })
-        
+        })    
+    };
+
+    openModal=()=>{
+        this.setState({open: true});
     };
 
     listHouses=()=>{
@@ -56,6 +62,7 @@ class BrowseListings extends React.Component{
                                     <RaisedButton
                                     secondary={true}
                                     icon={message}
+                                    onClick={this.openModal}
                                     style={{color: 'white'}}
                                     />
 
@@ -67,9 +74,10 @@ class BrowseListings extends React.Component{
                                     />       
                                 </CardActions>
                             </Card>
+                            
                         )
                     })}
-                    
+                    <MessageBox open={this.state.open}/>
                 </div>
                 
             </div>
