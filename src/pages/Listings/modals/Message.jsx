@@ -77,7 +77,6 @@ export default class DialogExampleModal extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="Modal Dialog" onClick={this.handleOpen} />
         <Dialog
           title="Homies Chat"
           actions={actions}
