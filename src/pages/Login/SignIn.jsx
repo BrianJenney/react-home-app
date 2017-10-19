@@ -97,7 +97,6 @@ showRegister=()=>{
 
 
 render(){
-  console.log(this.props);
   return(
     <div>
 
@@ -197,7 +196,8 @@ render(){
 
 function mapStateToProps(state){
     return {
-        id: state.loggedIn.id
+        id: state.loggedIn.id,
+        email: state.loggedIn.name
     };
 };
 

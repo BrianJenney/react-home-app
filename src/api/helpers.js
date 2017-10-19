@@ -13,14 +13,24 @@ export default {
   login: function(user) {
     return axios.post(url + "/api/user/login/", user);
   },
+
   register: function(user){
     return axios.post(url + "/api/user/register/", user);
   },
+
   posthome: function(home) {
     return axios.post(url + "/api/pics/upload/", home);
   },
 
   getpics: function() {
     return axios.get(url + "/api/pics/getlistings");
+  },
+
+  getMessages: function(id){
+    return axios.get(url + "/api/messages/getmessage?id=" + id);
+  },
+
+  postMessage: function(message){
+    return axios.post(url + "/api/messages/postmessage", message);
   }
 };

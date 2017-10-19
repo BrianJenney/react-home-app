@@ -7,6 +7,10 @@ import API from '../../api/helpers.js';
 import NavBar from '../../components/NavBar';
 import MessageBox from './modals/Message';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as loginActions from '../../actions/login';
+import * as logoutActions from '../../actions/logout';
 
 const message = <i className="material-icons">message</i>
 const search = <i className="material-icons">search</i>
@@ -15,11 +19,14 @@ class BrowseListings extends React.Component{
 
     constructor(props){
         super(props)
-
         this.state = {
             houses: [],
-            open: false
+            open: false,
+            picID: '',
+            messages:[]
         }
+
+        this.closeModal = this.closeModal.bind(this);
     };
 
     componentDidMount=()=>{
@@ -28,13 +35,23 @@ class BrowseListings extends React.Component{
         })    
     };
 
-    openModal=()=>{
-        this.setState({open: true});
+    openModal=(pic)=>{
+        let self = this;
+        
+        API.getMessages(pic._id).then((response)=>{
+            console.log(response);
+            self.setState({messages:response.data})
+        });
+
+        self.setState({open: true, picID: pic._id});
+    };
+
+    closeModal=()=>{
+        this.setState({open: false});
     };
 
     listHouses=()=>{
         this.state.houses.map((house, i)=>{
-            console.log(house);
             return(       
                 <div key={i}>
                     <img src={house.imgUrl} alt=""/>
@@ -62,7 +79,7 @@ class BrowseListings extends React.Component{
                                     <RaisedButton
                                     secondary={true}
                                     icon={message}
-                                    onClick={this.openModal}
+                                    onClick={this.openModal.bind(this, house)}
                                     style={{color: 'white'}}
                                     />
 
@@ -77,7 +94,12 @@ class BrowseListings extends React.Component{
                             
                         )
                     })}
-                    <MessageBox open={this.state.open}/>
+                    <MessageBox 
+                    open={this.state.open}
+                    id={this.state.picID}
+                    email={this.props.email}
+                    messages={this.state.messages}
+                    closeModal={this.closeModal}/>
                 </div>
                 
             </div>
@@ -86,4 +108,17 @@ class BrowseListings extends React.Component{
 
 }
 
-export default BrowseListings;
+function mapStateToProps(state){
+    return {
+        id: state.loggedIn.id,
+        email: state.loggedIn.name
+    };
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        loginaction: bindActionCreators(loginActions, dispatch),
+        logoutaction: bindActionCreators(logoutActions, dispatch)
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(BrowseListings);

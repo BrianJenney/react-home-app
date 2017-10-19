@@ -14,12 +14,6 @@ const signout = <i className="material-icons">highlight_off</i>;
 
 class NavBar extends React.Component{
 
-    constructor(props){
-        super(props);
-        console.log(props.selectedIndex);
-    }
-
-
     select=(page)=>{
         switch(page){
             case 0:
@@ -39,7 +33,7 @@ class NavBar extends React.Component{
                 
         }
         
-    }
+    };
 
     render(){
         return(
