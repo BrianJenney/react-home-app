@@ -12,8 +12,13 @@ import SignIn from './pages/Login/SignIn';
 import AddProp from './pages/AddProperty/AddProp';
 import Nav from './pages/Nav/NavPage';
 import Listings from './pages/Listings/BrowseHomes';
+import {saveState} from './actions/localstorage';
 
 const StoreInstance = Store();
+
+StoreInstance.subscribe(()=>{
+  saveState(StoreInstance.getState());
+});
 
 ReactDOM.render(
   <MuiThemeProvider>

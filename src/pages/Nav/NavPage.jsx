@@ -22,6 +22,7 @@ class NavPage extends React.Component{
 
     render(){
         return(
+            
             <div>
             <NavBar selectedIndex={0}/>
             <div className="col-md-6 col-md-offset-3">
