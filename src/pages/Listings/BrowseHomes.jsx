@@ -19,7 +19,7 @@ class BrowseListings extends React.Component{
 
     constructor(props){
         super(props)
-        console.log(props);
+        
         this.state = {
             houses: [],
             open: false,
@@ -31,7 +31,7 @@ class BrowseListings extends React.Component{
     };
 
     componentDidMount=()=>{
-        API.getpics().then((docs)=>{
+        API.getpics(this.props.id).then((docs)=>{
             this.setState({houses: docs.data});
         })    
     };
@@ -39,12 +39,11 @@ class BrowseListings extends React.Component{
     openModal=(pic)=>{
         let self = this;
         
-        API.getMessages(pic._id).then((response)=>{
-            console.log(response);
+        API.getConvoFromListing(this.props.email, pic._id).then((response)=>{
             self.setState({messages:response.data})
         });
 
-        self.setState({open: true, picID: pic._id});
+        self.setState({open: true, picID: pic._id, recipient: pic.userEmail});
     };
 
     closeModal=()=>{
@@ -63,7 +62,11 @@ class BrowseListings extends React.Component{
     }
 
     render(){
+        if(this.state.houses.length){
+
+        
         return(
+            
             <div>
                 <NavBar selectedIndex={2}/>
                 <div className="col-md-4 col-md-offset-4">
@@ -100,11 +103,20 @@ class BrowseListings extends React.Component{
                     id={this.state.picID}
                     email={this.props.email}
                     messages={this.state.messages}
+                    recipient={this.state.recipient}
                     closeModal={this.closeModal}/>
                 </div>
                 
             </div>
         )
+        }else{
+            return(
+                <div className="text-center">
+                    <NavBar selectedIndex={2}/>
+                    <h2>No Houses Posted Yet!</h2>
+                </div>
+            )
+        }
     };
 
 }

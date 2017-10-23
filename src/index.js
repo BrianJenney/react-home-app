@@ -13,12 +13,13 @@ import AddProp from './pages/AddProperty/AddProp';
 import Nav from './pages/Nav/NavPage';
 import Listings from './pages/Listings/BrowseHomes';
 import {saveState} from './actions/localstorage';
+import throttle from 'lodash/throttle';
 
 const StoreInstance = Store();
 
-StoreInstance.subscribe(()=>{
+StoreInstance.subscribe(throttle(()=>{
   saveState(StoreInstance.getState());
-});
+}, 1000));
 
 ReactDOM.render(
   <MuiThemeProvider>

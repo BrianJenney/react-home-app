@@ -1,8 +1,6 @@
 
 export const loadState=()=>{
-
     const myState = localStorage.getItem('state');
-
     return(myState === null ? undefined : JSON.parse(myState));
 };
 

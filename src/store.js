@@ -5,7 +5,6 @@ import {loadState} from './actions/localstorage';
 
 const persistedState = loadState();
 
-
 export default(initialState) => {
     return createStore(rootReducer, persistedState);
 }

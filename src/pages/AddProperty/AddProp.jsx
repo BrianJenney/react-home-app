@@ -14,7 +14,7 @@ class AddProp extends React.Component {
 
   constructor(props){
     super(props)
-
+    console.log(props);
     this.state={
       disabled: false,
       imgUrl: '',
@@ -33,17 +33,20 @@ class AddProp extends React.Component {
 
   submitPic=()=>{
 
+    let self = this;
+
     const picItem = {
       userid: this.props.id,
       imgUrl: this.state.imgUrl,
       price: this.state.price,
       city: this.state.city,
       state: this.state.state,
-      zip: this.state.zip 
+      zip: this.state.zip ,
+      userEmail: this.props.email,
     }
 
     API.posthome(picItem).then(function(response){
-      this.props.history.push("/nav");
+      self.props.history.push("/nav");
     });
   };
 
@@ -113,7 +116,8 @@ class AddProp extends React.Component {
 
 function mapStateToProps(state){
     return {
-        id: state.loggedIn.id
+        id: state.loggedIn.id,
+        email: state.loggedIn.name
     };
 };
 

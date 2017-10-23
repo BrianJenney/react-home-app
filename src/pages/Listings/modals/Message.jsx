@@ -1,7 +1,6 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 import API from '../../../api/helpers.js';
@@ -13,12 +12,13 @@ export default class DialogExampleModal extends React.Component {
     this.state= {
       disabled: false,
       userMessage: '',
+      recipient: '',
       messages: []
     };
   };
 
   componentWillReceiveProps=(nextProps)=>{
-    this.setState({messages: nextProps.messages});
+    this.setState({messages: nextProps.messages, recipient: nextProps.recipient});
   };
 
   handleClose = () => {
@@ -35,7 +35,7 @@ export default class DialogExampleModal extends React.Component {
       id: this.props.id,
       text: this.state.userMessage,
       user: this.props.email,
-      messages: []
+      recipient: this.state.recipient
     }
 
     API.postMessage(message).then((response)=>{
@@ -49,7 +49,7 @@ export default class DialogExampleModal extends React.Component {
 
     let self = this;
         
-    API.getMessages(this.props.id).then((response)=>{
+    API.getConvoFromListing(this.props.email, this.props.id).then((response)=>{
         self.setState({messages:response.data})
     });
 
@@ -58,9 +58,10 @@ export default class DialogExampleModal extends React.Component {
   render() {
     const actions = [
       <TextField
-          onChange={this.textChange.bind(this)}
-          hintText="Send a message"
-          fullWidth={true}
+        value={this.state.userMessage}
+        onChange={this.textChange.bind(this)}
+        hintText="Send a message"
+        fullWidth={true}
       />,
       <FlatButton
         label="Close"
