@@ -10,6 +10,7 @@ const home = <i className="material-icons">home</i>;
 const list = <FontIcon className="material-icons">view_list</FontIcon>;
 const search = <i className="material-icons">location_searching</i>;
 const signout = <i className="material-icons">highlight_off</i>;
+const envelope = <i className="material-icons">message</i>
 
 
 class NavBar extends React.Component{
@@ -28,6 +29,8 @@ class NavBar extends React.Component{
             case 3:
                 this.props.history.push('/');
                 break;
+            case 4:
+                this.props.history.push('/mymessages');
             default: 
                 return;
                 
@@ -54,6 +57,11 @@ class NavBar extends React.Component{
                 label="Search"
                 icon={search}
                 onClick={() => this.select(2)}
+            />
+            <BottomNavigationItem
+                label="Messages"
+                icon={envelope}
+                onClick={() => this.select(4)}
             />
             <BottomNavigationItem
                 label="LogOut"

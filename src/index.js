@@ -12,6 +12,8 @@ import SignIn from './pages/Login/SignIn';
 import AddProp from './pages/AddProperty/AddProp';
 import Nav from './pages/Nav/NavPage';
 import Listings from './pages/Listings/BrowseHomes';
+import UserMessages from './pages/MyMessages/UserMessage';
+
 import {saveState} from './actions/localstorage';
 import throttle from 'lodash/throttle';
 
@@ -30,6 +32,7 @@ ReactDOM.render(
         <Route path="/addproperty" component={AddProp} />
         <Route path="/nav" component={Nav} /> 
         <Route path="/listings" component={Listings}/>
+        <Route path="/mymessages" component={UserMessages}/>
       </div>    
     </Router >
   </Provider>

@@ -28,6 +28,10 @@ export default {
     return axios.get(url + "/api/pics/getlistings?picid=" + id);
   },
 
+  getPicsByUser: function(email){
+    return axios.get(url + "/api/pics/getlistingsbyuser?email=" + email);
+  },
+
   getMessages: function(id){
     return axios.get(url + "/api/messages/getmessage?id=" + id);
   },
@@ -42,5 +46,9 @@ export default {
 
   getConvoFromListing: function(recipient, id){
     return axios.get(url + "/api/messages/getconvofromlisting?recipient=" + recipient + "&picId=" + id);
+  },
+
+  getMessagesFromEachUser: function(id){
+    return axios.get(url + "/api/messages/getusersbypic?id=" + id);
   }
 };
