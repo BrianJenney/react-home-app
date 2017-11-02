@@ -49,18 +49,7 @@ class BrowseListings extends React.Component{
     closeModal=()=>{
         this.setState({open: false});
     };
-
-    listHouses=()=>{
-        this.state.houses.map((house, i)=>{
-            return(       
-                <div key={i}>
-                    <img src={house.imgUrl} alt=""/>
-                    <p>Price</p>
-                </div>
-            )
-        })
-    }
-
+    
     render(){
         if(this.state.houses.length){
 
