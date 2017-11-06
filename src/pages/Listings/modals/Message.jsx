@@ -12,13 +12,12 @@ export default class DialogExampleModal extends React.Component {
     this.state= {
       disabled: false,
       userMessage: '',
-      recipient: '',
-      messages: []
+      recipient: ''
     };
   };
 
   componentWillReceiveProps=(nextProps)=>{
-    this.setState({messages: nextProps.messages, recipient: nextProps.recipient});
+    this.setState({recipient: nextProps.recipient});
   };
 
   handleClose = () => {
@@ -34,23 +33,12 @@ export default class DialogExampleModal extends React.Component {
     const message={
       id: this.props.id,
       text: this.state.userMessage,
-      user: this.props.email,
-      recipient: this.state.recipient
+      from: this.props.email,
+      to: this.state.recipient
     }
 
     API.postMessage(message).then((response)=>{
       this.setState({userMessage: ''});
-      this.getMessages();
-    });
-
-  };
-
-  getMessages=()=>{
-
-    let self = this;
-        
-    API.getConvoFromListing(this.props.email, this.props.id).then((response)=>{
-        self.setState({messages:response.data})
     });
 
   };
@@ -82,24 +70,9 @@ export default class DialogExampleModal extends React.Component {
           title="Homies Chat"
           actions={actions}
           modal={true}
-          autoScrollBodyContent={true}
+          //autoScrollBodyContent={true}
           open={this.props.open}
         >
-        <div style={{marginTop: 30}}>
-          {this.state.messages.map((message, i)=>{
-            return(
-              <div 
-              key={i}
-              style={{marginTop:26}}
-              >
-                <p>{message.text}</p>  
-                <small className="text-muted">{message.user}</small><br/>
-                <small className="text-muted">{message.time}</small>   
-              </div>
-            )
-          })}
-        </div>
-
         </Dialog>
       </div>
     );

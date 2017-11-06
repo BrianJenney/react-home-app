@@ -37,13 +37,7 @@ class BrowseListings extends React.Component{
     };
 
     openModal=(pic)=>{
-        let self = this;
-        
-        API.getConvoFromListing(this.props.email, pic._id).then((response)=>{
-            self.setState({messages:response.data})
-        });
-
-        self.setState({open: true, picID: pic._id, recipient: pic.userEmail});
+        this.setState({open: true, picID: pic._id, recipient: pic.userEmail});
     };
 
     closeModal=()=>{
@@ -51,9 +45,7 @@ class BrowseListings extends React.Component{
     };
     
     render(){
-        if(this.state.houses.length){
-
-        
+        if(this.state.houses.length){   
         return(
             
             <div>
@@ -71,17 +63,11 @@ class BrowseListings extends React.Component{
                                 <CardActions>
                                     <RaisedButton
                                     secondary={true}
+                                    label={house.userEmail}
                                     icon={message}
                                     onClick={this.openModal.bind(this, house)}
                                     style={{color: 'white'}}
-                                    />
-
-                                    <RaisedButton
-                                    className="text-right"
-                                    secondary={true}
-                                    icon={search}
-                                    style={{color: 'white'}}
-                                    />       
+                                    />     
                                 </CardActions>
                             </Card>
                             
@@ -91,7 +77,6 @@ class BrowseListings extends React.Component{
                     open={this.state.open}
                     id={this.state.picID}
                     email={this.props.email}
-                    messages={this.state.messages}
                     recipient={this.state.recipient}
                     closeModal={this.closeModal}/>
                 </div>

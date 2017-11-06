@@ -5,6 +5,7 @@ import API from '../../api/helpers.js';
 import NavBar from '../../components/NavBar';
 import {Card, CardActions, CardMedia, CardTitle} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import MessageBox from '../Listings/modals/Message';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -18,9 +19,17 @@ class UserMessages extends React.Component{
 
     constructor(props){
         super(props)
+
         this.state = {
-            picData: []
+            picData: [],
+            houses: [],
+            open: false,
+            picID: '',
+            messages:[],
+            recipient: ''
         }
+
+        this.closeModal = this.closeModal.bind(this);
     };
 
     componentDidMount=()=>{
@@ -46,6 +55,23 @@ class UserMessages extends React.Component{
         });
     };
 
+
+    openModal=(pic)=>{
+        let self = this;
+        
+        API.getConvoFromListing(this.props.email, pic._id).then((response)=>{
+            self.setState({messages:response.data})
+        });
+
+        self.setState({open: true, picID: pic._id, recipient: pic.userEmail});
+    };
+
+
+    closeModal=()=>{
+        this.setState({open: false});
+    };
+
+
     render(){
         return(          
             <div>
@@ -64,6 +90,7 @@ class UserMessages extends React.Component{
                                 {pic.messageData.map((msg, idx)=>{
                                     return(
                                         <RaisedButton
+                                        onClick={this.openModal.bind(this, pic)}
                                         key={idx}
                                         secondary={true}
                                         icon={message}
@@ -79,6 +106,13 @@ class UserMessages extends React.Component{
                         )
                     })}
                 </div>
+                <MessageBox 
+                    open={this.state.open}
+                    id={this.state.picID}
+                    email={this.props.email}
+                    messages={this.state.messages}
+                    recipient={this.state.recipient}
+                    closeModal={this.closeModal}/>
             </div>
             
         )
