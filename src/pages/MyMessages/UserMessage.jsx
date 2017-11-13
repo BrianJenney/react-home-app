@@ -19,7 +19,6 @@ class UserMessages extends React.Component{
 
     constructor(props){
         super(props)
-
         this.state = {
             open: false,
             picID: '',
@@ -27,6 +26,8 @@ class UserMessages extends React.Component{
             recipient: '',
             convo: []
         };
+
+        this.refreshConvo = this.refreshConvo.bind(this);
     };
 
     componentDidMount=()=>{
@@ -48,12 +49,18 @@ class UserMessages extends React.Component{
         });
     };
 
-    getConvo=(messages)=>{
-        this.setState({convo: messages});
+    getConvo=(message)=>{
+        this.setState({convo: message.messages, recipient: message.participants[0], picID: message.id});
     };
 
+    refreshConvo=(recipient, sender)=>{
+        API.getConvo(recipient, sender).then((response)=>{
+            console.log(response);
+            this.setState({convo: response.data[0].messages, recipient, picId: response.data[0].id})
+        })
+    }
+
     render(){
-        console.log(this.state.messages)
         return(          
             <div>
                 <NavBar selectedIndex={3}/>
@@ -68,7 +75,7 @@ class UserMessages extends React.Component{
                                 <div className="col-md-4">
                                     <List>
                                         <ListItem primaryText={message.participants[0]} 
-                                        onClick={this.getConvo.bind(this, message.messages)}
+                                        onClick={this.getConvo.bind(this, message)}
                                         leftIcon={<img src="https://cdn2.iconfinder.com/data/icons/business-and-finance-related-hand-gestures/256/face_female_blank_user_avatar_mannequin-512.png" 
                                             width="25%"
                                             alt=""/>} />
@@ -81,6 +88,10 @@ class UserMessages extends React.Component{
                     })}
                     <div className="col-md-8">
                         <ChatBox
+                        refreshConvo={this.refreshConvo}
+                        picID={this.state.picID}
+                        recipient={this.state.recipient}
+                        sender={this.props.email}
                         open={this.state.open}
                         messages={this.state.convo}/>
                     </div>

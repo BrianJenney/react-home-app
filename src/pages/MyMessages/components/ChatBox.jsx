@@ -4,6 +4,10 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
 
+import API from '../../../api/helpers.js';
+
+import '../../../styles/global.css';
+
 const styles = {
   chip: {
     margin: 4,
@@ -18,25 +22,50 @@ const styles = {
 export default class ChatBox extends React.Component{
 
     constructor(props){
-        console.log(props);
         super(props)
         this.state = {
-            open: false
-        }
-        
+            open: false,
+            userMessage: '',
+            messages: []
+        }     
     }
 
-    
+    componentWillReceiveProps=(props)=>{
+        this.setState({messages: props.messages});
+    }
+
+    textChange=(e)=>{
+        this.setState({userMessage: e.target.value});
+    };
+
+    submitMessage=()=>{
+
+        const message={
+            id: this.props.picID,
+            text: this.state.userMessage,
+            from: this.props.sender,
+            to: this.props.recipient
+        }
+
+        API.postMessage(message).then((response)=>{
+            this.setState({userMessage: ''});
+        });
+
+        this.props.refreshConvo(message.to, message.from);
+
+    };
 
     render(){
         return(
-            <div>
+            <div style={{display: this.state.messages.length ? 'block' : 'none'}}>
                 <Card>
                     <CardText>
-                    {this.props.messages.map((chat, i)=>{
+                    {this.state.messages.map((chat, i)=>{
                         return(
 
-                            <Chip style={styles.chip} 
+                            <Chip 
+                            className={chat.from === this.props.recipient ? 'receiver' : ''}
+                            style={styles.chip} 
                             key={i}>
                             <p>{chat.text}</p>
                             </Chip>
@@ -45,20 +74,20 @@ export default class ChatBox extends React.Component{
                     </CardText>
 
                     <TextField
+                    value={this.state.userMessage}
+                    onChange={this.textChange.bind(this)}
                     fullWidth ={true}
                     floatingLabelText="Your message"
                     />
 
                     <CardActions>
-                        <FlatButton label="Send" />
+                        <FlatButton label="Send" 
+                        primary={true}
+                        onClick={this.submitMessage}
+                        disabled={!this.state.userMessage.length || !this.props.messages.length}/>
                         <FlatButton label="Cancel" />
                     </CardActions>
-                </Card>
-
-
-
-                
-                
+                </Card>     
             </div>
         )
     }

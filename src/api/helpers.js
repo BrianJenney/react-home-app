@@ -42,6 +42,10 @@ export default {
 
   getMessages: function(userEmail){
     return axios.get(url + "/api/messages/getmessages/" +  userEmail);
+  },
+
+  getConvo: function(recipient, sender){
+    return axios.get(url + "/api/messages/getconvo/" + recipient + "/" + sender);
   }
 
 };
