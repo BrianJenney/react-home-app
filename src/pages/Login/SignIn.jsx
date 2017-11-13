@@ -53,7 +53,7 @@ login=()=>{
     }
 
     if(response.data.length === 0){
-      this.setState({error: 'This user does not exist'});
+      this.setState({error: 'This user does not exist, or your password is invalid'});
       return;
     }
   

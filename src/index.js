@@ -17,6 +17,8 @@ import UserMessages from './pages/MyMessages/UserMessage';
 import {saveState} from './actions/localstorage';
 import throttle from 'lodash/throttle';
 
+import './styles/global.css';
+
 const StoreInstance = Store();
 
 StoreInstance.subscribe(throttle(()=>{

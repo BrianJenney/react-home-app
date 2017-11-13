@@ -5,7 +5,9 @@ import TextField from 'material-ui/TextField';
 
 import API from '../../../api/helpers.js';
 
-export default class DialogExampleModal extends React.Component {
+import '../../../styles/messages.css';
+
+export default class DialogModal extends React.Component {
 
   constructor(props){
     super(props)
@@ -39,6 +41,7 @@ export default class DialogExampleModal extends React.Component {
 
     API.postMessage(message).then((response)=>{
       this.setState({userMessage: ''});
+      this.props.closeModal();
     });
 
   };
@@ -70,7 +73,6 @@ export default class DialogExampleModal extends React.Component {
           title="Homies Chat"
           actions={actions}
           modal={true}
-          //autoScrollBodyContent={true}
           open={this.props.open}
         >
         </Dialog>
