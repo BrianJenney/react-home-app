@@ -7,6 +7,8 @@ import Chip from 'material-ui/Chip';
 import API from '../../../api/helpers.js';
 
 import '../../../styles/global.css';
+import '../../../styles/messages.css';
+
 
 const styles = {
   chip: {
@@ -30,9 +32,14 @@ export default class ChatBox extends React.Component{
         }     
     }
 
+    componentDidMount=()=>{
+        var objDiv = document.querySelector(".scrollable-box");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    };
+
     componentWillReceiveProps=(props)=>{
         this.setState({messages: props.messages});
-    }
+    };
 
     textChange=(e)=>{
         this.setState({userMessage: e.target.value});
@@ -49,9 +56,11 @@ export default class ChatBox extends React.Component{
 
         API.postMessage(message).then((response)=>{
             this.setState({userMessage: ''});
-        });
+        }).then(()=>{
+            this.props.refreshConvo(message.to, message.from);
+        })
 
-        this.props.refreshConvo(message.to, message.from);
+        
 
     };
 
@@ -59,7 +68,7 @@ export default class ChatBox extends React.Component{
         return(
             <div style={{display: this.state.messages.length ? 'block' : 'none'}}>
                 <Card>
-                    <CardText>
+                    <CardText className="scrollable-box">
                     {this.state.messages.map((chat, i)=>{
                         return(
 
@@ -67,18 +76,20 @@ export default class ChatBox extends React.Component{
                             className={chat.from === this.props.recipient ? 'receiver' : ''}
                             style={styles.chip} 
                             key={i}>
-                            <p>{chat.text}</p>
+                            <p className={chat.from === this.props.recipient ? 'white-text' : ''}>{chat.text}</p>
                             </Chip>
                         )
                     })}
                     </CardText>
-
-                    <TextField
-                    value={this.state.userMessage}
-                    onChange={this.textChange.bind(this)}
-                    fullWidth ={true}
-                    floatingLabelText="Your message"
-                    />
+                    <div style={{margin: 'auto', width: '95%'}}>
+                        <TextField
+                        value={this.state.userMessage}
+                        onChange={this.textChange.bind(this)}
+                        fullWidth ={true}
+                        floatingLabelText="Your message"
+                        />
+                    </div>
+                    
 
                     <CardActions>
                         <FlatButton label="Send" 

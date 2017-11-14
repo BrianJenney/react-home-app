@@ -1,0 +1,8 @@
+.receiver {
+  background-color: #01bcd4 !important; }
+  .receiver p {
+    color: white; }
+
+.scrollable-box {
+  height: 300px;
+  overflow: auto; }
