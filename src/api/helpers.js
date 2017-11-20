@@ -2,8 +2,6 @@ import axios from "axios";
 
 const ENV = process.env.NODE_ENV;
 
-console.log(ENV);
-
 //for home testing
 const url = (window.location.href.indexOf('localhost') > -1 ? "http://localhost:8081" : "https://react-web-services.herokuapp.com");
 
