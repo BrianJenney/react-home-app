@@ -60,7 +60,7 @@ login=()=>{
     const user={
       isLogged: true,
       name: this.state.email,
-      id: response.data[0]._id
+      id: response.data._id
     };
 
     this.props.loginaction.login(user); 
@@ -82,7 +82,7 @@ register=()=>{
       id: response.data._id
     };
 
-    this.props.actions.login(user); 
+    this.props.loginaction.login(user); 
     this.props.history.push("/nav");
 
   })
