@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const ENV = process.env.NODE_ENV;
-
 //for home testing
 const url = (window.location.href.indexOf('localhost') > -1 ? "http://localhost:8081" : "https://react-web-services.herokuapp.com");
 
@@ -38,10 +36,12 @@ export default {
     return axios.post(url + "/api/messages/postmessage", message);
   },
 
+  //gets all direct messages that a user is included in
   getMessages: function(userEmail){
     return axios.get(url + "/api/messages/getmessages/" +  userEmail);
   },
 
+  //gets a specific convo from the list of messages to display
   getConvo: function(recipient, sender){
     return axios.get(url + "/api/messages/getconvo/" + recipient + "/" + sender);
   }

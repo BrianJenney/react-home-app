@@ -13,8 +13,6 @@ import { connect } from 'react-redux';
 import * as loginActions from '../../actions/login';
 import * as logoutActions from '../../actions/logout';
 
-const message = <i className="material-icons">message</i>
-
 class UserMessages extends React.Component{
 
     constructor(props){

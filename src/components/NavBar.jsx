@@ -31,6 +31,7 @@ class NavBar extends React.Component{
                 break;
             case 4:
                 this.props.history.push('/mymessages');
+                break;
             default: 
                 return;
                 

@@ -13,7 +13,6 @@ import * as loginActions from '../../actions/login';
 import * as logoutActions from '../../actions/logout';
 
 const message = <i className="material-icons">message</i>
-const search = <i className="material-icons">search</i>
 
 class BrowseListings extends React.Component{
 
