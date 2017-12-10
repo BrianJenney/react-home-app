@@ -23,7 +23,8 @@ constructor(props){
     email: '',
     password: '',
     error: '',
-    display: 'none'
+    display: 'none',
+    processing: false
   };
 };
 
@@ -38,6 +39,7 @@ onChange=(e)=>{
 };
 
 submitUser=(type)=>{
+  this.setState({processing: true})
   if(type === 'login'){
     this.login();
   }else{
@@ -48,7 +50,7 @@ submitUser=(type)=>{
 login=()=>{
   API.login(this.state).then((response)=>{
     if(typeof response.data.errors !== `undefined`){ 
-      this.setState({error: response.data.message});
+      this.setState({error: response.data.message, processing: false});
       return;
     }
 
@@ -72,7 +74,7 @@ login=()=>{
 register=()=>{
   API.register(this.state).then((response)=>{
     if(typeof response.data.errmsg !== `undefined`){ 
-      this.setState({error: response.data.errmsg.indexOf('duplicate') ? 'That username is already taken' : response.data.errmsg});
+      this.setState({error: response.data.errmsg.indexOf('duplicate') ? 'That username is already taken' : response.data.errmsg, processing: false});
       return;
     }
   
@@ -174,16 +176,16 @@ render(){
           style={{marginRight: `5%`}}
           primary={true}
           disabled={this.state.password.length < 1 ||
-          this.state.email.length < 1}
+          this.state.email.length < 1 || this.state.processing}
           onClick={this.submitUser.bind(this, 'login')}
-          label="Login"/>
+          label={this.state.processing ? 'Processing...' : 'Login'}/>
 
         <RaisedButton 
           primary={true}
           disabled={this.state.password.length < 1 ||
-          this.state.email.length < 1 || this.state.SSN.toString().length < 8 || this.state.userType === '' || Number(this.state.income) < 1}
+          this.state.email.length < 1 || this.state.SSN.toString().length < 8 || this.state.userType === '' || Number(this.state.income) < 1 || this.state.processing}
           onClick={this.submitUser.bind(this, 'register')}
-          label="Register"/>
+          label={this.state.processing ? 'Processing...' : 'Register'}/>
       </div>
 
       
