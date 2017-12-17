@@ -58,11 +58,15 @@ login=()=>{
       this.setState({error: 'This user does not exist, or your password is invalid'});
       return;
     }
+
+    if(response.data.token){
+      this.saveToken(response.data.token);
+    }
   
     const user={
       isLogged: true,
       name: this.state.email,
-      id: response.data._id
+      id: response.data.userInfo._id
     };
 
     this.props.loginaction.login(user); 
@@ -77,11 +81,15 @@ register=()=>{
       this.setState({error: response.data.errmsg.indexOf('duplicate') ? 'That username is already taken' : response.data.errmsg, processing: false});
       return;
     }
+
+    if(response.data.token){
+      this.saveToken(response.data.token);
+    }
   
     const user={
       isLogged: true,
       name: this.state.email,
-      id: response.data._id
+      id: response.userInfo.data._id
     };
 
     this.props.loginaction.login(user); 
@@ -89,6 +97,11 @@ register=()=>{
 
   })
 };
+
+saveToken=(token)=>{
+  const userToken = JSON.stringify(token);
+  localStorage.setItem('casaToken', userToken);
+}
 
 showRegister=()=>{
   if(this.state.display === 'block')
