@@ -22,14 +22,9 @@ export default {
     return axios.post(url + "/api/pics/upload/", home);
   },
 
-  //return all pics to display
-  getpics: function(id) {
-    return axios.get(url + "/api/pics/getlistings/" + id);
-  },
-
-  //get only pics associated with a certain email
-  getPicsByUser: function(email){
-    return axios.get(url + "/api/pics/getlistingsbyuser/" + email);
+  //send search object to retrieve homes
+  searchForHomes: function(searchObj){
+    return axios.post(url + "/api/pics/searchlistings", searchObj)
   },
 
   //create a message to send to another user

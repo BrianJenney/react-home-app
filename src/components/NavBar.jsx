@@ -6,6 +6,8 @@ import Paper from 'material-ui/Paper';
 
 import { withRouter } from 'react-router'
 
+import '../styles/nav.css';
+
 const home = <i className="material-icons">home</i>;
 const list = <FontIcon className="material-icons">view_list</FontIcon>;
 const search = <i className="material-icons">location_searching</i>;
@@ -33,17 +35,14 @@ class NavBar extends React.Component{
                 this.props.history.push('/mymessages');
                 break;
             default: 
-                return;
-                
-        }
-        
+                return; 
+        } 
     };
 
     render(){
         return(
         <Paper zDepth={1}>
-            <BottomNavigation selectedIndex={this.props.selectedIndex}
-            style={{marginBottom: '5%'}}>
+            <BottomNavigation className="bottom-nav" selectedIndex={this.props.selectedIndex}>
             <BottomNavigationItem
                 label="Nav"
                 icon={home}

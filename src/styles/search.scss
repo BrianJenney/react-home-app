@@ -1,0 +1,29 @@
+.user-search{
+    position: absolute;
+    bottom: 5%;
+    right: 0;
+    height:450px;
+    padding: 0 !important;
+
+    .user-select{
+        width: 75px !important;
+    }
+
+    .form-control{
+        padding: 5%;
+    }
+
+    .header{
+      background-color: rgba(150, 94, 7, .99);
+      color: white;
+      padding: 15px;
+    }
+
+    .buy-sell{
+      p{
+        display: inline;
+        margin-left: 5%;
+      }
+    }
+
+  }
