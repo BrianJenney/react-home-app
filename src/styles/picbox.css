@@ -1,0 +1,6 @@
+.house-pics {
+  text-align: center;
+  overflow: scroll;
+  height: 250px; }
+  .house-pics img {
+    width: 100%; }

@@ -54,7 +54,7 @@ class NavBar extends React.Component{
                 onClick={() => this.select(1)}
             />
             <BottomNavigationItem
-                label="Search"
+                label="House Hunt"
                 icon={search}
                 onClick={() => this.select(2)}
             />
