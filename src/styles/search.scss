@@ -1,3 +1,9 @@
+.form-control{
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0;
+}
+
 .user-search{
     opacity: 10%;
     position: absolute;
@@ -5,6 +11,10 @@
     right: 1%;
     height:450px;
     padding: 0 !important;
+  
+    img{
+      width: 75%;
+    }
 
     .user-select{
         width: 75px !important;

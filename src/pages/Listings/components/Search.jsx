@@ -7,6 +7,14 @@ import API from '../../../api/helpers.js';
 import HousePics from './HousePics';
 import '../../../styles/search.css';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as loginActions from '../../../actions/login';
+import * as logoutActions from '../../../actions/logout';
+import * as mapActions from '../../../actions/mapMarker';
+
+import Logo from '../../../img/logo-micasa.png';
+
 class UserSearch extends Component {
 
     constructor(props){
@@ -39,12 +47,10 @@ class UserSearch extends Component {
         searchObj.maxPrice = this.state.maxPrice;
         searchObj.minPrice = this.state.minPrice;
 
-        console.log(searchObj, 'hello');
         API.searchForHomes(searchObj).then((response)=>{
-            this.setState({results: response.data})
-        }).then(()=>{
-            console.log(this.state);
-        })
+            this.setState({results: response.data});
+            this.props.mapActions.addMapMarker(response);
+        });
     }
 
     render() {
@@ -52,7 +58,7 @@ class UserSearch extends Component {
             <Card className="col-md-4 user-search">
                 <div className="header row">
                     <div className="col-md-6">
-                    <p>micasa</p>
+                    <img src={Logo} alt=""/>
                     </div>
                     
                     <div className="col-md-6 text-right buy-sell">
@@ -115,4 +121,18 @@ class UserSearch extends Component {
   }
 }
 
-export default UserSearch;
+function mapStateToProps(state){
+    return {
+        id: state.loggedIn.id,
+        email: state.loggedIn.name,
+    };
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        loginaction: bindActionCreators(loginActions, dispatch),
+        logoutaction: bindActionCreators(logoutActions, dispatch),
+        mapActions: bindActionCreators(mapActions, dispatch),
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(UserSearch);

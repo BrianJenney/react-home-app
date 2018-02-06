@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
-import UserSearch from './Search';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
+import * as mapActions from '../../../actions/mapMarker';
 
-export default class MapContainer extends Component {
+class MapContainer extends Component {
 
-  state = {
-    locations: [
-      { name: "Your Home", location:{ lat: 37.8338026, lng:-122.2591576 } }
-    ]
+  constructor(props){
+    super(props)
+    this.state = {
+    }
   }
 
   componentDidUpdate() {
@@ -34,15 +36,16 @@ export default class MapContainer extends Component {
   // ==================
   // ADD MARKERS TO MAP
   // ==================
-      this.state.locations.forEach( location => { // iterate through locations saved in state
-        const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
-          position: {lat: location.location.lat, lng: location.location.lng}, // sets position of marker to specified location
-          map: this.map, // sets markers to appear on the map we just created on line 35
-          title: location.name // the title of the marker is set to the name of the location
-        });
-      })
-
-    }
+      this.props.locations.forEach( location => { // iterate through locations saved in state
+        if(location.hasOwnProperty('location')){
+          new google.maps.Marker({ // creates a new Google maps Marker object.
+            position: {lat: location.location[1], lng: location.location[0]}, // sets position of marker to specified location
+            map: this.map, // sets markers to appear on the map we just created on line 35
+            title: location.address // the title of the marker is set to the name of the location
+          });
+        } 
+        })
+      }
   }
 
   render() {
@@ -58,3 +61,17 @@ export default class MapContainer extends Component {
     )
   }
 }
+
+function mapStateToProps(state){
+  return {
+      locations: state.mapMarker
+  };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+      mapAction: bindActionCreators(mapActions, dispatch),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapContainer);

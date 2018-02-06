@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import API from '../../../api/helpers.js';
 import '../../../styles/picbox.css';
 
 class HousePics extends Component {
