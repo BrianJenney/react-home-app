@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Card} from 'material-ui/Card';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import { GoogleApiWrapper } from 'google-maps-react'
 
 import API from '../../../api/helpers.js';
 import HousePics from './HousePics';
@@ -9,6 +10,8 @@ import '../../../styles/search.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {debounce} from 'throttle-debounce';
+
 import * as loginActions from '../../../actions/login';
 import * as logoutActions from '../../../actions/logout';
 import * as mapActions from '../../../actions/mapMarker';
@@ -20,18 +23,33 @@ class UserSearch extends Component {
     constructor(props){
         super(props)
         this.state={
+            autoComplete: null,
             results: [],
             bedRooms: null,
             propertyType: null,
             maxPrice: null,
             minPrice: 0
         }
+        this.callAddressAutoComplete = debounce(1000, this.callAddressAutoComplete);
     }
 
     handleAddressChange=(e)=>{
-        let query = {};
-        // query[e.target.id] = e.target.value;
-        // this.setState(query);
+        let input = e.target.value;
+        this.callAddressAutoComplete(input);
+    }
+
+    callAddressAutoComplete=(input)=>{
+        const google = this.props.google;
+        let autoComplete = new google.maps.places.Autocomplete(
+            document.getElementById('address'),
+            {types: ['geocode']}
+        )
+
+        autoComplete.addListener('place_changed', this.cb);
+    }
+
+    cb=()=>{
+        //console.log(autoComplete.getPlace());
     }
 
     handleChange=(type, event, index, val)=>{
@@ -135,4 +153,8 @@ function mapDispatchToProps(dispatch) {
         mapActions: bindActionCreators(mapActions, dispatch),
     }
 };
-export default connect(mapStateToProps, mapDispatchToProps)(UserSearch);
+
+const WrappedContainer = GoogleApiWrapper({
+    apiKey: 'AIzaSyBd8HrEYJVSBoNvYs-fWVynMBBHgQbD1mo',    
+})(UserSearch)
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedContainer);

@@ -24,7 +24,6 @@ class NavPage extends React.Component{
         return(
             
             <div>
-            <NavBar selectedIndex={0}/>
             <div className="col-md-6 col-md-offset-3">
                 <Card onClick={this.goto.bind(this, 'addhome')}>
                     <CardHeader
@@ -51,12 +50,10 @@ class NavPage extends React.Component{
                     </CardMedia>
                 </Card>
             </div>
-            
+            <NavBar selectedIndex={0}/>
         </div>
         )
     }
-    
-
 }
 
 export default NavPage;

@@ -27,6 +27,11 @@ export default {
     return axios.post(url + "/api/pics/searchlistings", searchObj)
   },
 
+  //get autocomplete from google
+  autocomplete: function(input){
+    return axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=geocode&language=en&key=AIzaSyAKSwpmylLQXawpmn7_JeF_mH44PmUyzq8`);
+  },
+
   //create a message to send to another user
   postMessage: function(message){
     return axios.post(url + "/api/messages/postmessage", message);
