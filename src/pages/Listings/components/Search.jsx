@@ -30,7 +30,6 @@ class UserSearch extends Component {
             maxPrice: null,
             minPrice: 0
         }
-        this.callAddressAutoComplete = debounce(1000, this.callAddressAutoComplete);
     }
 
     handleAddressChange=(e)=>{
@@ -45,11 +44,13 @@ class UserSearch extends Component {
             {types: ['geocode']}
         )
 
-        autoComplete.addListener('place_changed', this.cb);
+        autoComplete.addListener('place_changed', ()=>{
+            this.cb(autoComplete);
+        });
     }
 
-    cb=()=>{
-        //console.log(autoComplete.getPlace());
+    cb=(ac)=>{
+       console.log(ac.getPlace().formatted_address);
     }
 
     handleChange=(type, event, index, val)=>{
