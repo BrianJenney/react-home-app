@@ -10,7 +10,6 @@ import '../../../styles/search.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {debounce} from 'throttle-debounce';
 
 import * as loginActions from '../../../actions/login';
 import * as logoutActions from '../../../actions/logout';
@@ -27,8 +26,9 @@ class UserSearch extends Component {
             results: [],
             bedRooms: null,
             propertyType: null,
-            maxPrice: null,
-            minPrice: 0
+            maxPrice: Infinity,
+            minPrice: 0,
+            address: null
         }
     }
 
@@ -50,7 +50,8 @@ class UserSearch extends Component {
     }
 
     cb=(ac)=>{
-       console.log(ac.getPlace().formatted_address);
+       let address = ac.getPlace().formatted_address;
+       this.setState({address: address}, this.searchHomes)
     }
 
     handleChange=(type, event, index, val)=>{
@@ -65,6 +66,7 @@ class UserSearch extends Component {
         searchObj.bedRooms = this.state.bedRooms;
         searchObj.maxPrice = this.state.maxPrice;
         searchObj.minPrice = this.state.minPrice;
+        searchObj.address = this.state.address;
 
         API.searchForHomes(searchObj).then((response)=>{
             this.setState({results: response.data});
