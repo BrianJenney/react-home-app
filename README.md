@@ -2,7 +2,7 @@
 
 * Download node to run projects https://nodejs.org/en/download/
 
-*** Setting Up Front End Project
+# Setting Up Front End Project
 
 * In your terminal:
 
