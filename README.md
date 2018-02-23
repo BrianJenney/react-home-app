@@ -1,4 +1,4 @@
-*** Prerequisites ***
+# Prerequisites 
 
 * Download node to run projects https://nodejs.org/en/download/
 
@@ -12,7 +12,9 @@
 
 * `npm start`
 
-*** To Set Up the Node Server ***
+* The project should be running on localhost:3000
+
+# To Set Up the Node Server
 
 * In another terminal window:
 
@@ -24,13 +26,11 @@
 
 * `node server.js`
 
-* The project should be running on localhost:3000
-
 * Name: test@gmail.com
 
 * Pass: test123
 
-*** Workflow ***
+# Workflow
 
 * `git pull` to get latest from the master branch
 
