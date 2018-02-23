@@ -89,7 +89,7 @@ register=()=>{
     const user={
       isLogged: true,
       name: this.state.email,
-      id: response.userInfo.data._id
+      id: response.data._id
     };
 
     this.props.loginaction.login(user); 
