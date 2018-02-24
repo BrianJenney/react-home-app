@@ -1,6 +1,6 @@
 .bottom-nav {
   z-index: 1;
-  position: absolute !important;
+  position: sticky;
   bottom: 0;
   background-color: #315179 !important; }
   .bottom-nav .material-icons {
