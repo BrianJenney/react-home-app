@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card} from 'material-ui/Card';
+import { Card } from 'material-ui/Card';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import { GoogleApiWrapper } from 'google-maps-react'

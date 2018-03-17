@@ -2,6 +2,7 @@ import React from 'react';
 
 import API from '../../api/helpers.js';
 import NavBar from '../../components/NavBar';
+import { GoogleApiWrapper } from 'google-maps-react'
 
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -9,21 +10,50 @@ import TextField from 'material-ui/TextField';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as loginActions from '../../actions/login';
+import * as mapActions from '../../actions/mapMarker';
 
 class AddProp extends React.Component {
 
   constructor(props){
     super(props)
-    console.log(props);
+
     this.state={
+      autoComplete: null,
       disabled: false,
-      imgUrl: '',
+      imgs:[],
       price: 0,
-      city:'',
-      state: '',
-      zip:0
+     	address: null,
+      propertyType: null,
+      owner: null,
+	    mortgageBalance: 0,
+	    phone: null,
+	    occupancyStatus: null,
+	    description: null,
+	    timeFrame: null
     }
   }
+
+  handleAddressChange=(e)=>{
+    let input = e.target.value;
+    this.callAddressAutoComplete(input);
+  };
+
+  callAddressAutoComplete=(input)=>{
+    const google = this.props.google;
+    let autoComplete = new google.maps.places.Autocomplete(
+        document.getElementById('address'),
+        {types: ['geocode']}
+    )
+
+    autoComplete.addListener('place_changed', ()=>{
+        this.callBack(autoComplete);
+    });
+  };
+
+  callBack=(ac)=>{
+    let address = ac.getPlace().formatted_address;
+    this.setState({address: address}, this.searchHomes)
+  };
 
   onChange=(e)=>{
     let picInfo = {};
@@ -32,18 +62,9 @@ class AddProp extends React.Component {
   };
 
   submitPic=()=>{
-
     let self = this;
-
-    const picItem = {
-      userid: this.props.id,
-      imgUrl: this.state.imgUrl,
-      price: this.state.price,
-      city: this.state.city,
-      state: this.state.state,
-      zip: this.state.zip ,
-      userEmail: this.props.email,
-    }
+    
+    const picItem = this.state;
 
     API.posthome(picItem).then(function(response){
       self.props.history.push("/nav");
@@ -55,9 +76,13 @@ class AddProp extends React.Component {
       return (     
          <div>
           <NavBar selectedIndex={1}/>
-            <div className="text-center">
-              <img src={this.state.imgUrl} alt="Upload a Pic of Your House"/>
-            </div>
+            <input 
+              type="text" 
+              className="form-control"
+              placeholder="Address"
+              id="address"
+              onChange={this.handleAddressChange.bind(this)}/>
+              
             <div className="col-md-6 col-md-offset-3">
               <TextField
               floatingLabelText="Enter a URL"
@@ -76,23 +101,13 @@ class AddProp extends React.Component {
               id="price"/>
 
               <br/>
+            
               <TextField
-              floatingLabelText="City"
+              floatingLabelText="Zip"
               onChange={this.onChange.bind(this)}
               fullWidth={true}
-              type="text"
-              id="city"/>
-
-              <br/>
-
-              <TextField
-              floatingLabelText="State"
-              onChange={this.onChange.bind(this)}
-              fullWidth={true}
-              type="text"
-              id="state"/>
-
-              <br/>
+              type="number"
+              id="zip"/>
 
               <TextField
               floatingLabelText="Zip"
@@ -101,12 +116,12 @@ class AddProp extends React.Component {
               type="number"
               id="zip"/>
 
-              <RaisedButton 
+	      <RaisedButton 
               primary={true}
               label="Add Property"
               onClick={this.submitPic}
-              disabled={this.state.price < 1 || this.state.city.length < 1 || this.state.zip.toString().length < 5 || this.state.imgUrl.length < 3}/>
-                
+	      />
+	      
             </div>
             
          </div>
@@ -123,9 +138,13 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(loginActions, dispatch)
+        actions: bindActionCreators(loginActions, dispatch),
+        mapActions: bindActionCreators(mapActions, dispatch),
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddProp);
+const WrappedContainer = GoogleApiWrapper({
+    apiKey: 'AIzaSyBd8HrEYJVSBoNvYs-fWVynMBBHgQbD1mo',    
+})(AddProp);
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedContainer);
 

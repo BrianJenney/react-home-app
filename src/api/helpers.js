@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.defaults.headers.common['Authorization'] = (localStorage.getItem('casaToken') || '');
 
-const url = (window.location.href.indexOf('localhost') > -1 ? "http://localhost:8081" : "https://react-web-services.herokuapp.com");
+const url = (window.location.href.includes('localhost') ? "http://localhost:8081" : "https://react-web-services.herokuapp.com");
 
 //testing when blocked by firewall
 //const url = `https://react-web-services.herokuapp.com`
