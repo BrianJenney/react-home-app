@@ -6,6 +6,9 @@ import { GoogleApiWrapper } from 'google-maps-react'
 
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Dropzone from 'react-dropzone'
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -25,17 +28,27 @@ class AddProp extends React.Component {
      	address: null,
       propertyType: null,
       owner: null,
-	    mortgageBalance: 0,
+	    balance: 0,
 	    phone: null,
 	    occupancyStatus: null,
 	    description: null,
-	    timeFrame: null
+      timeFrame: null,
+      bedRooms: 0,
+      bathRooms: 0,
+      yearBuilt: Date.now(),
     }
   }
 
   handleAddressChange=(e)=>{
     let input = e.target.value;
     this.callAddressAutoComplete(input);
+  };
+
+  onDrop=(file)=>{
+    console.log(file);
+    this.state.imgs.push(
+      file[0]
+    );
   };
 
   callAddressAutoComplete=(input)=>{
@@ -56,17 +69,23 @@ class AddProp extends React.Component {
   };
 
   onChange=(e)=>{
-    let picInfo = {};
-    picInfo[e.target.id] = e.target.value;
-    this.setState(picInfo);
+    let propertyInfo = {};
+    propertyInfo[e.target.id] = e.target.value;
+    this.setState(propertyInfo);
   };
 
-  submitPic=()=>{
+  handleChange=(type, event, index, val)=>{
+    let query = {};
+    query[type] = val;
+    this.setState(query);
+  };
+
+  submitProperty=()=>{
     let self = this;
     
-    const picItem = this.state;
+    const property = this.state;
 
-    API.posthome(picItem).then(function(response){
+    API.posthome(property).then(function(response){
       self.props.history.push("/nav");
     });
   };
@@ -76,6 +95,14 @@ class AddProp extends React.Component {
       return (     
          <div>
           <NavBar selectedIndex={1}/>
+
+            <Dropzone 
+              onDrop={this.onDrop} 
+              multiple 
+              accept="image/*">
+              <p>Drop your files or click here to upload</p>
+            </Dropzone>
+
             <input 
               type="text" 
               className="form-control"
@@ -84,14 +111,86 @@ class AddProp extends React.Component {
               onChange={this.handleAddressChange.bind(this)}/>
               
             <div className="col-md-6 col-md-offset-3">
+
+              <SelectField
+              floatingLabelText="Property Type"
+              value={this.state.propertyType}
+              id="propertyType"
+              onChange={this.handleChange.bind(null, 'propertyType')}>
+                  <MenuItem value={'Single Family'} primaryText="Singe Family" />
+                  <MenuItem value={'Duplex'} primaryText="Duplex" />
+                  <MenuItem value={'Multi-Unit'} primaryText="Multi-Unit" />
+                  <MenuItem value={'Condo'} primaryText="Condo" />
+                  <MenuItem value={'Townhouse'} primaryText="Townhouse" />
+              </SelectField>
+
+              <SelectField
+              floatingLabelText="Bedrooms"
+              value={this.state.bedRooms}
+              id="propertyType"
+              onChange={this.handleChange.bind(null, 'bedRooms')}>
+                  <MenuItem value={1} primaryText='1'/>
+                  <MenuItem value={2} primaryText="2" />
+                  <MenuItem value={3} primaryText="3" />
+                  <MenuItem value={4} primaryText="4" />
+                  <MenuItem value={5} primaryText="5" />
+                  <MenuItem value={6} primaryText="6" />
+                  <MenuItem value={7} primaryText="7" />
+                  <MenuItem value={8} primaryText="8" />
+              </SelectField>
+
+              <SelectField
+              floatingLabelText="Bathrooms"
+              value={this.state.bathRooms}
+              onChange={this.handleChange.bind(null, 'bathRooms')}>
+                  <MenuItem value={1} primaryText='1'/>
+                  <MenuItem value={2} primaryText="2" />
+                  <MenuItem value={3} primaryText="3" />
+                  <MenuItem value={4} primaryText="4" />
+                  <MenuItem value={5} primaryText="5" />
+                  <MenuItem value={6} primaryText="6" />
+                  <MenuItem value={7} primaryText="7" />
+                  <MenuItem value={8} primaryText="8" />
+              </SelectField>
+
               <TextField
-              floatingLabelText="Enter a URL"
+              floatingLabelText="Owner"
               onChange={this.onChange.bind(this)}
               fullWidth={true}
-              type="string"
-              id="imgUrl"/>
+              type="text"
+              id="owner"/>
+
+              <TextField
+              floatingLabelText="Remaining Balance"
+              onChange={this.onChange.bind(this)}
+              fullWidth={true}
+              type="number"
+              id="balance"/>
 
               <br/>
+            
+              <TextField
+              floatingLabelText="Phone"
+              onChange={this.onChange.bind(this)}
+              fullWidth={true}
+              type="phone"
+              id="phone"/>
+
+              <SelectField
+              floatingLabelText="Occupancy Status"
+              value={this.state.occupancyStatus}
+              onChange={this.handleChange.bind(null, 'occupancyStatus')}>
+                  <MenuItem value={'Second Home'} primaryText="Second Home" />
+                  <MenuItem value={'Rental'} primaryText="Rental" />
+                  <MenuItem value={'Owner Occupied'} primaryText="Owner Occupied" />
+              </SelectField>
+
+              <TextField
+              floatingLabelText="Description"
+              onChange={this.onChange.bind(this)}
+              fullWidth={true}
+              type="text"
+              id="description"/>
 
               <TextField
               floatingLabelText="Price"
@@ -100,30 +199,20 @@ class AddProp extends React.Component {
               type="number"
               id="price"/>
 
-              <br/>
-            
-              <TextField
-              floatingLabelText="Zip"
-              onChange={this.onChange.bind(this)}
-              fullWidth={true}
-              type="number"
-              id="zip"/>
+              <SelectField
+              floatingLabelText="Time Frame"
+              value={this.state.timeFrame}
+              onChange={this.handleChange.bind(null, 'timeFrame')}>
+                  <MenuItem value={60} primaryText="60 Days" />
+                  <MenuItem value={90} primaryText="90 Days" />
+                  <MenuItem value={120} primaryText="120 Days" />
+              </SelectField>
 
-              <TextField
-              floatingLabelText="Zip"
-              onChange={this.onChange.bind(this)}
-              fullWidth={true}
-              type="number"
-              id="zip"/>
-
-	      <RaisedButton 
+	            <RaisedButton 
               primary={true}
               label="Add Property"
-              onClick={this.submitPic}
-	      />
-	      
+              onClick={this.submitProperty}/>
             </div>
-            
          </div>
       );
    }

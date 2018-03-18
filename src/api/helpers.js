@@ -19,12 +19,12 @@ export default {
 
   //create a home listing
   posthome: function(home) {
-    return axios.post(url + "/api/pics/upload/", home);
+    return axios.post(url + "/api/property/upload/", home);
   },
 
   //send search object to retrieve homes
   searchForHomes: function(searchObj){
-    return axios.post(url + "/api/pics/searchlistings", searchObj)
+    return axios.post(url + "/api/property/searchlistings", searchObj)
   },
 
   //create a message to send to another user
