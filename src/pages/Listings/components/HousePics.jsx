@@ -17,7 +17,7 @@ class HousePics extends Component {
                     return(
                         <div key={id}>
                             <p>{pic.address}</p>
-                            <img src={pic.imgUrl[0]} alt=""/>
+                            <img src={pic.imgs[0]} alt=""/>
                         </div>
                     )
                 })}
