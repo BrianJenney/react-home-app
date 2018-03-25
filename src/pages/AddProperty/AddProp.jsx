@@ -3,6 +3,7 @@ import React from 'react';
 import API from '../../api/helpers.js';
 import NavBar from '../../components/NavBar';
 import { GoogleApiWrapper } from 'google-maps-react'
+import axios from 'axios';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -36,6 +37,7 @@ class AddProp extends React.Component {
       bedRooms: 0,
       bathRooms: 0,
       yearBuilt: Date.now(),
+      form: new FormData()
     }
   }
 
@@ -44,12 +46,11 @@ class AddProp extends React.Component {
     this.callAddressAutoComplete(input);
   };
 
-  onDrop=(file)=>{
-    console.log(file);
-    this.state.imgs.push(
-      file[0]
-    );
-  };
+  handleDrop = files => {
+    const uploaders = files.map(file => {
+      this.state.imgs.push(file);
+    });
+  }
 
   callAddressAutoComplete=(input)=>{
     const google = this.props.google;
@@ -82,22 +83,38 @@ class AddProp extends React.Component {
 
   submitProperty=()=>{
     let self = this;
-    
-    const property = this.state;
 
-    API.posthome(property).then(function(response){
+    this.state.form.append('file', this.state.imgs)    
+    this.state.form.append('email', this.props.email)
+    this.state.form.append('userid', this.props.id)
+    this.state.form.append('price', this.state.price)
+    this.state.form.append('address', this.state.address)
+    this.state.form.append('propertyType', this.state.propertyType)
+    this.state.form.append('owner', this.state.owner)
+    this.state.form.append('balance', this.state.balance)
+    this.state.form.append('phone', this.state.phone)
+    this.state.form.append('occupancyStatus', this.state.occupancyStatus)
+    this.state.form.append('description', this.state.description)
+    this.state.form.append('timeFrame', this.state.timeFrame)
+    this.state.form.append('bedRooms', this.state.bedRooms)
+    this.state.form.append('bathRooms', this.state.bathRooms)
+    this.state.form.append('yearBuilt', this.state.yearBuilt)
+
+    if(this.state.imgs.length < 2){
+      alert('Please add more pictures');
+      return;
+    }
+
+    API.posthome(this.state.form).then((response)=>{
       self.props.history.push("/nav");
     });
   };
 
-   render() {
-     
+   render() { 
       return (     
          <div>
-          <NavBar selectedIndex={1}/>
-
             <Dropzone 
-              onDrop={this.onDrop} 
+              onDrop={this.handleDrop} 
               multiple 
               accept="image/*">
               <p>Drop your files or click here to upload</p>
@@ -213,6 +230,7 @@ class AddProp extends React.Component {
               label="Add Property"
               onClick={this.submitProperty}/>
             </div>
+            <NavBar selectedIndex={1}/>
          </div>
       );
    }
