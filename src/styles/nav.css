@@ -1,8 +1,8 @@
 .bottom-nav {
   z-index: 1;
-  position: sticky;
-  bottom: 0;
-  background-color: #315179 !important; }
+  position: fixed !important;
+  bottom: 0 !important;
+  background-color: rgba(34, 70, 113, 0.94) !important; }
   .bottom-nav .material-icons {
     color: white !important; }
   .bottom-nav div {
