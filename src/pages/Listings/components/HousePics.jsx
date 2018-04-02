@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {GridList, GridTile} from 'material-ui/GridList';
 
 import '../../../styles/picbox.css';
 
@@ -10,6 +11,18 @@ class HousePics extends Component {
         }
     }
 
+    horizontalScroll=(imgs)=>{
+        return(
+            imgs.map((img, id)=>{
+                return(
+                    <div key={id} className="house-img">
+                        <img src={img}/>                     
+                    </div>
+                )
+            })
+        )
+    }
+
     render() {
         return (
             <div className="house-pics">
@@ -17,7 +30,9 @@ class HousePics extends Component {
                     return(
                         <div key={id}>
                             <p>{pic.address}</p>
-                            <img src={pic.imgs[0]} alt=""/>
+                            <div className="horizontal-scroll">                         
+                                {this.horizontalScroll(pic.imgs)}
+                            </div> 
                         </div>
                     )
                 })}
