@@ -27,6 +27,11 @@ export default {
     return axios.post(url + "/api/property/searchlistings", searchObj)
   },
 
+  //get a specific home
+  getHome: (id)=>{
+    return axios.get(url + `/api/property/info/${id}`)
+  },
+
   //create a message to send to another user
   postMessage: function(message){
     return axios.post(url + "/api/messages/postmessage", message);

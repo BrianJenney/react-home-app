@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {GridList, GridTile} from 'material-ui/GridList';
+import {Link} from 'react-router-dom';
 
 import '../../../styles/picbox.css';
 
@@ -7,17 +7,17 @@ class HousePics extends Component {
 
     constructor(props){
         super(props)
-        this.state={
-        }
     }
 
-    horizontalScroll=(imgs)=>{
+    horizontalScroll=(imgs, picId)=>{
         return(
-            imgs.map((img, id)=>{
+            imgs.map((img, idx)=>{
                 return(
-                    <div key={id} className="house-img">
-                        <img src={img}/>                     
-                    </div>
+                    <div key={idx} className="horizontal-scroll">
+                        <Link to={`/property/${picId}`}>
+                            <img src={img}/>
+                        </Link>
+                    </div>  
                 )
             })
         )
@@ -29,16 +29,19 @@ class HousePics extends Component {
                 {this.props.pics.map((pic, id)=>{
                     return(
                         <div key={id}>
-                            <p>{pic.address}</p>
-                            <div className="horizontal-scroll">                         
-                                {this.horizontalScroll(pic.imgs)}
-                            </div> 
+                            {this.horizontalScroll(pic.imgs, pic._id)}
+                            <div className="property-info">
+                                <p>{pic.address}, {pic.city} {pic.zipCode}</p>
+                                <span>Price: $ {pic.price}</span>
+                                <span>Rooms: {pic.bedRooms}</span>
+                                <span>Bath: {pic.bathRooms}</span>
+                            </div>
                         </div>
                     )
                 })}
             </div>
-        );
-  }
+        )
+    }
 }
 
 export default HousePics;

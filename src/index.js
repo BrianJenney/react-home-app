@@ -11,7 +11,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SignIn from './pages/Login/SignIn';
 import AddProp from './pages/AddProperty/AddProp';
 import Nav from './pages/Nav/NavPage';
-import Listings from './pages/Listings/BrowseHomes';
+import Listings from './pages/Listings/BrowseHomes'
+import Property from './pages/Property/PropertyInfo';
 import UserMessages from './pages/MyMessages/UserMessage';
 
 import {saveState} from './actions/localstorage';
@@ -34,6 +35,7 @@ ReactDOM.render(
         <Route path="/addproperty" component={AddProp} />
         <Route path="/nav" component={Nav} /> 
         <Route path="/listings" component={Listings}/>
+        <Route path="/property/:id" component={Property}/>
         <Route path="/mymessages" component={UserMessages}/>
       </div>    
     </Router >

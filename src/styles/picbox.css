@@ -4,3 +4,5 @@
   height: 440px; }
   .house-pics img {
     width: 100%; }
+  .house-pics span {
+    margin: 2%; }
