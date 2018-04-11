@@ -85,6 +85,7 @@ class UserSearch extends Component {
                     <div className="col-md-6 text-right buy-sell">
                         <p>Buy</p>
                         <p>Sell</p>
+                        <p>Login</p>
                     </div>
                 </div>
                 <input 

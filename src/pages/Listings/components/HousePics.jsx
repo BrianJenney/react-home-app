@@ -13,7 +13,7 @@ class HousePics extends Component {
         return(
             imgs.map((img, idx)=>{
                 return(
-                    <div key={idx} className="horizontal-scroll">
+                    <div className="property-pic" key={idx}>
                         <Link to={`/property/${picId}`}>
                             <img src={img}/>
                         </Link>
@@ -29,7 +29,9 @@ class HousePics extends Component {
                 {this.props.pics.map((pic, id)=>{
                     return(
                         <div key={id}>
-                            {this.horizontalScroll(pic.imgs, pic._id)}
+                            <div className="horizontal-scroll">
+                                {this.horizontalScroll(pic.imgs, pic._id)}
+                            </div>
                             <div className="property-info">
                                 <p>{pic.address}, {pic.city} {pic.zipCode}</p>
                                 <span>Price: $ {pic.price}</span>

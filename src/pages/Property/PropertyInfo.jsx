@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NavBar from '../../components/NavBar';
 import API from '../../api/helpers'
 
 class Property extends Component {
@@ -18,6 +19,7 @@ class Property extends Component {
                 {this.state && this.state.property &&
                     <img src={this.state.property.imgs[0]} alt=""/>
                 }
+                <NavBar selectedIndex={1}/>
             </div>
         )
     }

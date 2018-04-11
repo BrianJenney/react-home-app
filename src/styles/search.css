@@ -3,6 +3,16 @@
   border-left: 0;
   border-radius: 0; }
 
+.horizontal-scroll {
+  display: flex;
+  min-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap; }
+  .horizontal-scroll .property-pic {
+    min-width: 400px;
+    display: inline-block;
+    vertical-align: middle; }
+
 .user-search {
   opacity: 10%;
   position: absolute;
@@ -18,9 +28,13 @@
   .user-search .form-control {
     padding: 5%; }
   .user-search .header {
-    background-color: rgba(150, 94, 7, 0.99);
+    filter-gradient: #1e5799, #7db9e8, vertical;
+    background-image: linear-gradient(left, #1e5799 0%, #2989d8 67%, #7db9e8 100%);
     color: white;
     padding: 15px; }
+  .user-search .buy-sell p:first-child, .user-search .buy-sell p:nth-child(2) {
+    border-right: 1px solid white;
+    padding-right: 10px; }
   .user-search .buy-sell p {
     display: inline;
-    margin-left: 5%; }
+    margin: 5%; }

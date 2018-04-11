@@ -4,6 +4,18 @@
   border-radius: 0;
 }
 
+.horizontal-scroll{
+  display: flex;
+  min-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  .property-pic{
+    min-width: 400px;
+    display: inline-block;
+    vertical-align: middle
+  }
+}
+
 .user-search{
     opacity: 10%;
     position: absolute;
@@ -26,15 +38,20 @@
     }
 
     .header{
-      background-color: rgba(150, 94, 7, .99);
+      filter-gradient: (#1e5799, #7db9e8, vertical); // IE6-9
+      background-image: (linear-gradient(left, #1e5799 0%,#2989d8 67%,#7db9e8 100%));
       color: white;
       padding: 15px;
     }
 
     .buy-sell{
+      p:first-child, p:nth-child(2){
+        border-right: 1px solid white;
+        padding-right: 10px;
+      }
       p{
         display: inline;
-        margin-left: 5%;
+        margin: 5%;
       }
     }
 
