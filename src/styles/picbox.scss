@@ -1,12 +1,28 @@
 
 .house-pics{
-    text-align: center;
     overflow: scroll;
     height: 440px;
+    background-color: #edeeef;
     img{
         width: 100%;
     }
     span{
         margin: 2%;
+    }
+}
+
+.property-info{
+    .house-price{
+        font-size: 1.7em;
+        i{
+            color: #eb7c4d;
+            margin-top: 2%;
+        }
+    }
+    .house-address{
+        color: #acacac;
+    }
+    .house-beds{
+        margin-left: 5%;
     }
 }

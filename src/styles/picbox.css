@@ -1,8 +1,20 @@
 .house-pics {
-  text-align: center;
   overflow: scroll;
-  height: 440px; }
+  height: 440px;
+  background-color: #edeeef; }
   .house-pics img {
     width: 100%; }
   .house-pics span {
     margin: 2%; }
+
+.property-info .house-price {
+  font-size: 1.7em; }
+  .property-info .house-price i {
+    color: #eb7c4d;
+    margin-top: 2%; }
+
+.property-info .house-address {
+  color: #acacac; }
+
+.property-info .house-beds {
+  margin-left: 5%; }

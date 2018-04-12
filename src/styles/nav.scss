@@ -1,12 +1,12 @@
 .bottom-nav{
     .material-icons{
-      color: white !important;
+      display: none !important;
     }
     div{
-        color: white !important;
+        color: darkgray !important;
     }
     z-index:1;
     position: fixed !important;
     bottom: 0 !important;
-    background-color: rgba(34, 70, 113, 0.94) !important;
+    background-color: #fafafa !important;
   }

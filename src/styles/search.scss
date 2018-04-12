@@ -2,6 +2,11 @@
   border-right: 0;
   border-left: 0;
   border-radius: 0;
+  background-color: #edeeef;
+}
+
+.search-options{
+  background-color: #edeeef;
 }
 
 .horizontal-scroll{
@@ -10,7 +15,7 @@
   overflow-x: auto;
   white-space: nowrap;
   .property-pic{
-    min-width: 400px;
+    min-width: 450px;
     display: inline-block;
     vertical-align: middle
   }
@@ -19,7 +24,6 @@
 .user-search{
     opacity: 10%;
     position: absolute;
-    /* bottom: 18%; */
 		top: 20px;
     right: 1%;
     height:98%;

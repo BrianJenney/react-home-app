@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 
 import '../../../styles/picbox.css';
 
+const markerIcon = <i className="material-icons">room</i>;
+
 class HousePics extends Component {
 
     constructor(props){
@@ -33,10 +35,18 @@ class HousePics extends Component {
                                 {this.horizontalScroll(pic.imgs, pic._id)}
                             </div>
                             <div className="property-info">
-                                <p>{pic.address}, {pic.city} {pic.zipCode}</p>
-                                <span>Price: $ {pic.price}</span>
-                                <span>Rooms: {pic.bedRooms}</span>
-                                <span>Bath: {pic.bathRooms}</span>
+                                <p>
+                                    <span className="house-price">
+                                    {markerIcon} ${pic.price}
+                                    </span>
+                                    <span className="house-address">
+                                    {pic.address}, {pic.city} {pic.zipCode}
+                                    </span>
+                                </p>
+                                <p>
+                                    <span className="house-beds">{pic.bedRooms} Beds</span>
+                                    <span className="house-baths">{pic.bathRooms} Baths</span>
+                                </p>
                             </div>
                         </div>
                     )

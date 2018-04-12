@@ -76,7 +76,7 @@ class UserSearch extends Component {
 
     render() {
         return (
-            <Card className="col-md-4 user-search">
+            <Card className="col-md-5 user-search">
                 <div className="header row">
                     <div className="col-md-6">
                     <img src={Logo} alt=""/>

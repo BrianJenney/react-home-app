@@ -1,7 +1,11 @@
 .form-control {
   border-right: 0;
   border-left: 0;
-  border-radius: 0; }
+  border-radius: 0;
+  background-color: #edeeef; }
+
+.search-options {
+  background-color: #edeeef; }
 
 .horizontal-scroll {
   display: flex;
@@ -9,14 +13,13 @@
   overflow-x: auto;
   white-space: nowrap; }
   .horizontal-scroll .property-pic {
-    min-width: 400px;
+    min-width: 450px;
     display: inline-block;
     vertical-align: middle; }
 
 .user-search {
   opacity: 10%;
   position: absolute;
-  /* bottom: 18%; */
   top: 20px;
   right: 1%;
   height: 98%;

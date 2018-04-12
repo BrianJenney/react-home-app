@@ -17,7 +17,12 @@ const envelope = <i className="material-icons">message</i>
 
 class NavBar extends React.Component{
 
+    state = {
+        selectedIndex: 0,
+      };
+
     select=(page)=>{
+        this.setState({selectedIndex: page});
         switch(page){
             case 0:
                 this.props.history.push('/nav');
@@ -64,7 +69,7 @@ class NavBar extends React.Component{
                 onClick={() => this.select(4)}
             />
             <BottomNavigationItem
-                label="LogOut"
+                label="Log Out"
                 icon={signout}
                 onClick={() => this.select(3)}
             />
