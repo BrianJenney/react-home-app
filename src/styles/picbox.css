@@ -1,6 +1,6 @@
 .house-pics {
   overflow: scroll;
-  height: 440px;
+  height: 100vh;
   background-color: #edeeef; }
   .house-pics img {
     width: 100%; }
@@ -14,7 +14,10 @@
     margin-top: 2%; }
 
 .property-info .house-address {
-  color: #acacac; }
+  white-space: nowrap;
+  overflow: hidden;
+  color: #acacac;
+  text-overflow: ellipsis; }
 
 .property-info .house-beds {
   margin-left: 5%; }

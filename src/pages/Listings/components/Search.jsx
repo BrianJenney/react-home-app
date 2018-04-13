@@ -79,7 +79,7 @@ class UserSearch extends Component {
             <Card className="col-md-5 user-search">
                 <div className="header row">
                     <div className="col-md-6">
-                    <img src={Logo} alt=""/>
+                    <img id="micasa-logo" src={Logo} alt=""/>
                     </div>
                     
                     <div className="col-md-6 text-right buy-sell">
@@ -88,13 +88,15 @@ class UserSearch extends Component {
                         <p>Login</p>
                     </div>
                 </div>
-                <input 
-                type="text" 
-                className="form-control"
-                placeholder="Search for your home"
-                id="address"
-                onChange={this.handleAddressChange.bind(this)}/>
-
+                <div className="search-input">
+                    <span className="fa fa-search"></span>
+                    <input 
+                    type="text" 
+                    className="form-control"
+                    placeholder="Search for your home"
+                    id="address"
+                    onChange={this.handleAddressChange.bind(this)}/>
+                </div>
                 <div className="search-options row">
                     <div className="col-md-3">
                         <SelectField
@@ -102,10 +104,11 @@ class UserSearch extends Component {
                         floatingLabelText="Type"
                         value={this.state.propertyType}
                         onChange={this.handleChange.bind(null, 'propertyType')}
+                        autoWidth={true}
                         >
-                            <MenuItem value={'house'} primaryText="Singe Family Home" />
-                            <MenuItem value={'townhouse'} primaryText="Town House" />
-                            <MenuItem value={'condo'} primaryText="Condo" />
+                            <MenuItem value={'house'} className="menu-type" primaryText="Singe Family Home" />
+                            <MenuItem value={'townhouse'} className="menu-type" primaryText="Town House" />
+                            <MenuItem value={'condo'} className="menu-type" primaryText="Condo" />
                         </SelectField>
                     </div>
                     <div className="col-md-3">

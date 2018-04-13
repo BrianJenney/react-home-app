@@ -1,3 +1,4 @@
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
 .form-control {
   border-right: 0;
   border-left: 0;
@@ -7,13 +8,16 @@
 .search-options {
   background-color: #edeeef; }
 
+.user-select {
+  width: 75px !important; }
+
 .horizontal-scroll {
   display: flex;
   min-width: 100%;
   overflow-x: auto;
   white-space: nowrap; }
   .horizontal-scroll .property-pic {
-    min-width: 450px;
+    min-width: 100%;
     display: inline-block;
     vertical-align: middle; }
 
@@ -24,10 +28,18 @@
   right: 1%;
   height: 98%;
   padding: 0 !important; }
+  .user-search .search-input {
+    position: relative; }
+    .user-search .search-input .fa {
+      position: absolute;
+      margin-left: 85%;
+      font-size: 2.6rem;
+      margin-top: 2%;
+      color: #717171; }
   .user-search img {
     width: 100%; }
-  .user-search .user-select {
-    width: 75px !important; }
+  .user-search #micasa-logo {
+    width: 75%; }
   .user-search .form-control {
     padding: 5%; }
   .user-search .header {
