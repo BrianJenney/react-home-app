@@ -24,7 +24,8 @@ class UserSearch extends Component {
         this.state={
             autoComplete: null,
             results: [],
-            bedRooms: null,
+            bedRooms: 0,
+            bathRooms: 0,
             propertyType: null,
             maxPrice: Infinity,
             minPrice: 0,
@@ -63,6 +64,7 @@ class UserSearch extends Component {
     searchHomes=()=>{
         let searchObj = {};
         searchObj.propertyType = this.state.propertyType;
+        searchObj.bathRooms = this.state.bathRooms;
         searchObj.bedRooms = this.state.bedRooms;
         searchObj.maxPrice = this.state.maxPrice;
         searchObj.minPrice = this.state.minPrice;
@@ -117,6 +119,20 @@ class UserSearch extends Component {
                         className="user-select"
                         value={this.state.bedRooms}
                         onChange={this.handleChange.bind(null, 'bedRooms')}
+                        >
+                            <MenuItem value={1} primaryText="+1" />
+                            <MenuItem value={2} primaryText="+2" />
+                            <MenuItem value={3} primaryText="+3" />
+                            <MenuItem value={4} primaryText="+4" />
+                            <MenuItem value={5} primaryText="+5" />
+                        </SelectField>
+                    </div>
+                    <div className="col-md-3">
+                        <SelectField
+                        floatingLabelText="Baths"
+                        className="user-select"
+                        value={this.state.bathRooms}
+                        onChange={this.handleChange.bind(null, 'bathRooms')}
                         >
                             <MenuItem value={1} primaryText="+1" />
                             <MenuItem value={2} primaryText="+2" />
