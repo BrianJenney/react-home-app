@@ -36,6 +36,7 @@ class AddProp extends React.Component {
       timeFrame: null,
       bedRooms: 0,
       bathRooms: 0,
+      sqFeet: 0,
       yearBuilt: Date.now(),
       form: new FormData()
     }
@@ -99,6 +100,7 @@ class AddProp extends React.Component {
     this.state.form.append('bedRooms', this.state.bedRooms)
     this.state.form.append('bathRooms', this.state.bathRooms)
     this.state.form.append('yearBuilt', this.state.yearBuilt)
+    this.state.form.append('sqFeet', this.state.sqFeet)
 
     if(this.state.imgs.length < 2){
       alert('Please add more pictures');
@@ -215,6 +217,13 @@ class AddProp extends React.Component {
               fullWidth={true}
               type="number"
               id="price"/>
+
+              <TextField
+              floatingLabelText="Sq Feet"
+              onChange={this.onChange.bind(this)}
+              fullWidth={true}
+              type="number"
+              id="sqFeet"/>
 
               <SelectField
               floatingLabelText="Time Frame"
