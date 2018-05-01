@@ -1,9 +1,9 @@
 .house-pics {
   overflow: scroll;
-  height: 475px;
+  height: calc(100vh - 140px);
   background-color: #edeeef; }
   .house-pics img {
-    width: 100%; }
+    width: 50%; }
   .house-pics span {
     margin: 2%; }
 

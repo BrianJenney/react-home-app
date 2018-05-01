@@ -1,10 +1,10 @@
 
 .house-pics{
     overflow: scroll;
-    height: 100vh;
+    height: calc(100vh - 140px);
     background-color: #edeeef;
     img{
-        width: 100%;
+        width: 50%;
     }
     span{
         margin: 2%;

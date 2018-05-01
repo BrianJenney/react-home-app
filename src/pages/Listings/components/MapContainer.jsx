@@ -7,10 +7,6 @@ import * as mapActions from '../../../actions/mapMarker';
 
 class MapContainer extends Component {
 
-  constructor(props){
-    super(props)
-  }
-
   componentDidUpdate() {
     this.loadMap(); // call loadMap function to load the google map
   }

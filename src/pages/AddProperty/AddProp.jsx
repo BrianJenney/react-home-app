@@ -3,9 +3,10 @@ import React from 'react';
 import API from '../../api/helpers.js';
 import NavBar from '../../components/NavBar';
 import { GoogleApiWrapper } from 'google-maps-react'
-import axios from 'axios';
 
 import RaisedButton from 'material-ui/RaisedButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from 'material-ui/TextField';
 import Dropzone from 'react-dropzone'
 import SelectField from 'material-ui/SelectField';
@@ -18,10 +19,7 @@ import * as mapActions from '../../actions/mapMarker';
 
 class AddProp extends React.Component {
 
-  constructor(props){
-    super(props)
-
-    this.state={
+    state={
       autoComplete: null,
       disabled: false,
       imgs:[],
@@ -40,7 +38,7 @@ class AddProp extends React.Component {
       yearBuilt: Date.now(),
       form: new FormData()
     }
-  }
+
 
   handleAddressChange=(e)=>{
     let input = e.target.value;
@@ -48,7 +46,7 @@ class AddProp extends React.Component {
   };
 
   handleDrop = files => {
-    const uploaders = files.map(file => {
+    files.array.forEach(file => {
       this.state.imgs.push(file);
     });
   }
@@ -115,13 +113,18 @@ class AddProp extends React.Component {
    render() { 
       return (     
          <div>
-            <Dropzone 
-              onDrop={this.handleDrop} 
-              multiple 
-              accept="image/*">
-              <p>Drop your files or click here to upload</p>
-            </Dropzone>
-
+           <div className="col-8">
+              <Dropzone 
+                onDrop={this.handleDrop} 
+                multiple 
+                accept="image/*">
+                <FloatingActionButton>
+                <ContentAdd />
+              </FloatingActionButton>
+                <p>Upload Images</p>
+              </Dropzone>
+            </div>
+            
             <input 
               type="text" 
               className="form-control"

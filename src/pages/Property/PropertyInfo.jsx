@@ -3,9 +3,6 @@ import NavBar from '../../components/NavBar';
 import API from '../../api/helpers'
 
 class Property extends Component {
-    constructor(props){
-        super(props)
-    }
 
     componentDidMount=()=>{
         API.getHome(this.props.match.params.id).then((response)=>{

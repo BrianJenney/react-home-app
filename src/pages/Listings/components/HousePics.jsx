@@ -7,17 +7,13 @@ const markerIcon = <i className="material-icons">room</i>;
 
 class HousePics extends Component {
 
-    constructor(props){
-        super(props)
-    }
-
     horizontalScroll=(imgs, picId)=>{
         return(
             imgs.map((img, idx)=>{
                 return(
                     <div className="property-pic" key={idx}>
                         <Link to={`/property/${picId}`}>
-                            <img src={img}/>
+                            <img src={img} alt={picId}/>
                         </Link>
                     </div>  
                 )
