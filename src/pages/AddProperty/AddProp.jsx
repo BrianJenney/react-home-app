@@ -139,7 +139,7 @@ class AddProp extends React.Component {
               value={this.state.propertyType}
               id="propertyType"
               onChange={this.handleChange.bind(null, 'propertyType')}>
-                  <MenuItem value={'Single Family'} primaryText="Singe Family" />
+                  <MenuItem value={'Single Family Home'} primaryText="Singe Family" />
                   <MenuItem value={'Duplex'} primaryText="Duplex" />
                   <MenuItem value={'Multi-Unit'} primaryText="Multi-Unit" />
                   <MenuItem value={'Condo'} primaryText="Condo" />
