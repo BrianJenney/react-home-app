@@ -33,15 +33,13 @@
     .user-search .search-input .fa {
       position: absolute;
       margin-left: 85%;
-      font-size: 2.6rem;
-      margin-top: 2%;
+      font-size: 1.5rem;
+      margin-top: 1%;
       color: #717171; }
   .user-search img {
     width: 100%; }
   .user-search #micasa-logo {
     width: 75%; }
-  .user-search .form-control {
-    padding: 5%; }
   .user-search .header {
     filter-gradient: #1e5799, #7db9e8, vertical;
     background-image: linear-gradient(left, #315a8f 0%, #4e74a4 67%, #6286b3 100%);

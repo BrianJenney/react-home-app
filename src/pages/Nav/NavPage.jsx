@@ -24,7 +24,7 @@ class NavPage extends React.Component{
         return(
             
             <div>
-            <div className="col-md-6 col-md-offset-3">
+            <div className="col-6 offset-3">
                 <Card onClick={this.goto.bind(this, 'addhome')}>
                     <CardHeader
                     title="For Sellers"
@@ -37,7 +37,7 @@ class NavPage extends React.Component{
                 </Card>
             </div>
 
-            <div className="col-md-6 col-md-offset-3"
+            <div className="col-6 offset-3"
                 style={{marginTop: 45}}>
                 <Card onClick={this.goto.bind(this, 'listings')}>
                     <CardHeader
