@@ -1,0 +1,57 @@
+
+.details-main-img{
+    width: 100%;
+}
+.details{
+    margin-left: 2%;
+    .property-details{
+        .fa{
+            color: gray;
+        }    
+    
+        span{
+            margin-right: 2%;
+        }
+    }
+    
+    .address-details{
+        h3{
+            color: #355d91;
+            margin-top: 3%;
+        }
+    }
+
+    .description{
+        margin-top: 3%;
+        p{
+            color: #5b6067;
+            text-transform: capitalize;
+        }
+    }
+}
+
+.btn-offer{
+    width: 70%;
+    background-color: #25b797 !important;
+    color: white;
+}
+
+.btn-toolbar{
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.contact{
+    border: 1px solid #d5dae1;
+    text-align: center;
+    background-color: #f9fbfe;
+    h2{
+        margin-top: 10%;
+        color: #355d91;
+    }
+    button{
+        border: 1px solid #d5dae1;
+        margin: 1%
+    }
+}
+

@@ -33,7 +33,7 @@ export default class ChatBox extends React.Component{
     }
 
     componentDidMount=()=>{
-        var objDiv = document.querySelector(".scrollable-box");
+        const objDiv = document.querySelector(".scrollable-box");
         objDiv.scrollTop = objDiv.scrollHeight;
     };
 
@@ -59,9 +59,6 @@ export default class ChatBox extends React.Component{
         }).then(()=>{
             this.props.refreshConvo(message.to, message.from);
         })
-
-        
-
     };
 
     render(){
@@ -81,6 +78,7 @@ export default class ChatBox extends React.Component{
                         )
                     })}
                     </CardText>
+                    
                     <div style={{margin: 'auto', width: '95%'}}>
                         <TextField
                         value={this.state.userMessage}
@@ -90,7 +88,6 @@ export default class ChatBox extends React.Component{
                         />
                     </div>
                     
-
                     <CardActions>
                         <FlatButton label="Send" 
                         primary={true}
