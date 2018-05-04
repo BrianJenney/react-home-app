@@ -3,6 +3,7 @@ import NavBar from '../../components/NavBar';
 import API from '../../api/helpers'
 import moment from 'moment';
 import '../../styles/propertyInfo.css';
+import ChatBox from '../MyMessages/components/ChatBox';
 
 const FontAwesome = require('react-fontawesome');
 
@@ -10,13 +11,19 @@ class Property extends Component {
 
     state = {
         property: null,
-        mainImg: null
+        mainImg: null,
+        open: false,
+        messages: [],
     }
 
     componentDidMount=()=>{
         API.getHome(this.props.match.params.id).then((response)=>{
             this.setState({mainImg: response.data[0].imgs[0], property: response.data[0]});
         });
+    }
+
+    openMessage=()=>{
+        this.setState({open: true});
     }
 
     render() {
@@ -36,9 +43,11 @@ class Property extends Component {
                             </button>
                             <div className="btn-toolbar">
                                 <button className="btn btn-default">
-                                    Get Prequalified
+                                Get Prequalified
                                 </button>
-                                <button className="btn btn-default">
+                                <button 
+                                className="btn btn-default"
+                                onClick={this.openMessage}>
                                     Message Owner
                                 </button>
                             </div>
@@ -77,6 +86,10 @@ class Property extends Component {
                     </div>
                 </div>
                 }
+                <ChatBox 
+                messages={this.state.messages}
+                open={this.state.open}
+                />
                 <NavBar selectedIndex={1}/>
             </div>
         )

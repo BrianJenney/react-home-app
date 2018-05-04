@@ -93,13 +93,9 @@ class UserMessages extends React.Component{
                         open={this.state.open}
                         messages={this.state.convo}/>
                     </div>
-
                     </div>
-
                 </div>
-                       
-            </div>
-            
+            </div>            
         )
     }
 
