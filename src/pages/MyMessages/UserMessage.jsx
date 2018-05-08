@@ -53,7 +53,6 @@ class UserMessages extends React.Component{
 
     refreshConvo=(recipient, sender)=>{
         API.getConvo(recipient, sender).then((response)=>{
-            console.log(response);
             this.setState({convo: response.data[0].messages, recipient, picId: response.data[0].id})
         })
     }

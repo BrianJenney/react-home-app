@@ -3,9 +3,9 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
-import API from '../../../api/helpers.js';
+import API from '../../api/helpers.js';
 
-import '../../../styles/messages.css';
+import '../../styles/messages.css';
 
 export default class DialogModal extends React.Component {
 
@@ -14,12 +14,18 @@ export default class DialogModal extends React.Component {
     this.state= {
       disabled: false,
       userMessage: '',
-      recipient: ''
+      recipientEmail: null,
+      senderEmail: null,
+      propertyId: null
     };
   };
 
   componentWillReceiveProps=(nextProps)=>{
-    this.setState({recipient: nextProps.recipient});
+    this.setState({
+      recipientEmail: nextProps.propertyInfo.email, 
+      senderEmail: nextProps.senderEmail,
+      propertyId: nextProps.propertyInfo._id
+    });
   };
 
   handleClose = () => {
@@ -31,19 +37,17 @@ export default class DialogModal extends React.Component {
   };
 
   submitMessage=()=>{
-
     const message={
-      id: this.props.id,
+      id: this.state.propertyId,
       text: this.state.userMessage,
-      from: this.props.email,
-      to: this.state.recipient
+      from: this.props.senderEmail,
+      to: this.state.recipientEmail
     }
 
     API.postMessage(message).then((response)=>{
       this.setState({userMessage: ''});
       this.props.closeModal();
     });
-
   };
 
   render() {
@@ -70,7 +74,7 @@ export default class DialogModal extends React.Component {
     return (
       <div>
         <Dialog
-          title="Homies Chat"
+          title="Message Owner"
           actions={actions}
           modal={true}
           open={this.props.open}

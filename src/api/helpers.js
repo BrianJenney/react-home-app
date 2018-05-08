@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.headers.common['Authorization'] = (localStorage.getItem('casaToken') || '');
+axios.defaults.headers.common['Authorization'] = (JSON.parse(localStorage.getItem('casaToken')) || '');
 
 const url = (window.location.href.includes('localhost') ? "http://localhost:8081" : "https://react-web-services.herokuapp.com");
 

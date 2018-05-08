@@ -3,24 +3,34 @@ import NavBar from '../../components/NavBar';
 import API from '../../api/helpers'
 import moment from 'moment';
 import '../../styles/propertyInfo.css';
-import ChatBox from '../MyMessages/components/ChatBox';
+import DialogModal from '../../components/modals/Message';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as loginActions from '../../actions/login';
+import * as logoutActions from '../../actions/logout';
 
 const FontAwesome = require('react-fontawesome');
 
 class Property extends Component {
-
     state = {
         property: null,
         mainImg: null,
         open: false,
         messages: [],
     }
+    
+    
 
     componentDidMount=()=>{
         API.getHome(this.props.match.params.id).then((response)=>{
             this.setState({mainImg: response.data[0].imgs[0], property: response.data[0]});
         });
     }
+
+    closeModal=()=>{
+        this.setState({open: false});
+    };		      
 
     openMessage=()=>{
         this.setState({open: true});
@@ -75,7 +85,7 @@ class Property extends Component {
                                 <FontAwesome name='wrench' />
                                 {moment(this.state.property.yearBuilt).get('year')}
                             </span>
-                            <span>
+                            <span className='details-property-type'>
                                 <FontAwesome name='home' />
                                 {this.state.property.propertyType}
                             </span>
@@ -86,9 +96,11 @@ class Property extends Component {
                     </div>
                 </div>
                 }
-                <ChatBox 
-                messages={this.state.messages}
+                <DialogModal 
+                closeModal={this.closeModal.bind(this)}
                 open={this.state.open}
+                propertyInfo={this.state.property}
+                senderEmail={this.props.email}
                 />
                 <NavBar selectedIndex={1}/>
             </div>
@@ -96,4 +108,17 @@ class Property extends Component {
     }
 }
 
-export default Property;
+function mapStateToProps(state){
+    return {
+        id: state.loggedIn.id,
+        email: state.loggedIn.name,
+    };
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        loginaction: bindActionCreators(loginActions, dispatch),
+        logoutaction: bindActionCreators(logoutActions, dispatch)
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Property);
