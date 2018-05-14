@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NavBar from "../../components/NavBar";
+import TopNav from "../../components/TopNav";
 import API from "../../api/helpers";
 import moment from "moment";
 import "../../styles/propertyInfo.css";
@@ -42,6 +43,7 @@ class Property extends Component {
     render() {
         return (
             <div>
+                <TopNav />
                 {this.state &&
                     this.state.property && (
                         <div style={{ marginBottom: 200 }}>

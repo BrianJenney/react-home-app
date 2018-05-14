@@ -6,4 +6,4 @@
   .bottom-nav .material-icons {
     display: none !important; }
   .bottom-nav div {
-    color: darkgray !important; }
+    border-right: 1px solid lightgray; }

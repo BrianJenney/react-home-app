@@ -1,0 +1,19 @@
+.top-nav {
+    border-bottom: 1px solid #d5dae1;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
+
+    .nav-options {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        p {
+            padding: 0 1rem;
+            border-right: 1px solid #f3f3f3;
+            color: #b1b2b5;
+        }
+    }
+}

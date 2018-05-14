@@ -21,7 +21,6 @@ class UserMessages extends React.Component {
             recipient: "",
             convo: []
         };
-
         this.refreshConvo = this.refreshConvo.bind(this);
     }
 
@@ -29,7 +28,6 @@ class UserMessages extends React.Component {
         let self = this;
         API.getMessages(this.props.email).then(response => {
             const messages = response.data;
-
             //only show the user in the message that is not the logged in user
             messages.map(message => {
                 return (message.participants = message.participants.filter(
@@ -38,7 +36,6 @@ class UserMessages extends React.Component {
                     }
                 ));
             });
-
             return self.setState({ messages: response.data });
         });
     };
