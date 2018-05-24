@@ -2,7 +2,7 @@ import React from "react";
 import FontIcon from "material-ui/FontIcon";
 
 import { withRouter } from "react-router";
-import Logo from "../img/logo-micasa.png";
+import Logo from "../img/logo-micasa-blue.png";
 
 import "../styles/top-nav.css";
 

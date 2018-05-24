@@ -1,0 +1,38 @@
+.dropzone {
+    width: 100%;
+    border: 0.09rem dashed grey;
+    height: 400px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+    button {
+        background-color: #25b797 !important;
+    }
+
+    p {
+        color: #315a8f;
+        font-size: 1.2rem;
+        font-weight: 400;
+    }
+}
+
+.property-info {
+    background-color: #f9fbfe;
+    p {
+        color: #4a6f9d;
+    }
+    input[type="text"],
+    textarea {
+        background-color: #f9fbfe;
+    }
+}
+#address {
+    font-size: 1.5rem;
+    color: #25b797 !important;
+    width: 80%;
+}
+.no-border {
+    border: none;
+    margin-left: 1rem;
+}

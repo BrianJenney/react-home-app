@@ -56,25 +56,27 @@ class Property extends Component {
                                     />
                                 </div>
                                 <div className="col-5 contact">
-                                    <h2>${this.state.property.price}</h2>
-                                    <p className="text-muted">
-                                        ${this.state.monthlyPayment}/mo (Est
-                                        Mortgage)
-                                    </p>
+                                    <div className="contact-actions">
+                                        <h2>${this.state.property.price}</h2>
+                                        <p className="text-muted">
+                                            ${this.state.monthlyPayment}/mo (Est
+                                            Mortgage)
+                                        </p>
 
-                                    <button className="btn btn-default btn-offer">
-                                        Send Offer
-                                    </button>
-                                    <div className="btn-toolbar">
-                                        <button className="btn btn-default">
-                                            Get Prequalified
+                                        <button className="btn btn-default btn-offer">
+                                            Send Offer
                                         </button>
-                                        <button
-                                            className="btn btn-default"
-                                            onClick={this.openMessage}
-                                        >
-                                            Message Owner
-                                        </button>
+                                        <div className="btn-toolbar">
+                                            <button className="btn btn-default">
+                                                Get Prequalified
+                                            </button>
+                                            <button
+                                                className="btn btn-default"
+                                                onClick={this.openMessage}
+                                            >
+                                                Message Owner
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
