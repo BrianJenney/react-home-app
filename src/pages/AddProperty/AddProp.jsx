@@ -135,7 +135,7 @@ class AddProp extends React.Component {
                         </div>
 
                         <div className="col-4 text-center property-info">
-                            <p className="mt-5">
+                            <p className="mt-5 ">
                                 <small>Price</small>
                             </p>
                             <div className="edit-price">
@@ -163,9 +163,9 @@ class AddProp extends React.Component {
                     />
                 </div>
 
-                <div className="col-md-6 col-md-offset-3">
+                <div className="container-fluid">
                     <SelectField
-                        floatingLabelText="Property Type"
+                        floatingLabelText="House Type"
                         value={this.state.propertyType}
                         id="propertyType"
                         onChange={this.handleChange.bind(null, "propertyType")}
@@ -184,7 +184,7 @@ class AddProp extends React.Component {
                     </SelectField>
 
                     <SelectField
-                        floatingLabelText="Bedrooms"
+                        floatingLabelText="Bed"
                         value={this.state.bedRooms}
                         id="propertyType"
                         onChange={this.handleChange.bind(null, "bedRooms")}
@@ -200,7 +200,7 @@ class AddProp extends React.Component {
                     </SelectField>
 
                     <SelectField
-                        floatingLabelText="Bathrooms"
+                        floatingLabelText="Bath"
                         value={this.state.bathRooms}
                         onChange={this.handleChange.bind(null, "bathRooms")}
                     >
