@@ -28,15 +28,12 @@ class AddProp extends React.Component {
         price: 0,
         address: null,
         propertyType: null,
-        owner: null,
-        balance: 0,
-        phone: null,
-        occupancyStatus: null,
         description: null,
         timeFrame: null,
         bedRooms: 0,
         bathRooms: 0,
         sqFeet: 0,
+        sqFeetLotSize: 0,
         yearBuilt: Date.now(),
         form: new FormData()
     };
@@ -47,9 +44,11 @@ class AddProp extends React.Component {
     };
 
     handleDrop = files => {
-        files.array.forEach(file => {
+        files.forEach(file => {
             this.state.imgs.push(file);
         });
+
+        console.log(this.state.imgs);
     };
 
     callAddressAutoComplete = input => {
@@ -70,15 +69,10 @@ class AddProp extends React.Component {
     };
 
     onChange = e => {
+        console.log(e.target.id, e.target.value);
         let propertyInfo = {};
         propertyInfo[e.target.id] = e.target.value;
         this.setState(propertyInfo);
-    };
-
-    handleChange = (type, event, index, val) => {
-        let query = {};
-        query[type] = val;
-        this.setState(query);
     };
 
     submitProperty = () => {
@@ -90,15 +84,11 @@ class AddProp extends React.Component {
         this.state.form.append("price", this.state.price);
         this.state.form.append("address", this.state.address);
         this.state.form.append("propertyType", this.state.propertyType);
-        this.state.form.append("owner", this.state.owner);
-        this.state.form.append("balance", this.state.balance);
-        this.state.form.append("phone", this.state.phone);
-        this.state.form.append("occupancyStatus", this.state.occupancyStatus);
         this.state.form.append("description", this.state.description);
-        this.state.form.append("timeFrame", this.state.timeFrame);
         this.state.form.append("bedRooms", this.state.bedRooms);
         this.state.form.append("bathRooms", this.state.bathRooms);
         this.state.form.append("yearBuilt", this.state.yearBuilt);
+        this.state.form.append("sqFeetLot", this.state.sqFeetLotSize);
         this.state.form.append("sqFeet", this.state.sqFeet);
 
         if (this.state.imgs.length < 2) {
@@ -106,9 +96,13 @@ class AddProp extends React.Component {
             return;
         }
 
-        API.posthome(this.state.form).then(response => {
-            self.props.history.push("/nav");
-        });
+        API.posthome(this.state.form)
+            .then(response => {
+                self.props.history.push("/nav");
+            })
+            .catch(e => {
+                console.log(e);
+            });
     };
 
     render() {
@@ -164,100 +158,72 @@ class AddProp extends React.Component {
                 </div>
 
                 <div className="container-fluid">
-                    <SelectField
-                        floatingLabelText="House Type"
-                        value={this.state.propertyType}
-                        id="propertyType"
-                        onChange={this.handleChange.bind(null, "propertyType")}
-                    >
-                        <MenuItem
-                            value={"Single Family Home"}
-                            primaryText="Singe Family"
-                        />
-                        <MenuItem value={"Duplex"} primaryText="Duplex" />
-                        <MenuItem
-                            value={"Multi-Unit"}
-                            primaryText="Multi-Unit"
-                        />
-                        <MenuItem value={"Condo"} primaryText="Condo" />
-                        <MenuItem value={"Townhouse"} primaryText="Townhouse" />
-                    </SelectField>
+                    <div className="edit-property-details mt-2">
+                        <div className="form-inline">
+                            <select
+                                id="bedRooms"
+                                onChange={this.onChange.bind(this)}
+                            >
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <span>Bed</span>
+                        </div>
+                        <div className="form-inline">
+                            <select
+                                id="bathRooms"
+                                onChange={this.onChange.bind(this)}
+                            >
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <span>Bath</span>
+                        </div>
 
-                    <SelectField
-                        floatingLabelText="Bed"
-                        value={this.state.bedRooms}
-                        id="propertyType"
-                        onChange={this.handleChange.bind(null, "bedRooms")}
-                    >
-                        <MenuItem value={1} primaryText="1" />
-                        <MenuItem value={2} primaryText="2" />
-                        <MenuItem value={3} primaryText="3" />
-                        <MenuItem value={4} primaryText="4" />
-                        <MenuItem value={5} primaryText="5" />
-                        <MenuItem value={6} primaryText="6" />
-                        <MenuItem value={7} primaryText="7" />
-                        <MenuItem value={8} primaryText="8" />
-                    </SelectField>
+                        <div className="edit-sqfeet form-inline">
+                            <img src={EditIcon} />
+                            <input
+                                className="no-border"
+                                placeholder="1000"
+                                onChange={this.onChange.bind(this)}
+                                type="text"
+                                id="sqFeet"
+                            />
+                            <span>sq ft home size</span>
+                        </div>
 
-                    <SelectField
-                        floatingLabelText="Bath"
-                        value={this.state.bathRooms}
-                        onChange={this.handleChange.bind(null, "bathRooms")}
-                    >
-                        <MenuItem value={1} primaryText="1" />
-                        <MenuItem value={2} primaryText="2" />
-                        <MenuItem value={3} primaryText="3" />
-                        <MenuItem value={4} primaryText="4" />
-                        <MenuItem value={5} primaryText="5" />
-                        <MenuItem value={6} primaryText="6" />
-                        <MenuItem value={7} primaryText="7" />
-                        <MenuItem value={8} primaryText="8" />
-                    </SelectField>
+                        <div className="edit-sqfeet-lot form-inline">
+                            <img src={EditIcon} />
+                            <input
+                                className="no-border"
+                                placeholder="1000"
+                                onChange={this.onChange.bind(this)}
+                                type="text"
+                                id="sqFtLot"
+                            />
+                            <span>sq ft lot size</span>
+                        </div>
 
-                    <TextField
-                        floatingLabelText="Owner"
-                        onChange={this.onChange.bind(this)}
-                        fullWidth={true}
-                        type="text"
-                        id="owner"
-                    />
-
-                    <TextField
-                        floatingLabelText="Remaining Balance"
-                        onChange={this.onChange.bind(this)}
-                        fullWidth={true}
-                        type="number"
-                        id="balance"
-                    />
-
-                    <br />
-
-                    <TextField
-                        floatingLabelText="Phone"
-                        onChange={this.onChange.bind(this)}
-                        fullWidth={true}
-                        type="phone"
-                        id="phone"
-                    />
-
-                    <SelectField
-                        floatingLabelText="Occupancy Status"
-                        value={this.state.occupancyStatus}
-                        onChange={this.handleChange.bind(
-                            null,
-                            "occupancyStatus"
-                        )}
-                    >
-                        <MenuItem
-                            value={"Second Home"}
-                            primaryText="Second Home"
-                        />
-                        <MenuItem value={"Rental"} primaryText="Rental" />
-                        <MenuItem
-                            value={"Owner Occupied"}
-                            primaryText="Owner Occupied"
-                        />
-                    </SelectField>
+                        <div className="form-inline">
+                            <select
+                                id="propertyType"
+                                onChange={this.onChange.bind(this)}
+                            >
+                                <option value="Single Family Home">
+                                    Singe Family Home
+                                </option>
+                                <option value="Duplex">Duplex</option>
+                                <option value="Multi-Unit">Multi-Unit</option>
+                                <option value="Townhouse">Townhouse</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <TextField
                         floatingLabelText="Description"
@@ -266,32 +232,6 @@ class AddProp extends React.Component {
                         type="text"
                         id="description"
                     />
-
-                    <TextField
-                        floatingLabelText="Price"
-                        onChange={this.onChange.bind(this)}
-                        fullWidth={true}
-                        type="number"
-                        id="price"
-                    />
-
-                    <TextField
-                        floatingLabelText="Sq Feet"
-                        onChange={this.onChange.bind(this)}
-                        fullWidth={true}
-                        type="number"
-                        id="sqFeet"
-                    />
-
-                    <SelectField
-                        floatingLabelText="Time Frame"
-                        value={this.state.timeFrame}
-                        onChange={this.handleChange.bind(null, "timeFrame")}
-                    >
-                        <MenuItem value={60} primaryText="60 Days" />
-                        <MenuItem value={90} primaryText="90 Days" />
-                        <MenuItem value={120} primaryText="120 Days" />
-                    </SelectField>
 
                     <RaisedButton
                         primary={true}

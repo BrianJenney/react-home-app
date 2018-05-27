@@ -34,5 +34,40 @@
 }
 .no-border {
     border: none;
-    margin-left: 1rem;
+}
+
+.edit-price {
+    font-size: 1.5rem;
+    img {
+        width: 1.5rem;
+    }
+}
+
+.edit-property-details {
+    select {
+        background-color: white !important;
+        border: none !important;
+        font-size: 0.8rem;
+        margin: 0 1.5rem;
+        color: gray !important;
+    }
+    option {
+        color: gray !important;
+    }
+    span {
+        color: gray;
+    }
+    display: flex;
+}
+
+.edit-sqfeet,
+.edit-sqfeet-lot {
+    margin: 0 1.5rem;
+    font-size: 0.8rem;
+    input {
+        width: 3.5rem;
+    }
+    img {
+        width: 0.7rem;
+    }
 }
