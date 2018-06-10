@@ -47,8 +47,6 @@ class AddProp extends React.Component {
         files.forEach(file => {
             this.state.imgs.push(file);
         });
-
-        console.log(this.state.imgs);
     };
 
     callAddressAutoComplete = input => {
@@ -69,7 +67,6 @@ class AddProp extends React.Component {
     };
 
     onChange = e => {
-        console.log(e.target.id, e.target.value);
         let propertyInfo = {};
         propertyInfo[e.target.id] = e.target.value;
         this.setState(propertyInfo);
@@ -234,6 +231,7 @@ class AddProp extends React.Component {
                     />
 
                     <RaisedButton
+                        className="mb-5"
                         primary={true}
                         label="Add Property"
                         onClick={this.submitProperty}
