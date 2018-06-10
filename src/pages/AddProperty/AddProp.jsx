@@ -45,6 +45,7 @@ class AddProp extends React.Component {
 
     handleDrop = files => {
         files.forEach(file => {
+            this.state.form.append("file", file);
             this.state.imgs.push(file);
         });
     };
@@ -75,7 +76,11 @@ class AddProp extends React.Component {
     submitProperty = () => {
         let self = this;
 
-        this.state.form.append("file", this.state.imgs);
+        if (this.state.imgs.length < 1) {
+            alert("Please add more pictures");
+            return;
+        }
+
         this.state.form.append("email", this.props.email);
         this.state.form.append("userid", this.props.id);
         this.state.form.append("price", this.state.price);
@@ -88,10 +93,7 @@ class AddProp extends React.Component {
         this.state.form.append("sqFeetLot", this.state.sqFeetLotSize);
         this.state.form.append("sqFeet", this.state.sqFeet);
 
-        if (this.state.imgs.length < 2) {
-            alert("Please add more pictures");
-            return;
-        }
+        console.log(this.state.form);
 
         API.posthome(this.state.form)
             .then(response => {
@@ -260,4 +262,7 @@ function mapDispatchToProps(dispatch) {
 const WrappedContainer = GoogleApiWrapper({
     apiKey: "AIzaSyBd8HrEYJVSBoNvYs-fWVynMBBHgQbD1mo"
 })(AddProp);
-export default connect(mapStateToProps, mapDispatchToProps)(WrappedContainer);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(WrappedContainer);
