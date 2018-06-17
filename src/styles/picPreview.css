@@ -1,0 +1,14 @@
+.pic-previews {
+  display: flex;
+  flex-direction: row; }
+  .pic-previews .preview-pic {
+    position: relative;
+    margin: 0.05rem;
+    width: 10%; }
+    .pic-previews .preview-pic img {
+      width: 100%;
+      object-fit: cover; }
+  .pic-previews .fa {
+    padding: 2px; }
+    .pic-previews .fa:hover {
+      cursor: pointer; }

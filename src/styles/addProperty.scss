@@ -17,7 +17,7 @@
     }
 }
 
-.property-info {
+.add-property-info {
     background-color: #f9fbfe;
     p {
         color: #4a6f9d;
@@ -37,6 +37,9 @@
 }
 
 .edit-price {
+    input {
+        width: 8.5rem;
+    }
     font-size: 1.5rem;
     img {
         width: 1.5rem;
@@ -48,7 +51,7 @@
         background-color: white !important;
         border: none !important;
         font-size: 0.8rem;
-        margin: 0 1.5rem;
+        margin: 0 0.5rem;
         color: gray !important;
     }
     option {
@@ -65,7 +68,7 @@
     margin: 0 1.5rem;
     font-size: 0.8rem;
     input {
-        width: 3.5rem;
+        width: 2.25rem;
     }
     img {
         width: 0.7rem;

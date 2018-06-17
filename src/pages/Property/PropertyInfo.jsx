@@ -145,4 +145,7 @@ function mapDispatchToProps(dispatch) {
         logoutaction: bindActionCreators(logoutActions, dispatch)
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Property);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Property);
