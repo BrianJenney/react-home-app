@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import "../../../styles/picPreview.css";
 
 class PicPreview extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="pic-previews">
@@ -14,7 +10,7 @@ class PicPreview extends Component {
                         <div className="preview-pic" key={idx}>
                             <span
                                 className="fa fa-remove"
-                                onClick={this.props.removePic.bind(this, idx)}
+                                onClick={this.props.removePic.bind(idx)}
                             />
                             <img src={file.preview} alt={file.name} />
                         </div>
