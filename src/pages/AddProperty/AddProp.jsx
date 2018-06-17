@@ -10,17 +10,20 @@ import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import TextField from "material-ui/TextField";
 import Dropzone from "react-dropzone";
-import SelectField from "material-ui/SelectField";
-import MenuItem from "material-ui/MenuItem";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as loginActions from "../../actions/login";
 import * as mapActions from "../../actions/mapMarker";
-import "../../styles/addProperty.css";
 import EditIcon from "../../img/icon-edit-small.png";
+import PicPreview from "./components/PicPreview";
+import "../../styles/addProperty.css";
 
 class AddProp extends React.Component {
+    constructor() {
+        super();
+        this.removePic = this.removePic.bind(this);
+    }
     state = {
         autoComplete: null,
         disabled: false,
@@ -38,6 +41,12 @@ class AddProp extends React.Component {
         form: new FormData()
     };
 
+    removePic = idx => {
+        let imgs = [...this.state.imgs];
+        imgs.splice(idx, 1);
+        this.setState({ imgs });
+    };
+
     handleAddressChange = e => {
         let input = e.target.value;
         this.callAddressAutoComplete(input);
@@ -46,7 +55,7 @@ class AddProp extends React.Component {
     handleDrop = files => {
         files.forEach(file => {
             this.state.form.append("file", file);
-            this.state.imgs.push(file);
+            this.setState({ imgs: [...this.state.imgs, file] });
         });
     };
 
@@ -93,8 +102,6 @@ class AddProp extends React.Component {
         this.state.form.append("sqFeetLot", this.state.sqFeetLotSize);
         this.state.form.append("sqFeet", this.state.sqFeet);
 
-        console.log(this.state.form);
-
         API.posthome(this.state.form)
             .then(response => {
                 self.props.history.push("/nav");
@@ -127,7 +134,7 @@ class AddProp extends React.Component {
                             </Dropzone>
                         </div>
 
-                        <div className="col-4 text-center property-info">
+                        <div className="col-4 text-center add-property-info">
                             <p className="mt-5 ">
                                 <small>Price</small>
                             </p>
@@ -145,7 +152,14 @@ class AddProp extends React.Component {
                     </div>
                 </div>
 
-                <div className="add-address container-fluid">
+                <div className="pic-preview ml-4">
+                    <PicPreview
+                        pics={this.state.imgs}
+                        removePic={this.removePic}
+                    />
+                </div>
+
+                <div className="add-address container-fluid ml-3">
                     <img src={EditIcon} />
                     <input
                         className="no-border"
@@ -224,20 +238,22 @@ class AddProp extends React.Component {
                         </div>
                     </div>
 
-                    <TextField
-                        floatingLabelText="Description"
-                        onChange={this.onChange.bind(this)}
-                        fullWidth={true}
-                        type="text"
-                        id="description"
-                    />
+                    <div className="ml-3">
+                        <TextField
+                            floatingLabelText="Description"
+                            onChange={this.onChange.bind(this)}
+                            fullWidth={true}
+                            type="text"
+                            id="description"
+                        />
 
-                    <RaisedButton
-                        className="mb-5"
-                        primary={true}
-                        label="Add Property"
-                        onClick={this.submitProperty}
-                    />
+                        <RaisedButton
+                            className="mb-5"
+                            primary={true}
+                            label="Add Property"
+                            onClick={this.submitProperty}
+                        />
+                    </div>
                 </div>
                 <NavBar selectedIndex={1} />
             </div>
