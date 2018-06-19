@@ -115,6 +115,10 @@ class AddProp extends React.Component {
         return (
             <div>
                 <TopNav />
+                <div className="saveDraft-publish-buttons">
+                    <button>Save As Draft</button>
+                    <button id="pubButton">Publish Listing</button>
+                </div>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-8">

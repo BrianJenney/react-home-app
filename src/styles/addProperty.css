@@ -58,3 +58,14 @@
   .edit-sqfeet img,
   .edit-sqfeet-lot img {
     width: 0.7rem; }
+
+.saveDraft-publish-buttons {
+  text-align: right;
+  margin: 0.6rem; }
+  .saveDraft-publish-buttons button {
+    margin: 0.4rem;
+    padding: 0.4rem 4rem;
+    border-radius: 0.3rem; }
+  .saveDraft-publish-buttons #pubButton {
+    background-color: #25b797 !important;
+    color: #f9fbfe; }
