@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/BreadcrumbNav';
 import MapWrapper from './components/MapWrapper';
 import UserSearch from './components/Search';
 
@@ -14,7 +14,7 @@ class BrowseListings extends React.Component{
 
     constructor(props){
         super(props)
-        
+
         this.state = {
             houses: [],
             open: false,
@@ -22,14 +22,14 @@ class BrowseListings extends React.Component{
             messages:[]
         }
     };
-    
-    render(){ 
+
+    render(){
         return(
-            
+
             <div>
                 <MapWrapper/>
                 <UserSearch/>
-                <NavBar selectedIndex={2}/>  
+                <NavBar selectedIndex={2}/>
             </div>
         )
     };

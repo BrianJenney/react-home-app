@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/BreadcrumbNav";
 import TopNav from "../../components/TopNav";
 import API from "../../api/helpers";
 import moment from "moment";
