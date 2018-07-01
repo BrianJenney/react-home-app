@@ -39,24 +39,26 @@ li {
 }
 
 a {
-  font-size: 0.85rem;
+  font-size: 1rem;
+  font-weight: 500;
   display: block;
   padding: 18px 0;
   position: relative;
   white-space: nowrap;
+  color:dimgrey !important;
   background:#F5F5F5;
 }
 
 a::after {
   background:transparent;
   border-radius: 0 0 0 0;
-  box-shadow: 3px -3px 0px 0px 	#B8B8B8;
+  box-shadow: 3.5px -4.5px 0px 0px 	#D2D2D2;
   content: "";
   height: 50px;
   position: absolute;
   right: -21px;
-  top: 4px;
-  transform: scale(0.85) rotate(45deg);
+  top: -4px;
+  transform: scale(0.70) rotate(19deg) skewY(52deg);
   width: 48px;
   z-index: 1;
 }
@@ -67,7 +69,7 @@ a:visited,
 a:hover,
 a:active,
 a:focus {
-  color: rgb(0, 188, 212) !important;
+  color: #4e74a4 !important;
   text-decoration: none;
   cursor:pointer
 }
