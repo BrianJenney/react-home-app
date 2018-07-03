@@ -23,7 +23,14 @@ class AddProp extends React.Component {
     constructor() {
         super();
         this.removePic = this.removePic.bind(this);
+
+        const currentYear = new Date().getFullYear();
+        this.years = Array.from(
+            new Array(70),
+            (val, index) => currentYear - index
+        );
     }
+
     state = {
         autoComplete: null,
         disabled: false,
@@ -239,6 +246,21 @@ class AddProp extends React.Component {
                                 <option value="Multi-Unit">Multi-Unit</option>
                                 <option value="Townhouse">Townhouse</option>
                             </select>
+                        </div>
+                        <div className="form-inline">
+                            <select
+                                id="yearBuilt"
+                                onChange={this.onChange.bind(this)}
+                            >
+                                {this.years.map((year, index) => {
+                                    return (
+                                        <option key={index} value={year}>
+                                            {year}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                            <span>year built</span>
                         </div>
                     </div>
 

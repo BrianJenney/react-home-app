@@ -63,6 +63,10 @@
     display: flex;
 }
 
+span {
+    font-size: 0.8rem;
+}
+
 .edit-sqfeet,
 .edit-sqfeet-lot {
     margin: 0 1.5rem;
@@ -89,5 +93,4 @@
         background-color: #25b797 !important;
         color: #f9fbfe;
     }
-    
 }
