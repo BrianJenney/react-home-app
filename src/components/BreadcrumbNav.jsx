@@ -39,39 +39,62 @@ class NavBar extends React.Component {
     render() {
         return (
             <footer>
-              <div>
-                <nav
-                    className="bottom-nav"
-                    selectedIndex={this.props.selectedIndex}
-                >
-                  <ol>
-                    <li>
-                      <a label="Nav" icon={home} onClick={() => this.select(0)}>
-                        Nav
-                      </a>
-                    </li>
-                    <li>
-                      <a label="Post" icon={list} onClick={() => this.select(1)}>
-                        Post
-                      </a>
-                    </li>
-                      <a label="House Hunt" icon={search} onClick={() => this.select(2)}>
-                        House Hunt
-                      </a>
-                    <li className = "last-li">
-                      <a label="Messages" icon={envelope} onClick={() => this.select(4)} >
-                        Message
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        label="Log Out"
-                        icon={signout}
-                        onClick={() => this.select(3)}
-                      >Log Out</a>
-                    </li>
-                  </ol>
-                </nav>
+                <div>
+                    <nav
+                        className="bottom-nav"
+                        selectedIndex={this.props.selectedIndex}
+                    >
+                        <ol>
+                            <li>
+                                <a
+                                    label="Nav"
+                                    className="crumb-link"
+                                    icon={home}
+                                    onClick={() => this.select(0)}
+                                >
+                                    Nav
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    label="Post"
+                                    className="crumb-link"
+                                    icon={list}
+                                    onClick={() => this.select(1)}
+                                >
+                                    Post
+                                </a>
+                            </li>
+                            <a
+                                label="House Hunt"
+                                className="crumb-link"
+                                icon={search}
+                                onClick={() => this.select(2)}
+                            >
+                                House Hunt
+                            </a>
+                            <li className="last-li">
+                                <a
+                                    label="Messages"
+                                    className="crumb-link"
+                                    icon={envelope}
+                                    onClick={() => this.select(4)}
+                                >
+                                    Message
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    label="Log Out"
+                                    className="crumb-link"
+                                    icon={signout}
+                                    onClick={() => this.select(3)}
+                                >
+                                    Log Out
+                                </a>
+                            </li>
+                        </ol>
+                    </nav>
                 </div>
             </footer>
         );

@@ -5,14 +5,15 @@ footer {
   position: fixed;
   bottom: 0;
   background-color: grey;
-  letter-spacing: .05em; }
+  letter-spacing: 0.05em;
+  z-index: 1; }
   footer div {
     position: fixed;
     bottom: 0;
     display: block;
     height: 56px;
     width: 100% !important;
-    background-color: #F5F5F5 !important; }
+    background-color: #f5f5f5 !important; }
 
 nav {
   margin-left: 12%;
@@ -26,27 +27,27 @@ ol {
   list-style: none;
   text-align: center;
   width: 100% !important;
-  background-color: #F5F5F5 !important; }
+  background-color: #f5f5f5 !important; }
 
 li {
   display: table-cell;
   vertical-align: middle;
   width: 20%; }
 
-a {
-  font-size: 1rem;
-  font-weight: 500;
+.crumb-link {
+  font-size: 0.8rem;
+  font-weight: 100;
   display: block;
   padding: 18px 0;
   position: relative;
   white-space: nowrap;
   color: dimgrey !important;
-  background: #F5F5F5; }
+  background: #f5f5f5; }
 
-a::after {
+.crumb-link::after {
   background: transparent;
   border-radius: 0 0 0 0;
-  box-shadow: 3.5px -4.5px 0px 0px 	#D2D2D2;
+  box-shadow: 1.5px -1.5px 0px 0px #d2d2d2;
   content: "";
   height: 50px;
   position: absolute;
