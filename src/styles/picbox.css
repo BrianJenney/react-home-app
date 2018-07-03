@@ -1,6 +1,6 @@
 .house-pics {
   overflow: scroll;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 165px);
   background-color: #edeeef; }
   .house-pics img {
     width: 50%; }

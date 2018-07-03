@@ -1,6 +1,6 @@
 import React from "react";
 import API from "../../api/helpers.js";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/BreadcrumbNav";
 import Divider from "material-ui/Divider";
 import ChatBox from "./components/ChatBox";
 import { List, ListItem } from "material-ui/List";

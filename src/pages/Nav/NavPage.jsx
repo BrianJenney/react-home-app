@@ -2,7 +2,7 @@
 import React from 'react';
 import {Card, CardHeader, CardMedia, CardTitle} from 'material-ui/Card';
 
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/BreadcrumbNav';
 
 class NavPage extends React.Component{
 
@@ -22,7 +22,7 @@ class NavPage extends React.Component{
 
     render(){
         return(
-            
+
             <div>
             <div className="col-6 offset-3">
                 <Card onClick={this.goto.bind(this, 'addhome')}>
