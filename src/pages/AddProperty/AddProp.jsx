@@ -1,7 +1,7 @@
 import React from "react";
 
 import API from "../../api/helpers.js";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/BreadcrumbNav";
 import TopNav from "../../components/TopNav";
 import { GoogleApiWrapper } from "google-maps-react";
 
@@ -10,17 +10,27 @@ import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import TextField from "material-ui/TextField";
 import Dropzone from "react-dropzone";
-import SelectField from "material-ui/SelectField";
-import MenuItem from "material-ui/MenuItem";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as loginActions from "../../actions/login";
 import * as mapActions from "../../actions/mapMarker";
-import "../../styles/addProperty.css";
 import EditIcon from "../../img/icon-edit-small.png";
+import PicPreview from "./components/PicPreview";
+import "../../styles/addProperty.css";
 
 class AddProp extends React.Component {
+    constructor() {
+        super();
+        this.removePic = this.removePic.bind(this);
+
+        const currentYear = new Date().getFullYear();
+        this.years = Array.from(
+            new Array(70),
+            (val, index) => currentYear - index
+        );
+    }
+
     state = {
         autoComplete: null,
         disabled: false,
@@ -38,6 +48,12 @@ class AddProp extends React.Component {
         form: new FormData()
     };
 
+    removePic = idx => {
+        let imgs = [...this.state.imgs];
+        imgs.splice(idx, 1);
+        this.setState({ imgs });
+    };
+
     handleAddressChange = e => {
         let input = e.target.value;
         this.callAddressAutoComplete(input);
@@ -45,7 +61,8 @@ class AddProp extends React.Component {
 
     handleDrop = files => {
         files.forEach(file => {
-            this.state.imgs.push(file);
+            this.state.form.append("file", file);
+            this.setState({ imgs: [...this.state.imgs, file] });
         });
     };
 
@@ -75,7 +92,11 @@ class AddProp extends React.Component {
     submitProperty = () => {
         let self = this;
 
-        this.state.form.append("file", this.state.imgs);
+        if (this.state.imgs.length < 1) {
+            alert("Please add more pictures");
+            return;
+        }
+
         this.state.form.append("email", this.props.email);
         this.state.form.append("userid", this.props.id);
         this.state.form.append("price", this.state.price);
@@ -87,11 +108,6 @@ class AddProp extends React.Component {
         this.state.form.append("yearBuilt", this.state.yearBuilt);
         this.state.form.append("sqFeetLot", this.state.sqFeetLotSize);
         this.state.form.append("sqFeet", this.state.sqFeet);
-
-        if (this.state.imgs.length < 2) {
-            alert("Please add more pictures");
-            return;
-        }
 
         API.posthome(this.state.form)
             .then(response => {
@@ -106,6 +122,10 @@ class AddProp extends React.Component {
         return (
             <div>
                 <TopNav />
+                <div className="saveDraft-publish-buttons">
+                    <button>Save As Draft</button>
+                    <button id="pubButton">Publish Listing</button>
+                </div>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-8">
@@ -125,7 +145,7 @@ class AddProp extends React.Component {
                             </Dropzone>
                         </div>
 
-                        <div className="col-4 text-center property-info">
+                        <div className="col-4 text-center add-property-info">
                             <p className="mt-5 ">
                                 <small>Price</small>
                             </p>
@@ -143,7 +163,14 @@ class AddProp extends React.Component {
                     </div>
                 </div>
 
-                <div className="add-address container-fluid">
+                <div className="pic-preview ml-4">
+                    <PicPreview
+                        pics={this.state.imgs}
+                        removePic={this.removePic}
+                    />
+                </div>
+
+                <div className="add-address container-fluid ml-3">
                     <img src={EditIcon} />
                     <input
                         className="no-border"
@@ -220,22 +247,39 @@ class AddProp extends React.Component {
                                 <option value="Townhouse">Townhouse</option>
                             </select>
                         </div>
+                        <div className="form-inline">
+                            <select
+                                id="yearBuilt"
+                                onChange={this.onChange.bind(this)}
+                            >
+                                {this.years.map((year, index) => {
+                                    return (
+                                        <option key={index} value={year}>
+                                            {year}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                            <span>year built</span>
+                        </div>
                     </div>
 
-                    <TextField
-                        floatingLabelText="Description"
-                        onChange={this.onChange.bind(this)}
-                        fullWidth={true}
-                        type="text"
-                        id="description"
-                    />
+                    <div className="ml-3">
+                        <TextField
+                            floatingLabelText="Description"
+                            onChange={this.onChange.bind(this)}
+                            fullWidth={true}
+                            type="text"
+                            id="description"
+                        />
 
-                    <RaisedButton
-                        className="mb-5"
-                        primary={true}
-                        label="Add Property"
-                        onClick={this.submitProperty}
-                    />
+                        <RaisedButton
+                            className="mb-5"
+                            primary={true}
+                            label="Add Property"
+                            onClick={this.submitProperty}
+                        />
+                    </div>
                 </div>
                 <NavBar selectedIndex={1} />
             </div>
@@ -260,4 +304,7 @@ function mapDispatchToProps(dispatch) {
 const WrappedContainer = GoogleApiWrapper({
     apiKey: "AIzaSyBd8HrEYJVSBoNvYs-fWVynMBBHgQbD1mo"
 })(AddProp);
-export default connect(mapStateToProps, mapDispatchToProps)(WrappedContainer);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(WrappedContainer);

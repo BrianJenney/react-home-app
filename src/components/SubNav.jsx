@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router";
-import Logo from "../img/logo-micasa-blue.png";
-import "../styles/top-nav.css";
+import Logo from "../img/logo-micasa.png";
+import "../styles/sub-nav.css";
 
-class TopNav extends React.Component {
+class SubNav extends React.Component {
     state = {
         selectedIndex: 0
     };
@@ -27,11 +27,11 @@ class TopNav extends React.Component {
 
     render() {
         return (
-            <div className="top-nav">
-                <div className="logo">
-                    <img src={Logo} />
+            <div className="sub-nav">
+                <div className="logo">                        
+                    <img id="micasa-logo" src={Logo} alt="" />
                 </div>
-                <div className="nav-options">
+                <div className="col-md-6 text-right buy-sell">                    
                     <p onClick={() => this.select(0)}>Buy</p>
                     <p onClick={() => this.select(1)}>Sell</p>
                     <p onClick={() => this.select(2)}>Logout</p>
@@ -41,4 +41,4 @@ class TopNav extends React.Component {
     }
 }
 
-export default withRouter(TopNav);
+export default withRouter(SubNav);

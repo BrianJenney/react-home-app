@@ -4,6 +4,8 @@ import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import { GoogleApiWrapper } from "google-maps-react";
 
+import SubNav from "../../../components/SubNav";
+
 import API from "../../../api/helpers.js";
 import HousePics from "./HousePics";
 import "../../../styles/search.css";
@@ -20,6 +22,7 @@ import Logo from "../../../img/logo-micasa.png";
 class UserSearch extends Component {
     constructor(props) {
         super(props);
+        
         this.state = {
             autoComplete: null,
             results: [],
@@ -75,19 +78,12 @@ class UserSearch extends Component {
         });
     };
 
+
     render() {
         return (
             <Card className="col-md-5 user-search">
-                <div className="header row">
-                    <div className="col-md-6">
-                        <img id="micasa-logo" src={Logo} alt="" />
-                    </div>
-
-                    <div className="col-md-6 text-right buy-sell">
-                        <p>Buy</p>
-                        <p>Sell</p>
-                        <p>Login</p>
-                    </div>
+                <div className="header row">              
+                    <SubNav />
                 </div>
                 <div className="search-input">
                     <span className="fa fa-search" />

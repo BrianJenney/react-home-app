@@ -1,31 +1,29 @@
-
-.house-pics{
+.house-pics {
     overflow: scroll;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 165px);
     background-color: #edeeef;
-    img{
+    img {
         width: 50%;
     }
-    span{
+    span {
         margin: 2%;
     }
 }
 
-.property-info{
-    .house-price{
+.property-info {
+    .house-price {
         font-size: 1.7em;
-        i{
+        i {
             color: #eb7c4d;
             margin-top: 2%;
         }
     }
-    .house-address{
-        white-space: nowrap; 
+    .house-address {
         overflow: hidden;
         color: #acacac;
         text-overflow: ellipsis;
     }
-    .house-beds{
+    .house-beds {
         margin-left: 5%;
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/BreadcrumbNav";
 import TopNav from "../../components/TopNav";
 import API from "../../api/helpers";
 import moment from "moment";
@@ -145,4 +145,7 @@ function mapDispatchToProps(dispatch) {
         logoutaction: bindActionCreators(logoutActions, dispatch)
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Property);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Property);

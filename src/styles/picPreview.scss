@@ -1,0 +1,21 @@
+.pic-previews {
+    display: flex;
+    flex-direction: row;
+
+    .preview-pic {
+        position: relative;
+        img {
+            width: 100%;
+            object-fit: cover;
+        }
+        margin: 0.05rem;
+        width: 10%;
+    }
+
+    .fa {
+        padding: 2px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
