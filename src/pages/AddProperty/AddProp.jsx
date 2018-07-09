@@ -45,8 +45,7 @@ class AddProp extends React.Component {
         sqFeet: 0,
         sqFeetLotSize: 0,
         yearBuilt: Date.now(),
-        form: new FormData(),
-        draft: false
+        form: new FormData()
     };
 
     removePic = idx => {
@@ -90,7 +89,7 @@ class AddProp extends React.Component {
         this.setState(propertyInfo);
     };
 
-    submitProperty = bool => {
+    submitProperty = () => {
         let self = this;
 
         if (this.state.imgs.length < 1) {
@@ -109,7 +108,6 @@ class AddProp extends React.Component {
         this.state.form.append("yearBuilt", this.state.yearBuilt);
         this.state.form.append("sqFeetLot", this.state.sqFeetLotSize);
         this.state.form.append("sqFeet", this.state.sqFeet);
-        this.state.form.append("draft", bool);
 
         API.posthome(this.state.form)
             .then(response => {
@@ -279,7 +277,7 @@ class AddProp extends React.Component {
                             className="mb-5"
                             primary={true}
                             label="Add Property"
-                            onClick={this.submitProperty(true)}
+                            onClick={this.submitProperty}
                         />
                     </div>
                 </div>
