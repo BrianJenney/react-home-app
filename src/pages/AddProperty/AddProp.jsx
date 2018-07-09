@@ -95,6 +95,7 @@ class AddProp extends React.Component {
         if (this.state.imgs.length < 1) {
             alert("Please add more pictures");
             return;
+
         }
 
         this.state.form.append("email", this.props.email);
@@ -124,7 +125,7 @@ class AddProp extends React.Component {
                 <TopNav />
                 <div className="saveDraft-publish-buttons">
                     <button>Save As Draft</button>
-                    <button id="pubButton">Publish Listing</button>
+                    <button id="pubButton onClick={this.submitProperty}">Publish Listing</button>
                 </div>
                 <div className="container-fluid">
                     <div className="row">
@@ -271,13 +272,6 @@ class AddProp extends React.Component {
                             fullWidth={true}
                             type="text"
                             id="description"
-                        />
-
-                        <RaisedButton
-                            className="mb-5"
-                            primary={true}
-                            label="Add Property"
-                            onClick={this.submitProperty}
                         />
                     </div>
                 </div>
