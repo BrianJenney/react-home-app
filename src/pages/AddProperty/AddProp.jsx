@@ -45,7 +45,8 @@ class AddProp extends React.Component {
         sqFeet: 0,
         sqFeetLotSize: 0,
         yearBuilt: Date.now(),
-        form: new FormData()
+        form: new FormData(), 
+        draft: false
     };
 
     removePic = idx => {
@@ -89,7 +90,7 @@ class AddProp extends React.Component {
         this.setState(propertyInfo);
     };
 
-    submitProperty = () => {
+    submitProperty = bool => {
         let self = this;
 
         if (this.state.imgs.length < 1) {
@@ -108,6 +109,7 @@ class AddProp extends React.Component {
         this.state.form.append("yearBuilt", this.state.yearBuilt);
         this.state.form.append("sqFeetLot", this.state.sqFeetLotSize);
         this.state.form.append("sqFeet", this.state.sqFeet);
+        this.state.form.append("draft", bool);
 
         API.posthome(this.state.form)
             .then(response => {
@@ -123,8 +125,12 @@ class AddProp extends React.Component {
             <div>
                 <TopNav />
                 <div className="saveDraft-publish-buttons">
-                    <button>Save As Draft</button>
-                    <button id="pubButton">Publish Listing</button>
+                    <button
+                        onClick={this.submitProperty.bind(true)}
+                    >Save As Draft</button>
+                    <button id="pubButton"
+                        onClick={this.submitProperty.bind(false)}
+                    >Publish Listing</button>
                 </div>
                 <div className="container-fluid">
                     <div className="row">
