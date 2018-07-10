@@ -125,7 +125,7 @@ class AddProp extends React.Component {
                 <TopNav />
                 <div className="saveDraft-publish-buttons">
                     <button>Save As Draft</button>
-                    <button id="pubButton onClick={this.submitProperty}">Publish Listing</button>
+                    <button id="pubButton" onClick={this.submitProperty}>Publish Listing</button>
                 </div>
                 <div className="container-fluid">
                     <div className="row">
