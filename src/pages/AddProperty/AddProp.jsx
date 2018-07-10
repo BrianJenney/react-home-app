@@ -127,10 +127,10 @@ class AddProp extends React.Component {
                 <TopNav />
                 <div className="saveDraft-publish-buttons">
                     <button
-                        onClick={this.submitProperty.bind('draft')}
+                        onClick={this.submitProperty.bind(this, 'draft')}
                     >Save As Draft</button>
                     <button id="pubButton"
-                        onClick={this.submitProperty.bind('publish')}
+                        onClick={this.submitProperty.bind(this, 'publish')}
                     >Publish Listing</button>
                 </div>
                 <div className="container-fluid">
