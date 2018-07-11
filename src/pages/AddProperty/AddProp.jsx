@@ -46,7 +46,7 @@ class AddProp extends React.Component {
         sqFeetLotSize: 0,
         yearBuilt: Date.now(),
         form: new FormData(), 
-        draft: false
+        status: null
     };
 
     removePic = idx => {
@@ -90,12 +90,13 @@ class AddProp extends React.Component {
         this.setState(propertyInfo);
     };
 
-    submitProperty = bool => {
+    submitProperty = status => {
         let self = this;
 
         if (this.state.imgs.length < 1) {
             alert("Please add more pictures");
             return;
+
         }
 
         this.state.form.append("email", this.props.email);
@@ -109,7 +110,7 @@ class AddProp extends React.Component {
         this.state.form.append("yearBuilt", this.state.yearBuilt);
         this.state.form.append("sqFeetLot", this.state.sqFeetLotSize);
         this.state.form.append("sqFeet", this.state.sqFeet);
-        this.state.form.append("draft", bool);
+        this.state.form.append("status", status);
 
         API.posthome(this.state.form)
             .then(response => {
@@ -126,10 +127,10 @@ class AddProp extends React.Component {
                 <TopNav />
                 <div className="saveDraft-publish-buttons">
                     <button
-                        onClick={this.submitProperty.bind(true)}
+                        onClick={this.submitProperty.bind('draft')}
                     >Save As Draft</button>
                     <button id="pubButton"
-                        onClick={this.submitProperty.bind(false)}
+                        onClick={this.submitProperty.bind('publish')}
                     >Publish Listing</button>
                 </div>
                 <div className="container-fluid">
@@ -277,13 +278,6 @@ class AddProp extends React.Component {
                             fullWidth={true}
                             type="text"
                             id="description"
-                        />
-
-                        <RaisedButton
-                            className="mb-5"
-                            primary={true}
-                            label="Add Property"
-                            onClick={this.submitProperty}
                         />
                     </div>
                 </div>
