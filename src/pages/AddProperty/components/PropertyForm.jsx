@@ -1,8 +1,8 @@
 import React from "react";
 
-import API from "../../api/helpers.js";
-import NavBar from "../../components/BreadcrumbNav";
-import TopNav from "../../components/TopNav";
+import API from "../../../api/helpers.js";
+import NavBar from "../../../components/BreadcrumbNav";
+import TopNav from "../../../components/TopNav";
 import { GoogleApiWrapper } from "google-maps-react";
 
 import RaisedButton from "material-ui/RaisedButton";
@@ -13,11 +13,11 @@ import Dropzone from "react-dropzone";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as loginActions from "../../actions/login";
-import * as mapActions from "../../actions/mapMarker";
-import EditIcon from "../../img/icon-edit-small.png";
-import PicPreview from "./components/PicPreview";
-import "../../styles/addProperty.css";
+import * as loginActions from "../../../actions/login";
+import * as mapActions from "../../../actions/mapMarker";
+import EditIcon from "../../../img/icon-edit-small.png";
+import PicPreview from "./PicPreview";
+import "../../../styles/addProperty.css";
 
 class AddProp extends React.Component {
     constructor() {
@@ -45,7 +45,7 @@ class AddProp extends React.Component {
         sqFeet: 0,
         sqFeetLotSize: 0,
         yearBuilt: Date.now(),
-        form: new FormData(), 
+        form: new FormData(),
         status: null
     };
 
@@ -96,7 +96,6 @@ class AddProp extends React.Component {
         if (this.state.imgs.length < 1) {
             alert("Please add more pictures");
             return;
-
         }
 
         this.state.form.append("email", this.props.email);
@@ -126,12 +125,15 @@ class AddProp extends React.Component {
             <div>
                 <TopNav />
                 <div className="saveDraft-publish-buttons">
+                    <button onClick={this.submitProperty.bind(this, "draft")}>
+                        Save As Draft
+                    </button>
                     <button
-                        onClick={this.submitProperty.bind(this, 'draft')}
-                    >Save As Draft</button>
-                    <button id="pubButton"
-                        onClick={this.submitProperty.bind(this, 'publish')}
-                    >Publish Listing</button>
+                        id="pubButton"
+                        onClick={this.submitProperty.bind(this, "publish")}
+                    >
+                        Publish Listing
+                    </button>
                 </div>
                 <div className="container-fluid">
                     <div className="row">

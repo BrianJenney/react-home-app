@@ -9,7 +9,8 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 //we import our component from our component folder to use here
 import SignIn from "./pages/Login/SignIn";
-import AddProp from "./pages/AddProperty/AddProp";
+import AddProperty from "./pages/AddProperty/Index";
+import EditProperty from "./pages/EditProperty/Index";
 import Nav from "./pages/Nav/NavPage";
 import Listings from "./pages/Listings/BrowseHomes";
 import Property from "./pages/Property/PropertyInfo";
@@ -35,7 +36,8 @@ ReactDOM.render(
             <Router>
                 <div>
                     <Route exact path="/" component={SignIn} />
-                    <Route path="/addproperty" component={AddProp} />
+                    <Route path="/addproperty" component={AddProperty} />
+                    <Route path="/edit/property/:id" component={EditProperty} />
                     <Route path="/nav" component={Nav} />
                     <Route path="/listings" component={Listings} />
                     <Route path="/property/:id" component={Property} />
