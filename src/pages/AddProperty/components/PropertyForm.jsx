@@ -23,13 +23,18 @@ class AddProp extends React.Component {
     constructor() {
         super();
         this.removePic = this.removePic.bind(this);
-
         const currentYear = new Date().getFullYear();
         this.years = Array.from(
             new Array(70),
             (val, index) => currentYear - index
         );
     }
+
+    componentWillReceiveProps = nextProps => {
+        if (nextProps.home) {
+            this.setState({ ...nextProps.home });
+        }
+    };
 
     state = {
         autoComplete: null,
@@ -43,7 +48,7 @@ class AddProp extends React.Component {
         bedRooms: 0,
         bathRooms: 0,
         sqFeet: 0,
-        sqFeetLotSize: 0,
+        sqFeetLot: 0,
         yearBuilt: Date.now(),
         form: new FormData(),
         status: null
@@ -107,7 +112,7 @@ class AddProp extends React.Component {
         this.state.form.append("bedRooms", this.state.bedRooms);
         this.state.form.append("bathRooms", this.state.bathRooms);
         this.state.form.append("yearBuilt", this.state.yearBuilt);
-        this.state.form.append("sqFeetLot", this.state.sqFeetLotSize);
+        this.state.form.append("sqFeetLot", this.state.sqFeetLot);
         this.state.form.append("sqFeet", this.state.sqFeet);
         this.state.form.append("status", status);
 
@@ -163,6 +168,7 @@ class AddProp extends React.Component {
                                 <input
                                     className="no-border text-center"
                                     placeholder="$300,000"
+                                    value={this.state.price || null}
                                     onChange={this.onChange.bind(this)}
                                     type="text"
                                     id="price"
@@ -182,6 +188,7 @@ class AddProp extends React.Component {
                 <div className="add-address container-fluid ml-3">
                     <img src={EditIcon} />
                     <input
+                        value={this.state.address}
                         className="no-border"
                         type="text"
                         placeholder="Add address"
@@ -195,6 +202,7 @@ class AddProp extends React.Component {
                         <div className="form-inline">
                             <select
                                 id="bedRooms"
+                                value={this.state.bedRooms}
                                 onChange={this.onChange.bind(this)}
                             >
                                 <option value="1">1</option>
@@ -207,6 +215,7 @@ class AddProp extends React.Component {
                         </div>
                         <div className="form-inline">
                             <select
+                                value={this.state.bathRooms}
                                 id="bathRooms"
                                 onChange={this.onChange.bind(this)}
                             >
@@ -222,6 +231,7 @@ class AddProp extends React.Component {
                         <div className="edit-sqfeet form-inline">
                             <img src={EditIcon} />
                             <input
+                                value={this.state.sqFeet || null}
                                 className="no-border"
                                 placeholder="1000"
                                 onChange={this.onChange.bind(this)}
@@ -234,11 +244,12 @@ class AddProp extends React.Component {
                         <div className="edit-sqfeet-lot form-inline">
                             <img src={EditIcon} />
                             <input
+                                value={this.state.sqFeetLot || null}
                                 className="no-border"
                                 placeholder="1000"
                                 onChange={this.onChange.bind(this)}
                                 type="text"
-                                id="sqFtLot"
+                                id="sqFeetLot"
                             />
                             <span>sq ft lot size</span>
                         </div>
@@ -246,6 +257,7 @@ class AddProp extends React.Component {
                         <div className="form-inline">
                             <select
                                 id="propertyType"
+                                value={this.state.propertyType}
                                 onChange={this.onChange.bind(this)}
                             >
                                 <option value="Single Family Home">
@@ -258,6 +270,7 @@ class AddProp extends React.Component {
                         </div>
                         <div className="form-inline">
                             <select
+                                value={this.state.yearBuilt}
                                 id="yearBuilt"
                                 onChange={this.onChange.bind(this)}
                             >
@@ -275,6 +288,7 @@ class AddProp extends React.Component {
 
                     <div className="ml-3">
                         <TextField
+                            value={this.state.description}
                             floatingLabelText="Description"
                             onChange={this.onChange.bind(this)}
                             fullWidth={true}

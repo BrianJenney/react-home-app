@@ -3,7 +3,7 @@ import PropertyForm from "./components/PropertyForm";
 
 class AddProperty extends React.Component {
     render() {
-        return <PropertyForm />;
+        return <PropertyForm home={null} />;
     }
 }
 
