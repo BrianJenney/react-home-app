@@ -7,8 +7,6 @@ import "../../styles/dashboard.css";
 
 import Profile from "./components/Profile";
 
-import API from "../../api/helpers.js";
-
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
