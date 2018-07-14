@@ -95,9 +95,7 @@ class AddProp extends React.Component {
         this.setState(propertyInfo);
     };
 
-    submitProperty = status => {
-        let self = this;
-
+    submitProperty = () => {
         if (this.state.imgs.length < 1) {
             alert("Please add more pictures");
             return;
@@ -118,7 +116,7 @@ class AddProp extends React.Component {
 
         API.posthome(this.state.form)
             .then(response => {
-                self.props.history.push("/nav");
+                this.props.history.push("/nav");
             })
             .catch(e => {
                 console.log(e);
@@ -288,7 +286,6 @@ class AddProp extends React.Component {
 
                     <div className="ml-3">
                         <TextField
-                            value={this.state.description}
                             floatingLabelText="Description"
                             onChange={this.onChange.bind(this)}
                             fullWidth={true}
