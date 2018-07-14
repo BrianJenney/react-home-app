@@ -14,7 +14,9 @@ class EditProperty extends React.Component {
     }
 
     render() {
-        return <PropertyForm home={this.state.home} />;
+        return (
+            <PropertyForm home={this.state.home} history={this.props.history} />
+        );
     }
 }
 
