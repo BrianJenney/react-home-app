@@ -7,19 +7,44 @@ import "../../../styles/FillOutProfile.css";
 
 class FillOutProfile extends React.Component {
     constructor(props) {
+
         super(props);
         this.toggle = this.toggle.bind(this);
-        this.state = { collapse: false };
+        this.state = {
+          collapse: false,
+          isEditing: false
+         };
 
         const styles = {
             display: "flex",
             alignItems: "center"
         };
+        this.postPhoneNumber = this.postPhoneNumber.bind(this);
     }
 
     toggle() {
         this.setState({ collapse: !this.state.collapse });
     }
+
+postPhoneNumber() {
+  //post request to backend/api using value of form
+}
+
+userPhoneNumber() {
+
+    //when user clicks on add phone number, return form for user to add phone number
+
+          return (
+            <div>
+            <td>
+              <form onSubmit={this.postPhoneNumber}>
+                <input type="text" placeholder="Phone Number" ref="phoneNumber" className="postPhoneNumber"/>
+              </form>
+            </td>
+            </div>
+          )
+
+}
 
     render() {
         return (
@@ -61,7 +86,7 @@ class FillOutProfile extends React.Component {
                           <input type="checkbox" className="d-inline m-2 ml-0"/>
                           <p className="paragraph d-inline "> Add your phone number <span className="purple">(this will only be shown to buyers after you approve their offer)</span></p><br/>
                           <i className="lightGrey fas fa-pencil-alt d-inline ml-5"></i>
-                          <a className="d-inline blue ml-1"><p className="d-inline blue ml-1">Add Phone Number</p></a>
+                          <a onClick={this.userPhoneNumber} className="d-inline blue ml-1"><p className="d-inline blue ml-1">Add Phone Number</p></a>
                         </div>
                         </CardBody>
                     </Card>
