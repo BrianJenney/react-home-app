@@ -56,4 +56,14 @@ export default {
     getConvo: function(recipient, sender) {
         return axios.get(url + `/api/messages/getconvo/${recipient}/${sender}`);
     }
+<<<<<<< HEAD
+=======
+
+    //saves user's phone number when the upload it to the dashboard
+    // phoneNumber: function(file) {
+    //     return axios.post(file + "/api/user/profile")
+    // }
+
+
+>>>>>>> started an attempt at post request for user phone number
 };
