@@ -41,6 +41,16 @@ class UserMessages extends React.Component {
     };
 
     getConvo = message => {
+        //set viewed of this message to true
+
+        let unviewedMessages = message.messages.filter(item => {
+            return item.to === this.props.email && !item.viewed;
+        });
+        //if any message sent to user is not read, set all to read after opening convo
+        unviewedMessages.forEach(convo => {
+            API.setMessageToViewed(message._id, convo._id);
+        });
+
         this.setState({
             convo: message.messages,
             recipient: message.participants[0],
@@ -124,4 +134,7 @@ function mapDispatchToProps(dispatch) {
         logoutaction: bindActionCreators(logoutActions, dispatch)
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(UserMessages);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(UserMessages);

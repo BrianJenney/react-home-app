@@ -41,13 +41,19 @@ export default {
 
     //gets all direct messages that a user is included in
     getMessages: function(userEmail) {
-        return axios.get(url + "/api/messages/getmessages/" + userEmail);
+        return axios.get(url + `/api/messages/getmessages/${userEmail}`);
+    },
+
+    //set a message to viewed if last message is to the logged in user and message was set to viewed === false
+    setMessageToViewed: function(parentId, messageId) {
+        return axios.post(url + "/api/messages/messageviewed", {
+            parentId,
+            messageId
+        });
     },
 
     //gets a specific convo from the list of messages to display
     getConvo: function(recipient, sender) {
-        return axios.get(
-            url + "/api/messages/getconvo/" + recipient + "/" + sender
-        );
+        return axios.get(url + `/api/messages/getconvo/${recipient}/${sender}`);
     }
 };
