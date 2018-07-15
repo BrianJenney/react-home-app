@@ -2,6 +2,7 @@ import React from "react";
 import { Collapse, Button, CardBody, Card } from "reactstrap";
 import API from "../../../api/helpers";
 import { Link } from "react-router-dom";
+import NavBar from "../../../components/BreadcrumbNav";
 
 class Messages extends React.Component {
     constructor(props) {
@@ -54,6 +55,9 @@ class Messages extends React.Component {
                         }
                         onClick={this.toggle}
                     />
+                    <small className="ml-auto">
+                        {this.state.unreadMessages} Messages
+                    </small>
                 </div>
                 <Collapse isOpen={this.state.collapse}>
                     <Card>

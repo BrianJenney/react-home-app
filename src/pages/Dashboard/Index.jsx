@@ -5,6 +5,7 @@ import * as loginActions from "../../actions/login";
 import * as logoutActions from "../../actions/logout";
 import "../../styles/dashboard.css";
 
+import NavBar from "../../components/BreadcrumbNav";
 import Profile from "./components/Profile";
 import Messages from "./components/Messages";
 
@@ -15,10 +16,13 @@ class Dashboard extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <h1>Dashboard</h1>
-                <Profile />
-                <Messages userEmail={this.props.email} />
+            <div>
+                <div className="container w-50">
+                    <h1>Dashboard</h1>
+                    <Profile />
+                    <Messages userEmail={this.props.email} />
+                </div>
+                <NavBar />
             </div>
         );
     }
