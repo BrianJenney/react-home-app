@@ -19,7 +19,8 @@ class Property extends Component {
         mainImg: null,
         monthlyPayment: 0,
         open: false,
-        messages: []
+        messages: [],
+        user: null
     };
 
     componentDidMount = () => {
@@ -27,7 +28,8 @@ class Property extends Component {
             this.setState({
                 mainImg: response.data.doc[0].imgs[0],
                 property: response.data.doc[0],
-                monthlyPayment: response.data.monthly
+                monthlyPayment: response.data.monthly,
+                user: response.data.user
             });
         });
     };
@@ -125,6 +127,7 @@ class Property extends Component {
                     open={this.state.open}
                     propertyInfo={this.state.property}
                     senderEmail={this.props.email}
+                    user={this.state.user}
                 />
                 <NavBar selectedIndex={1} />
             </div>
