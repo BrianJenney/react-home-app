@@ -19,10 +19,6 @@ export default {
         return axios.post(url + "/api/user/register/", user);
     },
 
-    updateProfile: function(user) {
-      return axios.post(url + "/api/user/profile/", user);
-    },
-
     //create a home listing
     posthome: function(home) {
         return axios.post(url + "/api/property/upload/", home);
@@ -60,14 +56,4 @@ export default {
     getConvo: function(recipient, sender) {
         return axios.get(url + `/api/messages/getconvo/${recipient}/${sender}`);
     }
-<<<<<<< HEAD
-=======
-
-    //saves user's phone number when the upload it to the dashboard
-    // phoneNumber: function(file) {
-    //     return axios.post(file + "/api/user/profile")
-    // }
-
-
->>>>>>> started an attempt at post request for user phone number
 };
