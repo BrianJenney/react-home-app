@@ -4,6 +4,7 @@ import Dropzone from "react-dropzone";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import "../../../styles/FillOutProfile.css";
+import API from '../../../api/helpers.js'
 
 class FillOutProfile extends React.Component {
     constructor(props) {
@@ -12,35 +13,45 @@ class FillOutProfile extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
           collapse: false,
+          phoneNumber: null,
+          file: null,
+          form: new FormData()
          };
 
         const styles = {
             display: "flex",
             alignItems: "center"
         };
-        this.postPhoneNumber = this.postPhoneNumber.bind(this);
     }
 
     toggle() {
         this.setState({ collapse: !this.state.collapse });
     }
 
+    handleDrop = files => {
+        files.forEach(file => {
+            this.setState({file});
+        });
+    };
+
 postPhoneNumber() {
   //post request to backend/api using value of form
 }
 
-userPhoneNumber() {
-    //when user clicks on add your phone number checkbox, return form for user to add phone number
-          return (
-            <div>
-            <td>
-              <form>
-                <input type="text" placeholder="Phone Number" ref="phoneNumber" className="postPhoneNumber"/>
-              </form>
-            </td>
-            </div>
-          )
+handleChange = (e) => {
+  this.setState({phoneNumber: e.target.value})
 }
+
+updateProfile = () => {
+  console.log(this.state);
+  this.state.form.append("file", this.state.file)
+  this.state.form.append("phoneNumber", this.state.phoneNumber)
+  API.updateProfile(this.state.form).then((data)=>{
+    console.log(data);
+  })
+}
+
+
 
     render() {
         return (
@@ -80,9 +91,11 @@ userPhoneNumber() {
                           </Dropzone>
 
                           <input type="checkbox" className="d-inline m-2 ml-0"/>
+                          <input onChange={this.handleChange.bind(this)} type="phone"/>
                           <p className="paragraph d-inline "> Add your phone number <span className="purple">(this will only be shown to buyers after you approve their offer)</span></p><br/>
                           <i className="lightGrey fas fa-pencil-alt d-inline ml-5"></i>
                           <a className="d-inline blue ml-1"><p className="d-inline blue ml-1">Add Phone Number</p></a>
+                          <button onClick={this.updateProfile}>update</button>
                         </div>
                         </CardBody>
                     </Card>
