@@ -6,6 +6,7 @@ import * as logoutActions from "../../actions/logout";
 import "../../styles/dashboard.css";
 
 import Profile from "./components/Profile";
+import Messages from "./components/Messages";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class Dashboard extends React.Component {
             <div className="container">
                 <h1>Dashboard</h1>
                 <Profile />
+                <Messages userEmail={this.props.email} />
             </div>
         );
     }
