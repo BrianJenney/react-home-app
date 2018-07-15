@@ -95,7 +95,7 @@ class AddProp extends React.Component {
         this.setState(propertyInfo);
     };
 
-    submitProperty = () => {
+    submitProperty = status => {
         if (this.state.imgs.length < 1) {
             alert("Please add more pictures");
             return;
