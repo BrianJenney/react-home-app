@@ -1,17 +1,15 @@
+import React from "react";
+import { Card, CardHeader, CardMedia, CardTitle } from "material-ui/Card";
 
-import React from 'react';
-import {Card, CardHeader, CardMedia, CardTitle} from 'material-ui/Card';
+import NavBar from "../../components/BreadcrumbNav";
 
-import NavBar from '../../components/BreadcrumbNav';
-
-class NavPage extends React.Component{
-
-    goto=(dest)=>{
-        switch(dest){
-            case 'addhome':
+class NavPage extends React.Component {
+    goto = dest => {
+        switch (dest) {
+            case "addhome":
                 this.props.history.push("/addproperty");
                 break;
-            case 'listings':
+            case "listings":
                 this.props.history.push("/listings");
                 break;
             default:
@@ -20,39 +18,51 @@ class NavPage extends React.Component{
         }
     };
 
-    render(){
-        return(
-
+    render() {
+        return (
             <div>
-            <div className="col-6 offset-3">
-                <Card onClick={this.goto.bind(this, 'addhome')}>
-                    <CardHeader
-                    title="For Sellers"
-                    />
-                    <CardMedia
-                    overlay={<CardTitle title="Post A Property" subtitle="Fast and Easy" />}
-                    >
-                    <img width="50" src="https://i.ytimg.com/vi/Xx6t0gmQ_Tw/maxresdefault.jpg" alt="" />
-                    </CardMedia>
-                </Card>
-            </div>
+                <div className="col-6 offset-3">
+                    <Card onClick={this.goto.bind(this, "addhome")}>
+                        <CardHeader title="For Sellers" />
+                        <CardMedia
+                            overlay={
+                                <CardTitle
+                                    title="Post A Property"
+                                    subtitle="Fast and Easy"
+                                />
+                            }
+                        >
+                            <img
+                                width="50"
+                                src="https://i.ytimg.com/vi/Xx6t0gmQ_Tw/maxresdefault.jpg"
+                                alt=""
+                            />
+                        </CardMedia>
+                    </Card>
+                </div>
 
-            <div className="col-6 offset-3"
-                style={{marginTop: 45}}>
-                <Card onClick={this.goto.bind(this, 'listings')}>
-                    <CardHeader
-                    title="For Buyers"
-                    />
-                    <CardMedia
-                    overlay={<CardTitle title="Check Out Listings" subtitle="Homes For Sale" />}
-                    >
-                    <img width="50" src="https://cdn.houseplans.com/product/o2d2ui14afb1sov3cnslpummre/w560x373.jpg?v=15" alt="" />
-                    </CardMedia>
-                </Card>
+                <div className="col-6 offset-3" style={{ marginTop: 45 }}>
+                    <Card onClick={this.goto.bind(this, "listings")}>
+                        <CardHeader title="For Buyers" />
+                        <CardMedia
+                            overlay={
+                                <CardTitle
+                                    title="Check Out Listings"
+                                    subtitle="Homes For Sale"
+                                />
+                            }
+                        >
+                            <img
+                                width="50"
+                                src="https://cdn.houseplans.com/product/o2d2ui14afb1sov3cnslpummre/w560x373.jpg?v=15"
+                                alt=""
+                            />
+                        </CardMedia>
+                    </Card>
+                </div>
+                <NavBar selectedIndex={0} />
             </div>
-            <NavBar selectedIndex={0}/>
-        </div>
-        )
+        );
     }
 }
 

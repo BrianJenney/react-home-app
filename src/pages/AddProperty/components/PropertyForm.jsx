@@ -1,8 +1,8 @@
 import React from "react";
 
-import API from "../../api/helpers.js";
-import NavBar from "../../components/BreadcrumbNav";
-import TopNav from "../../components/TopNav";
+import API from "../../../api/helpers.js";
+import NavBar from "../../../components/BreadcrumbNav";
+import TopNav from "../../../components/TopNav";
 import { GoogleApiWrapper } from "google-maps-react";
 
 import RaisedButton from "material-ui/RaisedButton";
@@ -13,23 +13,28 @@ import Dropzone from "react-dropzone";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as loginActions from "../../actions/login";
-import * as mapActions from "../../actions/mapMarker";
-import EditIcon from "../../img/icon-edit-small.png";
-import PicPreview from "./components/PicPreview";
-import "../../styles/addProperty.css";
+import * as loginActions from "../../../actions/login";
+import * as mapActions from "../../../actions/mapMarker";
+import EditIcon from "../../../img/icon-edit-small.png";
+import PicPreview from "./PicPreview";
+import "../../../styles/addProperty.css";
 
 class AddProp extends React.Component {
     constructor() {
         super();
         this.removePic = this.removePic.bind(this);
-
         const currentYear = new Date().getFullYear();
         this.years = Array.from(
             new Array(70),
             (val, index) => currentYear - index
         );
     }
+
+    componentWillReceiveProps = nextProps => {
+        if (nextProps.home) {
+            this.setState({ ...nextProps.home });
+        }
+    };
 
     state = {
         autoComplete: null,
@@ -43,9 +48,10 @@ class AddProp extends React.Component {
         bedRooms: 0,
         bathRooms: 0,
         sqFeet: 0,
-        sqFeetLotSize: 0,
+        sqFeetLot: 0,
         yearBuilt: Date.now(),
-        form: new FormData()
+        form: new FormData(),
+        status: null
     };
 
     removePic = idx => {
@@ -89,9 +95,7 @@ class AddProp extends React.Component {
         this.setState(propertyInfo);
     };
 
-    submitProperty = () => {
-        let self = this;
-
+    submitProperty = status => {
         if (this.state.imgs.length < 1) {
             alert("Please add more pictures");
             return;
@@ -106,12 +110,13 @@ class AddProp extends React.Component {
         this.state.form.append("bedRooms", this.state.bedRooms);
         this.state.form.append("bathRooms", this.state.bathRooms);
         this.state.form.append("yearBuilt", this.state.yearBuilt);
-        this.state.form.append("sqFeetLot", this.state.sqFeetLotSize);
+        this.state.form.append("sqFeetLot", this.state.sqFeetLot);
         this.state.form.append("sqFeet", this.state.sqFeet);
+        this.state.form.append("status", status);
 
         API.posthome(this.state.form)
             .then(response => {
-                self.props.history.push("/nav");
+                this.props.history.push("/nav");
             })
             .catch(e => {
                 console.log(e);
@@ -123,8 +128,15 @@ class AddProp extends React.Component {
             <div>
                 <TopNav />
                 <div className="saveDraft-publish-buttons">
-                    <button>Save As Draft</button>
-                    <button id="pubButton">Publish Listing</button>
+                    <button onClick={this.submitProperty.bind(this, "draft")}>
+                        Save As Draft
+                    </button>
+                    <button
+                        id="pubButton"
+                        onClick={this.submitProperty.bind(this, "publish")}
+                    >
+                        Publish Listing
+                    </button>
                 </div>
                 <div className="container-fluid">
                     <div className="row">
@@ -154,6 +166,7 @@ class AddProp extends React.Component {
                                 <input
                                     className="no-border text-center"
                                     placeholder="$300,000"
+                                    value={this.state.price || null}
                                     onChange={this.onChange.bind(this)}
                                     type="text"
                                     id="price"
@@ -173,6 +186,7 @@ class AddProp extends React.Component {
                 <div className="add-address container-fluid ml-3">
                     <img src={EditIcon} />
                     <input
+                        value={this.state.address}
                         className="no-border"
                         type="text"
                         placeholder="Add address"
@@ -186,6 +200,7 @@ class AddProp extends React.Component {
                         <div className="form-inline">
                             <select
                                 id="bedRooms"
+                                value={this.state.bedRooms}
                                 onChange={this.onChange.bind(this)}
                             >
                                 <option value="1">1</option>
@@ -198,6 +213,7 @@ class AddProp extends React.Component {
                         </div>
                         <div className="form-inline">
                             <select
+                                value={this.state.bathRooms}
                                 id="bathRooms"
                                 onChange={this.onChange.bind(this)}
                             >
@@ -213,6 +229,7 @@ class AddProp extends React.Component {
                         <div className="edit-sqfeet form-inline">
                             <img src={EditIcon} />
                             <input
+                                value={this.state.sqFeet || null}
                                 className="no-border"
                                 placeholder="1000"
                                 onChange={this.onChange.bind(this)}
@@ -225,11 +242,12 @@ class AddProp extends React.Component {
                         <div className="edit-sqfeet-lot form-inline">
                             <img src={EditIcon} />
                             <input
+                                value={this.state.sqFeetLot || null}
                                 className="no-border"
                                 placeholder="1000"
                                 onChange={this.onChange.bind(this)}
                                 type="text"
-                                id="sqFtLot"
+                                id="sqFeetLot"
                             />
                             <span>sq ft lot size</span>
                         </div>
@@ -237,6 +255,7 @@ class AddProp extends React.Component {
                         <div className="form-inline">
                             <select
                                 id="propertyType"
+                                value={this.state.propertyType}
                                 onChange={this.onChange.bind(this)}
                             >
                                 <option value="Single Family Home">
@@ -249,6 +268,7 @@ class AddProp extends React.Component {
                         </div>
                         <div className="form-inline">
                             <select
+                                value={this.state.yearBuilt}
                                 id="yearBuilt"
                                 onChange={this.onChange.bind(this)}
                             >
@@ -264,20 +284,14 @@ class AddProp extends React.Component {
                         </div>
                     </div>
 
-                    <div className="ml-3">
+                    <div className="ml-3 mb-5">
                         <TextField
+                            value={this.state.description || null}
                             floatingLabelText="Description"
                             onChange={this.onChange.bind(this)}
                             fullWidth={true}
                             type="text"
                             id="description"
-                        />
-
-                        <RaisedButton
-                            className="mb-5"
-                            primary={true}
-                            label="Add Property"
-                            onClick={this.submitProperty}
                         />
                     </div>
                 </div>

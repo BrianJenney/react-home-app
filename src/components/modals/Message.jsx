@@ -21,7 +21,7 @@ export default class DialogModal extends React.Component {
 
     componentWillReceiveProps = nextProps => {
         this.setState({
-            recipientEmail: nextProps.propertyInfo.email,
+            recipientEmail: nextProps.user.email,
             senderEmail: nextProps.senderEmail,
             propertyId: nextProps.propertyInfo._id
         });
