@@ -6,7 +6,7 @@ import * as logoutActions from "../../actions/logout";
 import "../../styles/dashboard.css";
 
 import NavBar from "../../components/BreadcrumbNav";
-import Profile from "./components/Profile";
+import Profile from "./components/FillOutProfile";
 import Messages from "./components/Messages";
 
 class Dashboard extends React.Component {

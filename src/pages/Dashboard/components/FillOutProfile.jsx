@@ -35,21 +35,22 @@ class FillOutProfile extends React.Component {
         });
     };
 
-    handleChange = e => {
-        this.setState({ phoneNumber: e.target.value });
-    };
+postPhoneNumber() {
+  //post request to backend/api using value of form
+}
 
-    updateProfile = () => {
-        this.state.form.set("file", this.state.file);
-        this.state.form.set("phoneNumber", this.state.phoneNumber);
-        this.state.form.set("userEmail", this.props.userEmail);
-        API.updateProfile(this.state.form).then(() => {
-            toast.success("Profile Updated !", {
-                position: toast.POSITION.TOP_RIGHT
-            });
-            this.setState({ collapse: false });
-        });
-    };
+handleChange = (e) => {
+  this.setState({phoneNumber: e.target.value})
+}
+
+updateProfile = () => {
+  console.log(this.state);
+  this.state.form.append("file", this.state.file)
+  this.state.form.append("phoneNumber", this.state.phoneNumber)
+  API.updateProfile(this.state.form).then((data)=>{
+    console.log(data);
+  })
+}
 
     render() {
         return (
@@ -98,33 +99,16 @@ class FillOutProfile extends React.Component {
                                     </div>
                                 </Dropzone>
 
-                                <input
-                                    type="checkbox"
-                                    className="d-inline m-2 ml-0"
-                                />
-                                <input
-                                    onChange={this.handleChange.bind(this)}
-                                    type="phone"
-                                />
-                                <p className="paragraph d-inline ">
-                                    {" "}
-                                    Add your phone number{" "}
-                                    <span className="purple">
-                                        (this will only be shown to buyers after
-                                        you approve their offer)
-                                    </span>
-                                </p>
-                                <br />
-                                <i className="lightGrey fas fa-pencil-alt d-inline ml-5" />
-                                <a className="d-inline blue ml-1">
-                                    <p className="d-inline blue ml-1">
-                                        Add Phone Number
-                                    </p>
-                                </a>
-                                <button onClick={this.updateProfile}>
-                                    update
-                                </button>
+                              
                             </div>
+                        <div>
+                          <input type="checkbox" className="d-inline m-2 ml-0"/>
+                          <input onChange={this.handleChange.bind(this)} type="phone" className="paragraph d-inline" placeholder="Add your phone number"/><span className="purple"> (this will only be shown to buyers after you approve their offer)</span><br/>
+
+                          <i className="lightGrey fas fa-pencil-alt d-inline ml-5"></i>
+                          <button onClick={this.updateProfile} className="d-inline blue ">Add Phone Number</button>
+                        </div>
+
                         </CardBody>
                     </Card>
                 </Collapse>

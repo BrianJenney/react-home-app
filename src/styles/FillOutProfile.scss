@@ -21,3 +21,19 @@
   max-height: 115px;
   padding-top: 15px;
 }
+
+::placeholder {
+  color: black;
+}
+
+input {
+  border: none;
+  min-width: 183px;
+  text-align: center;
+}
+
+button {
+  border: none;
+  background-color: none;
+  cursor: pointer;
+}
