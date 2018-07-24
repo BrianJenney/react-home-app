@@ -34,10 +34,6 @@ class FillOutProfile extends React.Component {
         });
     };
 
-postPhoneNumber() {
-  //post request to backend/api using value of form
-}
-
 handleChange = (e) => {
   this.setState({phoneNumber: e.target.value})
 }
@@ -95,7 +91,8 @@ updateProfile = () => {
                           <input onChange={this.handleChange.bind(this)} type="phone" className="paragraph d-inline" placeholder="Add your phone number"/><span className="purple"> (this will only be shown to buyers after you approve their offer)</span><br/>
 
                           <i className="lightGrey fas fa-pencil-alt d-inline ml-5"></i>
-                          <button onClick={this.updateProfile} className="d-inline blue ">Add Phone Number</button>
+                          <button onClick={this.validatePhone}
+                          className="d-inline blue ">Add Phone Number</button>
                         </div>
 
                         </CardBody>
