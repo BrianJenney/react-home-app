@@ -19,7 +19,7 @@ class Dashboard extends React.Component {
             <div>
                 <div className="container w-50">
                     <h1>Dashboard</h1>
-                    <Profile />
+                    <Profile userEmail={this.props.email} />
                     <Messages userEmail={this.props.email} />
                 </div>
                 <NavBar />
