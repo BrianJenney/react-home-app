@@ -19,6 +19,10 @@ export default {
         return axios.post(url + "/api/user/register/", user);
     },
 
+    updateProfile: function(user) {
+        return axios.post(url + "/api/user/profile/", user);
+    },
+
     //create a home listing
     posthome: function(home) {
         return axios.post(url + "/api/property/upload/", home);

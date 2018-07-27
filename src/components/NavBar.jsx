@@ -25,7 +25,7 @@ class NavBar extends React.Component {
         this.setState({ selectedIndex: page });
         switch (page) {
             case 0:
-                this.props.history.push("/nav");
+                this.props.history.push("/dashboard");
                 break;
             case 1:
                 this.props.history.push("/addproperty");
@@ -52,7 +52,7 @@ class NavBar extends React.Component {
                     selectedIndex={this.props.selectedIndex}
                 >
                     <BottomNavigationItem
-                        label="Nav"
+                        label="Dashboard"
                         icon={home}
                         onClick={() => this.select(0)}
                     />

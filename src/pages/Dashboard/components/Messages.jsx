@@ -22,7 +22,6 @@ class Messages extends React.Component {
     componentDidMount() {
         let unreadMessages = 0;
         API.getMessages(this.props.userEmail).then(responses => {
-            console.log(responses.data);
             const data = responses.data;
 
             data.forEach(message => {
