@@ -56,4 +56,5 @@ export default {
     getConvo: function(recipient, sender) {
         return axios.get(url + `/api/messages/getconvo/${recipient}/${sender}`);
     }
+
 };
