@@ -17,7 +17,7 @@ class NavBar extends React.Component {
         this.setState({ selectedIndex: page });
         switch (page) {
             case 0:
-                this.props.history.push("/nav");
+                this.props.history.push("/dashboard");
                 break;
             case 1:
                 this.props.history.push("/addproperty");
@@ -29,7 +29,7 @@ class NavBar extends React.Component {
                 this.props.history.push("/");
                 break;
             case 4:
-                this.props.history.push("/mymessages");
+                this.props.history.push("/messages");
                 break;
             default:
                 return;
@@ -47,12 +47,12 @@ class NavBar extends React.Component {
                         <ol>
                             <li>
                                 <a
-                                    label="Nav"
+                                    label="Dashboard"
                                     className="crumb-link"
                                     icon={home}
                                     onClick={() => this.select(0)}
                                 >
-                                    Nav
+                                    Dashboard
                                 </a>
                             </li>
                             <li>
