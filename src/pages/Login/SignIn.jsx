@@ -70,7 +70,8 @@ class SignIn extends React.Component {
             const user = {
                 isLogged: true,
                 name: this.state.email,
-                id: response.data.userInfo._id
+                id: response.data.userInfo._id,
+                user: response.data.userInfo
             };
 
             this.props.loginaction.login(user);
