@@ -34,7 +34,9 @@ class Dashboard extends React.Component {
 function mapStateToProps(state) {
     return {
         id: state.loggedIn.id,
-        email: state.loggedIn.name
+        email: state.loggedIn.name,
+        user: state.userEmail,
+        user: state.loggedIn.user
     };
 }
 

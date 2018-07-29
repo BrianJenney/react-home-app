@@ -1,8 +1,9 @@
-export const login = (user) => {
+export const login = user => {
     return {
-        type: 'ADD',
+        type: "ADD",
         loggedIn: user.isLogged,
         name: user.name,
-        id: user.id
+        id: user.id,
+        user
     };
-  }
+};
