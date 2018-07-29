@@ -3,6 +3,7 @@ import API from "../../api/helpers.js";
 import NavBar from "../../components/BreadcrumbNav";
 import Divider from "material-ui/Divider";
 import ChatBox from "./components/ChatBox";
+import TopNav from "../../components/TopNav";
 import { List, ListItem } from "material-ui/List";
 
 import { bindActionCreators } from "redux";
@@ -71,6 +72,7 @@ class UserMessages extends React.Component {
     render() {
         return (
             <div>
+                <TopNav />
                 <NavBar selectedIndex={3} />
                 <div className="row">
                     <div className="text-center">

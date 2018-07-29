@@ -26,6 +26,11 @@ class FillOutProfile extends React.Component {
         };
     }
 
+    componentDidMount() {
+        const input = document.querySelector(".dyanmic-input-size");
+        input.setAttribute("size", input.getAttribute("placeholder").length);
+    }
+
     removePic = idx => {
         let imgs = [...this.state.imgs];
         imgs.splice(idx, 1);
@@ -57,7 +62,7 @@ class FillOutProfile extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>
                     <h1 className="pr-4">2</h1>
                     <span className="section-title">Fill Out Your Profile</span>
@@ -71,73 +76,67 @@ class FillOutProfile extends React.Component {
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
-                    <Card>
-                        <CardBody>
-                            <div className="ml-4">
-                                <h5 className="blue">Things Left To Do...</h5>
-                                <input
-                                    type="checkbox"
-                                    className="d-inline m-2 ml-0"
-                                />
-                                <p className="paragraph d-inline">
-                                    {" "}
-                                    Upload your profile photo{" "}
-                                    <span className="purple">
-                                        (this will only be shown to buyers if
-                                        you reply to a message they send you)
-                                    </span>
-                                </p>
+                    <div className="ml-4">
+                        <h5 className="blue">Things Left To Do...</h5>
+                        <input type="checkbox" className="d-inline m-2 ml-0" />
+                        <p className="paragraph d-inline">
+                            {" "}
+                            Upload your profile photo{" "}
+                            <span className="purple">
+                                (this will only be shown to buyers if you reply
+                                to a message they send you)
+                            </span>
+                        </p>
+                        <br />
+                        <Dropzone
+                            className="dropzone w-25 h-25 m-2"
+                            onDrop={this.handleDrop}
+                            multiple
+                            accept="image/*"
+                        >
+                            <div className="upload-actions text-center">
+                                <FloatingActionButton mini className="mt-3">
+                                    <ContentAdd />
+                                </FloatingActionButton>
                                 <br />
-                                <Dropzone
-                                    className="dropzone m-2 ml-5"
-                                    onDrop={this.handleDrop}
-                                    multiple
-                                    accept="image/*"
-                                >
-                                    <div className="upload-actions text-center">
-                                        <FloatingActionButton>
-                                            <ContentAdd />
-                                        </FloatingActionButton>
-                                        <br />
-                                        <p>Upload Profile Pic</p>
-                                    </div>
-                                </Dropzone>
-
-                                <div className="pic-preview ml-4">
-                                    <PicPreview
-                                        pics={this.state.imgs}
-                                        removePic={this.removePic}
-                                    />
-                                </div>
+                                <small className="text-primary">
+                                    Upload Profile Pic
+                                </small>
                             </div>
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    className="d-inline m-2 ml-0"
-                                />
-                                <i className="lightGrey fa fa-pencil d-inline" />
-                                <input
-                                    onChange={this.handleChange.bind(this)}
-                                    type="phone"
-                                    className="paragraph d-inline"
-                                    placeholder="Add your phone number"
-                                />
-                                <span className="purple">
-                                    {" "}
-                                    (this will only be shown to buyers after you
-                                    approve their offer)
-                                </span>
-                                <br />
+                        </Dropzone>
 
-                                <button
-                                    onClick={this.updateProfile}
-                                    className="d-inline blue "
-                                >
-                                    Add Phone Number
-                                </button>
-                            </div>
-                        </CardBody>
-                    </Card>
+                        <div className="pic-preview ml-4">
+                            <PicPreview
+                                pics={this.state.imgs}
+                                removePic={this.removePic}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input type="checkbox" className="d-inline m-2 ml-0" />
+                        <i className="lightGrey fa fa-pencil d-inline" />
+                        <input
+                            onChange={this.handleChange.bind(this)}
+                            type="phone"
+                            className="dyanmic-input-size d-inline borderless"
+                            placeholder="Add your phone number"
+                        />
+                        <span className="purple">
+                            {" "}
+                            (this will only be shown to buyers after you approve
+                            their offer)
+                        </span>
+                        <br />
+
+                        <button
+                            onClick={this.updateProfile}
+                            className="d-inline btn btn-default"
+                        >
+                            <span className="text-primary">
+                                Add Phone Number
+                            </span>
+                        </button>
+                    </div>
                 </Collapse>
             </div>
         );

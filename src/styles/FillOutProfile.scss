@@ -1,39 +1,17 @@
 //colors
 .purple {
-  color: #915BB0
+    color: #915bb0;
 }
 
 .blue {
-  color: #315B8F;
-  font-weight: 400;
+    color: #315b8f;
+    font-weight: 400;
 }
 
 .lightGrey {
-  color: rgb(175, 175, 175);
+    color: rgb(175, 175, 175);
 }
 
 .paragraph {
-  font-weight: 300;
-}
-
-.dropzone {
-  max-width: 200px;
-  max-height: 115px;
-  padding-top: 15px;
-}
-
-::placeholder {
-  color: black;
-}
-
-input {
-  border: none;
-  min-width: 183px;
-  text-align: center;
-}
-
-button {
-  border: none;
-  background-color: none;
-  cursor: pointer;
+    font-weight: 300;
 }
