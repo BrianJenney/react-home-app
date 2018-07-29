@@ -40,7 +40,7 @@ class Messages extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>
                     <h1 className="pr-4">5</h1>
                     <span className="section-title">
@@ -59,13 +59,9 @@ class Messages extends React.Component {
                     </small>
                 </div>
                 <Collapse isOpen={this.state.collapse}>
-                    <Card>
-                        <CardBody>
-                            <Link to="/messages">
-                                {this.state.unreadMessages} unread messages.
-                            </Link>
-                        </CardBody>
-                    </Card>
+                    <Link to="/messages">
+                        {this.state.unreadMessages} unread messages.
+                    </Link>
                 </Collapse>
             </div>
         );

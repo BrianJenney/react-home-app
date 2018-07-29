@@ -74,7 +74,7 @@ class SignIn extends React.Component {
             };
 
             this.props.loginaction.login(user);
-            this.props.history.push("/nav");
+            this.props.history.push("/dashboard");
         });
     };
 
@@ -101,7 +101,7 @@ class SignIn extends React.Component {
             };
 
             this.props.loginaction.login(user);
-            this.props.history.push("/nav");
+            this.props.history.push("/dashboard");
         });
     };
 
