@@ -11,7 +11,8 @@ class DisclosureAgreement extends React.Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {
-            collapse: false
+            collapse: false,
+            form: new FormData()
         };
 
         const styles = {
@@ -26,7 +27,11 @@ class DisclosureAgreement extends React.Component {
 
     handleDrop = files => {
         files.forEach(file => {
-            console.log(file);
+            this.state.form.set("file", file);
+            this.state.form.set("userEmail", this.props.userEmail);
+            API.uploadDisclosure(this.state.form).then(() => {
+                this.setState({ collapse: false });
+            });
         });
     };
 

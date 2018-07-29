@@ -33,6 +33,11 @@ export default {
         return axios.post(url + "/api/property/searchlistings", searchObj);
     },
 
+    //upload disclosure package
+    uploadDisclosure: function(disclosureForm) {
+        return axios.post(url + "/api/property/disclosure", disclosureForm);
+    },
+
     //get a specific home
     getHome: id => {
         return axios.get(url + `/api/property/info/${id}`);
