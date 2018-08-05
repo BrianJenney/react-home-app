@@ -64,5 +64,10 @@ export default {
     //gets a specific convo from the list of messages to display
     getConvo: function(recipient, sender) {
         return axios.get(url + `/api/messages/getconvo/${recipient}/${sender}`);
+    },
+
+    //gets a list of homes by a user email
+    getListingHomes: function(userEmail) {
+        return axios.get(url + `/api/property/getlistingsbyuser/${userEmail}`);
     }
 };
