@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
         return (
             <div>
                 <TopNav />
-                <div className="container w-50">
+                <div className="container w-50 mb-10  h-100">
                     <h1>Dashboard</h1>
                     <ListHome userEmail={this.props.email} />
                     <Profile userEmail={this.props.email} />

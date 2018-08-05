@@ -57,12 +57,20 @@ class ListHome extends React.Component {
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
-                    <div>Total Homes : {this.state.homes.length}</div>
+                    {this.state.homes.length > 1 && (
+                        <div>Total Homes : {this.state.homes.length}</div>
+                    )}
+
                     <ul>
                         {this.state.homes.map(function(home, index) {
                             return (
-                                <li key={index} style={{ display: "flex", width:"100%"}}>
-                                    <a src={home}>Home {index} : {home.address}</a>
+                                <li
+                                    key={index}
+                                    style={{ display: "flex", width: "100%" }}
+                                >
+                                    <Link to={`/edit/property/${home._id}`}>
+                                        {home.address}
+                                    </Link>
                                 </li>
                             );
                         })}
