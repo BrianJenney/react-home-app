@@ -71,7 +71,9 @@ class Property extends Component {
                                                 to={`/buyerdashboard/${
                                                     this.state.property._id
                                                 }`}
-                                            />
+                                            >
+                                                Make an Offer
+                                            </Link>
                                         </button>
                                         <div className="btn-toolbar">
                                             <button className="btn btn-default">
