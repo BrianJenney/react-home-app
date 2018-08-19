@@ -31,7 +31,10 @@ class PurchaseAgreement extends React.Component {
     handleDrop = files => {
         files.forEach(file => {
             this.state.form.set("file", file);
-            this.state.form.set("userEmail", this.props.userEmail);
+
+            this.state.form.set("homeId", this.props.home._id);
+            this.state.form.set("userId", this.props.user._id);
+
             API.makeOffer(this.state.form).then(() => {
                 this.setState({ collapse: false });
             });
