@@ -8,6 +8,9 @@ import API from "../../api/helpers";
 import TopNav from "../../components/TopNav";
 import NavBar from "../../components/BreadcrumbNav";
 
+import Messages from "./components/Messages";
+import PurchaseAgreement from "./components/PurchaseAgreement";
+
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -37,6 +40,13 @@ class Dashboard extends React.Component {
                 <div className="container w-50 mb-10  h-100">
                     <h1>Buyer Dashboard</h1>
                     <img src={this.state.currentHouse} alt="" />
+
+                    <PurchaseAgreement
+                        userEmail={this.props.email}
+                        home={this.state.property}
+                        user={this.state.user}
+                    />
+                    <Messages userEmail={this.props.email} />
                 </div>
                 <NavBar />
             </div>

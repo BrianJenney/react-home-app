@@ -69,5 +69,10 @@ export default {
     //gets a list of homes by a user email
     getListingHomes: function(userEmail) {
         return axios.get(url + `/api/property/getlistingsbyuser/${userEmail}`);
+    },
+
+    //upsert offer obj
+    makeOffer: function(offerObj) {
+        return axios.post(`${url}/api/offers/makeoffer`, offerObj);
     }
 };
