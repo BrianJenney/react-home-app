@@ -10,6 +10,7 @@ import NavBar from "../../components/BreadcrumbNav";
 
 import Messages from "./components/Messages";
 import PurchaseAgreement from "./components/PurchaseAgreement";
+import SubmitOffer from "./components/SubmitOffer";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -46,6 +47,7 @@ class Dashboard extends React.Component {
                         home={this.state.property}
                         user={this.state.user}
                     />
+                    <SubmitOffer/>
                     <Messages userEmail={this.props.email} />
                 </div>
                 <NavBar />
