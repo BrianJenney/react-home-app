@@ -1,27 +1,44 @@
 .details-main-img {
     width: 100%;
 }
-
-.details {
-    margin-left: 2%;
+.property-info{
+    .upper{
+        .row{
+            margin-left:-15px !important;
+        }
+    }
+    .lower{
+        .row{
+            margin-left:20px !important;
+        }
+       
+    }
+}
+.details { 
     .property-details {
+        margin-top:18px !important;
+        .detail-icon {
+            margin-right:12px;
+            font-size:20px;
+        }
         .fa {
             color: gray;
         }
         span {
-            margin-right: 2%;
+            font-size:18px;
+            margin-right: 3%;
         }
     }
 
     .address-details {
         h3 {
             color: #355d91;
-            margin-top: 3%;
+            margin-top: 1.5%;
         }
     }
 
     .description {
-        margin-top: 3%;
+        margin-top: 2.8%;
         p {
             color: #5b6067;
             text-transform: capitalize;
@@ -31,12 +48,64 @@
     .details-property-type {
         text-transform: capitalize;
     }
+    .house-map{
+        width:100%;
+    }
+}
+
+
+
+
+
+.btn-long{
+    display: block;
+    width: 320px;
+    margin: 0 auto !important;
+    margin-bottom: 2.5% !important;
+    margin-top:0% !important;
+    text-align: center;
+}
+
+.image-list{
+    position: fixed;
+    bottom: 56px !important; 
+    height: 80px;
+    background-color: white;
+    width:100%;
+    border-top-color: #E9E6E6;
+    border-width:0px;
+    border-top-width: 1px;
+    display:block;
+    border-style: solid;
+    .image-icon{
+        position: relative;
+        top:10px;
+        display: inline-block;
+        width: 80px;
+        height:80px;
+        background-color: white;
+        padding-left: 20px;
+        color:red; 
+        font-size:40px;        
+    }   
+    img{
+        right:120px;
+        display: inline;
+        width: 130px;
+        height:80px;
+        margin-left:4px;
+        background-color: white;
+    }
 }
 
 .btn-offer {
-    width: 70%;
     background-color: #25b797 !important;
     color: white;
+}
+
+.btn-short{
+    margin-top:0% !important;
+    width: 154px;
 }
 
 .btn-toolbar {
