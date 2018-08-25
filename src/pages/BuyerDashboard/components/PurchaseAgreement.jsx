@@ -52,7 +52,7 @@ class PurchaseAgreement extends React.Component {
             this.state.form.set("userId", this.props.user._id);
 
             API.makeOffer(this.state.form).then(() => {
-                this.setState({ collapse: false });
+                this.props.refreshOfferData(this.props.home._id);
             });
         });
     };
@@ -171,6 +171,18 @@ class PurchaseAgreement extends React.Component {
                             </small>
                         </div>
                     </Dropzone>
+
+                    {this.state.currentOffer.purchaseAgreement.length && (
+                        <div className="d-inline">
+                            <i
+                                class="fa fa-file-pdf-o d-inline mr-2"
+                                aria-hidden="true"
+                            />
+                            <a href={this.state.currentOffer.purchaseAgreement}>
+                                {this.state.currentOffer.purchaseAgreement}
+                            </a>
+                        </div>
+                    )}
                 </Collapse>
             </div>
         );
