@@ -32,8 +32,9 @@ class PurchaseAgreement extends React.Component {
         if (nextProps.currentOffer) {
             this.setState({
                 currentOffer: {
-                    offer: nextProps.currentOffer.offer,
-                    purchaseAgreement: nextProps.currentOffer.purchaseAgreement
+                    offer: nextProps.currentOffer.offer || null,
+                    purchaseAgreement:
+                        nextProps.currentOffer.purchaseAgreement || ""
                 }
             });
         }
@@ -66,13 +67,12 @@ class PurchaseAgreement extends React.Component {
         debounce(
             1000,
             API.makeOffer(obj).then(data => {
-                console.log(data);
+                this.props.refreshOfferData(this.props.home._id);
             })
         );
     };
 
     render() {
-        console.log(this.state);
         return (
             <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -114,10 +114,8 @@ class PurchaseAgreement extends React.Component {
                                     <input
                                         type="number"
                                         className="dyanmic-input-size d-inline borderless"
-                                        placeholder={
-                                            this.state.currentOffer.offer ||
-                                            this.props.home.price
-                                        }
+                                        placeholder={this.props.home.price}
+                                        value={this.state.currentOffer.offer}
                                         onChange={this.updatePurchasePrice.bind(
                                             this
                                         )}
