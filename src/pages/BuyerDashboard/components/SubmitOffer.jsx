@@ -42,10 +42,12 @@ class SubmitOffer extends React.Component {
     handleChange(event) {
         this.setState({value: event.target.value});
 
-        API.postMessage() // NEED HELP
-    }
+        API.postMessage(this.state.value).then(() => { // NEED HELP not sure
+            this.setState({ collapse: false });
+        });
+    };
 
-    handleDrop = files => {
+    handleDrop = files => {  // NEED help ???
       files.forEach(file => {
           this.state.form.set("file", file);
 
@@ -90,21 +92,21 @@ class SubmitOffer extends React.Component {
                     <p className="paragraph d-inline">
                         Upload an optional attachments that may support your offer
                     </p>
-                    <div style={padL}>
-                    <Dropzone
-                        className="dropzone w-25 h-25 m-2"
-                        onDrop={this.handleDrop}
-                    >
-                        <div className="upload-actions text-center">
-                            <FloatingActionButton mini className="mt-3">
-                                <ContentAdd />
-                            </FloatingActionButton>
-                            <br />
-                            <small className="text-primary">
-                                Upload Attachment
-                            </small>
-                        </div>
-                    </Dropzone>
+                    <div class="alignDZone" style={padL}>
+                        <Dropzone
+                            className="dropzone w-25 h-25 m-2"
+                            onDrop={this.handleDrop}
+                        >
+                            <div className="upload-actions text-center">
+                                <FloatingActionButton mini className="mt-3">
+                                    <ContentAdd />
+                                </FloatingActionButton>
+                                <br />
+                                <small className="text-primary">
+                                    Upload Attachment
+                                </small>
+                            </div>
+                        </Dropzone>
                     </div>
 
                     <input type="checkbox" className="d-inline m-2 ml-0" />
