@@ -11,7 +11,11 @@ const textA = {
   marginLeft: "1.7em",
   marginTop: "0.7em",
   marginBottom: "0.7em",
-  backgroundColor: "#ffffff" 
+  backgroundColor: "#ffffff"
+}
+
+const padL = {
+  paddingLeft: "1.4em"
 }
 
 class SubmitOffer extends React.Component {
@@ -20,7 +24,8 @@ class SubmitOffer extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             collapse: false,
-            form: new FormData()
+            form: new FormData(),
+            value: ''
         };
 
         const styles = {
@@ -31,6 +36,13 @@ class SubmitOffer extends React.Component {
 
     toggle() {
         this.setState({ collapse: !this.state.collapse });
+    }
+
+    // to handle message
+    handleChange(event) {
+        this.setState({value: event.target.value});
+
+        API.postMessage() // NEED HELP
     }
 
     handleDrop = files => {
@@ -70,13 +82,15 @@ class SubmitOffer extends React.Component {
                     <p className="paragraph d-inline">
                         Write an optional message to seller alongside your offer
                     </p>
-                    <input type="text" className="form-control border" rows="5" 
-                      style={textA}/>
+                    <textarea className="form-control border" rows={4} 
+                      style={textA} 
+                      value={this.state.value}
+                      onChange={this.handleChange}/>
                     <input type="checkbox" className="d-inline m-2 ml-0" />
                     <p className="paragraph d-inline">
                         Upload an optional attachments that may support your offer
                     </p>
-
+                    <div style={padL}>
                     <Dropzone
                         className="dropzone w-25 h-25 m-2"
                         onDrop={this.handleDrop}
@@ -91,6 +105,7 @@ class SubmitOffer extends React.Component {
                             </small>
                         </div>
                     </Dropzone>
+                    </div>
 
                     <input type="checkbox" className="d-inline m-2 ml-0" />
                     <p className="paragraph d-inline">
