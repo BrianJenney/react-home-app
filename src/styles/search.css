@@ -3,38 +3,59 @@
   border-right: 0;
   border-left: 0;
   border-radius: 0;
-  background-color: #edeeef; }
+  background-color: #edeeef;
+  padding: 1.2em 1em; }
 
 .search-options {
-  background-color: #edeeef; }
+  background-color: #edeeef;
+  height: 3em;
+  padding-bottom: 0.3em;
+  width: 70%; }
+
+.search-options:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%; }
 
 .user-select {
-  width: 75px !important; }
+  width: 60px !important; }
+  .user-select label {
+    font-size: 1.2em; }
 
 .horizontal-scroll {
   display: flex;
-  min-width: 100%;
+  min-width: 90%;
   overflow-x: auto;
-  white-space: nowrap; }
+  white-space: nowrap;
+  margin: 0.5em 1em; }
   .horizontal-scroll .property-pic {
     min-width: 50%;
     display: inline-block;
     vertical-align: middle; }
 
+.property-info {
+  margin: auto 0.7em; }
+  .property-info p:first-child {
+    margin-bottom: 0; }
+  .property-info p:last-child {
+    margin-bottom: 0.8em; }
+
 .user-search {
   opacity: 10%;
   position: absolute;
   top: 20px;
-  right: 1%;
+  right: 2%;
   padding: 0 !important;
-  height: 100vh; }
+  height: 100vh;
+  min-width: 22.500em; }
   .user-search .search-input {
     position: relative; }
     .user-search .search-input .fa {
       position: absolute;
-      margin-left: 85%;
+      margin-left: 90%;
       font-size: 1.5rem;
-      margin-top: 1%;
+      margin-top: 0.8em;
       color: #717171; }
   .user-search img {
     width: 100%; }
@@ -44,10 +65,13 @@
     filter-gradient: #1e5799, #7db9e8, vertical;
     background-image: linear-gradient(left, #315a8f 0%, #4e74a4 67%, #6286b3 100%);
     color: white;
-    padding: 15px; }
-  .user-search .buy-sell p:first-child, .user-search .buy-sell p:nth-child(2) {
-    border-right: 1px solid white;
-    padding-right: 10px; }
-  .user-search .buy-sell p {
-    display: inline;
-    margin: 5%; }
+    padding: 0.2em 0.5em;
+    text-transform: uppercase; }
+  .user-search .buy-sell {
+    padding: 0; }
+    .user-search .buy-sell p:first-child, .user-search .buy-sell p:nth-child(2) {
+      border-right: 1px solid white;
+      padding-right: 6%; }
+    .user-search .buy-sell p {
+      display: inline;
+      margin: 3%; }
