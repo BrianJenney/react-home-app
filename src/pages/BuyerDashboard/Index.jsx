@@ -47,7 +47,11 @@ class Dashboard extends React.Component {
                         home={this.state.property}
                         user={this.state.user}
                     />
-                    <SubmitOffer/>
+                    <SubmitOffer
+                        userEmail={this.props.email}
+                        home={this.state.property}
+                        user={this.state.user}
+                    />
                     <Messages userEmail={this.props.email} />
                 </div>
                 <NavBar />
