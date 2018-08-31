@@ -60,7 +60,7 @@ class PurchaseAgreement extends React.Component {
         return (
             <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>
-                    <h1 className="pr-4">3</h1>
+                    <h1 className="pr-4">2</h1>
                     <span className="section-title">
                         Fill Out Purchase Agreement
                     </span>
@@ -79,7 +79,7 @@ class PurchaseAgreement extends React.Component {
                     <div>
                         <input type="checkbox" className="d-inline m-2 ml-0" />
                         <p className="paragraph d-inline">
-                            Enter your offer amount
+                            Choose your offer amount which will generate the Purchase Agreement
                         </p>
                         <br />
                         {this.props.home && (
@@ -119,29 +119,35 @@ class PurchaseAgreement extends React.Component {
                             </div>
                         )}
                     </div>
-
-                    <input type="checkbox" className="d-inline m-2 ml-0" />
-                    <p className="paragraph d-inline">
-                        <a className="mr-1" href={PurchaseDoc} download>
-                            Download
-                        </a>
-                        and fill out Purchase Agreement
-                    </p>
-
-                    <Dropzone
-                        className="dropzone w-25 h-25 m-2"
-                        onDrop={this.handleDrop}
-                    >
-                        <div className="upload-actions text-center">
-                            <FloatingActionButton mini className="mt-3">
-                                <ContentAdd />
-                            </FloatingActionButton>
-                            <br />
-                            <small className="text-primary">
-                                Upload Agreement
-                            </small>
+                    <div>
+                        <input type="checkbox" className="d-inline m-2 ml-0" />
+                        <p className="paragraph d-inline">
+                            Download and fill out Purchase Agreement
+                        </p>
+                        <div>
+                            <a className="mr-1" href={PurchaseDoc} download>Download Agreement</a>
                         </div>
-                    </Dropzone>
+                    </div>
+                    <div>
+                        <input type="checkbox" className="d-inline m-2 ml-0" />
+                        <p className="paragraph d-inline">
+                            Scan and upload a zip file of the completed Purchase Agreement
+                        </p>
+                        <Dropzone
+                            className="dropzone w-25 h-25 m-2"
+                            onDrop={this.handleDrop}
+                        >
+                            <div className="upload-actions text-center">
+                                <FloatingActionButton mini className="mt-3">
+                                    <ContentAdd />
+                                </FloatingActionButton>
+                                <br />
+                                <small className="text-primary">
+                                    Upload Agreement
+                                </small>
+                            </div>
+                        </Dropzone>
+                    </div>                    
                 </Collapse>
             </div>
         );
