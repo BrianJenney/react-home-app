@@ -66,14 +66,17 @@ class Property extends Component {
                                             Mortgage)
                                         </p>
 
-                                        <button className="btn btn-default btn-offer">
-                                            <Link
-                                                to={`/buyerdashboard/${
-                                                    this.state.property._id
-                                                }`}
-                                            >
-                                                Make an Offer
-                                            </Link>
+                                        <button
+                                            onClick={() => {
+                                                this.props.history.replace(
+                                                    `/buyerdashboard/${
+                                                        this.state.property._id
+                                                    }`
+                                                );
+                                            }}
+                                            className="btn btn-default btn-offer"
+                                        >
+                                            Make an Offer
                                         </button>
                                         <div className="btn-toolbar">
                                             <button className="btn btn-default">
