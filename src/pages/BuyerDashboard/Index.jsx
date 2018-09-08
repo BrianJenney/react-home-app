@@ -19,17 +19,35 @@ class Dashboard extends React.Component {
             property: null,
             currentHouse: null,
             open: false,
-            user: null
+            user: null,
+            currentOffer: null
         };
+
+        this.refreshOfferData = this.refreshOfferData.bind(this);
     }
 
-    componentDidMount = () => {
-        API.getHome(this.props.match.params.id).then(response => {
-            this.setState({
-                currentHouse: response.data.doc[0].imgs[0],
-                property: response.data.doc[0],
-                user: response.data.user
-            });
+    componentWillMount = () => {
+        this.refreshOfferData(this.props.match.params.id);
+    };
+
+    refreshOfferData = houseId => {
+        API.getHome(houseId).then(response => {
+            this.setState(
+                {
+                    currentHouse: response.data.doc[0].imgs[0],
+                    property: response.data.doc[0],
+                    user: response.data.user
+                },
+                () => {
+                    API.getOffer(this.state.property, this.state.user).then(
+                        res => {
+                            this.setState({
+                                currentOffer: res.data[0]
+                            });
+                        }
+                    );
+                }
+            );
         });
     };
 
@@ -45,6 +63,8 @@ class Dashboard extends React.Component {
                         userEmail={this.props.email}
                         home={this.state.property}
                         user={this.state.user}
+                        currentOffer={this.state.currentOffer}
+                        refreshOfferData={this.refreshOfferData}
                     />
                     <Messages userEmail={this.props.email} />
                 </div>

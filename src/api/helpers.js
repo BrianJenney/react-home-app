@@ -74,5 +74,11 @@ export default {
     //upsert offer obj
     makeOffer: function(offerObj) {
         return axios.post(`${url}/api/offers/makeoffer`, offerObj);
+    },
+
+    getOffer: function(home, user) {
+        const obj = { userId: user._id, homeId: home._id };
+
+        return axios.post(`${url}/api/offers/offerinfo`, obj);
     }
 };

@@ -15,7 +15,11 @@ class PurchaseAgreement extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             collapse: false,
-            form: new FormData()
+            form: new FormData(),
+            currentOffer: {
+                offer: null,
+                purchaseAgreement: ""
+            }
         };
 
         const styles = {
@@ -23,6 +27,18 @@ class PurchaseAgreement extends React.Component {
             alignItems: "center"
         };
     }
+
+    componentWillReceiveProps = nextProps => {
+        if (nextProps.currentOffer) {
+            this.setState({
+                currentOffer: {
+                    offer: nextProps.currentOffer.offer || null,
+                    purchaseAgreement:
+                        nextProps.currentOffer.purchaseAgreement || ""
+                }
+            });
+        }
+    };
 
     toggle() {
         this.setState({ collapse: !this.state.collapse });
@@ -36,7 +52,7 @@ class PurchaseAgreement extends React.Component {
             this.state.form.set("userId", this.props.user._id);
 
             API.makeOffer(this.state.form).then(() => {
-                this.setState({ collapse: false });
+                this.props.refreshOfferData(this.props.home._id);
             });
         });
     };
@@ -47,11 +63,11 @@ class PurchaseAgreement extends React.Component {
             userId: this.props.user._id,
             offer: e.target.value
         };
-        console.log(obj);
+
         debounce(
             1000,
             API.makeOffer(obj).then(data => {
-                console.log(data);
+                this.props.refreshOfferData(this.props.home._id);
             })
         );
     };
@@ -77,7 +93,12 @@ class PurchaseAgreement extends React.Component {
                     <h5 className="blue">Things Left To Do...</h5>
 
                     <div>
-                        <input type="checkbox" className="d-inline m-2 ml-0" />
+                        <input
+                            type="checkbox"
+                            disabled
+                            checked={this.state.currentOffer.offer}
+                            className="d-inline m-2 ml-0"
+                        />
                         <p className="paragraph d-inline">
                             Enter your offer amount
                         </p>
@@ -94,6 +115,7 @@ class PurchaseAgreement extends React.Component {
                                         type="number"
                                         className="dyanmic-input-size d-inline borderless"
                                         placeholder={this.props.home.price}
+                                        value={this.state.currentOffer.offer}
                                         onChange={this.updatePurchasePrice.bind(
                                             this
                                         )}
@@ -120,7 +142,14 @@ class PurchaseAgreement extends React.Component {
                         )}
                     </div>
 
-                    <input type="checkbox" className="d-inline m-2 ml-0" />
+                    <input
+                        type="checkbox"
+                        disabled
+                        checked={
+                            this.state.currentOffer.purchaseAgreement.length
+                        }
+                        className="d-inline m-2 ml-0"
+                    />
                     <p className="paragraph d-inline">
                         <a className="mr-1" href={PurchaseDoc} download>
                             Download
@@ -142,6 +171,18 @@ class PurchaseAgreement extends React.Component {
                             </small>
                         </div>
                     </Dropzone>
+
+                    {this.state.currentOffer.purchaseAgreement.length && (
+                        <div className="d-inline">
+                            <i
+                                class="fa fa-file-pdf-o d-inline mr-2"
+                                aria-hidden="true"
+                            />
+                            <a href={this.state.currentOffer.purchaseAgreement}>
+                                {this.state.currentOffer.purchaseAgreement}
+                            </a>
+                        </div>
+                    )}
                 </Collapse>
             </div>
         );
