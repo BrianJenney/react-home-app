@@ -6,21 +6,37 @@
   border-left: 0;
   border-radius: 0;
   background-color: #edeeef;
+  padding: 1.2em 1em;
 }
 
 .search-options{
   background-color: #edeeef;
+  height: 3em;
+  padding-bottom: 0.3em;
+  width: 70%;
+}
+
+.search-options:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
 }
 
 .user-select {
-  width: 75px !important; 
+  width: 60px !important;
+  
+  label {
+    font-size: 1.2em;
+  }
 }
 
 .horizontal-scroll{
   display: flex;
-  min-width: 100%;
+  min-width: 90%;
   overflow-x: auto;
   white-space: nowrap;
+  margin: 0.5em 1em;
   .property-pic{
     min-width: 50%;
     display: inline-block;
@@ -28,20 +44,32 @@
   }
 }
 
+.property-info {
+  margin: auto 0.7em;
+
+  p:first-child {
+    margin-bottom: 0;
+  }
+  p:last-child {
+    margin-bottom: 0.8em;
+  }
+}
+
 .user-search{
     opacity: 10%;
     position: absolute;
 		top: 20px;
-    right: 1%;
+    right: 2%;
     padding: 0 !important;
     height: 100vh;
+    min-width: 22.500em;
     .search-input{
       position: relative;
       .fa{
         position: absolute;
-        margin-left: 85%;
+        margin-left: 90%;
         font-size: 1.5rem;
-        margin-top: 1%;
+        margin-top: 0.8em;
         color: #717171;
       }
     }
@@ -58,17 +86,20 @@
       filter-gradient: (#1e5799, #7db9e8, vertical); 
       background-image: (linear-gradient(left, #315a8f 0%,#4e74a4 67%,#6286b3 100%));
       color: white;
-      padding: 15px;
+      padding: 0.2em 0.5em;
+      text-transform: uppercase;
     }
 
     .buy-sell{
+      padding: 0;
+
       p:first-child, p:nth-child(2){
         border-right: 1px solid white;
-        padding-right: 10px;
+        padding-right: 6%;
       }
       p{
         display: inline;
-        margin: 5%;
+        margin: 3%;
       }
     }
 

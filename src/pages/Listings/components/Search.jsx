@@ -19,6 +19,25 @@ import * as mapActions from "../../../actions/mapMarker";
 
 import Logo from "../../../img/logo-micasa.png";
 
+const CardStyle = {
+    borderTopLeftRadius: "8px",
+    borderTopRightRadius: "8px",
+    backgroundColor: "#edeeef"
+}
+
+const LStyle = {
+    color: "#495057"
+}
+
+const MStyle = {
+    marginTop: 0
+}
+
+const IStyle = {
+    paddingLeft: "1.3rem",
+    top: 0
+}
+
 class UserSearch extends Component {
     constructor(props) {
         super(props);
@@ -81,8 +100,8 @@ class UserSearch extends Component {
 
     render() {
         return (
-            <Card className="col-md-5 user-search">
-                <div className="header row">              
+            <Card className="col-md-5 user-search" style={CardStyle}>
+                <div className="header row" style={CardStyle}>              
                     <SubNav />
                 </div>
                 <div className="search-input">
@@ -98,14 +117,20 @@ class UserSearch extends Component {
                 <div className="search-options row">
                     <div className="col-md-3">
                         <SelectField
-                            className="user-select lg"
                             floatingLabelText="Type"
+                            className="user-select"
                             value={this.state.propertyType}
                             onChange={this.handleChange.bind(
                                 null,
                                 "propertyType"
                             )}
                             autoWidth={true}
+                            floatingLabelStyle={{
+                                transform: 'scale(0.75) translate(0px, -28px)',
+                                color: '#495057'
+                            }}
+                            menuStyle={MStyle}
+                            iconStyle={IStyle}
                         >
                             <MenuItem
                                 value={"house"}
@@ -126,10 +151,29 @@ class UserSearch extends Component {
                     </div>
                     <div className="col-md-3">
                         <SelectField
+                            floatingLabelText="Price"
+                            className="user-select"
+                            value={this.state.maxPrice}
+                            onChange={this.handleChange.bind(null, "maxPrice")}
+                            autoWidth={true}
+                            floatingLabelStyle={LStyle}
+                            menuStyle={MStyle}
+                            iconStyle={IStyle}
+                        >
+                            <MenuItem value={"all"} primaryText="All" />
+                            <MenuItem value={500000} primaryText="<500K" />
+                            <MenuItem value={1000000} primaryText="<1M" />
+                        </SelectField>
+                    </div>
+                    <div className="col-md-3">
+                        <SelectField
                             floatingLabelText="Beds"
                             className="user-select"
                             value={this.state.bedRooms}
                             onChange={this.handleChange.bind(null, "bedRooms")}
+                            floatingLabelStyle={LStyle}
+                            menuStyle={MStyle}
+                            iconStyle={IStyle}
                         >
                             <MenuItem value={1} primaryText="+1" />
                             <MenuItem value={2} primaryText="+2" />
@@ -144,24 +188,15 @@ class UserSearch extends Component {
                             className="user-select"
                             value={this.state.bathRooms}
                             onChange={this.handleChange.bind(null, "bathRooms")}
+                            floatingLabelStyle={LStyle}
+                            menuStyle={MStyle}
+                            iconStyle={IStyle}
                         >
                             <MenuItem value={1} primaryText="+1" />
                             <MenuItem value={2} primaryText="+2" />
                             <MenuItem value={3} primaryText="+3" />
                             <MenuItem value={4} primaryText="+4" />
                             <MenuItem value={5} primaryText="+5" />
-                        </SelectField>
-                    </div>
-                    <div className="col-md-3">
-                        <SelectField
-                            floatingLabelText="Price"
-                            className="user-select"
-                            value={this.state.maxPrice}
-                            onChange={this.handleChange.bind(null, "maxPrice")}
-                        >
-                            <MenuItem value={"all"} primaryText="All" />
-                            <MenuItem value={500000} primaryText="<500K" />
-                            <MenuItem value={1000000} primaryText="<1M" />
                         </SelectField>
                     </div>
                 </div>
