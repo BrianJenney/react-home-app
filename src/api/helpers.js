@@ -76,9 +76,24 @@ export default {
         return axios.post(`${url}/api/offers/makeoffer`, offerObj);
     },
 
+    //get offer info
     getOffer: function(home, user) {
         const obj = { userId: user._id, homeId: home._id };
 
         return axios.post(`${url}/api/offers/offerinfo`, obj);
+    },
+
+    //submit offer
+    submitOffer: function(home, user) {
+        const obj = { userId: user._id, homeId: home._id };
+
+        return axios.post(`${url}/api/offers/submitoffer`, obj);
+    },
+
+    //get all offers for a house
+    getOffers: function(home) {
+        const obj = { homeId: home._id };
+
+        return axios.post(`${url}/api/offers/getoffers`, obj);
     }
 };
