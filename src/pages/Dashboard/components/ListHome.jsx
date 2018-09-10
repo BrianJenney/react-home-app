@@ -33,7 +33,6 @@ class ListHome extends React.Component {
             })
             .then(() => {
                 this.setState({ homes: homes });
-                console.log(homes);
             });
     }
 

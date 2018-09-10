@@ -28,6 +28,7 @@ class Dashboard extends React.Component {
     }
 
     componentWillMount = () => {
+        console.log(this.props);
         this.refreshOfferData(this.props.match.params.id);
     };
 

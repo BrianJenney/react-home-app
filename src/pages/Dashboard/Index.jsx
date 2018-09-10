@@ -10,6 +10,7 @@ import Profile from "./components/FillOutProfile";
 import Messages from "./components/Messages";
 import DisclosureAgreement from "./components/DisclosureAgreement";
 import ListHome from "./components/ListHome";
+import Offers from "./components/Offers";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class Dashboard extends React.Component {
                     <ListHome userEmail={this.props.email} />
                     <Profile userEmail={this.props.email} />
                     <DisclosureAgreement userEmail={this.props.email} />
+                    <Offers user={this.props.user} />
                     <Messages userEmail={this.props.email} />
                 </div>
                 <NavBar />
