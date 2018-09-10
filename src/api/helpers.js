@@ -90,9 +90,9 @@ export default {
         return axios.post(`${url}/api/offers/submitoffer`, obj);
     },
 
-    //get all offers for a house
-    getOffers: function(home) {
-        const obj = { homeId: home._id };
+    //get all offers sent to a user
+    getOffers: function(user) {
+        const obj = { userId: user.id };
 
         return axios.post(`${url}/api/offers/getoffers`, obj);
     }
