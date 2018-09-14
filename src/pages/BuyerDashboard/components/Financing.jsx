@@ -9,7 +9,7 @@ import PurchaseDoc from "../../../documents/residential_purchase.pdf";
 
 import { debounce } from "throttle-debounce";
 
-class PurchaseAgreement extends React.Component {
+class Financing extends React.Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -78,7 +78,7 @@ class PurchaseAgreement extends React.Component {
                 <div style={{ display: "flex", alignItems: "center" }}>
                     <h1 className="pr-4">1</h1>
                     <span className="section-title">
-                        Fill Out Purchase Agreement
+                        Financing
                     </span>
                     <span
                         className={
@@ -88,60 +88,10 @@ class PurchaseAgreement extends React.Component {
                         }
                         onClick={this.toggle}
                     />
-                </div>
+                </div> 
                 <Collapse isOpen={this.state.collapse}>
+                    <h5 className="blue">How would you like to finance this purchase?</h5>
                     <h5 className="blue">Things Left To Do...</h5>
-
-                    <div>
-                        <input
-                            type="checkbox"
-                            disabled
-                            checked={this.state.currentOffer.offer}
-                            className="d-inline m-2 ml-0"
-                        />
-                        <p className="paragraph d-inline">
-                            Enter your offer amount
-                        </p>
-                        <br />
-                        {this.props.home && (
-                            <div className="ml-5">
-                                <div className="d-inline-block">
-                                    <small className="text-center text-primary">
-                                        Your Offer
-                                    </small>
-                                    <br />
-                                    <i className="lightGrey fa fa-pencil d-inline" />
-                                    <input
-                                        type="number"
-                                        className="dyanmic-input-size d-inline borderless"
-                                        placeholder={this.props.home.price}
-                                        value={this.state.currentOffer.offer}
-                                        onChange={this.updatePurchasePrice.bind(
-                                            this
-                                        )}
-                                    />
-                                </div>
-
-                                <div
-                                    className="d-inline-block"
-                                    style={{
-                                        borderLeft: "1px solid grey",
-                                        height: 30
-                                    }}
-                                />
-                                <div className="d-inline-block ml-5">
-                                    <small className="text-center text-primary">
-                                        Asking Price
-                                    </small>
-                                    <br />
-                                    <div className="muted paragraph d-inline">
-                                        <h5>${this.props.home.price}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
                     <input
                         type="checkbox"
                         disabled
@@ -151,10 +101,7 @@ class PurchaseAgreement extends React.Component {
                         className="d-inline m-2 ml-0"
                     />
                     <p className="paragraph d-inline">
-                        <a className="mr-1" href={PurchaseDoc} download>
-                            Download
-                        </a>
-                        and fill out Purchase Agreement
+                        Upload your preapproval or final loan documentation
                     </p>
 
                     <Dropzone
@@ -167,25 +114,37 @@ class PurchaseAgreement extends React.Component {
                             </FloatingActionButton>
                             <br />
                             <small className="text-primary">
-                                Upload Agreement
+                                Upload Docs
                             </small>
                         </div>
                     </Dropzone>
+                    <div>
+                        <input type="checkbox" className="d-inline m-2 ml-0" />
+                        <i className="lightGrey fa fa-pencil d-inline" />
+                        <input
+                            type="phone"
+                            className="dyanmic-input-size d-inline borderless"
+                            placeholder="Add your phone number"
+                        />
+                        <span className="purple">
+                            {" "}
+                            (this will only be shown to buyers after you approve
+                            their offer)
+                        </span>
+                        <br />
 
-                    {this.state.currentOffer.purchaseAgreement.length && (
-                        <div className="d-inline">
-                            <i
-                                class="fa fa-file-pdf-o d-inline mr-2"
-                                aria-hidden="true"
-                            />
-                            <a href={this.state.currentOffer.purchaseAgreement}>
-                                {this.state.currentOffer.purchaseAgreement}
-                            </a>
-                        </div>
-                    )}
+                        <button
+                            className="d-inline btn btn-default"
+                        >
+                            <span className="text-primary">
+                                Add Phone Number
+                            </span>
+                        </button>
+                    </div>
+                    
                 </Collapse>
             </div>
         );
     }
 }
-export default PurchaseAgreement;
+export default Financing;

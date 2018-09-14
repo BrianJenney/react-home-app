@@ -10,6 +10,7 @@ import NavBar from "../../components/BreadcrumbNav";
 
 import Messages from "./components/Messages";
 import PurchaseAgreement from "./components/PurchaseAgreement";
+import Financing from "./components/Financing";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -58,7 +59,7 @@ class Dashboard extends React.Component {
                 <div className="container w-50 mb-10  h-100">
                     <h1>Buyer Dashboard</h1>
                     <img src={this.state.currentHouse} alt="" />
-
+                    <Financing />
                     <PurchaseAgreement
                         userEmail={this.props.email}
                         home={this.state.property}
