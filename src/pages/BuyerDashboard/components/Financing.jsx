@@ -90,37 +90,45 @@ class Financing extends React.Component {
                     />
                 </div> 
                 <Collapse isOpen={this.state.collapse}>
-                    <h5 className="blue">How would you like to finance this purchase?</h5>
-                    <h5 className="blue">Things Left To Do...</h5>
-                    <input
-                        type="checkbox"
-                        disabled
-                        checked={
-                            this.state.currentOffer.purchaseAgreement.length
-                        }
-                        className="d-inline m-2 ml-0"
-                    />
-                    <p className="paragraph d-inline">
-                        Upload your preapproval or final loan documentation
-                    </p>
-
-                    <Dropzone
-                        className="dropzone w-25 h-25 m-2"
-                        onDrop={this.handleDrop}
-                    >
-                        <div className="upload-actions text-center">
-                            <FloatingActionButton mini className="mt-3">
-                                <ContentAdd />
-                            </FloatingActionButton>
-                            <br />
-                            <small className="text-primary">
-                                Upload Docs
-                            </small>
+                    <div> 
+                        <h5 className="blue">How would you like to finance this purchase?</h5>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                            <button style={{width: "23.5%", height:"100px", marginRight: "1.5%"}}>Will Soon Apply at a Bank</button>
+                            <button style={{width: "23.5%", height:"100px", marginRight: "1.5%"}}>Already Have Preapproval Loan</button>
+                            <button style={{width: "23.5%", height:"100px", marginRight: "1.5%"}}>Paying in Cash</button>
+                            <button style={{width: "23.5%", height:"100px", marginRight: "1.5%"}}>Apply Now on Rocket Mortage</button>
                         </div>
-                    </Dropzone>
-                    <div>
+                    </div>
+                    <div style={{ marginTop: "24px"}}>
+                        <h5 className="blue">Things Left To Do...</h5>
+                        <input
+                            type="checkbox"
+                            disabled
+                            checked={
+                                this.state.currentOffer.purchaseAgreement.length
+                            }
+                            className="d-inline m-2 ml-0"
+                        />
+                        <p className="paragraph d-inline">
+                            Upload your preapproval or final loan documentation
+                        </p>
+
+                        <Dropzone
+                            className="dropzone w-25 h-25 m-2"
+                            onDrop={this.handleDrop}
+                        >
+                            <div className="upload-actions text-center">
+                                <FloatingActionButton mini className="mt-3">
+                                    <ContentAdd />
+                                </FloatingActionButton>
+                                <br />
+                                <small className="text-primary">
+                                    Upload Docs
+                                </small>
+                            </div>
+                        </Dropzone>
                         <input type="checkbox" className="d-inline m-2 ml-0" />
-                        <i className="lightGrey fa fa-pencil d-inline" />
+                        
                         <input
                             type="phone"
                             className="dyanmic-input-size d-inline borderless"
@@ -135,7 +143,9 @@ class Financing extends React.Component {
 
                         <button
                             className="d-inline btn btn-default"
+                            style={{backgroundColor:"white"}}
                         >
+                        <i className="lightGrey fa fa-pencil d-inline" style={{padding:"10px"}} />
                             <span className="text-primary">
                                 Add Phone Number
                             </span>
