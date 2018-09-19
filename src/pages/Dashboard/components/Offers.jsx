@@ -2,6 +2,7 @@ import React from "react";
 import { Collapse, Button, CardBody, Card } from "reactstrap";
 import API from "../../../api/helpers";
 import { Link } from "react-router-dom";
+import "../../../styles/dashboard.css";
 
 class Offers extends React.Component {
     constructor(props) {
@@ -19,7 +20,6 @@ class Offers extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.user);
         API.getOffers(this.props.user).then(res => {
             this.setState({ offers: res.data });
         });
@@ -45,17 +45,16 @@ class Offers extends React.Component {
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
-                    <h5 className="blue">Things Left To Do...</h5>
-                    <input type="checkbox" className="d-inline m-2 ml-0" />
-                    <p className="paragraph d-inline">
-                        <a
-                            className="mr-1"
-                            href="https://res.cloudinary.com/dzriw5xmd/raw/upload/v1532886088/CA_Disclosure_Package_g72als.zip"
-                        >
-                            Download
-                        </a>
-                        and fill out California disclosure package
-                    </p>
+                    {this.state.offers.map((offer, idx) => {
+                        return (
+                            <div key={idx} className="offer-info">
+                                <a href={offer.purchaseAgreement}>
+                                    Purchase Agreement
+                                </a>
+                                <p>{offer.offer}</p>
+                            </div>
+                        );
+                    })}
                 </Collapse>
             </div>
         );

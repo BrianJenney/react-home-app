@@ -11,3 +11,6 @@ h1 {
 
 .borderless {
   border: none !important; }
+
+.offer-info {
+  display: flex; }
