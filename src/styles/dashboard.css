@@ -9,6 +9,9 @@ h1 {
   font-size: 1.5rem;
   font-weight: 500; }
 
+.dashboard {
+  margin-bottom: 10%; }
+
 .borderless {
   border: none !important; }
 

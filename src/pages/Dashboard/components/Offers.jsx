@@ -47,7 +47,14 @@ class Offers extends React.Component {
                 <Collapse isOpen={this.state.collapse}>
                     {this.state.offers.map((offer, idx) => {
                         return (
-                            <div key={idx} className="offer-info">
+                            <div key={offer._id} className="offer-info">
+                                {offer.users.length && (
+                                    <img
+                                        className="user-pic"
+                                        src={offer.users[0].userPic}
+                                        alt=""
+                                    />
+                                )}
                                 <a href={offer.purchaseAgreement}>
                                     Purchase Agreement
                                 </a>
