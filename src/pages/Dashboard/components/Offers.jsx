@@ -55,6 +55,7 @@ class Offers extends React.Component {
                                         alt=""
                                     />
                                 )}
+                                \
                                 <a href={offer.purchaseAgreement}>
                                     Purchase Agreement
                                 </a>
