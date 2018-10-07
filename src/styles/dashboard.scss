@@ -20,4 +20,15 @@ h1 {
 
 .offer-info {
     display: flex;
+    align-items: center;
+}
+
+.user-pic {
+    width: 100%;
+    height: 100%;
+}
+
+.x-small {
+    font-size: 0.2rem;
+    margin-bottom: 0.1rem;
 }

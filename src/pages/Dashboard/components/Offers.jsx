@@ -3,6 +3,9 @@ import { Collapse, Button, CardBody, Card } from "reactstrap";
 import API from "../../../api/helpers";
 import { Link } from "react-router-dom";
 import "../../../styles/dashboard.css";
+import ChatIcon from "../../../img/icon-chat.svg";
+import moment from "moment";
+import currencyFormatter from "../../../utils/currency-formatter";
 
 class Offers extends React.Component {
     constructor(props) {
@@ -21,7 +24,10 @@ class Offers extends React.Component {
 
     componentDidMount() {
         API.getOffers(this.props.user).then(res => {
-            this.setState({ offers: res.data });
+            let data = res.data.filter(offer => {
+                return offer.offer > 0;
+            });
+            this.setState({ offers: data });
         });
     }
 
@@ -47,19 +53,59 @@ class Offers extends React.Component {
                 <Collapse isOpen={this.state.collapse}>
                     {this.state.offers.map((offer, idx) => {
                         return (
-                            <div key={offer._id} className="offer-info">
-                                {offer.users.length && (
-                                    <img
-                                        className="user-pic"
-                                        src={offer.users[0].userPic}
-                                        alt=""
-                                    />
-                                )}
-                                \
-                                <a href={offer.purchaseAgreement}>
-                                    Purchase Agreement
-                                </a>
-                                <p>{offer.offer}</p>
+                            <div key={offer._id} className="row offer-info">
+                                <div className="col-1">
+                                    {offer.users.length && (
+                                        <img
+                                            className="user-pic rounded-circle w-10 h-10"
+                                            src={offer.users[0].userPic}
+                                            alt=""
+                                        />
+                                    )}
+                                </div>
+                                <div className="col-3">
+                                    <span>
+                                        {offer.users.length && (
+                                            <div className="user-info">
+                                                <b>{offer.users[0].email}</b>
+                                            </div>
+                                        )}
+                                    </span>
+                                </div>
+                                <div className="col-4 text-center">
+                                    <p className="text-muted x-small">
+                                        Offered on{" "}
+                                        {moment(offer.createdAt).format("l")}
+                                    </p>
+                                    <h4>{currencyFormatter(offer.offer)}</h4>
+                                </div>
+                                <div className="col-2">
+                                    <div
+                                        className="btn-toolbar"
+                                        role="toolbar"
+                                        aria-label="Toolbar with button groups"
+                                    >
+                                        <div
+                                            className="btn-group mr-2"
+                                            role="group"
+                                            aria-label="First group"
+                                        >
+                                            <img src={ChatIcon} alt="" />
+                                        </div>
+                                        <div
+                                            className="btn-group mr-2"
+                                            role="group"
+                                            aria-label="Second group"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-2 text-right">
+                                    <a href={offer.purchaseAgreement}>
+                                        <button className="btn btn-light">
+                                            Accept
+                                        </button>
+                                    </a>
+                                </div>
                             </div>
                         );
                     })}
