@@ -25,7 +25,9 @@ class SubmitOffer extends React.Component {
         this.state = {
             collapse: false,
             form: new FormData(),
-            value: ""
+            value: "",
+            home: null,
+            user: null
         };
 
         const styles = {
@@ -34,33 +36,44 @@ class SubmitOffer extends React.Component {
         };
     }
 
+    componentWillUpdate = props => {
+        this.getOfferData(props);
+    };
+
+    getOfferData = props => {
+        API.getOffersByUser(props.user, props.home).then(res => {
+            console.log(res);
+        });
+    };
+
     toggle() {
         this.setState({ collapse: !this.state.collapse });
     }
 
-    // to handle message
     handleChange = event => {
         this.setState({ value: event.target.value });
     };
 
     sendMessage = () => {
         API.postMessage(this.state.value).then(() => {
-            // NEED HELP not sure
             this.setState({ collapse: false });
         });
     };
 
     handleDrop = files => {
-        debugger;
         files.forEach(file => {
             this.state.form.set("file", file);
 
             this.state.form.set("homeId", this.props.home._id);
             this.state.form.set("userId", this.props.user._id);
 
-            API.makeOffer(this.state.form).then(() => {
-                this.setState({ collapse: false });
-            });
+            API.makeOffer(this.state.form);
+        });
+    };
+
+    submitOffer = () => {
+        API.submitOffer(this.props.home._id, this.props.user._id).then(() => {
+            this.setState({ collapse: false });
         });
     };
 
@@ -97,7 +110,7 @@ class SubmitOffer extends React.Component {
                         Upload an optional attachments that may support your
                         offer
                     </p>
-                    <div class="alignDZone" style={padL}>
+                    <div className="alignDZone" style={padL}>
                         <Dropzone
                             className="dropzone w-25 h-25 m-2"
                             onDrop={this.handleDrop}
@@ -114,13 +127,16 @@ class SubmitOffer extends React.Component {
                         </Dropzone>
                     </div>
 
-                    <input type="checkbox" className="d-inline m-2 ml-0" />
-                    <p className="paragraph d-inline">
-                        Officially submit your offer
-                    </p>
+                    <button
+                        className="btn btn-light"
+                        onClick={this.submitOffer}
+                    >
+                        Submit Your Offer
+                    </button>
                 </Collapse>
             </div>
         );
     }
 }
+
 export default SubmitOffer;

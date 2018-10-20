@@ -55,7 +55,7 @@ class Offers extends React.Component {
                         return (
                             <div key={offer._id} className="row offer-info">
                                 <div className="col-1">
-                                    {offer.users.length && (
+                                    {offer.users.length > 0 && (
                                         <img
                                             className="user-pic rounded-circle w-10 h-10"
                                             src={offer.users[0].userPic}
@@ -65,7 +65,7 @@ class Offers extends React.Component {
                                 </div>
                                 <div className="col-3">
                                     <span>
-                                        {offer.users.length && (
+                                        {offer.users.length > 0 && (
                                             <div className="user-info">
                                                 <b>{offer.users[0].email}</b>
                                             </div>

@@ -172,10 +172,10 @@ class PurchaseAgreement extends React.Component {
                         </div>
                     </Dropzone>
 
-                    {this.state.currentOffer.purchaseAgreement.length && (
+                    {this.state.currentOffer.purchaseAgreement.length > 0 && (
                         <div className="d-inline">
                             <i
-                                class="fa fa-file-pdf-o d-inline mr-2"
+                                className="fa fa-file-pdf-o d-inline mr-2"
                                 aria-hidden="true"
                             />
                             <a href={this.state.currentOffer.purchaseAgreement}>

@@ -27,8 +27,7 @@ class Dashboard extends React.Component {
         this.refreshOfferData = this.refreshOfferData.bind(this);
     }
 
-    componentWillMount = () => {
-        console.log(this.props);
+    componentDidMount = () => {
         this.refreshOfferData(this.props.match.params.id);
     };
 
@@ -57,7 +56,7 @@ class Dashboard extends React.Component {
         return (
             <div>
                 <TopNav />
-                <div className="container w-50 mb-10  h-100">
+                <div className="container buyer-dash w-80 mb-10 h-100">
                     <h1>Buyer Dashboard</h1>
                     <img src={this.state.currentHouse} alt="" />
 

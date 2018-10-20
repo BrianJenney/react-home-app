@@ -95,5 +95,12 @@ export default {
         const obj = { userId: user.id };
 
         return axios.post(`${url}/api/offers/getoffers`, obj);
+    },
+
+    //get info about current offer being made by a buyer
+    getOffersByUser: function(user, home) {
+        const obj = { userId: user._id, homeId: home._id };
+
+        return axios.post(`${url}/api/offers/offerinfo`, obj);
     }
 };
