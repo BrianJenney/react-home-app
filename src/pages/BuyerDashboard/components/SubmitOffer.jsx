@@ -44,7 +44,6 @@ class SubmitOffer extends React.Component {
     getOfferData = props => {
         API.getOfferByUser(props.user, props.home).then(res => {
             if (res.data.length) {
-                console.log(res.data);
                 const offerSubmitted = res.data[0].readyToSend;
                 // this.setState({ offerSubmitted });
             }

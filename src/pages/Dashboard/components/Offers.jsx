@@ -4,6 +4,7 @@ import API from "../../../api/helpers";
 import { Link } from "react-router-dom";
 import "../../../styles/dashboard.css";
 import ChatIcon from "../../../img/icon-chat.svg";
+import DialogModal from "../../../components/modals/Message";
 import moment from "moment";
 import currencyFormatter from "../../../utils/currency-formatter";
 
@@ -12,8 +13,10 @@ class Offers extends React.Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {
+            open: false,
             collapse: false,
-            offers: []
+            offers: [],
+            currentHome: {}
         };
 
         const styles = {
@@ -30,6 +33,14 @@ class Offers extends React.Component {
             this.setState({ offers: data });
         });
     }
+
+    openMessage = offer => {
+        this.setState({ open: true, currentHome: { id: offer.homeId } });
+    };
+
+    closeModal = () => {
+        this.setState({ open: false });
+    };
 
     toggle() {
         this.setState({ collapse: !this.state.collapse });
@@ -90,7 +101,14 @@ class Offers extends React.Component {
                                             role="group"
                                             aria-label="First group"
                                         >
-                                            <img src={ChatIcon} alt="" />
+                                            <img
+                                                src={ChatIcon}
+                                                onClick={this.openMessage.bind(
+                                                    null,
+                                                    offer
+                                                )}
+                                                alt=""
+                                            />
                                         </div>
                                         <div
                                             className="btn-group mr-2"
@@ -109,6 +127,13 @@ class Offers extends React.Component {
                             </div>
                         );
                     })}
+                    <DialogModal
+                        closeModal={this.closeModal.bind(this)}
+                        open={this.state.open}
+                        propertyInfo={this.state.currentHome}
+                        senderEmail={this.props.user.email}
+                        user={this.props.user}
+                    />
                 </Collapse>
             </div>
         );
