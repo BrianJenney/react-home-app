@@ -85,8 +85,6 @@ export default {
 
     //submit offer
     submitOffer: function(home, user) {
-        console.log(home, user);
-
         const obj = { userId: user, homeId: home };
 
         return axios.post(`${url}/api/offers/submitoffer`, obj);
