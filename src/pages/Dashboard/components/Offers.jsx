@@ -35,7 +35,7 @@ class Offers extends React.Component {
     }
 
     openMessage = offer => {
-        this.setState({ open: true, currentHome: { id: offer.homeId } });
+        this.setState({ open: true, currentHome: { _id: offer.homeId } });
     };
 
     closeModal = () => {
@@ -45,6 +45,13 @@ class Offers extends React.Component {
     toggle() {
         this.setState({ collapse: !this.state.collapse });
     }
+
+    acceptOffer = offer => {
+        console.log(offer);
+        API.acceptOffer(offer).then(res => {
+            console.log(res);
+        });
+    };
 
     render() {
         return (
@@ -118,11 +125,15 @@ class Offers extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-2 text-right">
-                                    <a href={offer.purchaseAgreement}>
-                                        <button className="btn btn-light">
-                                            Accept
-                                        </button>
-                                    </a>
+                                    <button
+                                        onClick={this.acceptOffer.bind(
+                                            null,
+                                            offer
+                                        )}
+                                        className="btn btn-light"
+                                    >
+                                        Accept
+                                    </button>
                                 </div>
                             </div>
                         );
@@ -131,8 +142,8 @@ class Offers extends React.Component {
                         closeModal={this.closeModal.bind(this)}
                         open={this.state.open}
                         propertyInfo={this.state.currentHome}
-                        senderEmail={this.props.user.email}
-                        user={this.props.user}
+                        senderEmail={this.props.user.name}
+                        user={this.props.user.user}
                     />
                 </Collapse>
             </div>

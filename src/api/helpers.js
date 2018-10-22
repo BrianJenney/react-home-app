@@ -90,6 +90,11 @@ export default {
         return axios.post(`${url}/api/offers/submitoffer`, obj);
     },
 
+    //accept offer
+    acceptOffer: function(offer) {
+        return axios.post(`${url}/api/offers/acceptoffer`, offer);
+    },
+
     //get all offers sent to a user
     getOffers: function(user) {
         const obj = { userId: user.id };

@@ -116,7 +116,7 @@ class AddProp extends React.Component {
 
         API.posthome(this.state.form)
             .then(response => {
-                this.props.history.push("/nav");
+                this.props.history.push("/dashboard");
             })
             .catch(e => {
                 console.log(e);

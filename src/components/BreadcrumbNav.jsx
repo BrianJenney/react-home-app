@@ -40,7 +40,7 @@ class NavBar extends React.Component {
         return (
             <footer>
                 <div>
-                    <nav className="bottom-nav" onClick={this.props.onclick}>
+                    <nav className="bottom-nav">
                         <ol>
                             <li>
                                 <a

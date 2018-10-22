@@ -18,7 +18,8 @@ h1 {
 
 .offer-info {
   display: flex;
-  align-items: center; }
+  align-items: center;
+  margin-bottom: 1%; }
 
 .user-pic {
   width: 100%;

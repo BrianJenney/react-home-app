@@ -22,15 +22,16 @@ class BrowseListings extends React.Component {
         };
     }
 
+    componentWillUnmount = () => {
+        this.props.mapActions.removeMapMarkers;
+    };
+
     render() {
         return (
             <div>
                 <MapWrapper />
                 <UserSearch />
-                <NavBar
-                    onclick={this.props.mapActions.removeMapMarkers}
-                    selectedIndex={2}
-                />
+                <NavBar selectedIndex={2} />
             </div>
         );
     }
