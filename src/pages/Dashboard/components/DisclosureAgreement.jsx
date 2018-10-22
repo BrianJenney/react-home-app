@@ -21,6 +21,14 @@ class DisclosureAgreement extends React.Component {
         };
     }
 
+    componentDidMount = () => {
+        console.log("mounted");
+        //TODO: get disclosure agreement if uploaded
+        API.getHome(this.props.userEmail).then(res => {
+            console.log(res);
+        });
+    };
+
     toggle() {
         this.setState({ collapse: !this.state.collapse });
     }
