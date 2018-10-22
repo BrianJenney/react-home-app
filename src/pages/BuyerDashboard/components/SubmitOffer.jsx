@@ -23,6 +23,7 @@ class SubmitOffer extends React.Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {
+            offerSubmitted: false,
             collapse: false,
             form: new FormData(),
             value: "",
@@ -41,8 +42,12 @@ class SubmitOffer extends React.Component {
     };
 
     getOfferData = props => {
-        API.getOffersByUser(props.user, props.home).then(res => {
-            console.log(res);
+        API.getOfferByUser(props.user, props.home).then(res => {
+            if (res.data.length) {
+                console.log(res.data);
+                const offerSubmitted = res.data[0].readyToSend;
+                // this.setState({ offerSubmitted });
+            }
         });
     };
 
@@ -94,7 +99,11 @@ class SubmitOffer extends React.Component {
                 </div>
                 <Collapse isOpen={this.state.collapse}>
                     <h5 className="blue">Things Left To Do...</h5>
-                    <input type="checkbox" className="d-inline m-2 ml-0" />
+                    <input
+                        type="checkbox"
+                        disabled
+                        className="d-inline m-2 ml-0"
+                    />
                     <p className="paragraph d-inline">
                         Write an optional message to seller alongside your offer
                     </p>
@@ -105,7 +114,11 @@ class SubmitOffer extends React.Component {
                         value={this.state.value}
                         onChange={this.handleChange}
                     />
-                    <input type="checkbox" className="d-inline m-2 ml-0" />
+                    <input
+                        type="checkbox"
+                        disabled
+                        className="d-inline m-2 ml-0"
+                    />
                     <p className="paragraph d-inline">
                         Upload an optional attachments that may support your
                         offer

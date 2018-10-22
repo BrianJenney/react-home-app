@@ -85,7 +85,9 @@ export default {
 
     //submit offer
     submitOffer: function(home, user) {
-        const obj = { userId: user._id, homeId: home._id };
+        console.log(home, user);
+
+        const obj = { userId: user, homeId: home };
 
         return axios.post(`${url}/api/offers/submitoffer`, obj);
     },
@@ -98,7 +100,7 @@ export default {
     },
 
     //get info about current offer being made by a buyer
-    getOffersByUser: function(user, home) {
+    getOfferByUser: function(user, home) {
         const obj = { userId: user._id, homeId: home._id };
 
         return axios.post(`${url}/api/offers/offerinfo`, obj);

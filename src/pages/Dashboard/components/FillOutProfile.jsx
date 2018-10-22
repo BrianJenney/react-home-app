@@ -87,6 +87,7 @@ class FillOutProfile extends React.Component {
                         <h5 className="blue">Things Left To Do...</h5>
                         <input
                             type="checkbox"
+                            disabled
                             checked={this.state.imgs.length}
                             className="d-inline m-2 ml-0"
                         />
@@ -125,6 +126,7 @@ class FillOutProfile extends React.Component {
                     <div>
                         <input
                             type="checkbox"
+                            disabled
                             checked={this.state.phoneNumber}
                             className="d-inline m-2 ml-0"
                         />

@@ -8,6 +8,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as loginActions from "../../actions/login";
 import * as logoutActions from "../../actions/logout";
+import * as mapActions from "../../actions/mapMarker";
 
 class BrowseListings extends React.Component {
     constructor(props) {
@@ -26,7 +27,10 @@ class BrowseListings extends React.Component {
             <div>
                 <MapWrapper />
                 <UserSearch />
-                <NavBar selectedIndex={2} />
+                <NavBar
+                    onclick={this.props.mapActions.removeMapMarkers}
+                    selectedIndex={2}
+                />
             </div>
         );
     }
@@ -42,7 +46,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         loginaction: bindActionCreators(loginActions, dispatch),
-        logoutaction: bindActionCreators(logoutActions, dispatch)
+        logoutaction: bindActionCreators(logoutActions, dispatch),
+        mapActions: bindActionCreators(mapActions, dispatch)
     };
 }
 export default connect(
