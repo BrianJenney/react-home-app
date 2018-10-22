@@ -85,15 +85,22 @@ export default {
 
     //submit offer
     submitOffer: function(home, user) {
-        const obj = { userId: user._id, homeId: home._id };
+        const obj = { userId: user, homeId: home };
 
         return axios.post(`${url}/api/offers/submitoffer`, obj);
     },
 
-    //get all offers for a house
-    getOffers: function(home) {
-        const obj = { homeId: home._id };
+    //get all offers sent to a user
+    getOffers: function(user) {
+        const obj = { userId: user.id };
 
         return axios.post(`${url}/api/offers/getoffers`, obj);
+    },
+
+    //get info about current offer being made by a buyer
+    getOfferByUser: function(user, home) {
+        const obj = { userId: user._id, homeId: home._id };
+
+        return axios.post(`${url}/api/offers/offerinfo`, obj);
     }
 };

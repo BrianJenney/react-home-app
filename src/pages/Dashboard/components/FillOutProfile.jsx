@@ -11,10 +11,10 @@ class FillOutProfile extends React.Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
-        this.removePic = this.removePic.bind(this);
+
         this.state = {
             collapse: false,
-            phoneNumber: null,
+            phoneNumber: "",
             file: null,
             form: new FormData(),
             imgs: []
@@ -27,15 +27,20 @@ class FillOutProfile extends React.Component {
     }
 
     componentDidMount() {
-        const input = document.querySelector(".dyanmic-input-size");
-        input.setAttribute("size", input.getAttribute("placeholder").length);
+        API.getHome(this.props.userEmail).then(res => {
+            const updateObj = res.data.user.userPic
+                ? { imgs: [res.data.user.userPic] }
+                : {};
+            this.setState(
+                Object.assign(
+                    {
+                        phoneNumber: res.data.user.phoneNumber || ""
+                    },
+                    updateObj
+                )
+            );
+        });
     }
-
-    removePic = idx => {
-        let imgs = [...this.state.imgs];
-        imgs.splice(idx, 1);
-        this.setState({ imgs });
-    };
 
     toggle() {
         this.setState({ collapse: !this.state.collapse });
@@ -45,6 +50,8 @@ class FillOutProfile extends React.Component {
         files.forEach(file => {
             this.setState({ file, imgs: [file] });
         });
+
+        this.updateProfile();
     };
 
     handleChange = e => {
@@ -78,7 +85,12 @@ class FillOutProfile extends React.Component {
                 <Collapse isOpen={this.state.collapse}>
                     <div className="ml-4">
                         <h5 className="blue">Things Left To Do...</h5>
-                        <input type="checkbox" className="d-inline m-2 ml-0" />
+                        <input
+                            type="checkbox"
+                            disabled
+                            checked={this.state.imgs.length}
+                            className="d-inline m-2 ml-0"
+                        />
                         <p className="paragraph d-inline">
                             {" "}
                             Upload your profile photo{" "}
@@ -88,38 +100,45 @@ class FillOutProfile extends React.Component {
                             </span>
                         </p>
                         <br />
-                        <Dropzone
-                            className="dropzone w-25 h-25 m-2"
-                            onDrop={this.handleDrop}
-                            multiple
-                            accept="image/*"
-                        >
-                            <div className="upload-actions text-center">
-                                <FloatingActionButton mini className="mt-3">
-                                    <ContentAdd />
-                                </FloatingActionButton>
-                                <br />
-                                <small className="text-primary">
-                                    Upload Profile Pic
-                                </small>
-                            </div>
-                        </Dropzone>
+                        {this.state.imgs.length < 1 && (
+                            <Dropzone
+                                className="dropzone w-25 h-25 m-2"
+                                onDrop={this.handleDrop}
+                                multiple
+                                accept="image/*"
+                            >
+                                <div className="upload-actions text-center">
+                                    <FloatingActionButton mini className="mt-3">
+                                        <ContentAdd />
+                                    </FloatingActionButton>
+                                    <br />
+                                    <small className="text-primary">
+                                        Upload Profile Pic
+                                    </small>
+                                </div>
+                            </Dropzone>
+                        )}
 
                         <div className="pic-preview ml-4">
-                            <PicPreview
-                                pics={this.state.imgs}
-                                removePic={this.removePic}
-                            />
+                            <img src={this.state.imgs[0]} alt="" />
                         </div>
                     </div>
                     <div>
-                        <input type="checkbox" className="d-inline m-2 ml-0" />
+                        <input
+                            type="checkbox"
+                            disabled
+                            checked={this.state.phoneNumber}
+                            className="d-inline m-2 ml-0"
+                        />
                         <i className="lightGrey fa fa-pencil d-inline" />
                         <input
                             onChange={this.handleChange.bind(this)}
                             type="phone"
                             className="dyanmic-input-size d-inline borderless"
-                            placeholder="Add your phone number"
+                            placeholder={
+                                this.state.phoneNumber ||
+                                "Add your phone number"
+                            }
                         />
                         <span className="purple">
                             {" "}

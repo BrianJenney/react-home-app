@@ -1,11 +1,9 @@
-
-
-import loggedIn from './userReducer';
-import mapMarker from './mapMarkersReducer';
-import { combineReducers } from 'redux';
+import loggedIn from "./userReducer";
+import mapMarker from "./mapMarkersReducer";
+import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
     loggedIn,
-    mapMarker,
+    mapMarker
 });
 export default rootReducer;

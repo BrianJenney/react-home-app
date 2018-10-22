@@ -10,6 +10,7 @@ import Profile from "./components/FillOutProfile";
 import Messages from "./components/Messages";
 import DisclosureAgreement from "./components/DisclosureAgreement";
 import ListHome from "./components/ListHome";
+import Offers from "./components/Offers";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -20,11 +21,12 @@ class Dashboard extends React.Component {
         return (
             <div>
                 <TopNav />
-                <div className="container w-50 mb-10  h-100">
+                <div className="container dashboard w-80 h-100">
                     <h1>Dashboard</h1>
                     <ListHome userEmail={this.props.email} />
                     <Profile userEmail={this.props.email} />
                     <DisclosureAgreement userEmail={this.props.email} />
+                    <Offers user={this.props.user} />
                     <Messages userEmail={this.props.email} />
                 </div>
                 <NavBar />

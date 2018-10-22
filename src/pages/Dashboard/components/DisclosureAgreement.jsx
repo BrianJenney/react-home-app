@@ -12,6 +12,7 @@ class DisclosureAgreement extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             collapse: false,
+            disclosureAgreement: "",
             form: new FormData()
         };
 
@@ -20,6 +21,14 @@ class DisclosureAgreement extends React.Component {
             alignItems: "center"
         };
     }
+
+    componentDidMount = () => {
+        API.getHome(this.props.userEmail).then(res => {
+            this.setState({
+                disclosureAgreement: res.data.doc[1].disclosureAgreement || ""
+            });
+        });
+    };
 
     toggle() {
         this.setState({ collapse: !this.state.collapse });
@@ -54,7 +63,12 @@ class DisclosureAgreement extends React.Component {
                 </div>
                 <Collapse isOpen={this.state.collapse}>
                     <h5 className="blue">Things Left To Do...</h5>
-                    <input type="checkbox" className="d-inline m-2 ml-0" />
+                    <input
+                        type="checkbox"
+                        disabled
+                        checked={this.state.disclosureAgreement.length}
+                        className="d-inline m-2 ml-0"
+                    />
                     <p className="paragraph d-inline">
                         <a
                             className="mr-1"
@@ -65,20 +79,29 @@ class DisclosureAgreement extends React.Component {
                         and fill out California disclosure package
                     </p>
 
-                    <Dropzone
-                        className="dropzone w-25 h-25 m-2"
-                        onDrop={this.handleDrop}
-                    >
-                        <div className="upload-actions text-center">
-                            <FloatingActionButton mini className="mt-3">
-                                <ContentAdd />
-                            </FloatingActionButton>
-                            <br />
-                            <small className="text-primary">
-                                Upload Package
-                            </small>
+                    {this.state.disclosureAgreement.length < 1 && (
+                        <Dropzone
+                            className="dropzone w-25 h-25 m-2"
+                            onDrop={this.handleDrop}
+                        >
+                            <div className="upload-actions text-center">
+                                <FloatingActionButton mini className="mt-3">
+                                    <ContentAdd />
+                                </FloatingActionButton>
+                                <br />
+                                <small className="text-primary">
+                                    Upload Package
+                                </small>
+                            </div>
+                        </Dropzone>
+                    )}
+                    {this.state.disclosureAgreement.length && (
+                        <div>
+                            <a href={this.state.disclosureAgreement}>
+                                {this.state.disclosureAgreement}
+                            </a>
                         </div>
-                    </Dropzone>
+                    )}
                 </Collapse>
             </div>
         );
