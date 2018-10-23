@@ -37,17 +37,17 @@ class Dashboard extends React.Component {
             this.setState(
                 {
                     currentHouse: response.data.doc[0].imgs[0],
-                    property: response.data.doc[0],
-                    user: response.data.user
+                    property: response.data.doc[0]
                 },
                 () => {
-                    API.getOffer(this.state.property, this.state.user).then(
-                        res => {
-                            this.setState({
-                                currentOffer: res.data[0]
-                            });
-                        }
-                    );
+                    API.getOfferForCurrentProperty(
+                        this.state.property,
+                        this.props.user.user
+                    ).then(res => {
+                        this.setState({
+                            currentOffer: res.data[0]
+                        });
+                    });
                 }
             );
         });
@@ -64,19 +64,19 @@ class Dashboard extends React.Component {
                     <Financing
                         userEmail={this.props.email}
                         home={this.state.property}
-                        user={this.state.user}
+                        user={this.props.user}
                         currentOffer={this.state.currentOffer}
                     />
                     <PurchaseAgreement
                         userEmail={this.props.email}
                         home={this.state.property}
-                        user={this.state.user}
+                        user={this.props.user}
                         currentOffer={this.state.currentOffer}
                     />
                     <SubmitOffer
                         userEmail={this.props.email}
                         home={this.state.property}
-                        user={this.state.user}
+                        user={this.props.user}
                     />
                     <Messages userEmail={this.props.email} />
                 </div>

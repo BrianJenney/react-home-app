@@ -41,7 +41,7 @@ class Financing extends React.Component {
             this.state.form.set("file", file);
 
             this.state.form.set("homeId", this.props.home._id);
-            this.state.form.set("userId", this.props.user._id);
+            this.state.form.set("userId", this.props.user.user._id);
             this.state.form.set("isPurchaseDoc", false);
 
             API.makeOffer(this.state.form).then(res => {

@@ -45,7 +45,7 @@ class PurchaseAgreement extends React.Component {
             this.state.form.set("file", file);
 
             this.state.form.set("homeId", this.props.home._id);
-            this.state.form.set("userId", this.props.user._id);
+            this.state.form.set("userId", this.props.user.user._id);
             this.state.form.set("isPurchaseDoc", true);
             API.makeOffer(this.state.form).then(res => {
                 this.setState({
@@ -60,7 +60,7 @@ class PurchaseAgreement extends React.Component {
 
         let obj = {
             homeId: this.props.home._id,
-            userId: this.props.user._id,
+            userId: this.props.user.id,
             offer: e.target.value
         };
 

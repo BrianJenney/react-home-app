@@ -76,8 +76,8 @@ export default {
         return axios.post(`${url}/api/offers/makeoffer`, offerObj);
     },
 
-    //get offer info
-    getOffer: function(home, user) {
+    //get offer info for the current property
+    getOfferForCurrentProperty: function(home, user) {
         const obj = { userId: user._id, homeId: home._id };
 
         return axios.post(`${url}/api/offers/offerinfo`, obj);

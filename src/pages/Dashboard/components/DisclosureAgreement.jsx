@@ -95,7 +95,7 @@ class DisclosureAgreement extends React.Component {
                             </div>
                         </Dropzone>
                     )}
-                    {this.state.disclosureAgreement.length && (
+                    {this.state.disclosureAgreement.length > 0 && (
                         <div>
                             <a href={this.state.disclosureAgreement}>
                                 {this.state.disclosureAgreement}

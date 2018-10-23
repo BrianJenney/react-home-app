@@ -23,6 +23,7 @@ class ListHome extends React.Component {
     componentDidMount() {
         let homes = [];
         let numbers = 0;
+
         API.getListingHomes(this.props.userEmail)
             .then(responses => {
                 const data = responses.data;
