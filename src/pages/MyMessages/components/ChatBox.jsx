@@ -66,7 +66,7 @@ export default class ChatBox extends React.Component {
                     display: this.state.messages.length ? "block" : "none"
                 }}
             >
-                <Card>
+                <Card className="chat-box">
                     <CardText className="scrollable-box">
                         {this.state.messages.map((chat, i) => {
                             return (

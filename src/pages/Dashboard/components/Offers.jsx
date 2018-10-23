@@ -17,7 +17,8 @@ class Offers extends React.Component {
             open: false,
             collapse: false,
             offers: [],
-            currentHome: {}
+            currentHome: {},
+            offerUser: { email: "" }
         };
 
         const styles = {
@@ -36,7 +37,11 @@ class Offers extends React.Component {
     }
 
     openMessage = offer => {
-        this.setState({ open: true, currentHome: { _id: offer.homeId } });
+        this.setState({
+            open: true,
+            currentHome: { _id: offer.homeId },
+            offerUser: { email: offer.users[0].email }
+        });
     };
 
     closeModal = () => {
@@ -142,8 +147,8 @@ class Offers extends React.Component {
                         closeModal={this.closeModal.bind(this)}
                         open={this.state.open}
                         propertyInfo={this.state.currentHome}
-                        senderEmail={this.props.user.name}
-                        user={this.props.user.user}
+                        senderEmail={this.props.user.user.email}
+                        user={this.state.offerUser}
                     />
                 </Collapse>
             </div>

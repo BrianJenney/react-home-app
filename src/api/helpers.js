@@ -19,6 +19,10 @@ export default {
         return axios.post(url + "/api/user/register/", user);
     },
 
+    userInfo: function(userId) {
+        return axios.get(`${url}/api/user/user/${userId}`);
+    },
+
     updateProfile: function(user) {
         return axios.post(url + "/api/user/profile/", user);
     },

@@ -6,6 +6,7 @@ import ContentAdd from "material-ui/svg-icons/content/add";
 import PicPreview from "../../AddProperty/components/PicPreview";
 import "../../../styles/FillOutProfile.css";
 import API from "../../../api/helpers.js";
+import { updateLocale } from "moment";
 
 class FillOutProfile extends React.Component {
     constructor(props) {
@@ -27,14 +28,14 @@ class FillOutProfile extends React.Component {
     }
 
     componentDidMount() {
-        API.getHome(this.props.userEmail).then(res => {
-            const updateObj = res.data.user.userPic
-                ? { imgs: [res.data.user.userPic] }
+        API.userInfo(this.props.user.id).then(res => {
+            const updateObj = res.data.userPic
+                ? { imgs: [res.data.userPic] }
                 : {};
             this.setState(
                 Object.assign(
                     {
-                        phoneNumber: res.data.user.phoneNumber || ""
+                        phoneNumber: res.data.phoneNumber || ""
                     },
                     updateObj
                 )
@@ -48,7 +49,7 @@ class FillOutProfile extends React.Component {
 
     handleDrop = files => {
         files.forEach(file => {
-            this.setState({ file, imgs: [file] });
+            this.state.form.set("file", file);
         });
 
         this.updateProfile();
@@ -59,7 +60,6 @@ class FillOutProfile extends React.Component {
     };
 
     updateProfile = () => {
-        this.state.form.set("file", this.state.file);
         this.state.form.set("phoneNumber", this.state.phoneNumber);
         this.state.form.set("userEmail", this.props.userEmail);
         API.updateProfile(this.state.form).then(() => {
@@ -104,8 +104,6 @@ class FillOutProfile extends React.Component {
                             <Dropzone
                                 className="dropzone w-25 h-25 m-2"
                                 onDrop={this.handleDrop}
-                                multiple
-                                accept="image/*"
                             >
                                 <div className="upload-actions text-center">
                                     <FloatingActionButton mini className="mt-3">
@@ -135,10 +133,8 @@ class FillOutProfile extends React.Component {
                             onChange={this.handleChange.bind(this)}
                             type="phone"
                             className="dyanmic-input-size d-inline borderless"
-                            placeholder={
-                                this.state.phoneNumber ||
-                                "Add your phone number"
-                            }
+                            value={this.state.phoneNumber || null}
+                            placeholder="Add your phone number"
                         />
                         <span className="purple">
                             {" "}

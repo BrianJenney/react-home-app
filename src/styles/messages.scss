@@ -1,11 +1,14 @@
-.receiver{
+.receiver {
     background-color: #01bcd4 !important;
-    p{
+    p {
         color: white;
     }
-  }
-  
-  .scrollable-box{
-      height: 300px;
-      overflow: auto;
-  }
+}
+
+.scrollable-box {
+    height: 300px;
+    overflow: auto;
+}
+.chat-box {
+    margin-bottom: 15%;
+}

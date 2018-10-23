@@ -6,3 +6,6 @@
 .scrollable-box {
   height: 300px;
   overflow: auto; }
+
+.chat-box {
+  margin-bottom: 15%; }

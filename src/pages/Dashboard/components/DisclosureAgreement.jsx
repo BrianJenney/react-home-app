@@ -24,9 +24,12 @@ class DisclosureAgreement extends React.Component {
 
     componentDidMount = () => {
         API.getHome(this.props.userEmail).then(res => {
-            this.setState({
-                disclosureAgreement: res.data.doc[1].disclosureAgreement || ""
-            });
+            if (res.data.doc.length) {
+                this.setState({
+                    disclosureAgreement:
+                        res.data.doc[0].disclosureAgreement || ""
+                });
+            }
         });
     };
 
