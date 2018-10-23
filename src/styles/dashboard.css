@@ -28,3 +28,10 @@ h1 {
 .x-small {
   font-size: 0.2rem;
   margin-bottom: 0.1rem; }
+
+.rocket-mortgage {
+  background-color: #215392;
+  width: 20%;
+  color: white;
+  text-align: center;
+  padding: 1rem; }

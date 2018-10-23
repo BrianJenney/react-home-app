@@ -2,6 +2,7 @@ import React from "react";
 import { Collapse, Button, CardBody, Card } from "reactstrap";
 import API from "../../../api/helpers";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import "../../../styles/dashboard.css";
 import ChatIcon from "../../../img/icon-chat.svg";
 import DialogModal from "../../../components/modals/Message";
@@ -47,9 +48,8 @@ class Offers extends React.Component {
     }
 
     acceptOffer = offer => {
-        console.log(offer);
-        API.acceptOffer(offer).then(res => {
-            console.log(res);
+        API.acceptOffer(offer).then(() => {
+            this.props.history.push(`/offeraccepted/${offer._id}`);
         });
     };
 
@@ -150,4 +150,4 @@ class Offers extends React.Component {
         );
     }
 }
-export default Offers;
+export default withRouter(Offers);

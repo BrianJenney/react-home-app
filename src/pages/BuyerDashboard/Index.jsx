@@ -11,6 +11,7 @@ import NavBar from "../../components/BreadcrumbNav";
 import Messages from "./components/Messages";
 import PurchaseAgreement from "./components/PurchaseAgreement";
 import SubmitOffer from "./components/SubmitOffer";
+import Financing from "./components/Financing";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -60,12 +61,17 @@ class Dashboard extends React.Component {
                     <h1>Buyer Dashboard</h1>
                     <img src={this.state.currentHouse} alt="" />
 
+                    <Financing
+                        userEmail={this.props.email}
+                        home={this.state.property}
+                        user={this.state.user}
+                        currentOffer={this.state.currentOffer}
+                    />
                     <PurchaseAgreement
                         userEmail={this.props.email}
                         home={this.state.property}
                         user={this.state.user}
                         currentOffer={this.state.currentOffer}
-                        refreshOfferData={this.refreshOfferData}
                     />
                     <SubmitOffer
                         userEmail={this.props.email}

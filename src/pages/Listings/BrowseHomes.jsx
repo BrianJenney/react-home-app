@@ -23,7 +23,7 @@ class BrowseListings extends React.Component {
     }
 
     componentWillUnmount = () => {
-        this.props.mapActions.removeMapMarkers;
+        this.props.mapActions.removeMapMarkers();
     };
 
     render() {

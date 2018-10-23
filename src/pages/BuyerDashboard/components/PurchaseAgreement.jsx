@@ -16,10 +16,8 @@ class PurchaseAgreement extends React.Component {
         this.state = {
             collapse: false,
             form: new FormData(),
-            currentOffer: {
-                offer: null,
-                purchaseAgreement: ""
-            }
+            currentOffer: null,
+            purchaseAgreement: ""
         };
 
         const styles = {
@@ -31,11 +29,9 @@ class PurchaseAgreement extends React.Component {
     componentWillReceiveProps = nextProps => {
         if (nextProps.currentOffer) {
             this.setState({
-                currentOffer: {
-                    offer: nextProps.currentOffer.offer || null,
-                    purchaseAgreement:
-                        nextProps.currentOffer.purchaseAgreement || ""
-                }
+                currentOffer: nextProps.currentOffer.offer || null,
+                purchaseAgreement:
+                    nextProps.currentOffer.purchaseAgreement || ""
             });
         }
     };
@@ -50,26 +46,25 @@ class PurchaseAgreement extends React.Component {
 
             this.state.form.set("homeId", this.props.home._id);
             this.state.form.set("userId", this.props.user._id);
-
-            API.makeOffer(this.state.form).then(() => {
-                this.props.refreshOfferData(this.props.home._id);
+            this.state.form.set("isPurchaseDoc", true);
+            API.makeOffer(this.state.form).then(res => {
+                this.setState({
+                    purchaseAgreement: res.data.purchaseAgreement
+                });
             });
         });
     };
 
     updatePurchasePrice = e => {
+        this.setState({ currentOffer: e.target.value });
+
         let obj = {
             homeId: this.props.home._id,
             userId: this.props.user._id,
             offer: e.target.value
         };
 
-        debounce(
-            1000,
-            API.makeOffer(obj).then(data => {
-                this.props.refreshOfferData(this.props.home._id);
-            })
-        );
+        debounce(1000, API.makeOffer(obj));
     };
 
     render() {
@@ -96,7 +91,7 @@ class PurchaseAgreement extends React.Component {
                         <input
                             type="checkbox"
                             disabled
-                            checked={this.state.currentOffer.offer}
+                            checked={this.state.currentOffer}
                             className="d-inline m-2 ml-0"
                         />
                         <p className="paragraph d-inline">
@@ -115,7 +110,7 @@ class PurchaseAgreement extends React.Component {
                                         type="number"
                                         className="dyanmic-input-size d-inline borderless"
                                         placeholder={this.props.home.price}
-                                        value={this.state.currentOffer.offer}
+                                        value={this.state.currentOffer}
                                         onChange={this.updatePurchasePrice.bind(
                                             this
                                         )}
@@ -145,9 +140,7 @@ class PurchaseAgreement extends React.Component {
                     <input
                         type="checkbox"
                         disabled
-                        checked={
-                            this.state.currentOffer.purchaseAgreement.length
-                        }
+                        checked={this.state.purchaseAgreement.length}
                         className="d-inline m-2 ml-0"
                     />
                     <p className="paragraph d-inline">
@@ -172,14 +165,14 @@ class PurchaseAgreement extends React.Component {
                         </div>
                     </Dropzone>
 
-                    {this.state.currentOffer.purchaseAgreement.length > 0 && (
+                    {this.state.purchaseAgreement.length > 0 && (
                         <div className="d-inline">
                             <i
                                 className="fa fa-file-pdf-o d-inline mr-2"
                                 aria-hidden="true"
                             />
-                            <a href={this.state.currentOffer.purchaseAgreement}>
-                                {this.state.currentOffer.purchaseAgreement}
+                            <a href={this.state.purchaseAgreement}>
+                                {this.state.purchaseAgreement}
                             </a>
                         </div>
                     )}
