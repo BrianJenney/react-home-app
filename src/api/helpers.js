@@ -111,5 +111,10 @@ export default {
         const obj = { userId: user._id, homeId: home._id };
 
         return axios.post(`${url}/api/offers/offerinfo`, obj);
+    },
+
+    //get specific offer and associated house
+    getOffer: id => {
+        return axios.get(`${url}/api/offers/offer/${id}`);
     }
 };

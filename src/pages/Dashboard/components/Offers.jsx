@@ -58,6 +58,10 @@ class Offers extends React.Component {
         });
     };
 
+    goToAcceptancePage = offer => {
+        this.props.history.push(`/offeraccepted/${offer._id}`);
+    };
+
     render() {
         return (
             <div className="card p-3">
@@ -135,15 +139,29 @@ class Offers extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-2 text-right">
-                                    <button
-                                        onClick={this.acceptOffer.bind(
-                                            null,
-                                            offer
-                                        )}
-                                        className="btn btn-light"
-                                    >
-                                        Accept
-                                    </button>
+                                    {offer.accepted && (
+                                        <button
+                                            className="btn btn-success"
+                                            onClick={this.goToAcceptancePage.bind(
+                                                null,
+                                                offer
+                                            )}
+                                        >
+                                            Offer Accepted
+                                        </button>
+                                    )}
+
+                                    {!offer.accepted && (
+                                        <button
+                                            onClick={this.acceptOffer.bind(
+                                                null,
+                                                offer
+                                            )}
+                                            className="btn btn-light"
+                                        >
+                                            Accept
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         );
