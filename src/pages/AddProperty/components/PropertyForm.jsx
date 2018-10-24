@@ -45,8 +45,8 @@ class AddProp extends React.Component {
         propertyType: null,
         description: null,
         timeFrame: null,
-        bedRooms: 0,
-        bathRooms: 0,
+        bedRooms: 1,
+        bathRooms: 1,
         sqFeet: 0,
         sqFeetLot: 0,
         yearBuilt: Date.now(),
@@ -128,9 +128,9 @@ class AddProp extends React.Component {
             <div>
                 <TopNav />
                 <div className="saveDraft-publish-buttons">
-                    <button onClick={this.submitProperty.bind(this, "draft")}>
+                    {/* <button onClick={this.submitProperty.bind(this, "draft")}>
                         Save As Draft
-                    </button>
+                    </button> */}
                     <button
                         id="pubButton"
                         onClick={this.submitProperty.bind(this, "publish")}

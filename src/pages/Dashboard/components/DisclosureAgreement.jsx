@@ -41,8 +41,11 @@ class DisclosureAgreement extends React.Component {
         files.forEach(file => {
             this.state.form.set("file", file);
             this.state.form.set("userEmail", this.props.userEmail);
-            API.uploadDisclosure(this.state.form).then(() => {
-                this.setState({ collapse: false });
+            API.uploadDisclosure(this.state.form).then(res => {
+                console.log("disclosure", res);
+                this.setState({
+                    disclosureAgreement: res.data.disclosureAgreement || ""
+                });
             });
         });
     };

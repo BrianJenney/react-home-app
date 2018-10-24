@@ -28,6 +28,10 @@
 .no-border {
   border: none; }
 
+#sqFeet,
+#sqFeetLot {
+  color: gray !important; }
+
 .edit-price {
   font-size: 1.5rem; }
   .edit-price input {

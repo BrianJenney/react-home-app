@@ -2,6 +2,7 @@ import React from "react";
 import { Collapse, Button, CardBody, Card } from "reactstrap";
 import API from "../../../api/helpers";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import NavBar from "../../../components/BreadcrumbNav";
 
 class ListHome extends React.Component {
@@ -37,6 +38,10 @@ class ListHome extends React.Component {
             });
     }
 
+    goToListHome = () => {
+        this.props.history.push("addproperty");
+    };
+
     toggle() {
         this.setState({ collapse: !this.state.collapse });
     }
@@ -57,7 +62,7 @@ class ListHome extends React.Component {
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
-                    {this.state.homes.length > 1 && (
+                    {/* {this.state.homes.length > 1 && (
                         <div>Total Homes : {this.state.homes.length}</div>
                     )}
 
@@ -74,10 +79,17 @@ class ListHome extends React.Component {
                                 </li>
                             );
                         })}
-                    </ul>
+                    </ul> */}
+
+                    <button
+                        className="btn btn-primary"
+                        onClick={this.goToListHome}
+                    >
+                        List your house
+                    </button>
                 </Collapse>
             </div>
         );
     }
 }
-export default ListHome;
+export default withRouter(ListHome);

@@ -98,7 +98,8 @@ class SignIn extends React.Component {
             const user = {
                 isLogged: true,
                 name: this.state.email,
-                id: response.data._id
+                id: response.data._id,
+                user: response.data.userInfo
             };
 
             this.props.loginaction.login(user);
@@ -138,7 +139,7 @@ class SignIn extends React.Component {
                         onChange={this.onChange.bind(this)}
                         fullWidth={true}
                         id="password"
-                        maxLength="8"
+                        maxLength="12"
                         type="password"
                     />
 

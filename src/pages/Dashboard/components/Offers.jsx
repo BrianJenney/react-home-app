@@ -147,7 +147,7 @@ class Offers extends React.Component {
                         closeModal={this.closeModal.bind(this)}
                         open={this.state.open}
                         propertyInfo={this.state.currentHome}
-                        senderEmail={this.props.user.user.email}
+                        senderEmail={this.props.user.name}
                         user={this.state.offerUser}
                     />
                 </Collapse>

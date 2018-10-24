@@ -62,8 +62,8 @@ class Property extends Component {
                                     <div className="contact-actions">
                                         <h2>${this.state.property.price}</h2>
                                         <p className="text-muted">
-                                            ${this.state.monthlyPayment}/mo (Est
-                                            Mortgage)
+                                            ${this.state.monthlyPayment}
+                                            /mo (Est Mortgage)
                                         </p>
 
                                         <button
@@ -79,9 +79,12 @@ class Property extends Component {
                                             Make an Offer
                                         </button>
                                         <div className="btn-toolbar">
-                                            <button className="btn btn-default">
-                                                Get Prequalified
-                                            </button>
+                                            <a href="https://rocketmortgage.com">
+                                                <button className="btn btn-default">
+                                                    Get Prequalified
+                                                </button>
+                                            </a>
+
                                             <button
                                                 className="btn btn-default"
                                                 onClick={this.openMessage}

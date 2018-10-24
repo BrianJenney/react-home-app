@@ -18,7 +18,7 @@ class FillOutProfile extends React.Component {
             phoneNumber: "",
             file: null,
             form: new FormData(),
-            imgs: []
+            profilePic: ""
         };
 
         const styles = {
@@ -29,17 +29,10 @@ class FillOutProfile extends React.Component {
 
     componentDidMount() {
         API.userInfo(this.props.user.id).then(res => {
-            const updateObj = res.data.userPic
-                ? { imgs: [res.data.userPic] }
-                : {};
-            this.setState(
-                Object.assign(
-                    {
-                        phoneNumber: res.data.phoneNumber || ""
-                    },
-                    updateObj
-                )
-            );
+            this.setState({
+                phoneNumber: res.data.phoneNumber || "",
+                profilePic: res.data.userPic || ""
+            });
         });
     }
 
@@ -62,8 +55,10 @@ class FillOutProfile extends React.Component {
     updateProfile = () => {
         this.state.form.set("phoneNumber", this.state.phoneNumber);
         this.state.form.set("userEmail", this.props.userEmail);
-        API.updateProfile(this.state.form).then(() => {
-            this.setState({ collapse: false });
+        API.updateProfile(this.state.form).then(res => {
+            this.setState({
+                profilePic: res.data.userPic || ""
+            });
         });
     };
 
@@ -88,7 +83,7 @@ class FillOutProfile extends React.Component {
                         <input
                             type="checkbox"
                             disabled
-                            checked={this.state.imgs.length}
+                            checked={this.state.profilePic.length}
                             className="d-inline m-2 ml-0"
                         />
                         <p className="paragraph d-inline">
@@ -100,7 +95,7 @@ class FillOutProfile extends React.Component {
                             </span>
                         </p>
                         <br />
-                        {this.state.imgs.length < 1 && (
+                        {this.state.profilePic.length < 1 && (
                             <Dropzone
                                 className="dropzone w-25 h-25 m-2"
                                 onDrop={this.handleDrop}
@@ -118,7 +113,11 @@ class FillOutProfile extends React.Component {
                         )}
 
                         <div className="pic-preview ml-4">
-                            <img src={this.state.imgs[0]} alt="" />
+                            <img
+                                style={{ width: 50 }}
+                                src={this.state.profilePic}
+                                alt=""
+                            />
                         </div>
                     </div>
                     <div>
