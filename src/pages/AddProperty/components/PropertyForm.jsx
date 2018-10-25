@@ -48,8 +48,8 @@ class AddProp extends React.Component {
         timeFrame: null,
         bedRooms: 1,
         bathRooms: 1,
-        sqFeet: 0,
-        sqFeetLot: 0,
+        sqFeet: 1000,
+        sqFeetLot: 1000,
         yearBuilt: Date.now(),
         form: new FormData(),
         status: null
@@ -115,8 +115,12 @@ class AddProp extends React.Component {
         this.state.form.append("sqFeet", this.state.sqFeet);
         this.state.form.append("status", status);
 
-        const isValid = this.isValidHouseObject(this.state.form);
-
+        const formObject = this.createFormObject(this.state.form);
+        const isValid = this.isValidHouseObject(formObject);
+        if (!isValid) {
+            alert("Please completely fill out your house details");
+            return;
+        }
         API.posthome(this.state.form)
             .then(response => {
                 this.props.history.push("/dashboard");
@@ -124,6 +128,15 @@ class AddProp extends React.Component {
             .catch(e => {
                 console.log(e);
             });
+    };
+
+    createFormObject = formData => {
+        let formObject = {};
+        formData.forEach(function(value, key) {
+            formObject[key] = value;
+        });
+
+        return formObject;
     };
 
     isValidHouseObject = form => {
@@ -142,7 +155,7 @@ class AddProp extends React.Component {
             "status"
         ];
 
-        for (let prop in required_props) {
+        for (let prop of required_props) {
             const currentProp = form[prop];
             const isNumeric = isNumber(currentProp);
 
