@@ -17,6 +17,7 @@ import * as loginActions from "../../../actions/login";
 import * as mapActions from "../../../actions/mapMarker";
 import EditIcon from "../../../img/icon-edit-small.png";
 import PicPreview from "./PicPreview";
+import isNumber from "../../../utils/is-number";
 import "../../../styles/addProperty.css";
 
 class AddProp extends React.Component {
@@ -114,6 +115,8 @@ class AddProp extends React.Component {
         this.state.form.append("sqFeet", this.state.sqFeet);
         this.state.form.append("status", status);
 
+        const isValid = this.isValidHouseObject(this.state.form);
+
         API.posthome(this.state.form)
             .then(response => {
                 this.props.history.push("/dashboard");
@@ -121,6 +124,40 @@ class AddProp extends React.Component {
             .catch(e => {
                 console.log(e);
             });
+    };
+
+    isValidHouseObject = form => {
+        let isValid = true;
+        const required_props = [
+            "email",
+            "userid",
+            "price",
+            "address",
+            "propertyType",
+            "description",
+            "bedRooms",
+            "bathRooms",
+            "yearBuilt",
+            "sqFeetLot",
+            "status"
+        ];
+
+        for (let prop in required_props) {
+            const currentProp = form[prop];
+            const isNumeric = isNumber(currentProp);
+
+            if (isNumeric && parseInt(currentProp) <= 0) {
+                isValid = false;
+                break;
+            }
+
+            if (currentProp === null || currentProp.length < 1) {
+                isValid = false;
+                break;
+            }
+        }
+
+        return isValid;
     };
 
     render() {
