@@ -36,8 +36,8 @@ class Dashboard extends React.Component {
         API.getHome(houseId).then(response => {
             this.setState(
                 {
-                    currentHouse: response.data.doc[0].imgs[0],
-                    property: response.data.doc[0]
+                    currentHouse: response.data.doc.imgs[0],
+                    property: response.data.doc
                 },
                 () => {
                     API.getOfferForCurrentProperty(

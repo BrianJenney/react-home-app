@@ -26,9 +26,10 @@ class Property extends Component {
 
     componentDidMount = () => {
         API.getHome(this.props.match.params.id).then(response => {
+            debugger;
             this.setState({
-                mainImg: response.data.doc[0].imgs[0],
-                property: response.data.doc[0],
+                mainImg: response.data.doc.imgs[0],
+                property: response.data.doc,
                 monthlyPayment: response.data.monthly,
                 user: response.data.user
             });
