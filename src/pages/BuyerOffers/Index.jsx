@@ -22,13 +22,17 @@ class Dashboard extends React.Component {
         return this.props.offers.map((offer, idx) => {
             return (
                 <div key={idx}>
-                    <p
-                        className="fake-link"
-                        onClick={this.goToOffer.bind(null, offer._id)}
+                    <button
+                        className="btn btn-primary btn-xs mb-3"
+                        onClick={this.goToOffer.bind(null, offer.home[0]._id)}
                     >
-                        Offer
-                    </p>
-                    <p>{moment(offer.createdAt).format("l")}</p>
+                        Go to Offer
+                    </button>
+                    <div>
+                        <img src={offer.home[0].imgs[0]} alt="" />
+                    </div>
+                    <p>{offer.home[0].address}</p>
+                    <p>Offer made on: {moment(offer.createdAt).format("l")}</p>
                 </div>
             );
         });
