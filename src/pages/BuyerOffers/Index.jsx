@@ -7,18 +7,28 @@ import * as logoutActions from "../../actions/logout";
 import * as actions from "./BuyerOffers.ducks";
 import TopNav from "../../components/TopNav";
 import NavBar from "../../components/BreadcrumbNav";
+import moment from "moment";
 
 class Dashboard extends React.Component {
     componentDidMount = () => {
         this.props.offerActions.getOffers(this.props.user.id);
     };
 
+    goToOffer = id => {
+        this.props.history.push(`/buyerdashboard/${id}`);
+    };
+
     renderOffers = () => {
         return this.props.offers.map((offer, idx) => {
             return (
                 <div key={idx}>
-                    <p>{offer._id}</p>
-                    <p>{offer.createdDate}</p>
+                    <p
+                        className="fake-link"
+                        onClick={this.goToOffer.bind(null, offer._id)}
+                    >
+                        Offer
+                    </p>
+                    <p>{moment(offer.createdAt).format("l")}</p>
                 </div>
             );
         });
