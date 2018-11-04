@@ -78,7 +78,7 @@ class Offers extends React.Component {
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
-                    {this.state.offers.map((offer, idx) => {
+                    {this.state.offers.map(offer => {
                         return (
                             <div key={offer._id} className="row offer-info">
                                 <div className="col-1">

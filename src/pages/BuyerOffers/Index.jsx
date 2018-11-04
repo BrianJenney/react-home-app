@@ -4,20 +4,24 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as loginActions from "../../actions/login";
 import * as logoutActions from "../../actions/logout";
-import API from "../../api/helpers";
+import * as actions from "./BuyerOffers.ducks";
 import TopNav from "../../components/TopNav";
 import NavBar from "../../components/BreadcrumbNav";
+
 class Dashboard extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            offers: []
-        };
-    }
-
     componentDidMount = () => {
-        API.getOfferByUser(this.props.user.user._id);
+        this.props.offerActions.getOffers(this.props.user.id);
+    };
+
+    renderOffers = () => {
+        return this.props.offers.map((offer, idx) => {
+            return (
+                <div key={idx}>
+                    <p>{offer._id}</p>
+                    <p>{offer.createdDate}</p>
+                </div>
+            );
+        });
     };
 
     render() {
@@ -25,6 +29,7 @@ class Dashboard extends React.Component {
             <div>
                 <TopNav />
                 <h1>Offers</h1>
+                <div>{this.renderOffers()}</div>
                 <NavBar />
             </div>
         );
@@ -35,14 +40,16 @@ function mapStateToProps(state) {
     return {
         id: state.loggedIn.id,
         email: state.loggedIn.name,
-        user: state.loggedIn.user
+        user: state.loggedIn.user,
+        offers: state.buyerOffers.offers
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         loginaction: bindActionCreators(loginActions, dispatch),
-        logoutaction: bindActionCreators(logoutActions, dispatch)
+        logoutaction: bindActionCreators(logoutActions, dispatch),
+        offerActions: bindActionCreators(actions, dispatch)
     };
 }
 export default connect(

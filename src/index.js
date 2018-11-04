@@ -17,6 +17,7 @@ import UserMessages from "./pages/MyMessages/UserMessage";
 import Dashboard from "./pages/Dashboard/Index";
 import BuyerDashboard from "./pages/BuyerDashboard/Index";
 import AcceptedOffer from "./pages/OfferAccepted/Index";
+import BuyerOffers from "./pages/BuyerOffers/Index";
 
 import { saveState } from "./actions/localstorage";
 import throttle from "lodash/throttle";
@@ -47,6 +48,7 @@ ReactDOM.render(
                         path="/buyerdashboard/:id?"
                         component={BuyerDashboard}
                     />
+                    <Route path="/myoffers/:id?" component={BuyerOffers} />
                     <Route
                         path="/offeraccepted/:id"
                         component={AcceptedOffer}
