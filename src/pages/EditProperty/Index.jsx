@@ -9,7 +9,7 @@ class EditProperty extends React.Component {
 
     componentDidMount() {
         API.getHome(this.props.match.params.id).then(response => {
-            this.setState({ home: response.data.doc[0] });
+            this.setState({ home: response.data.doc });
         });
     }
 
