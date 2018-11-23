@@ -1,14 +1,12 @@
 import React from "react";
-
 import NavBar from "../../components/BreadcrumbNav";
 import MapWrapper from "./components/MapWrapper";
 import UserSearch from "./components/Search";
-
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as loginActions from "../../actions/login";
 import * as logoutActions from "../../actions/logout";
-import * as mapActions from "../../actions/mapMarker";
+import * as actions from "./Listings.ducks";
 
 class BrowseListings extends React.Component {
     constructor(props) {
@@ -23,7 +21,10 @@ class BrowseListings extends React.Component {
     }
 
     componentWillUnmount = () => {
-        this.props.mapActions.removeMapMarkers();
+        const {
+            listings: { removeMapMarkers }
+        } = this.props;
+        removeMapMarkers();
     };
 
     render() {
@@ -48,7 +49,7 @@ function mapDispatchToProps(dispatch) {
     return {
         loginaction: bindActionCreators(loginActions, dispatch),
         logoutaction: bindActionCreators(logoutActions, dispatch),
-        mapActions: bindActionCreators(mapActions, dispatch)
+        listings: bindActionCreators(actions, dispatch)
     };
 }
 export default connect(

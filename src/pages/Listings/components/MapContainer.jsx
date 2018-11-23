@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-
-import * as mapActions from "../../../actions/mapMarker";
+import { getLatLngCenter } from "../../../utils/map-center";
 
 class MapContainer extends Component {
     componentDidUpdate = () => {
@@ -23,10 +22,15 @@ class MapContainer extends Component {
             const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
             const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
+            const mapCenter = getLatLngCenter(this.props.locations);
+            const OFFSET = 0.15;
+
             const mapConfig = Object.assign(
                 {},
                 {
-                    center: { lat: 37.8338026, lng: -122.2591576 }, // sets center of google map to SF.
+                    center: mapCenter.length
+                        ? { lat: mapCenter[0], lng: mapCenter[1] + OFFSET }
+                        : { lat: 37.8338026, lng: -122.2591576 + OFFSET },
                     zoom: 10, // sets zoom. Lower numbers are zoomed further out.
                     mapTypeId: "roadmap" // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
                 }
@@ -72,17 +76,8 @@ class MapContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-        locations: state.mapMarker
+        locations: state.listings
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        mapAction: bindActionCreators(mapActions, dispatch)
-    };
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MapContainer);
+export default connect(mapStateToProps)(MapContainer);

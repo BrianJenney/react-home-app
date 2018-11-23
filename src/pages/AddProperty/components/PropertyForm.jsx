@@ -14,7 +14,6 @@ import Dropzone from "react-dropzone";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as loginActions from "../../../actions/login";
-import * as mapActions from "../../../actions/mapMarker";
 import EditIcon from "../../../img/icon-edit-small.png";
 import PicPreview from "./PicPreview";
 import isNumber from "../../../utils/is-number";
@@ -360,8 +359,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(loginActions, dispatch),
-        mapActions: bindActionCreators(mapActions, dispatch)
+        actions: bindActionCreators(loginActions, dispatch)
     };
 }
 

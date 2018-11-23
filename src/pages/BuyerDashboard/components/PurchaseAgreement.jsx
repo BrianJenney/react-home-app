@@ -49,7 +49,7 @@ class PurchaseAgreement extends React.Component {
             this.state.form.set("isPurchaseDoc", true);
             API.makeOffer(this.state.form).then(res => {
                 this.setState({
-                    purchaseAgreement: res.data.purchaseAgreement
+                    purchaseAgreement: res.data.purchaseAgreement || ""
                 });
             });
         });

@@ -9,39 +9,36 @@ import SubNav from "../../../components/SubNav";
 import API from "../../../api/helpers.js";
 import HousePics from "./HousePics";
 import "../../../styles/search.css";
-
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-
 import * as loginActions from "../../../actions/login";
 import * as logoutActions from "../../../actions/logout";
-import * as mapActions from "../../../actions/mapMarker";
-
+import * as actions from "../Listings.ducks";
 import Logo from "../../../img/logo-micasa.png";
 
 const CardStyle = {
     borderTopLeftRadius: "8px",
     borderTopRightRadius: "8px",
     backgroundColor: "#edeeef"
-}
+};
 
 const LStyle = {
     color: "#495057"
-}
+};
 
 const MStyle = {
     marginTop: 0
-}
+};
 
 const IStyle = {
     paddingLeft: "1.3rem",
     top: 0
-}
+};
 
 class UserSearch extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             autoComplete: null,
             results: [],
@@ -91,17 +88,16 @@ class UserSearch extends Component {
         searchObj.minPrice = this.state.minPrice;
         searchObj.address = this.state.address;
 
-        API.searchForHomes(searchObj).then(response => {
-            this.setState({ results: response.data });
-            this.props.mapActions.addMapMarker(response);
-        });
+        const {
+            listings: { addMapMarker }
+        } = this.props;
+        addMapMarker(searchObj);
     };
-
 
     render() {
         return (
             <Card className="col-md-5 user-search" style={CardStyle}>
-                <div className="header row" style={CardStyle}>              
+                <div className="header row" style={CardStyle}>
                     <SubNav />
                 </div>
                 <div className="search-input">
@@ -126,8 +122,8 @@ class UserSearch extends Component {
                             )}
                             autoWidth={true}
                             floatingLabelStyle={{
-                                transform: 'scale(0.75) translate(0px, -28px)',
-                                color: '#495057'
+                                transform: "scale(0.75) translate(0px, -28px)",
+                                color: "#495057"
                             }}
                             menuStyle={MStyle}
                             iconStyle={IStyle}
@@ -201,7 +197,7 @@ class UserSearch extends Component {
                     </div>
                 </div>
 
-                <HousePics pics={this.state.results} />
+                <HousePics pics={this.props.properties} />
             </Card>
         );
     }
@@ -210,7 +206,8 @@ class UserSearch extends Component {
 function mapStateToProps(state) {
     return {
         id: state.loggedIn.id,
-        email: state.loggedIn.name
+        email: state.loggedIn.name,
+        properties: state.listings
     };
 }
 
@@ -218,11 +215,14 @@ function mapDispatchToProps(dispatch) {
     return {
         loginaction: bindActionCreators(loginActions, dispatch),
         logoutaction: bindActionCreators(logoutActions, dispatch),
-        mapActions: bindActionCreators(mapActions, dispatch)
+        listings: bindActionCreators(actions, dispatch)
     };
 }
 
 const WrappedContainer = GoogleApiWrapper({
     apiKey: "AIzaSyBd8HrEYJVSBoNvYs-fWVynMBBHgQbD1mo"
 })(UserSearch);
-export default connect(mapStateToProps, mapDispatchToProps)(WrappedContainer);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(WrappedContainer);
