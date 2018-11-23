@@ -116,5 +116,10 @@ export default {
     //get specific offer and associated house
     getOffer: id => {
         return axios.get(`${url}/api/offers/offer/${id}`);
+    },
+
+    //get offers belonging to a user for display on the offers dashboard for buyer
+    getOffersByUser: userId => {
+        return axios.get(`${url}/api/offers/useroffers/${userId}`);
     }
 };
