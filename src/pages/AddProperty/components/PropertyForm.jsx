@@ -14,9 +14,9 @@ import Dropzone from "react-dropzone";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as loginActions from "../../../actions/login";
-import * as mapActions from "../../../actions/mapMarker";
 import EditIcon from "../../../img/icon-edit-small.png";
 import PicPreview from "./PicPreview";
+import isNumber from "../../../utils/is-number";
 import "../../../styles/addProperty.css";
 
 class AddProp extends React.Component {
@@ -45,10 +45,10 @@ class AddProp extends React.Component {
         propertyType: null,
         description: null,
         timeFrame: null,
-        bedRooms: 0,
-        bathRooms: 0,
-        sqFeet: 0,
-        sqFeetLot: 0,
+        bedRooms: 1,
+        bathRooms: 1,
+        sqFeet: 1000,
+        sqFeetLot: 1000,
         yearBuilt: Date.now(),
         form: new FormData(),
         status: null
@@ -114,13 +114,62 @@ class AddProp extends React.Component {
         this.state.form.append("sqFeet", this.state.sqFeet);
         this.state.form.append("status", status);
 
+        const formObject = this.createFormObject(this.state.form);
+        const isValid = this.isValidHouseObject(formObject);
+        if (!isValid) {
+            alert("Please completely fill out your house details");
+            return;
+        }
         API.posthome(this.state.form)
             .then(response => {
-                this.props.history.push("/nav");
+                this.props.history.push("/dashboard");
             })
             .catch(e => {
                 console.log(e);
             });
+    };
+
+    createFormObject = formData => {
+        let formObject = {};
+        formData.forEach(function(value, key) {
+            formObject[key] = value;
+        });
+
+        return formObject;
+    };
+
+    isValidHouseObject = form => {
+        let isValid = true;
+        const required_props = [
+            "email",
+            "userid",
+            "price",
+            "address",
+            "propertyType",
+            "description",
+            "bedRooms",
+            "bathRooms",
+            "yearBuilt",
+            "sqFeetLot",
+            "status"
+        ];
+
+        for (let prop of required_props) {
+            const currentProp = form[prop];
+            const isNumeric = isNumber(currentProp);
+
+            if (isNumeric && parseInt(currentProp) <= 0) {
+                isValid = false;
+                break;
+            }
+
+            if (currentProp === null || currentProp.length < 1) {
+                isValid = false;
+                break;
+            }
+        }
+
+        return isValid;
     };
 
     render() {
@@ -128,9 +177,9 @@ class AddProp extends React.Component {
             <div>
                 <TopNav />
                 <div className="saveDraft-publish-buttons">
-                    <button onClick={this.submitProperty.bind(this, "draft")}>
+                    {/* <button onClick={this.submitProperty.bind(this, "draft")}>
                         Save As Draft
-                    </button>
+                    </button> */}
                     <button
                         id="pubButton"
                         onClick={this.submitProperty.bind(this, "publish")}
@@ -310,8 +359,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(loginActions, dispatch),
-        mapActions: bindActionCreators(mapActions, dispatch)
+        actions: bindActionCreators(loginActions, dispatch)
     };
 }
 

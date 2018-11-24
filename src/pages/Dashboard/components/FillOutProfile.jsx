@@ -6,18 +6,19 @@ import ContentAdd from "material-ui/svg-icons/content/add";
 import PicPreview from "../../AddProperty/components/PicPreview";
 import "../../../styles/FillOutProfile.css";
 import API from "../../../api/helpers.js";
+import { updateLocale } from "moment";
 
 class FillOutProfile extends React.Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
-        this.removePic = this.removePic.bind(this);
+
         this.state = {
             collapse: false,
-            phoneNumber: null,
+            phoneNumber: "",
             file: null,
             form: new FormData(),
-            imgs: []
+            profilePic: ""
         };
 
         const styles = {
@@ -26,11 +27,14 @@ class FillOutProfile extends React.Component {
         };
     }
 
-    removePic = idx => {
-        let imgs = [...this.state.imgs];
-        imgs.splice(idx, 1);
-        this.setState({ imgs });
-    };
+    componentDidMount() {
+        API.userInfo(this.props.user.id).then(res => {
+            this.setState({
+                phoneNumber: res.data.phoneNumber || "",
+                profilePic: res.data.userPic || ""
+            });
+        });
+    }
 
     toggle() {
         this.setState({ collapse: !this.state.collapse });
@@ -38,8 +42,10 @@ class FillOutProfile extends React.Component {
 
     handleDrop = files => {
         files.forEach(file => {
-            this.setState({ file, imgs: [file] });
+            this.state.form.set("file", file);
         });
+
+        this.updateProfile();
     };
 
     handleChange = e => {
@@ -47,17 +53,18 @@ class FillOutProfile extends React.Component {
     };
 
     updateProfile = () => {
-        this.state.form.set("file", this.state.file);
         this.state.form.set("phoneNumber", this.state.phoneNumber);
         this.state.form.set("userEmail", this.props.userEmail);
-        API.updateProfile(this.state.form).then(() => {
-            this.setState({ collapse: false });
+        API.updateProfile(this.state.form).then(res => {
+            this.setState({
+                profilePic: res.data.userPic || ""
+            });
         });
     };
 
     render() {
         return (
-            <div>
+            <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>
                     <h1 className="pr-4">2</h1>
                     <span className="section-title">Fill Out Your Profile</span>
@@ -71,73 +78,79 @@ class FillOutProfile extends React.Component {
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
-                    <Card>
-                        <CardBody>
-                            <div className="ml-4">
-                                <h5 className="blue">Things Left To Do...</h5>
-                                <input
-                                    type="checkbox"
-                                    className="d-inline m-2 ml-0"
-                                />
-                                <p className="paragraph d-inline">
-                                    {" "}
-                                    Upload your profile photo{" "}
-                                    <span className="purple">
-                                        (this will only be shown to buyers if
-                                        you reply to a message they send you)
-                                    </span>
-                                </p>
-                                <br />
-                                <Dropzone
-                                    className="dropzone m-2 ml-5"
-                                    onDrop={this.handleDrop}
-                                    multiple
-                                    accept="image/*"
-                                >
-                                    <div className="upload-actions text-center">
-                                        <FloatingActionButton>
-                                            <ContentAdd />
-                                        </FloatingActionButton>
-                                        <br />
-                                        <p>Upload Profile Pic</p>
-                                    </div>
-                                </Dropzone>
-
-                                <div className="pic-preview ml-4">
-                                    <PicPreview
-                                        pics={this.state.imgs}
-                                        removePic={this.removePic}
-                                    />
+                    <div className="ml-4">
+                        <h5 className="blue">Things Left To Do...</h5>
+                        <input
+                            type="checkbox"
+                            disabled
+                            checked={this.state.profilePic.length}
+                            className="d-inline m-2 ml-0"
+                        />
+                        <p className="paragraph d-inline">
+                            {" "}
+                            Upload your profile photo{" "}
+                            <span className="purple">
+                                (this will only be shown to buyers if you reply
+                                to a message they send you)
+                            </span>
+                        </p>
+                        <br />
+                        {this.state.profilePic.length < 1 && (
+                            <Dropzone
+                                className="dropzone w-25 h-25 m-2"
+                                onDrop={this.handleDrop}
+                            >
+                                <div className="upload-actions text-center">
+                                    <FloatingActionButton mini className="mt-3">
+                                        <ContentAdd />
+                                    </FloatingActionButton>
+                                    <br />
+                                    <small className="text-primary">
+                                        Upload Profile Pic
+                                    </small>
                                 </div>
-                            </div>
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    className="d-inline m-2 ml-0"
-                                />
-                                <i className="lightGrey fa fa-pencil d-inline" />
-                                <input
-                                    onChange={this.handleChange.bind(this)}
-                                    type="phone"
-                                    className="paragraph d-inline"
-                                    placeholder="Add your phone number"
-                                />
-                                <span className="purple">
-                                    {" "}
-                                    (this will only be shown to buyers after you
-                                    approve their offer)
-                                </span>
-                                <br />
+                            </Dropzone>
+                        )}
 
-                                <button
-                                    onClick={this.updateProfile}
-                                    className="d-inline blue "
-                                >
-                                    Add Phone Number
-                                </button>
-                            </div>
-                        </CardBody>
-                    </Card>
+                        <div className="pic-preview ml-4">
+                            <img
+                                style={{ width: 50 }}
+                                src={this.state.profilePic}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input
+                            type="checkbox"
+                            disabled
+                            checked={this.state.phoneNumber}
+                            className="d-inline m-2 ml-0"
+                        />
+                        <i className="lightGrey fa fa-pencil d-inline" />
+                        <input
+                            onChange={this.handleChange.bind(this)}
+                            type="phone"
+                            className="dyanmic-input-size d-inline borderless"
+                            value={this.state.phoneNumber || null}
+                            placeholder="Add your phone number"
+                        />
+                        <span className="purple">
+                            {" "}
+                            (this will only be shown to buyers after you approve
+                            their offer)
+                        </span>
+                        <br />
+
+                        <button
+                            onClick={this.updateProfile}
+                            className="d-inline btn btn-default"
+                        >
+                            <span className="text-primary">
+                                Add Phone Number
+                            </span>
+                        </button>
+                    </div>
                 </Collapse>
             </div>
         );

@@ -63,18 +63,7 @@ class SignIn extends React.Component {
                 return;
             }
 
-            if (response.data.token) {
-                this.saveToken(response.data.token);
-            }
-
-            const user = {
-                isLogged: true,
-                name: this.state.email,
-                id: response.data.userInfo._id
-            };
-
-            this.props.loginaction.login(user);
-            this.props.history.push("/nav");
+            this.addUserToStore(response);
         });
     };
 
@@ -90,19 +79,24 @@ class SignIn extends React.Component {
                 return;
             }
 
-            if (response.data.token) {
-                this.saveToken(response.data.token);
-            }
-
-            const user = {
-                isLogged: true,
-                name: this.state.email,
-                id: response.data._id
-            };
-
-            this.props.loginaction.login(user);
-            this.props.history.push("/nav");
+            this.addUserToStore(response);
         });
+    };
+
+    addUserToStore = response => {
+        if (response.data.token) {
+            this.saveToken(response.data.token);
+        }
+
+        const user = {
+            isLogged: true,
+            name: this.state.email,
+            id: response.data.userInfo._id,
+            user: response.data.userInfo
+        };
+
+        this.props.loginaction.login(user);
+        this.props.history.push("/listings");
     };
 
     saveToken = token => {
@@ -137,7 +131,7 @@ class SignIn extends React.Component {
                         onChange={this.onChange.bind(this)}
                         fullWidth={true}
                         id="password"
-                        maxLength="8"
+                        maxLength="12"
                         type="password"
                     />
 

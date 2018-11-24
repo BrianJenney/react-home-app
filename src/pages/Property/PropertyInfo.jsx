@@ -3,6 +3,7 @@ import NavBar from "../../components/BreadcrumbNav";
 import TopNav from "../../components/TopNav";
 import API from "../../api/helpers";
 import moment from "moment";
+import { Link } from "react-router-dom";
 import "../../styles/propertyInfo.css";
 import DialogModal from "../../components/modals/Message";
 
@@ -26,8 +27,8 @@ class Property extends Component {
     componentDidMount = () => {
         API.getHome(this.props.match.params.id).then(response => {
             this.setState({
-                mainImg: response.data.doc[0].imgs[0],
-                property: response.data.doc[0],
+                mainImg: response.data.doc.imgs[0],
+                property: response.data.doc,
                 monthlyPayment: response.data.monthly,
                 user: response.data.user
             });
@@ -61,17 +62,29 @@ class Property extends Component {
                                     <div className="contact-actions">
                                         <h2>${this.state.property.price}</h2>
                                         <p className="text-muted">
-                                            ${this.state.monthlyPayment}/mo (Est
-                                            Mortgage)
+                                            ${this.state.monthlyPayment}
+                                            /mo (Est Mortgage)
                                         </p>
 
-                                        <button className="btn btn-default btn-offer">
-                                            Send Offer
+                                        <button
+                                            onClick={() => {
+                                                this.props.history.replace(
+                                                    `/buyerdashboard/${
+                                                        this.state.property._id
+                                                    }`
+                                                );
+                                            }}
+                                            className="btn btn-default btn-offer"
+                                        >
+                                            Make an Offer
                                         </button>
                                         <div className="btn-toolbar">
-                                            <button className="btn btn-default">
-                                                Get Prequalified
-                                            </button>
+                                            <a href="https://rocketmortgage.com">
+                                                <button className="btn btn-default">
+                                                    Get Prequalified
+                                                </button>
+                                            </a>
+
                                             <button
                                                 className="btn btn-default"
                                                 onClick={this.openMessage}

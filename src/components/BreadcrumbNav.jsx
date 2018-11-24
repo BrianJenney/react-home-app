@@ -40,10 +40,7 @@ class NavBar extends React.Component {
         return (
             <footer>
                 <div>
-                    <nav
-                        className="bottom-nav"
-                        selectedIndex={this.props.selectedIndex}
-                    >
+                    <nav className="bottom-nav">
                         <ol>
                             <li>
                                 <a

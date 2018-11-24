@@ -1,11 +1,11 @@
-
-
-import loggedIn from './userReducer';
-import mapMarker from './mapMarkersReducer';
-import { combineReducers } from 'redux';
+import loggedIn from "./userReducer";
+import { reducer as buyerOffers } from "../pages/BuyerOffers/BuyerOffers.ducks";
+import { reducer as listings } from "../pages/Listings/Listings.ducks";
+import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
     loggedIn,
-    mapMarker,
+    buyerOffers,
+    listings
 });
 export default rootReducer;
