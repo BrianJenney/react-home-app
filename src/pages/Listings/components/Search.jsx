@@ -3,9 +3,7 @@ import { Card } from "material-ui/Card";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import { GoogleApiWrapper } from "google-maps-react";
-
 import SubNav from "../../../components/SubNav";
-
 import API from "../../../api/helpers.js";
 import HousePics from "./HousePics";
 import "../../../styles/search.css";
@@ -129,9 +127,14 @@ class UserSearch extends Component {
                             iconStyle={IStyle}
                         >
                             <MenuItem
-                                value={"house"}
+                                value={""}
                                 className="menu-type"
-                                primaryText="Singe Family Home"
+                                primaryText="All"
+                            />
+                            <MenuItem
+                                value={"Single Family Home"}
+                                className="menu-type"
+                                primaryText="Single Family Home"
                             />
                             <MenuItem
                                 value={"townhouse"}
