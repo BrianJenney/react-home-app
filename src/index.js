@@ -18,6 +18,7 @@ import Dashboard from "./pages/Dashboard/Index";
 import BuyerDashboard from "./pages/BuyerDashboard/Index";
 import AcceptedOffer from "./pages/OfferAccepted/Index";
 import BuyerOffers from "./pages/BuyerOffers/Index";
+import ErrorBoundary from "./ErrorBoundary";
 
 import { saveState } from "./actions/localstorage";
 import throttle from "lodash/throttle";
@@ -35,26 +36,31 @@ StoreInstance.subscribe(
 ReactDOM.render(
     <MuiThemeProvider>
         <Provider store={StoreInstance}>
-            <Router>
-                <div>
-                    <Route exact path="/" component={SignIn} />
-                    <Route path="/addproperty" component={AddProperty} />
-                    <Route path="/edit/property/:id" component={EditProperty} />
-                    <Route path="/listings" component={Listings} />
-                    <Route path="/property/:id" component={Property} />
-                    <Route path="/messages" component={UserMessages} />
-                    <Route path="/dashboard" component={Dashboard} />
-                    <Route
-                        path="/buyerdashboard/:id?"
-                        component={BuyerDashboard}
-                    />
-                    <Route path="/myoffers/:id?" component={BuyerOffers} />
-                    <Route
-                        path="/offeraccepted/:id"
-                        component={AcceptedOffer}
-                    />
-                </div>
-            </Router>
+            <ErrorBoundary>
+                <Router>
+                    <div>
+                        <Route exact path="/" component={SignIn} />
+                        <Route path="/addproperty" component={AddProperty} />
+                        <Route
+                            path="/edit/property/:id"
+                            component={EditProperty}
+                        />
+                        <Route path="/listings" component={Listings} />
+                        <Route path="/property/:id" component={Property} />
+                        <Route path="/messages" component={UserMessages} />
+                        <Route path="/dashboard" component={Dashboard} />
+                        <Route
+                            path="/buyerdashboard/:id?"
+                            component={BuyerDashboard}
+                        />
+                        <Route path="/myoffers/:id?" component={BuyerOffers} />
+                        <Route
+                            path="/offeraccepted/:id"
+                            component={AcceptedOffer}
+                        />
+                    </div>
+                </Router>
+            </ErrorBoundary>
         </Provider>
     </MuiThemeProvider>,
     document.getElementById("root")
