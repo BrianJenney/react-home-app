@@ -10,25 +10,28 @@ const envelope = <i className="material-icons">message</i>;
 
 class NavBar extends React.Component {
     state = {
-        selectedIndex: 0
+        selectedPage: "dash"
     };
 
     select = page => {
-        this.setState({ selectedIndex: page });
+        this.setState({ selectedPage: page });
         switch (page) {
-            case 0:
+            case "dash":
                 this.props.history.push("/dashboard");
                 break;
-            case 1:
+            case "post":
                 this.props.history.push("/addproperty");
                 break;
-            case 2:
+            case "listings":
                 this.props.history.push("/listings");
                 break;
-            case 3:
+            case "login":
                 this.props.history.push("/");
                 break;
-            case 4:
+            case "register":
+                this.props.history.push("/sign-up");
+                break;
+            case "messages":
                 this.props.history.push("/messages");
                 break;
             default:
@@ -37,60 +40,63 @@ class NavBar extends React.Component {
     };
 
     render() {
+        const isActive = this.selectedPage;
         return (
             <footer>
                 <div>
                     <nav className="bottom-nav">
-                        <ol>
+                        <ul>
+                            <li>
+                                <a
+                                    label="House Hunt"
+                                    className="crumb-link"
+                                    icon={search}
+                                    onClick={() => this.select("listings")}
+                                >
+                                    House Hunt
+                                </a>
+                            </li>
                             <li>
                                 <a
                                     label="Dashboard"
                                     className="crumb-link"
                                     icon={home}
-                                    onClick={() => this.select(0)}
+                                    onClick={() => this.select("dash")}
                                 >
                                     Dashboard
                                 </a>
                             </li>
-                            <li>
-                                <a
-                                    label="Post"
-                                    className="crumb-link"
-                                    icon={list}
-                                    onClick={() => this.select(1)}
-                                >
-                                    Post
-                                </a>
-                            </li>
-                            <a
-                                label="House Hunt"
-                                className="crumb-link"
-                                icon={search}
-                                onClick={() => this.select(2)}
-                            >
-                                House Hunt
-                            </a>
                             <li className="last-li">
                                 <a
                                     label="Messages"
                                     className="crumb-link"
                                     icon={envelope}
-                                    onClick={() => this.select(4)}
+                                    onClick={() => this.select("messages")}
                                 >
-                                    Message
+                                    Messages
                                 </a>
                             </li>
                             <li>
                                 <a
-                                    label="Log Out"
+                                    label="Sign Up"
                                     className="crumb-link"
                                     icon={signout}
-                                    onClick={() => this.select(3)}
+                                    onClick={() => this.select("register")}
                                 >
-                                    Log Out
+                                    Sign Up
                                 </a>
                             </li>
-                        </ol>
+                            <li>
+                                <a
+                                    label="Log In"
+                                    className="crumb-link"
+                                    icon={signout}
+                                    onClick={() => this.select("login")}
+                                >
+                                    Log In
+                                </a>
+                            </li>
+                        </ul>
                     </nav>
                 </div>
             </footer>

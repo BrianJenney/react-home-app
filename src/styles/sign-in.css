@@ -1,0 +1,20 @@
+.sign-up-header {
+  margin: 5% 0 10% 0; }
+
+.sign-up-wrapper {
+  width: 70%;
+  margin: auto; }
+
+.sign-up-fields {
+  display: flex;
+  justify-content: space-between; }
+  .sign-up-fields div:first-child {
+    margin-right: 1%; }
+  .sign-up-fields div:last-child {
+    margin-left: 1%; }
+
+.sign-in-actions {
+  margin-top: 5%; }
+
+input:-webkit-autofill {
+  background-color: none !important; }
