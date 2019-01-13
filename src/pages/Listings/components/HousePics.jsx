@@ -6,19 +6,6 @@ import "../../../styles/picbox.css";
 
 const markerIcon = <i className="material-icons">room</i>;
 
-// const imgStyle = {
-//     padding: "0.10em"
-// };
-
-// const EachHmStyle = {
-//     paddingTop: "0.5em",
-//     borderBottom: "1px solid #ced4da"
-// };
-
-// const HousePicStyle = {
-//     paddingBottom: "3rem"
-// };
-
 class HousePics extends Component {
     horizontalScroll = (imgs, picId) => {
         return imgs.map((img, idx) => {
@@ -35,7 +22,6 @@ class HousePics extends Component {
     render() {
         return (
             <div>
-                <div className="half-circle" />
                 <div className="house-pics">
                     {this.props.pics.map((pic, id) => {
                         return (

@@ -28,7 +28,6 @@ class BrowseListings extends React.Component {
     render() {
         return (
             <div>
-                <div className="half-circle" />
                 <MapWrapper />
                 {/* <UserSearch /> */}
                 <HousePics pics={this.props.properties} />

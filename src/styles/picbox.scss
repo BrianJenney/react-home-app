@@ -1,8 +1,11 @@
 .half-circle {
-    position: absolute;
-    z-index: 100;
-    width: 50%;
-    height: 100%;
+    background: transparent;
+    position: relative;
+    height: 16em;
+    width: 16em;
+    border-radius: 50%;
+    box-shadow: 4em 0.5em 0 1em #fff, 6em 0 3em rgba(255, 255, 255, 0.3);
+    transform: rotate(180deg) translateX(3em);
 }
 
 .half-circle:after {
@@ -22,7 +25,7 @@
 
 .house-pics {
     //temporary css
-    width: 70%;
+    width: 60%;
     margin-left: auto;
     padding-bottom: 3rem;
     //end
