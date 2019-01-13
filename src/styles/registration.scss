@@ -1,0 +1,41 @@
+.registration-header {
+    margin: 5% 0 10% 0;
+}
+
+.registration-wrapper {
+    width: 70%;
+    margin: auto;
+}
+
+.registration-fields {
+    display: flex;
+    justify-content: space-between;
+
+    div:first-child {
+        margin-right: 1%;
+    }
+    div:last-child {
+        margin-left: 1%;
+    }
+}
+
+.registration-pic-preview {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.registration-dropzone {
+    position: relative;
+    height: 64px;
+    width: 100%;
+    color: #b4b4b4 !important;
+    border-bottom: 1px solid #e0e0e0;
+    p {
+        position: absolute;
+        margin-top: 35px;
+    }
+}
+
+.registration-actions {
+    margin-top: 5%;
+}
