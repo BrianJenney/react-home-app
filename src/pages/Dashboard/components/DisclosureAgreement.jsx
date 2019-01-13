@@ -1,15 +1,14 @@
 import React from "react";
 import { Collapse, Button, CardBody, Card } from "reactstrap";
 import API from "../../../api/helpers";
-import Dropzone from "react-dropzone";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-import ContentAdd from "material-ui/svg-icons/content/add";
+import FileUpload from "../../../components/FileUpload";
 import { Link } from "react-router-dom";
 
 class DisclosureAgreement extends React.Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.handleDrop = this.handleDrop.bind(this);
         this.state = {
             collapse: false,
             disclosureAgreement: "",
@@ -26,7 +25,7 @@ class DisclosureAgreement extends React.Component {
         API.getHome(this.props.userEmail).then(res => {
             if (res.data.doc.length) {
                 this.setState({
-                    disclosureAgreement: res.data.doc.disclosureAgreement || ""
+                    ...res.data.doc
                 });
             }
         });
@@ -36,13 +35,14 @@ class DisclosureAgreement extends React.Component {
         this.setState({ collapse: !this.state.collapse });
     }
 
-    handleDrop = files => {
+    handleDrop = (fileName, files) => {
         files.forEach(file => {
             this.state.form.set("file", file);
             this.state.form.set("userEmail", this.props.userEmail);
+            this.state.form.set("fileName", fileName);
             API.uploadDisclosure(this.state.form).then(res => {
                 this.setState({
-                    disclosureAgreement: res.data.disclosureAgreement || ""
+                    ...res.data
                 });
             });
         });
@@ -70,7 +70,6 @@ class DisclosureAgreement extends React.Component {
                     <input
                         type="checkbox"
                         disabled
-                        checked={this.state.disclosureAgreement.length}
                         className="d-inline m-2 ml-0"
                     />
                     <p className="paragraph d-inline">
@@ -84,20 +83,11 @@ class DisclosureAgreement extends React.Component {
                     </p>
 
                     {this.state.disclosureAgreement.length < 1 && (
-                        <Dropzone
-                            className="dropzone w-25 h-25 m-2"
-                            onDrop={this.handleDrop}
-                        >
-                            <div className="upload-actions text-center">
-                                <FloatingActionButton mini className="mt-3">
-                                    <ContentAdd />
-                                </FloatingActionButton>
-                                <br />
-                                <small className="text-primary">
-                                    Upload Package
-                                </small>
-                            </div>
-                        </Dropzone>
+                        <FileUpload
+                            title={"State Disclosure Agreement"}
+                            handleUpload={this.handleDrop}
+                            fileName={"disclosureAgreement"}
+                        />
                     )}
                     {this.state.disclosureAgreement.length > 0 && (
                         <div>
