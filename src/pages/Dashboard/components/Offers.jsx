@@ -78,6 +78,9 @@ class Offers extends React.Component {
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
+                    {!this.state.offers.length && (
+                        <span className="text-muted">No offers yet</span>
+                    )}
                     {this.state.offers.map(offer => {
                         return (
                             <div key={offer._id} className="row offer-info">

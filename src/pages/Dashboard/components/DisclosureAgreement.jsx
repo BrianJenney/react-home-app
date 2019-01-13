@@ -11,7 +11,12 @@ class DisclosureAgreement extends React.Component {
         this.handleDrop = this.handleDrop.bind(this);
         this.state = {
             collapse: false,
-            disclosureAgreement: "",
+            transferDisclosure: "",
+            leadPaintDisclosure: "",
+            naturalHazardDisclosure: "",
+            sellerQuestionaire: "",
+            statewideAdvisory: "",
+            supplementalQuestionaire: "",
             form: new FormData()
         };
 
@@ -23,7 +28,7 @@ class DisclosureAgreement extends React.Component {
 
     componentDidMount = () => {
         API.getHome(this.props.userEmail).then(res => {
-            if (res.data.doc.length) {
+            if (res.data.doc) {
                 this.setState({
                     ...res.data.doc
                 });
@@ -35,11 +40,11 @@ class DisclosureAgreement extends React.Component {
         this.setState({ collapse: !this.state.collapse });
     }
 
-    handleDrop = (fileName, files) => {
+    handleDrop = (documentType, files) => {
         files.forEach(file => {
             this.state.form.set("file", file);
             this.state.form.set("userEmail", this.props.userEmail);
-            this.state.form.set("fileName", fileName);
+            this.state.form.set("documentType", documentType);
             API.uploadDisclosure(this.state.form).then(res => {
                 this.setState({
                     ...res.data
@@ -82,17 +87,86 @@ class DisclosureAgreement extends React.Component {
                         and fill out California disclosure package
                     </p>
 
-                    {this.state.disclosureAgreement.length < 1 && (
-                        <FileUpload
-                            title={"State Disclosure Agreement"}
-                            handleUpload={this.handleDrop}
-                            fileName={"disclosureAgreement"}
-                        />
+                    <FileUpload
+                        title={"State Disclosure Agreement"}
+                        handleUpload={this.handleDrop}
+                        documentType={"transferDisclosure"}
+                    />
+
+                    {this.state.transferDisclosure.length > 0 && (
+                        <div className="text-center">
+                            <a href={this.state.transferDisclosure}>
+                                {this.state.transferDisclosure}
+                            </a>
+                        </div>
                     )}
-                    {this.state.disclosureAgreement.length > 0 && (
+
+                    <FileUpload
+                        title={"Lead Paint Disclosure"}
+                        handleUpload={this.handleDrop}
+                        documentType={"leadPaintDisclosure"}
+                    />
+
+                    {this.state.leadPaintDisclosure.length > 0 && (
+                        <div className="text-center">
+                            <a href={this.state.leadPaintDisclosure}>
+                                {this.state.leadPaintDisclosure}
+                            </a>
+                        </div>
+                    )}
+
+                    <FileUpload
+                        title={"Natural Hazard Disclosure"}
+                        handleUpload={this.handleDrop}
+                        documentType={"naturalHazardDisclosure"}
+                    />
+
+                    {this.state.naturalHazardDisclosure.length > 0 && (
+                        <div className="text-center">
+                            <a href={this.state.naturalHazardDisclosure}>
+                                {this.state.naturalHazardDisclosure}
+                            </a>
+                        </div>
+                    )}
+
+                    <FileUpload
+                        title={"Seller Questionaire"}
+                        handleUpload={this.handleDrop}
+                        documentType={"sellerQuestionaire"}
+                    />
+
+                    {this.state.sellerQuestionaire.length > 0 && (
+                        <div className="text-center">
+                            <a href={this.state.sellerQuestionaire}>
+                                {this.state.sellerQuestionaire}
+                            </a>
+                        </div>
+                    )}
+
+                    <FileUpload
+                        title={"Statewide Advisory"}
+                        handleUpload={this.handleDrop}
+                        documentType={"statewideAdvisory"}
+                    />
+
+                    {this.state.statewideAdvisory.length > 0 && (
+                        <div className="text-center">
+                            <a href={this.state.statewideAdvisory}>
+                                {this.state.statewideAdvisory}
+                            </a>
+                        </div>
+                    )}
+
+                    <FileUpload
+                        title={"Supplemental Questionaire"}
+                        handleUpload={this.handleDrop}
+                        documentType={"supplementalQuestionaire"}
+                    />
+
+                    {this.state.supplementalQuestionaire.length > 0 && (
                         <div>
-                            <a href={this.state.disclosureAgreement}>
-                                {this.state.disclosureAgreement}
+                            <a href={this.state.supplementalQuestionaire}>
+                                {this.state.supplementalQuestionaire}
                             </a>
                         </div>
                     )}
