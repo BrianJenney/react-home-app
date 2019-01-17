@@ -62,7 +62,7 @@ class ListHome extends React.Component {
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
-                    {/* {this.state.homes.length > 1 && (
+                    {this.state.homes.length > 1 && (
                         <div>Total Homes : {this.state.homes.length}</div>
                     )}
 
@@ -79,7 +79,7 @@ class ListHome extends React.Component {
                                 </li>
                             );
                         })}
-                    </ul> */}
+                    </ul>
 
                     <button
                         className="btn btn-primary"

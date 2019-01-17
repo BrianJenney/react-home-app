@@ -6,7 +6,6 @@ import * as logoutActions from "../../actions/logout";
 import "../../styles/dashboard.css";
 import TopNav from "../../components/TopNav";
 import NavBar from "../../components/BreadcrumbNav";
-import Profile from "./components/FillOutProfile";
 import Messages from "./components/Messages";
 import DisclosureAgreement from "./components/DisclosureAgreement";
 import ListHome from "./components/ListHome";
@@ -24,13 +23,9 @@ class Dashboard extends React.Component {
                 <div className="container dashboard w-80 h-100">
                     <h1>Dashboard</h1>
                     <ListHome userEmail={this.props.email} />
-                    <Profile
-                        userEmail={this.props.email}
-                        user={this.props.user}
-                    />
                     <DisclosureAgreement userEmail={this.props.email} />
-                    <Offers user={this.props.user} />
                     <Messages userEmail={this.props.email} />
+                    <Offers user={this.props.user} />
                 </div>
                 <NavBar />
             </div>

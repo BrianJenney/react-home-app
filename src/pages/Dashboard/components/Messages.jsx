@@ -42,7 +42,7 @@ class Messages extends React.Component {
         return (
             <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>
-                    <h1 className="pr-4">5</h1>
+                    <h1 className="pr-4">3</h1>
                     <span className="section-title">
                         Answer Buyer Questions
                     </span>

@@ -1,0 +1,12 @@
+.fileUpload-dropzone-wrapper {
+  width: 100%;
+  border: 1px dashed lightgrey;
+  margin-top: 1rem; }
+
+.fileUpload-actions {
+  display: inline flex;
+  margin-left: 3rem; }
+  .fileUpload-actions .text-primary {
+    display: inline-flex;
+    margin-left: 3rem;
+    font-size: 1.5rem; }
