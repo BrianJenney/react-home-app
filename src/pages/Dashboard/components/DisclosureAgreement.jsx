@@ -57,9 +57,9 @@ class DisclosureAgreement extends React.Component {
         return (
             <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>
-                    <h1 className="pr-4">3</h1>
+                    <h1 className="pr-4">2</h1>
                     <span className="section-title">
-                        Download Disclosure Agreement
+                        Fill Out Disclosure Package
                     </span>
                     <span
                         className={

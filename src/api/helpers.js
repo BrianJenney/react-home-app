@@ -32,6 +32,11 @@ export default {
         return axios.post(url + "/api/property/upload/", home);
     },
 
+    //edit an existing home
+    editHome: home => {
+        return axios.post(url + "/api/property/edit/", home);
+    },
+
     //send search object to retrieve homes
     searchForHomes: function(searchObj) {
         return axios.post(url + "/api/property/searchlistings", searchObj);
