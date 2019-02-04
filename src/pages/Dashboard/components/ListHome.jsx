@@ -69,14 +69,22 @@ class ListHome extends React.Component {
                     <ul>
                         {this.state.homes.map(function(home, index) {
                             return (
-                                <li
-                                    key={index}
-                                    style={{ display: "flex", width: "100%" }}
-                                >
-                                    <Link to={`/edit/property/${home._id}`}>
-                                        {home.address}
-                                    </Link>
-                                </li>
+                                <div>
+                                    <li
+                                        key={index}
+                                        style={{
+                                            display: "flex",
+                                            width: "100%"
+                                        }}
+                                    >
+                                        <img src={home.imgs[0]} alt="" />
+                                    </li>
+                                    <li>
+                                        <Link to={`/edit/property/${home._id}`}>
+                                            {home.address}
+                                        </Link>
+                                    </li>
+                                </div>
                             );
                         })}
                     </ul>

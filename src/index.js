@@ -18,7 +18,6 @@ import UserMessages from "./pages/MyMessages/UserMessage";
 import Dashboard from "./pages/Dashboard/Index";
 import BuyerDashboard from "./pages/BuyerDashboard/Index";
 import AcceptedOffer from "./pages/OfferAccepted/Index";
-import BuyerOffers from "./pages/BuyerOffers/Index";
 import ErrorBoundary from "./ErrorBoundary";
 
 import { saveState } from "./actions/localstorage";
@@ -75,10 +74,6 @@ ReactDOM.render(
                         <PrivateRoute
                             path="/buyerdashboard/:id?"
                             component={BuyerDashboard}
-                        />
-                        <PrivateRoute
-                            path="/myoffers/:id?"
-                            component={BuyerOffers}
                         />
                         <PrivateRoute
                             path="/offeraccepted/:id"

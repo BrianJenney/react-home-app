@@ -9,9 +9,9 @@ import API from "../../api/helpers";
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* getOffers(action) {
-    const { userId } = action;
+    const { userId, homeId } = action;
     try {
-        const user = yield API.getOffersByUser(userId);
+        const user = yield API.getOffersByUserAndHome(userId, homeId);
         yield put(getOffersSucceeded(user));
     } catch (e) {
         yield console.log(e);

@@ -12,6 +12,7 @@ import Messages from "./components/Messages";
 import PurchaseAgreement from "./components/PurchaseAgreement";
 import SubmitOffer from "./components/SubmitOffer";
 import Financing from "./components/Financing";
+import Decisioning from "./components/Decisioning";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -77,8 +78,14 @@ class Dashboard extends React.Component {
                         userEmail={this.props.email}
                         home={this.state.property}
                         user={this.props.user}
+                        currentOffer={this.state.currentOffer}
                     />
-                    <Messages userEmail={this.props.email} />
+                    <Decisioning
+                        userEmail={this.props.email}
+                        home={this.state.property}
+                        user={this.props.user}
+                    />
+                    {/* <Messages userEmail={this.props.email} /> */}
                 </div>
                 <NavBar />
             </div>

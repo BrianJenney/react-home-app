@@ -367,7 +367,7 @@ class AddProp extends React.Component {
 
                     <div className="ml-3 mb-5">
                         <TextField
-                            value={this.state.description || null}
+                            value={this.state.description}
                             floatingLabelText="Description"
                             onChange={this.onChange.bind(this)}
                             fullWidth={true}

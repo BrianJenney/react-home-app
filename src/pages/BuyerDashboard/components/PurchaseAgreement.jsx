@@ -6,7 +6,7 @@ import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import { Link } from "react-router-dom";
 import PurchaseDoc from "../../../documents/residential_purchase.pdf";
-
+import FileUpload from "../../../components/FileUpload";
 import { debounce } from "throttle-debounce";
 
 class PurchaseAgreement extends React.Component {
@@ -40,13 +40,13 @@ class PurchaseAgreement extends React.Component {
         this.setState({ collapse: !this.state.collapse });
     }
 
-    handleDrop = files => {
+    handleDrop = (documentType, files) => {
         files.forEach(file => {
             this.state.form.set("file", file);
 
             this.state.form.set("homeId", this.props.home._id);
             this.state.form.set("userId", this.props.user.user._id);
-            this.state.form.set("isPurchaseDoc", true);
+            this.state.form.set("documentType", documentType);
             API.makeOffer(this.state.form).then(res => {
                 this.setState({
                     purchaseAgreement: res.data.purchaseAgreement || ""
@@ -87,7 +87,10 @@ class PurchaseAgreement extends React.Component {
                 <Collapse isOpen={this.state.collapse}>
                     <h5 className="blue">Things Left To Do...</h5>
 
-                    <div>
+                    {/*
+                    Removing this section for now... 2/1/19
+                    */}
+                    {/* <div>
                         <input
                             type="checkbox"
                             disabled
@@ -135,7 +138,7 @@ class PurchaseAgreement extends React.Component {
                                 </div>
                             </div>
                         )}
-                    </div>
+                    </div> */}
 
                     <input
                         type="checkbox"
@@ -150,20 +153,11 @@ class PurchaseAgreement extends React.Component {
                         and fill out Purchase Agreement
                     </p>
 
-                    <Dropzone
-                        className="dropzone w-25 h-25 m-2"
-                        onDrop={this.handleDrop}
-                    >
-                        <div className="upload-actions text-center">
-                            <FloatingActionButton mini className="mt-3">
-                                <ContentAdd />
-                            </FloatingActionButton>
-                            <br />
-                            <small className="text-primary">
-                                Upload Agreement
-                            </small>
-                        </div>
-                    </Dropzone>
+                    <FileUpload
+                        title={"Upload Purchase Agreement"}
+                        handleUpload={this.handleDrop}
+                        documentType={"purchaseAgreement"}
+                    />
 
                     {this.state.purchaseAgreement.length > 0 && (
                         <div className="d-inline">

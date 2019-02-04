@@ -128,8 +128,8 @@ export default {
         return axios.get(`${url}/api/offers/offer/${id}`);
     },
 
-    //get offers belonging to a user for display on the offers dashboard for buyer
-    getOffersByUser: userId => {
-        return axios.get(`${url}/api/offers/useroffers/${userId}`);
+    //get offers belonging to a user for a particular home
+    getOffersByUserAndHome: (userId, homeId) => {
+        return axios.post(`${url}/api/offers/offerinfo`, { userId, homeId });
     }
 };
