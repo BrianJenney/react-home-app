@@ -10,7 +10,6 @@ import FileUpload from "../../../components/FileUpload";
 class SubmitOffer extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.toggle = this.toggle.bind(this);
         this.state = {
             offerSubmitted: false,
