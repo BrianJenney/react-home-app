@@ -142,22 +142,19 @@ class Dashboard extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="card p-3">
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        <h1 className="pr-4">4</h1>
-                        <span className="section-title">Decisioning</span>
-                        <span
-                            className={
-                                this.state.collapse
-                                    ? "fa fa-2x fa-angle-up pl-4"
-                                    : "fa fa-2x fa-angle-down pl-4"
-                            }
-                            onClick={this.toggle}
-                        />
-                    </div>
+            <div className="card p-3">
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <h1 className="pr-4">4</h1>
+                    <span className="section-title">Decisioning</span>
+                    <span
+                        className={
+                            this.state.collapse
+                                ? "fa fa-2x fa-angle-up pl-4"
+                                : "fa fa-2x fa-angle-down pl-4"
+                        }
+                        onClick={this.toggle}
+                    />
                 </div>
-
                 <Collapse isOpen={this.state.collapse}>
                     {this.renderOffers()}
                     <DialogModal
