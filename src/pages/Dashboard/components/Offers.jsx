@@ -24,10 +24,7 @@ class Offers extends React.Component {
 
     componentDidMount() {
         API.getOffers(this.props.user).then(res => {
-            let data = res.data.filter(offer => {
-                return offer.offer > 0;
-            });
-            this.setState({ offers: data });
+            this.setState({ offers: res.data });
         });
     }
 
