@@ -32,6 +32,11 @@ export default {
         return axios.post(url + "/api/property/upload/", home);
     },
 
+    //edit an existing home
+    editHome: home => {
+        return axios.post(url + "/api/property/edit/", home);
+    },
+
     //send search object to retrieve homes
     searchForHomes: function(searchObj) {
         return axios.post(url + "/api/property/searchlistings", searchObj);
@@ -73,6 +78,11 @@ export default {
     //gets a list of homes by a user email
     getListingHomes: function(userEmail) {
         return axios.get(url + `/api/property/getlistingsbyuser/${userEmail}`);
+    },
+
+    //gets a list of homes by a user email
+    getAllListings: function() {
+        return axios.get(url + `/api/property/properties`);
     },
 
     //upsert offer obj
@@ -118,8 +128,8 @@ export default {
         return axios.get(`${url}/api/offers/offer/${id}`);
     },
 
-    //get offers belonging to a user for display on the offers dashboard for buyer
-    getOffersByUser: userId => {
-        return axios.get(`${url}/api/offers/useroffers/${userId}`);
+    //get offers belonging to a user for a particular home
+    getOffersByUserAndHome: (userId, homeId) => {
+        return axios.post(`${url}/api/offers/offerinfo`, { userId, homeId });
     }
 };

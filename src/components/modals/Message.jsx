@@ -72,12 +72,7 @@ export default class DialogModal extends React.Component {
 
         return (
             <div>
-                <Dialog
-                    title="Message Owner"
-                    actions={actions}
-                    modal={true}
-                    open={this.props.open}
-                />
+                <Dialog actions={actions} modal={true} open={this.props.open} />
             </div>
         );
     }

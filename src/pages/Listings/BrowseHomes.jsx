@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "../../components/BreadcrumbNav";
 import MapWrapper from "./components/MapWrapper";
 import UserSearch from "./components/Search";
+import HousePics from "./components/HousePics";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as loginActions from "../../actions/login";
@@ -9,17 +10,6 @@ import * as logoutActions from "../../actions/logout";
 import * as actions from "./Listings.ducks";
 
 class BrowseListings extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            houses: [],
-            open: false,
-            picID: "",
-            messages: []
-        };
-    }
-
     componentWillUnmount = () => {
         const {
             listings: { removeMapMarkers }
@@ -27,11 +17,20 @@ class BrowseListings extends React.Component {
         removeMapMarkers();
     };
 
+    componentDidMount = () => {
+        const {
+            listings: { addMapMarker }
+        } = this.props;
+
+        addMapMarker();
+    };
+
     render() {
         return (
             <div>
                 <MapWrapper />
-                <UserSearch />
+                {/* <UserSearch /> */}
+                <HousePics pics={this.props.properties} />
                 <NavBar selectedIndex={2} />
             </div>
         );
@@ -41,7 +40,8 @@ class BrowseListings extends React.Component {
 function mapStateToProps(state) {
     return {
         id: state.loggedIn.id,
-        email: state.loggedIn.name
+        email: state.loggedIn.name,
+        properties: state.listings
     };
 }
 

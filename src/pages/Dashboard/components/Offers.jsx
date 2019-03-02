@@ -20,19 +20,11 @@ class Offers extends React.Component {
             currentHome: {},
             offerUser: { email: "" }
         };
-
-        const styles = {
-            display: "flex",
-            alignItems: "center"
-        };
     }
 
     componentDidMount() {
         API.getOffers(this.props.user).then(res => {
-            let data = res.data.filter(offer => {
-                return offer.offer > 0;
-            });
-            this.setState({ offers: data });
+            this.setState({ offers: res.data });
         });
     }
 
@@ -78,6 +70,9 @@ class Offers extends React.Component {
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
+                    {!this.state.offers.length && (
+                        <span className="text-muted">No offers yet</span>
+                    )}
                     {this.state.offers.map(offer => {
                         return (
                             <div key={offer._id} className="row offer-info">
@@ -99,14 +94,7 @@ class Offers extends React.Component {
                                         )}
                                     </span>
                                 </div>
-                                <div className="col-3 text-center">
-                                    <p className="text-muted x-small">
-                                        Offered on{" "}
-                                        {moment(offer.createdAt).format("l")}
-                                    </p>
-                                    <h4>{currencyFormatter(offer.offer)}</h4>
-                                </div>
-                                <div className="col-1 text-center">
+                                <div className="col-4 text-center">
                                     <a href={offer.purchaseAgreement}>
                                         <i className="lightGrey fa fa-2x fa-file d-inline" />
                                     </a>

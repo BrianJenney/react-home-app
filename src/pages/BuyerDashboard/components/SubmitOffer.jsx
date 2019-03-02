@@ -5,18 +5,7 @@ import Dropzone from "react-dropzone";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import { Link } from "react-router-dom";
-
-const textA = {
-    width: "90%",
-    marginLeft: "1.7em",
-    marginTop: "0.7em",
-    marginBottom: "0.7em",
-    backgroundColor: "#ffffff"
-};
-
-const padL = {
-    paddingLeft: "1.4em"
-};
+import FileUpload from "../../../components/FileUpload";
 
 class SubmitOffer extends React.Component {
     constructor(props) {
@@ -28,24 +17,28 @@ class SubmitOffer extends React.Component {
             form: new FormData(),
             value: "",
             home: null,
-            user: null
-        };
-
-        const styles = {
-            display: "flex",
-            alignItems: "center"
+            user: null,
+            supportingDocument: ""
         };
     }
 
-    componentDidUpdate = props => {
-        this.getOfferData(props);
-    };
+    componentDidUpdate(prevProps) {
+        const { user, home } = prevProps;
+        if (prevProps.currentOffer !== this.props.currentOffer) {
+            let userObj = {};
+            user._id = user.id;
+            this.getOfferData(user, home);
+        }
+    }
 
-    getOfferData = props => {
-        API.getOfferByUser(this.props.user, this.props.home).then(res => {
+    getOfferData = (user, home) => {
+        API.getOfferForCurrentProperty(home, user).then(res => {
             if (res.data.length) {
                 const offerSubmitted = res.data[0].readyToSend;
-                // this.setState({ offerSubmitted });
+                this.setState({
+                    supportingDocument: res.data[0].supportingDocument,
+                    offerSubmitted
+                });
             }
         });
     };
@@ -64,24 +57,33 @@ class SubmitOffer extends React.Component {
         });
     };
 
-    handleDrop = files => {
+    handleDrop = (documentType, files) => {
         files.forEach(file => {
             this.state.form.set("file", file);
-
+            this.state.form.set("documentType", documentType);
             this.state.form.set("homeId", this.props.home._id);
             this.state.form.set("userId", this.props.user.id);
 
-            API.makeOffer(this.state.form);
+            API.makeOffer(this.state.form).then(res => {
+                this.setState({
+                    supportingDocument: res.data.supportingDocument || ""
+                });
+            });
         });
     };
 
     submitOffer = () => {
-        API.submitOffer(this.props.home._id, this.props.user.id).then(() => {
-            this.setState({ collapse: false });
+        API.submitOffer(this.props.home._id, this.props.user.id).then(res => {
+            this.setState({
+                collapse: false,
+                readyToSend: res.data.readyToSend
+            });
         });
     };
 
     render() {
+        const { offerSubmitted } = this.state;
+
         return (
             <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -109,7 +111,13 @@ class SubmitOffer extends React.Component {
                     <textarea
                         className="form-control border"
                         rows={4}
-                        style={textA}
+                        style={{
+                            width: "90%",
+                            marginLeft: "1.7em",
+                            marginTop: "0.7em",
+                            marginBottom: "0.7em",
+                            backgroundColor: "#ffffff"
+                        }}
                         value={this.state.value}
                         onChange={this.handleChange}
                     />
@@ -122,29 +130,44 @@ class SubmitOffer extends React.Component {
                         Upload an optional attachments that may support your
                         offer
                     </p>
-                    <div className="alignDZone" style={padL}>
-                        <Dropzone
-                            className="dropzone w-25 h-25 m-2"
-                            onDrop={this.handleDrop}
-                        >
-                            <div className="upload-actions text-center">
-                                <FloatingActionButton mini className="mt-3">
-                                    <ContentAdd />
-                                </FloatingActionButton>
-                                <br />
-                                <small className="text-primary">
-                                    Upload Attachment
-                                </small>
-                            </div>
-                        </Dropzone>
-                    </div>
+                    <FileUpload
+                        title={"Upload Optional Supporting Documents"}
+                        handleUpload={this.handleDrop}
+                        documentType={"supportingDocuments"}
+                    />
 
-                    <button
-                        className="btn btn-light"
-                        onClick={this.submitOffer}
-                    >
-                        Submit Your Offer
-                    </button>
+                    {this.state.supportingDocument.length > 0 && (
+                        <div className="d-inline">
+                            <i
+                                className="fa fa-file-pdf-o d-inline mr-2"
+                                aria-hidden="true"
+                            />
+                            <a href={this.state.supportingDocument}>
+                                {this.state.supportingDocument}
+                            </a>
+                        </div>
+                    )}
+                    {!offerSubmitted && (
+                        <div className="mt-5">
+                            <button
+                                className="btn btn-light"
+                                onClick={this.submitOffer}
+                            >
+                                Submit Your Offer
+                            </button>
+                        </div>
+                    )}
+                    {offerSubmitted && (
+                        <div className="mt-5">
+                            <button
+                                disabled
+                                className="btn btn-light btn-primary"
+                                onClick={this.submitOffer}
+                            >
+                                Offer Submitted
+                            </button>
+                        </div>
+                    )}
                 </Collapse>
             </div>
         );

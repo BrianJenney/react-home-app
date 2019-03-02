@@ -28,10 +28,10 @@ class SubNav extends React.Component {
     render() {
         return (
             <div className="sub-nav">
-                <div className="logo">                        
+                <div className="logo">
                     <img id="micasa-logo" src={Logo} alt="" />
                 </div>
-                <div className="col-md-6 text-right buy-sell">                    
+                <div className="col-md-6 text-right buy-sell">
                     <p onClick={() => this.select(0)}>Buy</p>
                     <p onClick={() => this.select(1)}>Sell</p>
                     <p onClick={() => this.select(2)}>Logout</p>

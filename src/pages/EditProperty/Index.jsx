@@ -3,9 +3,12 @@ import PropertyForm from "../../pages/AddProperty/components/PropertyForm";
 import API from "../../api/helpers";
 
 class EditProperty extends React.Component {
-    state = {
-        home: null
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            home: null
+        };
+    }
 
     componentDidMount() {
         API.getHome(this.props.match.params.id).then(response => {
@@ -15,7 +18,11 @@ class EditProperty extends React.Component {
 
     render() {
         return (
-            <PropertyForm home={this.state.home} history={this.props.history} />
+            <PropertyForm
+                home={this.state.home}
+                editMode
+                history={this.props.history}
+            />
         );
     }
 }

@@ -1,5 +1,4 @@
 import React from "react";
-
 import API from "../../../api/helpers.js";
 import NavBar from "../../../components/BreadcrumbNav";
 import TopNav from "../../../components/TopNav";
@@ -20,8 +19,8 @@ import isNumber from "../../../utils/is-number";
 import "../../../styles/addProperty.css";
 
 class AddProp extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.removePic = this.removePic.bind(this);
         const currentYear = new Date().getFullYear();
         this.years = Array.from(
@@ -39,6 +38,7 @@ class AddProp extends React.Component {
     state = {
         autoComplete: null,
         disabled: false,
+        imgsToDelete: [],
         imgs: [],
         price: 0,
         address: null,
@@ -55,6 +55,14 @@ class AddProp extends React.Component {
     };
 
     removePic = idx => {
+        const { home } = this.props;
+
+        if (home && home.imgs.includes(this.state.imgs[idx])) {
+            this.setState({
+                imgsToDelete: [...this.state.imgsToDelete, this.state.imgs[idx]]
+            });
+        }
+
         let imgs = [...this.state.imgs];
         imgs.splice(idx, 1);
         this.setState({ imgs });
@@ -114,13 +122,37 @@ class AddProp extends React.Component {
         this.state.form.append("sqFeet", this.state.sqFeet);
         this.state.form.append("status", status);
 
+        if (this.state.imgsToDelete.length) {
+            this.state.form.append("imgsToDelete", this.state.imgsToDelete);
+        }
+
         const formObject = this.createFormObject(this.state.form);
         const isValid = this.isValidHouseObject(formObject);
         if (!isValid) {
             alert("Please completely fill out your house details");
             return;
         }
+
+        if (this.props.editMode) {
+            this.state.form.append("homeId", this.props.home._id);
+            this.editHome(this.state.form);
+        } else {
+            this.postHome(this.state.form);
+        }
+    };
+
+    postHome = form => {
         API.posthome(this.state.form)
+            .then(response => {
+                this.props.history.push("/dashboard");
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+
+    editHome = form => {
+        API.editHome(this.state.form)
             .then(response => {
                 this.props.history.push("/dashboard");
             })
@@ -335,7 +367,7 @@ class AddProp extends React.Component {
 
                     <div className="ml-3 mb-5">
                         <TextField
-                            value={this.state.description || null}
+                            value={this.state.description}
                             floatingLabelText="Description"
                             onChange={this.onChange.bind(this)}
                             fullWidth={true}

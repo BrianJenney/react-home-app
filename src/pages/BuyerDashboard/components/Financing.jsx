@@ -5,7 +5,7 @@ import Dropzone from "react-dropzone";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import { Link } from "react-router-dom";
-
+import FileUpload from "../../../components/FileUpload";
 import { debounce } from "throttle-debounce";
 
 class Financing extends React.Component {
@@ -15,7 +15,8 @@ class Financing extends React.Component {
         this.state = {
             collapse: false,
             form: new FormData(),
-            loanDocument: ""
+            loanDocument: "",
+            supportingDocument: ""
         };
 
         const styles = {
@@ -25,9 +26,11 @@ class Financing extends React.Component {
     }
 
     componentWillReceiveProps = nextProps => {
+        const { currentOffer } = nextProps;
         if (nextProps.currentOffer) {
             this.setState({
-                loanDocument: nextProps.currentOffer.loanDocument || ""
+                loanDocument: currentOffer.loanDocument || "",
+                supportingDocument: currentOffer.supportingDocument || ""
             });
         }
     };
@@ -36,17 +39,18 @@ class Financing extends React.Component {
         this.setState({ collapse: !this.state.collapse });
     }
 
-    handleDrop = files => {
+    handleDrop = (documentType, files) => {
         files.forEach(file => {
             this.state.form.set("file", file);
 
             this.state.form.set("homeId", this.props.home._id);
             this.state.form.set("userId", this.props.user.user._id);
-            this.state.form.set("isPurchaseDoc", false);
+            this.state.form.set("documentType", documentType);
 
             API.makeOffer(this.state.form).then(res => {
                 this.setState({
-                    loanDocument: res.data.loanDocument || ""
+                    loanDocument: res.data.loanDocument || "",
+                    supportingDocument: res.data.supportingDocument || ""
                 });
             });
         });
@@ -98,19 +102,12 @@ class Financing extends React.Component {
                     <p className="paragraph d-inline">
                         Upload your preapproval or final loan documentation
                     </p>
-                    <Dropzone
-                        className="dropzone w-25 h-25 m-2"
-                        onDrop={this.handleDrop}
-                    >
-                        <div className="upload-actions text-center">
-                            <FloatingActionButton mini className="mt-3">
-                                <ContentAdd />
-                            </FloatingActionButton>
-                            <br />
-                            <small className="text-primary">Upload Doc</small>
-                        </div>
-                    </Dropzone>
 
+                    <FileUpload
+                        title={"Upload Preapproval Documentation"}
+                        handleUpload={this.handleDrop}
+                        documentType={"loanDocument"}
+                    />
                     {this.state.loanDocument.length > 0 && (
                         <div className="d-inline">
                             <i
@@ -119,6 +116,22 @@ class Financing extends React.Component {
                             />
                             <a href={this.state.loanDocument}>
                                 {this.state.loanDocument}
+                            </a>
+                        </div>
+                    )}
+                    <FileUpload
+                        title={"Upload Supporting Documentation"}
+                        handleUpload={this.handleDrop}
+                        documentType={"supportingDocument"}
+                    />
+                    {this.state.supportingDocument.length > 0 && (
+                        <div className="d-inline">
+                            <i
+                                className="fa fa-file-pdf-o d-inline mr-2"
+                                aria-hidden="true"
+                            />
+                            <a href={this.state.supportingDocument}>
+                                {this.state.supportingDocument}
                             </a>
                         </div>
                     )}

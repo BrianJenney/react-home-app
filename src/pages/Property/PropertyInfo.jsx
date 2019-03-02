@@ -47,94 +47,93 @@ class Property extends Component {
         return (
             <div>
                 <TopNav />
-                {this.state &&
-                    this.state.property && (
-                        <div style={{ marginBottom: 200 }}>
-                            <div className="row">
-                                <div className="col-7">
-                                    <img
-                                        className="img-fluid details-main-img"
-                                        src={this.state.mainImg}
-                                        alt={this.state.property._id}
-                                    />
-                                </div>
-                                <div className="col-5 contact">
-                                    <div className="contact-actions">
-                                        <h2>${this.state.property.price}</h2>
-                                        <p className="text-muted">
-                                            ${this.state.monthlyPayment}
-                                            /mo (Est Mortgage)
-                                        </p>
+                {this.state && this.state.property && (
+                    <div style={{ marginBottom: 200 }}>
+                        <div className="row">
+                            <div className="col-7">
+                                <img
+                                    className="img-fluid details-main-img"
+                                    src={this.state.mainImg}
+                                    alt={this.state.property._id}
+                                />
+                            </div>
+                            <div className="col-5 contact">
+                                <div className="contact-actions">
+                                    <h2>${this.state.property.price}</h2>
+                                    <p className="text-muted">
+                                        ${this.state.monthlyPayment}
+                                        /mo (Est Mortgage)
+                                    </p>
+
+                                    <button
+                                        onClick={() => {
+                                            this.props.history.replace(
+                                                `/buyerdashboard/${
+                                                    this.state.property._id
+                                                }`
+                                            );
+                                        }}
+                                        className="btn btn-default btn-offer"
+                                    >
+                                        Make an Offer
+                                    </button>
+                                    <div className="btn-toolbar">
+                                        <a href="https://rocketmortgage.com">
+                                            <button className="btn btn-default">
+                                                Get Prequalified
+                                            </button>
+                                        </a>
 
                                         <button
-                                            onClick={() => {
-                                                this.props.history.replace(
-                                                    `/buyerdashboard/${
-                                                        this.state.property._id
-                                                    }`
-                                                );
-                                            }}
-                                            className="btn btn-default btn-offer"
+                                            className="btn btn-default"
+                                            onClick={this.openMessage}
                                         >
-                                            Make an Offer
+                                            Message Owner
                                         </button>
-                                        <div className="btn-toolbar">
-                                            <a href="https://rocketmortgage.com">
-                                                <button className="btn btn-default">
-                                                    Get Prequalified
-                                                </button>
-                                            </a>
-
-                                            <button
-                                                className="btn btn-default"
-                                                onClick={this.openMessage}
-                                            >
-                                                Message Owner
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div className="details">
-                                <div className="address-details">
-                                    <h3>
-                                        {this.state.property.address},{" "}
-                                        {this.state.property.city}{" "}
-                                        {this.state.property.state},{" "}
-                                        {this.state.property.zipCode}
-                                    </h3>
-                                </div>
-                                <div className="property-details">
-                                    <span>
-                                        <FontAwesome name="bed" />
-                                        {this.state.property.bedRooms} beds
-                                    </span>
-                                    <span>
-                                        <FontAwesome name="bath" />
-                                        {this.state.property.bathRooms} baths
-                                    </span>
-                                    <span>
-                                        <FontAwesome name="crop" />
-                                        {this.state.property.sqFeet} sq ft
-                                    </span>
-                                    <span>
-                                        <FontAwesome name="wrench" />
-                                        {moment(
-                                            this.state.property.yearBuilt
-                                        ).get("year")}
-                                    </span>
-                                    <span className="details-property-type">
-                                        <FontAwesome name="home" />
-                                        {this.state.property.propertyType}
-                                    </span>
-                                </div>
-                                <div className="description">
-                                    <p>{this.state.property.description}</p>
-                                </div>
+                        <div className="details">
+                            <div className="address-details">
+                                <h3>
+                                    {this.state.property.address},{" "}
+                                    {this.state.property.city}{" "}
+                                    {this.state.property.state},{" "}
+                                    {this.state.property.zipCode}
+                                </h3>
+                            </div>
+                            <div className="property-details">
+                                <span>
+                                    <FontAwesome name="bed" />
+                                    {this.state.property.bedRooms} beds
+                                </span>
+                                <span>
+                                    <FontAwesome name="bath" />
+                                    {this.state.property.bathRooms} baths
+                                </span>
+                                <span>
+                                    <FontAwesome name="crop" />
+                                    {this.state.property.sqFeet} sq ft
+                                </span>
+                                <span>
+                                    <FontAwesome name="wrench" />
+                                    {moment(this.state.property.yearBuilt).get(
+                                        "year"
+                                    )}
+                                </span>
+                                <span className="details-property-type">
+                                    <FontAwesome name="home" />
+                                    {this.state.property.propertyType}
+                                </span>
+                            </div>
+                            <div className="description">
+                                <p>{this.state.property.description}</p>
                             </div>
                         </div>
-                    )}
+                    </div>
+                )}
                 <DialogModal
                     closeModal={this.closeModal.bind(this)}
                     open={this.state.open}

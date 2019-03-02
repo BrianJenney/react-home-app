@@ -1,5 +1,6 @@
 footer {
-    width: 100%;
+    margin: auto;
+    width: 80%;
     height: 50;
     display: block;
     position: fixed;
@@ -25,7 +26,7 @@ nav {
     background: grey;
 }
 
-ol {
+ul {
     display: table-row;
     list-style: none;
     text-align: center;

@@ -10,7 +10,7 @@ class PicPreview extends Component {
                         <div className="preview-pic" key={idx}>
                             <span
                                 className="fa fa-remove"
-                                onClick={this.props.removePic.bind(idx)}
+                                onClick={this.props.removePic.bind(null, idx)}
                             />
                             <img src={file.preview || file} alt={file.name} />
                         </div>

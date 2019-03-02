@@ -2,7 +2,7 @@ const GET_OFFERS = "BuyerOffers/GET_OFFERS";
 const GET_OFFERS_SUCCEEDED = "BuyerOffers/GET_OFFERS_SUCCEEDED";
 
 const initialState = {
-    offers: [],
+    offer: {},
     loading: false
 };
 
@@ -17,7 +17,7 @@ const reducer = (state = initialState, action = {}) => {
         case GET_OFFERS_SUCCEEDED:
             return {
                 ...state,
-                offers: [...action.payload.data],
+                offer: { ...action.payload.data[0] },
                 loading: false
             };
         default:
@@ -26,8 +26,8 @@ const reducer = (state = initialState, action = {}) => {
 };
 
 // Action Creators
-const getOffers = userId => {
-    return { type: GET_OFFERS, userId };
+const getOffers = (userId, homeId) => {
+    return { type: GET_OFFERS, userId, homeId };
 };
 
 const getOffersSucceeded = payload => {
