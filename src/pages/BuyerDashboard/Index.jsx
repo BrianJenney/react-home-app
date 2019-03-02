@@ -13,6 +13,7 @@ import PurchaseAgreement from "./components/PurchaseAgreement";
 import SubmitOffer from "./components/SubmitOffer";
 import Financing from "./components/Financing";
 import Decisioning from "./components/Decisioning";
+import ContractCompletion from "./components/ContractCompletion";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -55,6 +56,8 @@ class Dashboard extends React.Component {
     };
 
     render() {
+        const { currentOffer, property } = this.state;
+        const { user, email } = this.props;
         return (
             <div>
                 <TopNav />
@@ -63,28 +66,32 @@ class Dashboard extends React.Component {
                     <img src={this.state.currentHouse} alt="" />
 
                     <Financing
-                        userEmail={this.props.email}
-                        home={this.state.property}
-                        user={this.props.user}
-                        currentOffer={this.state.currentOffer}
+                        userEmail={email}
+                        home={property}
+                        user={user}
+                        currentOffer={currentOffer}
                     />
                     <PurchaseAgreement
-                        userEmail={this.props.email}
+                        userEmail={email}
                         home={this.state.property}
-                        user={this.props.user}
-                        currentOffer={this.state.currentOffer}
+                        user={user}
+                        currentOffer={currentOffer}
                     />
                     <SubmitOffer
-                        userEmail={this.props.email}
-                        home={this.state.property}
-                        user={this.props.user}
-                        currentOffer={this.state.currentOffer}
+                        userEmail={email}
+                        home={property}
+                        user={user}
+                        currentOffer={currentOffer}
                     />
                     <Decisioning
-                        userEmail={this.props.email}
-                        home={this.state.property}
-                        user={this.props.user}
+                        userEmail={email}
+                        home={property}
+                        user={user}
                     />
+                    {currentOffer &&
+                        currentOffer.sellerPurchaseAgreement.length && (
+                            <ContractCompletion offer={currentOffer} />
+                        )}
                     {/* <Messages userEmail={this.props.email} /> */}
                 </div>
                 <NavBar />

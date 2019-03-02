@@ -8,7 +8,7 @@ import "../../../styles/dashboard.css";
 import moment from "moment";
 import { find, isEmpty, get } from "lodash";
 
-class Offers extends React.Component {
+class ContractCompletion extends React.Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -159,4 +159,4 @@ class Offers extends React.Component {
         );
     }
 }
-export default withRouter(Offers);
+export default withRouter(ContractCompletion);

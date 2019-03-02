@@ -11,7 +11,6 @@ import API from "../../api/helpers";
 function* getOffers(action) {
     const { userId, homeId } = action;
     try {
-        console.log("HERE");
         const user = yield API.getOffersByUserAndHome(userId, homeId);
         yield put(getOffersSucceeded(user));
     } catch (e) {
