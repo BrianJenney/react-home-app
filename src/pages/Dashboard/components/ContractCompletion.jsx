@@ -26,9 +26,14 @@ class Offers extends React.Component {
     componentDidMount() {
         API.getOffers(this.props.user).then(res => {
             const offer = find(res.data, { accepted: true });
+            const sellerPurchaseAgreement = get(
+                offer,
+                "sellerPurchaseAgreement",
+                ""
+            );
             this.setState({
                 offer,
-                sellerPurchaseAgreement: offer.sellerPurchaseAgreement
+                sellerPurchaseAgreement
             });
         });
     }

@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Collapse, Button, CardBody, Card } from "reactstrap";
 import API from "../../../api/helpers";
 import { bindActionCreators } from "redux";
@@ -32,9 +33,10 @@ class Dashboard extends React.Component {
         this.setState({ collapse: !this.state.collapse });
     }
 
-    componentDidMount = () => {
+    componentDidUpdate = prevProps => {
         const { home, user } = this.props;
-        if (home && user) {
+        const { offers } = this.state;
+        if (prevProps.home !== home) {
             this.props.offerActions.getOffers(user.id, home._id);
         }
     };
@@ -51,23 +53,17 @@ class Dashboard extends React.Component {
         this.setState({ open: false });
     };
 
-    goToOffer = id => {
-        this.props.history.push(`/buyerdashboard/${id}`);
-    };
-
-    goToAcceptancePage = offer => {
-        this.props.history.push(`/offeraccepted/${offer._id}`);
-    };
-
     acceptOffer = offer => {
         API.acceptOffer(offer).then(() => {
-            this.props.history.push(`/offeraccepted/${offer._id}`);
+            //TODO: update offer with acceptance from buyer
+            console.log("accepted");
         });
     };
 
     renderOffers = () => {
         const { offer } = this.props;
         const { home } = this.state;
+
         return (
             <div key={offer._id} className="row offer-info">
                 <div className="col-1">
@@ -119,10 +115,7 @@ class Dashboard extends React.Component {
                 </div>
                 <div className="col-2 text-right">
                     {offer.accepted && (
-                        <button
-                            className="btn btn-success"
-                            onClick={this.goToAcceptancePage.bind(null, offer)}
-                        >
+                        <button className="btn btn-success" disabled>
                             Offer Accepted
                         </button>
                     )}
@@ -141,6 +134,7 @@ class Dashboard extends React.Component {
     };
 
     render() {
+        const { offer } = this.props;
         return (
             <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -156,7 +150,7 @@ class Dashboard extends React.Component {
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
-                    {this.renderOffers()}
+                    {offer ? this.renderOffers() : ""}
                     <DialogModal
                         closeModal={this.closeModal.bind(this)}
                         open={this.state.open}

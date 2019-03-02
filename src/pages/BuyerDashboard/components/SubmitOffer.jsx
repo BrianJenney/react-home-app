@@ -22,16 +22,22 @@ class SubmitOffer extends React.Component {
         };
     }
 
-    componentDidUpdate = props => {
-        this.getOfferData(props);
-    };
+    componentDidUpdate(prevProps) {
+        const { user, home } = prevProps;
+        if (prevProps.currentOffer !== this.props.currentOffer) {
+            let userObj = {};
+            user._id = user.id;
+            this.getOfferData(user, home);
+        }
+    }
 
-    getOfferData = props => {
-        API.getOfferByUser(this.props.user, this.props.home).then(res => {
+    getOfferData = (user, home) => {
+        API.getOfferForCurrentProperty(home, user).then(res => {
             if (res.data.length) {
                 const offerSubmitted = res.data[0].readyToSend;
                 this.setState({
-                    supportingDocument: res.data[0].supportingDocument
+                    supportingDocument: res.data[0].supportingDocument,
+                    offerSubmitted
                 });
             }
         });
@@ -67,12 +73,17 @@ class SubmitOffer extends React.Component {
     };
 
     submitOffer = () => {
-        API.submitOffer(this.props.home._id, this.props.user.id).then(() => {
-            this.setState({ collapse: false });
+        API.submitOffer(this.props.home._id, this.props.user.id).then(res => {
+            this.setState({
+                collapse: false,
+                readyToSend: res.data.readyToSend
+            });
         });
     };
 
     render() {
+        const { offerSubmitted } = this.state;
+
         return (
             <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -136,14 +147,27 @@ class SubmitOffer extends React.Component {
                             </a>
                         </div>
                     )}
-                    <div className="mt-5">
-                        <button
-                            className="btn btn-light"
-                            onClick={this.submitOffer}
-                        >
-                            Submit Your Offer
-                        </button>
-                    </div>
+                    {!offerSubmitted && (
+                        <div className="mt-5">
+                            <button
+                                className="btn btn-light"
+                                onClick={this.submitOffer}
+                            >
+                                Submit Your Offer
+                            </button>
+                        </div>
+                    )}
+                    {offerSubmitted && (
+                        <div className="mt-5">
+                            <button
+                                disabled
+                                className="btn btn-light btn-primary"
+                                onClick={this.submitOffer}
+                            >
+                                Offer Submitted
+                            </button>
+                        </div>
+                    )}
                 </Collapse>
             </div>
         );
