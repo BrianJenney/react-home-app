@@ -54,10 +54,7 @@ class Dashboard extends React.Component {
     };
 
     acceptOffer = offer => {
-        API.acceptOffer(offer).then(() => {
-            //TODO: update offer with acceptance from buyer
-            console.log("accepted");
-        });
+        //TODO: another API route to have the BUYER accept the offer
     };
 
     renderOffers = () => {
@@ -67,7 +64,7 @@ class Dashboard extends React.Component {
         return (
             <div key={offer._id} className="row offer-info">
                 <div className="col-1">
-                    {offer.users.length > 0 && (
+                    {offer.users && offer.users.length > 0 && (
                         <img
                             className="user-pic rounded-circle w-10 h-10"
                             src={offer.users[0].userPic}
@@ -77,7 +74,7 @@ class Dashboard extends React.Component {
                 </div>
                 <div className="col-3">
                     <span>
-                        {offer.users.length > 0 && (
+                        {offer.users && offer.users.length > 0 && (
                             <div className="user-info">
                                 <b>{offer.users[0].email}</b>
                             </div>

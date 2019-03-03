@@ -14,6 +14,7 @@ import SubmitOffer from "./components/SubmitOffer";
 import Financing from "./components/Financing";
 import Decisioning from "./components/Decisioning";
 import ContractCompletion from "./components/ContractCompletion";
+import { get } from "lodash";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -58,6 +59,12 @@ class Dashboard extends React.Component {
     render() {
         const { currentOffer, property } = this.state;
         const { user, email } = this.props;
+
+        const sellerPurchaseAgreement = get(
+            currentOffer,
+            "sellerPurchaseAgreement",
+            ""
+        );
         return (
             <div>
                 <TopNav />
@@ -88,10 +95,9 @@ class Dashboard extends React.Component {
                         home={property}
                         user={user}
                     />
-                    {currentOffer &&
-                        currentOffer.sellerPurchaseAgreement.length && (
-                            <ContractCompletion offer={currentOffer} />
-                        )}
+                    {sellerPurchaseAgreement.length > 0 && (
+                        <ContractCompletion offer={currentOffer} />
+                    )}
                     {/* <Messages userEmail={this.props.email} /> */}
                 </div>
                 <NavBar />
