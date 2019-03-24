@@ -104,9 +104,14 @@ export default {
         return axios.post(`${url}/api/offers/submitoffer`, obj);
     },
 
-    //accept offer
+    //seller accept offer
     acceptOffer: function(offer) {
         return axios.post(`${url}/api/offers/acceptoffer`, offer);
+    },
+
+    //buyer accept offer
+    buyerAcceptOffer: function(offer) {
+        return axios.post(`${url}/api/offers/acceptoffer/buyer`, offer);
     },
 
     //get all offers sent to a user

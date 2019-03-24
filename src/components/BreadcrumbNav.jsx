@@ -2,6 +2,10 @@ import React from "react";
 import FontIcon from "material-ui/FontIcon";
 import { withRouter } from "react-router";
 import "../styles/breadcrumb-nav.css";
+import * as switchUserType from "../actions/switchUser";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { switchUser } from "../actions/switchUser";
 const home = <i className="material-icons">home</i>;
 const list = <FontIcon className="material-icons">view_list</FontIcon>;
 const search = <i className="material-icons">location_searching</i>;
@@ -11,6 +15,11 @@ const envelope = <i className="material-icons">message</i>;
 class NavBar extends React.Component {
     state = {
         selectedPage: "dash"
+    };
+
+    onChange = e => {
+        console.log(e.target.value);
+        this.props.switchUser(e.target.value);
     };
 
     select = page => {
@@ -46,6 +55,16 @@ class NavBar extends React.Component {
                 <div>
                     <nav className="bottom-nav">
                         <ul>
+                            <li>
+                                <select
+                                    value={this.state.yearBuilt}
+                                    id="yearBuilt"
+                                    onChange={this.onChange.bind(this)}
+                                >
+                                    <option value="Buy">Buy</option>
+                                    <option value="Seller">Sell</option>
+                                </select>
+                            </li>
                             <li>
                                 <a
                                     label="House Hunt"
@@ -104,4 +123,21 @@ class NavBar extends React.Component {
     }
 }
 
-export default withRouter(NavBar);
+function mapStateToProps(state) {
+    return {
+        userType: state.loggedIn.userType
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        switchUser: bindActionCreators(switchUser, dispatch)
+    };
+}
+
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(NavBar)
+);

@@ -1,6 +1,6 @@
 export const login = user => {
     return {
-        type: "ADD",
+        type: "LOGIN",
         loggedIn: user.isLogged,
         name: user.name,
         id: user.id,

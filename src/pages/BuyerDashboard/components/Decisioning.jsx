@@ -54,9 +54,9 @@ class Dashboard extends React.Component {
     };
 
     acceptOffer = offer => {
-        API.acceptOffer(offer).then(() => {
-            //TODO: update offer with acceptance from buyer
-            console.log("accepted");
+        //TODO: make sure this works as expected
+        API.buyerAcceptOffer(offer).then(res => {
+            console.log(res);
         });
     };
 
