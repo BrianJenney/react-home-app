@@ -14,8 +14,6 @@ export default (state = {}, action) => {
             const { userType } = action;
             console.log(userType);
             return Object.assign({}, state, { userType });
-
-            return;
         default:
             return state;
     }
