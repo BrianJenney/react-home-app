@@ -12,7 +12,6 @@ export default (state = {}, action) => {
             return Object.assign({});
         case "SWITCH_USER_TYPE":
             const { userType } = action;
-            console.log(userType);
             return Object.assign({}, state, { userType });
         default:
             return state;
