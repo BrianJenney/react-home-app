@@ -110,7 +110,7 @@ class AddProp extends React.Component {
         }
 
         this.state.form.append("email", this.props.email);
-        this.state.form.append("userid", this.props.id);
+        this.state.form.append("userId", this.props.id);
         this.state.form.append("price", this.state.price);
         this.state.form.append("address", this.state.address);
         this.state.form.append("propertyType", this.state.propertyType);
@@ -174,7 +174,7 @@ class AddProp extends React.Component {
         let isValid = true;
         const required_props = [
             "email",
-            "userid",
+            "userId",
             "price",
             "address",
             "propertyType",

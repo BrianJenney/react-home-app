@@ -18,7 +18,6 @@ class NavBar extends React.Component {
     };
 
     onChange = e => {
-        console.log(e.target.value);
         this.props.switchUser(e.target.value);
     };
 

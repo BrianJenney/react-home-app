@@ -1,7 +1,7 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import * as loginActions from "../../actions/login";
 import * as logoutActions from "../../actions/logout";
 import API from "../../api/helpers";
@@ -25,14 +25,25 @@ class Dashboard extends React.Component {
             currentHouse: null,
             open: false,
             user: null,
-            currentOffer: null
+            currentOffer: null,
+            offers: []
         };
 
         this.refreshOfferData = this.refreshOfferData.bind(this);
     }
 
     componentDidMount = () => {
-        this.refreshOfferData(this.props.match.params.id);
+        this.getOffers();
+        if (this.props.match.params.id) {
+            this.refreshOfferData(this.props.match.params.id);
+        }
+    };
+
+    getOffers = () => {
+        const { userId } = this.props;
+        API.getOffersFromBuyer(this.props.user.id).then(res => {
+            this.setState({ offers: res.data });
+        });
     };
 
     refreshOfferData = houseId => {
@@ -57,7 +68,7 @@ class Dashboard extends React.Component {
     };
 
     render() {
-        const { currentOffer, property } = this.state;
+        const { currentOffer, property, offers } = this.state;
         const { user, email } = this.props;
 
         const sellerPurchaseAgreement = get(
@@ -71,6 +82,22 @@ class Dashboard extends React.Component {
                 <div className="container buyer-dash w-80 mb-10 h-100">
                     <h1>Buyer Dashboard</h1>
                     <img src={this.state.currentHouse} alt="" />
+
+                    <div>
+                        {offers.map((offer, idx) => {
+                            return (
+                                <li
+                                    onClick={() => {
+                                        this.props.history.replace(
+                                            `/buyerdashboard/${offer.homeId}`
+                                        );
+                                    }}
+                                >
+                                    {offer.homeId}
+                                </li>
+                            );
+                        })}
+                    </div>
 
                     <Financing
                         userEmail={email}
@@ -94,6 +121,7 @@ class Dashboard extends React.Component {
                         userEmail={email}
                         home={property}
                         user={user}
+                        currentOffer={currentOffer}
                     />
                     {sellerPurchaseAgreement.length > 0 && (
                         <ContractCompletion offer={currentOffer} />
@@ -120,7 +148,9 @@ function mapDispatchToProps(dispatch) {
         logoutaction: bindActionCreators(logoutActions, dispatch)
     };
 }
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Dashboard);
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(Dashboard)
+);

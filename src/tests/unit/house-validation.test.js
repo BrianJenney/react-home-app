@@ -8,7 +8,7 @@ test("house validation", () => {
 
     const houseObj = {
         email: "seller4@gmail.com",
-        userid: "5bd1fde74458861f08a2667f",
+        userId: "5bd1fde74458861f08a2667f",
         price: "123",
         address: "null",
         propertyType: "null",

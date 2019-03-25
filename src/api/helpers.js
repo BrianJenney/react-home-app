@@ -93,7 +93,6 @@ export default {
     //get offer info for the current property
     getOfferForCurrentProperty: function(home, user) {
         const obj = { userId: user._id, homeId: home._id };
-
         return axios.post(`${url}/api/offers/offerinfo`, obj);
     },
 
@@ -114,27 +113,18 @@ export default {
         return axios.post(`${url}/api/offers/acceptoffer/buyer`, offer);
     },
 
-    //get all offers sent to a user
+    //get all offers belonging to a seller
     getOffers: function(user) {
         const obj = { userId: user.id };
-
         return axios.post(`${url}/api/offers/getoffers`, obj);
     },
 
-    //get info about current offer being made by a buyer
-    getOfferByUser: function(user, home) {
-        const obj = { userId: user._id, homeId: home._id };
-
-        return axios.post(`${url}/api/offers/offerinfo`, obj);
+    getOffersFromBuyer: userId => {
+        return axios.get(`${url}/api/offers/buyeroffers/${userId}`);
     },
 
     //get specific offer and associated house
     getOffer: id => {
         return axios.get(`${url}/api/offers/offer/${id}`);
-    },
-
-    //get offers belonging to a user for a particular home
-    getOffersByUserAndHome: (userId, homeId) => {
-        return axios.post(`${url}/api/offers/offerinfo`, { userId, homeId });
     }
 };

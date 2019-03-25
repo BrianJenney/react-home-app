@@ -2,7 +2,7 @@ const GET_OFFERS = "BuyerOffers/GET_OFFERS";
 const GET_OFFERS_SUCCEEDED = "BuyerOffers/GET_OFFERS_SUCCEEDED";
 
 const initialState = {
-    offer: {},
+    offers: [],
     loading: false
 };
 
@@ -17,7 +17,7 @@ const reducer = (state = initialState, action = {}) => {
         case GET_OFFERS_SUCCEEDED:
             return {
                 ...state,
-                offer: { ...action.payload.data[0] },
+                offers: [...action.payload.data],
                 loading: false
             };
         default:

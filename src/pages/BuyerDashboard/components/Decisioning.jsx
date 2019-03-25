@@ -15,6 +15,7 @@ import ChatIcon from "../../../img/icon-chat.svg";
 import DialogModal from "../../../components/modals/Message";
 import moment from "moment";
 import currencyFormatter from "../../../utils/currency-formatter";
+import { find } from "lodash";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -23,8 +24,6 @@ class Dashboard extends React.Component {
         this.state = {
             open: false,
             collapse: false,
-            offers: [],
-            home: {},
             offerUser: { email: "" }
         };
     }
@@ -37,7 +36,7 @@ class Dashboard extends React.Component {
         const { home, user } = this.props;
         const { offers } = this.state;
         if (prevProps.home !== home) {
-            this.props.offerActions.getOffers(user.id, home._id);
+            this.props.offerActions.getOffers(user.id);
         }
     };
 
@@ -45,7 +44,7 @@ class Dashboard extends React.Component {
         this.setState({
             open: true,
             currentHome: { _id: offer.homeId },
-            offerUser: { email: offer.users[0].email }
+            offerUser: { email: offer.seller[0].email }
         });
     };
 
@@ -60,17 +59,16 @@ class Dashboard extends React.Component {
         });
     };
 
-    renderOffers = () => {
-        const { offer } = this.props;
-        const { home } = this.state;
+    renderOffers = (offers, home) => {
+        const offer = find(offers, { homeId: home._id });
 
         return (
             <div key={offer._id} className="row offer-info">
                 <div className="col-1">
-                    {offer.users && offer.users.length > 0 && (
+                    {offer.seller && offer.seller.length > 0 && (
                         <img
                             className="user-pic rounded-circle w-10 h-10"
-                            src={offer.users[0].userPic}
+                            src={offer.seller[0].userPic}
                             alt=""
                         />
                     )}
@@ -134,7 +132,7 @@ class Dashboard extends React.Component {
     };
 
     render() {
-        const { offer } = this.props;
+        const { offers, home } = this.props;
         return (
             <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -150,11 +148,11 @@ class Dashboard extends React.Component {
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
-                    {offer ? this.renderOffers() : ""}
+                    {offers && home ? this.renderOffers(offers, home) : ""}
                     <DialogModal
                         closeModal={this.closeModal.bind(this)}
                         open={this.state.open}
-                        propertyInfo={this.state.home}
+                        propertyInfo={this.props.home}
                         senderEmail={this.props.user.name}
                         user={this.state.offerUser}
                     />
@@ -169,7 +167,7 @@ function mapStateToProps(state) {
         id: state.loggedIn.id,
         email: state.loggedIn.name,
         user: state.loggedIn.user,
-        offer: state.buyerOffers.offer
+        offers: state.buyerOffers.offers
     };
 }
 
