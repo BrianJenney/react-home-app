@@ -76,6 +76,11 @@ class Dashboard extends React.Component {
             "sellerPurchaseAgreement",
             ""
         );
+
+        const maybeTruncate = word => {
+            return word.length < 12 ? word : `${word.slice(0, 12)}...`;
+        };
+
         return (
             <div>
                 <TopNav />
@@ -86,15 +91,16 @@ class Dashboard extends React.Component {
                     <div>
                         {offers.map((offer, idx) => {
                             return (
-                                <li
+                                <span
+                                    key={idx}
                                     onClick={() => {
                                         this.props.history.replace(
                                             `/buyerdashboard/${offer.homeId}`
                                         );
                                     }}
                                 >
-                                    {offer.homeId}
-                                </li>
+                                    {maybeTruncate(offer.home.address)} |
+                                </span>
                             );
                         })}
                     </div>
