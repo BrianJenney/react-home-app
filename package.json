@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
     "axios": "^0.16.2",
     "google-maps-react": "^1.1.2",
     "lodash": "^4.17.11",
