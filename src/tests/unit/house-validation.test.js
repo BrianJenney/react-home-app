@@ -4,7 +4,7 @@ import PropertyForm from "../../pages/AddProperty/components/PropertyForm";
 import { shallow } from "enzyme";
 
 test("house validation", () => {
-    const wrapper = shallow(<PropertyForm />);
+    const wrapper = shallow(<PropertyForm.WrappedComponent />);
 
     const houseObj = {
         email: "seller4@gmail.com",
@@ -21,10 +21,6 @@ test("house validation", () => {
         status: "publish"
     };
 
-    expect(
-        wrapper
-            .instance()
-            .validateHouseObject(houseObj)
-            .equals(true)
-    );
+    console.log(wrapper.instance());
+    expect(wrapper.validateHouseObject(houseObj).equals(true));
 });

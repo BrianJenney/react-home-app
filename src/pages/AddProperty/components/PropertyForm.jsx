@@ -144,6 +144,12 @@ class AddProp extends React.Component {
     postHome = form => {
         API.posthome(this.state.form)
             .then(response => {
+                console.log(response);
+                if (response.errors) {
+                    alert(
+                        `Oops, something went wrong. Try uploading your property again.`
+                    );
+                }
                 this.props.history.push("/dashboard");
             })
             .catch(e => {
