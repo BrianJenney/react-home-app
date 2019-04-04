@@ -76,7 +76,8 @@ class SubmitOffer extends React.Component {
         API.submitOffer(this.props.home._id, this.props.user.id).then(res => {
             this.setState({
                 collapse: false,
-                readyToSend: res.data.readyToSend
+                readyToSend: res.data.readyToSend,
+                offerSubmitted: true
             });
         });
     };

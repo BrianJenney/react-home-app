@@ -68,7 +68,7 @@ class Dashboard extends React.Component {
     };
 
     render() {
-        const { currentOffer, property, offers } = this.state;
+        const { currentOffer, currentHouse, property, offers } = this.state;
         const { user, email } = this.props;
 
         const sellerPurchaseAgreement = get(
@@ -86,7 +86,7 @@ class Dashboard extends React.Component {
                 <TopNav />
                 <div className="container buyer-dash w-80 mb-10 h-100">
                     <h1>Buyer Dashboard</h1>
-                    <img src={this.state.currentHouse} alt="" />
+                    <img src={currentHouse} alt="" />
 
                     <div>
                         {offers.map((offer, idx) => {
@@ -113,7 +113,7 @@ class Dashboard extends React.Component {
                     />
                     <PurchaseAgreement
                         userEmail={email}
-                        home={this.state.property}
+                        home={property}
                         user={user}
                         currentOffer={currentOffer}
                     />
@@ -123,12 +123,15 @@ class Dashboard extends React.Component {
                         user={user}
                         currentOffer={currentOffer}
                     />
-                    <Decisioning
-                        userEmail={email}
-                        home={property}
-                        user={user}
-                        currentOffer={currentOffer}
-                    />
+                    {offers.length > 0 && property && (
+                        <Decisioning
+                            userEmail={email}
+                            home={property}
+                            user={user}
+                            offers={offers}
+                            currentOffer={currentOffer}
+                        />
+                    )}
                     {sellerPurchaseAgreement.length > 0 && (
                         <ContractCompletion offer={currentOffer} />
                     )}

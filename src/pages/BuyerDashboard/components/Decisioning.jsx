@@ -117,12 +117,21 @@ class Dashboard extends React.Component {
                         </button>
                     )}
 
-                    {!offer.accepted && (
+                    {!offer.accepted && offer.sellerPurchaseAgreement && (
+                        <button
+                            onClick={this.acceptOffer.bind(null, offer)}
+                            className="btn btn-light btn-primary"
+                        >
+                            Accept
+                        </button>
+                    )}
+                    {!offer.accepted && !offer.sellerPurchaseAgreement && (
                         <button
                             onClick={this.acceptOffer.bind(null, offer)}
                             className="btn btn-light"
+                            disabled
                         >
-                            Accept
+                            Pending
                         </button>
                     )}
                 </div>
@@ -148,13 +157,15 @@ class Dashboard extends React.Component {
                 </div>
                 <Collapse isOpen={this.state.collapse}>
                     {offers && home ? this.renderOffers(offers, home) : ""}
-                    <DialogModal
-                        closeModal={this.closeModal.bind(this)}
-                        open={this.state.open}
-                        propertyInfo={this.props.home}
-                        senderEmail={this.props.user.name}
-                        user={this.state.offerUser}
-                    />
+                    {home && (
+                        <DialogModal
+                            closeModal={this.closeModal.bind(this)}
+                            open={this.state.open}
+                            propertyInfo={home}
+                            senderEmail={this.props.user.name}
+                            user={this.state.offerUser}
+                        />
+                    )}
                 </Collapse>
             </div>
         );
@@ -165,8 +176,7 @@ function mapStateToProps(state) {
     return {
         id: state.loggedIn.id,
         email: state.loggedIn.name,
-        user: state.loggedIn.user,
-        offers: state.buyerOffers.offers
+        user: state.loggedIn.user
     };
 }
 
