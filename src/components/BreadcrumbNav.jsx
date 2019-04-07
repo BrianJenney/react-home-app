@@ -6,33 +6,35 @@ import "../styles/breadcrumb-nav.css";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { switchUser } from "../actions/switchUser";
+
 const home = <i className="material-icons">home</i>;
 const list = <FontIcon className="material-icons">view_list</FontIcon>;
-
 const search = <i className="material-icons">location_searching</i>;
 const signout = <i className="material-icons">highlight_off</i>;
 const envelope = <i className="material-icons">message</i>;
 
 class NavBar extends React.Component {
-    state = {
-        selectedPage: "dash",
-        anchorEl: null
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedPage: "dash",
+            anchorEl: null,
+            open: false
+        };
+    }
 
     handleClick = event => {
         this.setState({
-            anchorEl: event.currentTarget
+            anchorEl: event.currentTarget,
+            open: true
         });
     };
 
     handleClose = () => {
         this.setState({
-            anchorEl: null
+            anchorEl: null,
+            open: false
         });
-    };
-
-    onChange = e => {
-        this.props.switchUser(e.target.value);
     };
 
     select = page => {
@@ -62,29 +64,28 @@ class NavBar extends React.Component {
     };
 
     switchUserType = type => {
+        this.handleClose();
         this.props.switchUser(type);
-        this.setState({
-            open: false
-        });
     };
 
     render() {
         const { userType } = this.props;
-        const { anchorEl } = this.state;
-        const open = Boolean(anchorEl);
+        const { anchorEl, open } = this.state;
         const isActive = this.selectedPage;
+
         return (
             <footer>
                 <div>
                     <nav className="bottom-nav">
                         <ul>
-                            <li onClick={this.handleClick}>
-                                {userType.toUpperCase()}
+                            <li>
+                                <p onClick={this.handleClick}>
+                                    {userType.toUpperCase()}
+                                </p>
                                 <Popover
                                     id="simple-popper"
                                     open={open}
                                     anchorEl={anchorEl}
-                                    onClose={this.handleClose}
                                     anchorOrigin={{
                                         vertical: "top",
                                         horizontal: "center"
