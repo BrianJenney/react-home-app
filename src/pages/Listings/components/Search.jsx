@@ -3,7 +3,8 @@ import { Card } from "material-ui/Card";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import { GoogleApiWrapper } from "google-maps-react";
-import SubNav from "../../../components/SubNav";
+import GoogleApiHOC from "../../../components/GoogleApiHOC";
+import TopNav from "../../../components/TopNav";
 import API from "../../../api/helpers.js";
 import HousePics from "./HousePics";
 import "../../../styles/search.css";
@@ -96,7 +97,7 @@ class UserSearch extends Component {
         return (
             <Card className="col-md-5 user-search" style={CardStyle}>
                 <div className="header row" style={CardStyle}>
-                    <SubNav />
+                    <TopNav />
                 </div>
                 <div className="search-input">
                     <span className="fa fa-search" />
@@ -222,10 +223,8 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-const WrappedContainer = GoogleApiWrapper({
-    apiKey: "AIzaSyBd8HrEYJVSBoNvYs-fWVynMBBHgQbD1mo"
-})(UserSearch);
+const WrappedContainer = GoogleApiHOC(UserSearch);
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(WrappedContainer);
+)(UserSearch);

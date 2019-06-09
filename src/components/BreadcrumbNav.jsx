@@ -79,9 +79,12 @@ class NavBar extends React.Component {
                     <nav className="bottom-nav">
                         <ul>
                             <li>
-                                <p onClick={this.handleClick}>
+                                <a
+                                    className="crumb-link"
+                                    onClick={this.handleClick}
+                                >
                                     {userType.toUpperCase()}
-                                </p>
+                                </a>
                                 <Popover
                                     id="simple-popper"
                                     open={open}
@@ -96,6 +99,7 @@ class NavBar extends React.Component {
                                     }}
                                 >
                                     <li
+                                        className="pop-over-item"
                                         onClick={this.switchUserType.bind(
                                             null,
                                             "buyer"
@@ -104,6 +108,7 @@ class NavBar extends React.Component {
                                         Buyer
                                     </li>
                                     <li
+                                        className="pop-over-item"
                                         onClick={this.switchUserType.bind(
                                             null,
                                             "seller"

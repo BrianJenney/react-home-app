@@ -3,6 +3,7 @@ import API from "../../../api/helpers.js";
 import NavBar from "../../../components/BreadcrumbNav";
 import TopNav from "../../../components/TopNav";
 import { GoogleApiWrapper } from "google-maps-react";
+import GoogleApiHOC from "../../../components/GoogleApiHOC";
 
 import RaisedButton from "material-ui/RaisedButton";
 import FloatingActionButton from "material-ui/FloatingActionButton";
@@ -36,22 +37,22 @@ class AddProp extends React.Component {
     };
 
     state = {
-        autoComplete: null,
+        autoComplete: "",
         disabled: false,
         imgsToDelete: [],
         imgs: [],
-        price: 0,
-        address: null,
-        propertyType: null,
-        description: null,
-        timeFrame: null,
+        price: undefined,
+        address: undefined,
+        propertyType: "",
+        description: "",
+        timeFrame: "",
         bedRooms: 1,
         bathRooms: 1,
         sqFeet: 1000,
         sqFeetLot: 1000,
         yearBuilt: Date.now(),
         form: new FormData(),
-        status: null
+        status: ""
     };
 
     removePic = idx => {
@@ -81,7 +82,7 @@ class AddProp extends React.Component {
     };
 
     callAddressAutoComplete = input => {
-        const google = this.props.google;
+        const { google } = this.props;
         let autoComplete = new google.maps.places.Autocomplete(
             document.getElementById("address"),
             { types: ["geocode"] }
@@ -253,7 +254,7 @@ class AddProp extends React.Component {
                                 <input
                                     className="no-border text-center"
                                     placeholder="$300,000"
-                                    value={this.state.price || null}
+                                    value={this.state.price}
                                     onChange={this.onChange.bind(this)}
                                     type="text"
                                     id="price"
@@ -401,9 +402,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-const WrappedContainer = GoogleApiWrapper({
-    apiKey: "AIzaSyBd8HrEYJVSBoNvYs-fWVynMBBHgQbD1mo"
-})(AddProp);
+const WrappedContainer = GoogleApiHOC(AddProp);
 export default connect(
     mapStateToProps,
     mapDispatchToProps
