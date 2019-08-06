@@ -1,10 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import PropertyForm from "../../pages/AddProperty/components/PropertyForm";
+import _PropertyForm from "../../pages/AddProperty/components/PropertyForm";
 import { shallow } from "enzyme";
 
 test("house validation", () => {
-    const wrapper = shallow(<PropertyForm.WrappedComponent />);
+    const PropertyForm = _PropertyForm.WrappedComponent;
+    const wrapper = shallow(<PropertyForm />);
 
     const houseObj = {
         email: "seller4@gmail.com",

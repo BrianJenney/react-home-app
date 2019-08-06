@@ -11,7 +11,6 @@ import API from "../../api/helpers";
 
 function* addMapMarkers(action) {
     try {
-        // const { searchObj } = action;
         const result = yield API.getAllListings();
         yield put(addMapMarkerSucceeded(result));
     } catch (e) {
