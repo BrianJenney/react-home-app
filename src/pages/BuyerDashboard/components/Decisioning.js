@@ -1,12 +1,8 @@
 import React from "react";
 import { Collapse, Button, CardBody, Card } from "reactstrap";
 import API from "../../../api/helpers";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
-import * as loginActions from "../../../actions/logout";
-import * as logoutActions from "../../../actions/logout";
 import * as actions from "../BuyerOffers.ducks";
 import TopNav from "../../../components/TopNav";
 import NavBar from "../../../components/BreadcrumbNav";
@@ -35,7 +31,7 @@ class Dashboard extends React.Component {
         const { home, user } = this.props;
         const { offers } = this.state;
         if (prevProps.home !== home) {
-            this.props.offerActions.getOffers(user.id);
+            this.props.offerActions.getOffers(user._id);
         }
     };
 
@@ -172,22 +168,4 @@ class Dashboard extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        id: state.loggedIn.id,
-        email: state.loggedIn.name,
-        user: state.loggedIn.user
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        loginaction: bindActionCreators(loginActions, dispatch),
-        logoutaction: bindActionCreators(logoutActions, dispatch),
-        offerActions: bindActionCreators(actions, dispatch)
-    };
-}
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Dashboard);
+export default Dashboard;

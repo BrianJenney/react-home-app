@@ -60,7 +60,7 @@ class PurchaseAgreement extends React.Component {
 
         let obj = {
             homeId: this.props.home._id,
-            userId: this.props.user.id,
+            userId: this.props.user._id,
             offer: e.target.value
         };
 

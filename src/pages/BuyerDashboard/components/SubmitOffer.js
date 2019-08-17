@@ -26,7 +26,7 @@ class SubmitOffer extends React.Component {
         const { user, home } = prevProps;
         if (prevProps.currentOffer !== this.props.currentOffer) {
             let userObj = {};
-            user._id = user.id;
+            user._id = user._id;
             this.getOfferData(user, home);
         }
     }
@@ -62,7 +62,7 @@ class SubmitOffer extends React.Component {
             this.state.form.set("file", file);
             this.state.form.set("documentType", documentType);
             this.state.form.set("homeId", this.props.home._id);
-            this.state.form.set("userId", this.props.user.id);
+            this.state.form.set("userId", this.props.user._id);
 
             API.makeOffer(this.state.form).then(res => {
                 this.setState({
@@ -73,7 +73,7 @@ class SubmitOffer extends React.Component {
     };
 
     submitOffer = () => {
-        API.submitOffer(this.props.home._id, this.props.user.id).then(res => {
+        API.submitOffer(this.props.home._id, this.props.user._id).then(res => {
             this.setState({
                 collapse: false,
                 readyToSend: res.data.readyToSend,
