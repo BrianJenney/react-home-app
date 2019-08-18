@@ -1,9 +1,8 @@
 export const login = user => {
+    console.log(user);
     return {
         type: "LOGIN",
-        loggedIn: user.isLogged,
-        name: user.name,
-        id: user.id,
-        user
+        loggedIn: true,
+        ...user
     };
 };

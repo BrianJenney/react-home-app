@@ -6,12 +6,6 @@ import ChatBox from "./components/ChatBox";
 import TopNav from "../../components/TopNav";
 import { List, ListItem } from "material-ui/List";
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-
-import * as loginActions from "../../actions/login";
-import * as logoutActions from "../../actions/logout";
-
 class UserMessages extends React.Component {
     constructor(props) {
         super(props);
@@ -27,13 +21,14 @@ class UserMessages extends React.Component {
 
     componentDidMount = () => {
         let self = this;
-        API.getMessages(this.props.email).then(response => {
+        const { user } = this.props;
+        API.getMessages(user.email).then(response => {
             const messages = response.data;
             //only show the user in the message that is not the logged in user
             messages.map(message => {
                 return (message.participants = message.participants.filter(
                     name => {
-                        return name !== self.props.email;
+                        return name !== self.props.user.email;
                     }
                 ));
             });
@@ -43,9 +38,9 @@ class UserMessages extends React.Component {
 
     getConvo = message => {
         //set viewed of this message to true
-
+        const { user } = this.props;
         let unviewedMessages = message.messages.filter(item => {
-            return item.to === this.props.email && !item.viewed;
+            return item.to === user.email && !item.viewed;
         });
         //if any message sent to user is not read, set all to read after opening convo
         unviewedMessages.forEach(convo => {
@@ -123,20 +118,4 @@ class UserMessages extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        id: state.loggedIn.id,
-        email: state.loggedIn.name
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        loginaction: bindActionCreators(loginActions, dispatch),
-        logoutaction: bindActionCreators(logoutActions, dispatch)
-    };
-}
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(UserMessages);
+export default UserMessages;

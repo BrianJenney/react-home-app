@@ -1,11 +1,9 @@
 export default (state = {}, action) => {
     switch (action.type) {
         case "LOGIN":
+            const { _id, type, ...rest } = action;
             return Object.assign({}, state, {
-                loggedIn: action.isLogged,
-                name: action.name,
-                id: action.id,
-                user: action.user,
+                ...rest,
                 userType: "buyer"
             });
         case "LOGOUT":

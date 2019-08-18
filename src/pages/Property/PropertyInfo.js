@@ -7,11 +7,6 @@ import { Link } from "react-router-dom";
 import "../../styles/propertyInfo.css";
 import DialogModal from "../../components/modals/Message";
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import * as loginActions from "../../actions/login";
-import * as logoutActions from "../../actions/logout";
-
 const FontAwesome = require("react-fontawesome");
 
 class Property extends Component {
@@ -138,7 +133,7 @@ class Property extends Component {
                     closeModal={this.closeModal.bind(this)}
                     open={this.state.open}
                     propertyInfo={this.state.property}
-                    senderEmail={this.props.email}
+                    senderEmail={this.props.user.email}
                     user={this.state.user}
                 />
                 <NavBar selectedIndex={1} />
@@ -147,20 +142,4 @@ class Property extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        id: state.loggedIn.id,
-        email: state.loggedIn.name
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        loginaction: bindActionCreators(loginActions, dispatch),
-        logoutaction: bindActionCreators(logoutActions, dispatch)
-    };
-}
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Property);
+export default Property;

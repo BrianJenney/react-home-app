@@ -115,7 +115,7 @@ export default {
 
     //get all offers belonging to a seller
     getOffers: function(user) {
-        const obj = { userId: user.id };
+        const obj = { userId: user._id };
         return axios.post(`${url}/api/offers/getoffers`, obj);
     },
 

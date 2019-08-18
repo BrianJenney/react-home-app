@@ -22,6 +22,7 @@ test("house validation", () => {
         status: "publish"
     };
 
-    console.log(wrapper.instance());
+    console.log(wrapper, "WRAPPER");
+
     expect(wrapper.validateHouseObject(houseObj).equals(true));
 });

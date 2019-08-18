@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import "../../../styles/picbox.css";
 
 const markerIcon = <i className="material-icons">room</i>;
@@ -55,13 +53,6 @@ class HousePics extends Component {
             </div>
         );
     }
-}
-
-function mapStateToProps(state) {
-    return {
-        id: state.loggedIn.id,
-        email: state.loggedIn.name
-    };
 }
 
 export default HousePics;

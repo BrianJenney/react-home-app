@@ -34,12 +34,16 @@ StoreInstance.subscribe(
 );
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const user = StoreInstance.getState().loggedIn;
+    const user = StoreInstance.getState().auth;
     return (
         <Route
             {...rest}
             render={props =>
-                user.id ? <Component {...props} /> : <Redirect to="/" />
+                user._id ? (
+                    <Component {...props} user={user} />
+                ) : (
+                    <Redirect to="/" />
+                )
             }
         />
     );

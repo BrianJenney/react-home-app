@@ -28,7 +28,7 @@ class FillOutProfile extends React.Component {
     }
 
     componentDidMount() {
-        API.userInfo(this.props.user.id).then(res => {
+        API.userInfo(this.props.user._id).then(res => {
             this.setState({
                 phoneNumber: res.data.phoneNumber || "",
                 profilePic: res.data.userPic || ""

@@ -21,9 +21,9 @@ class SignIn extends React.Component {
         };
     }
 
-    componentDidMount = () => {
-        this.props.logoutaction.logout();
-    };
+    // componentDidMount = () => {
+    //     this.props.logoutaction.logout();
+    // };
 
     onChange = e => {
         let user = {};
@@ -58,12 +58,7 @@ class SignIn extends React.Component {
             this.saveToken(response.data.token);
         }
 
-        const user = {
-            isLogged: true,
-            name: this.state.email,
-            id: response.data.userInfo._id,
-            user: response.data.userInfo
-        };
+        const user = response.data.userInfo;
 
         this.props.loginaction.login(user);
         this.props.history.push("/listings");
@@ -123,8 +118,8 @@ class SignIn extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        id: state.loggedIn.id,
-        email: state.loggedIn.name
+        id: state.auth.id,
+        email: state.auth.name
     };
 }
 

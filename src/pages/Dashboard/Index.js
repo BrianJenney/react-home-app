@@ -9,23 +9,17 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const { userType } = this.props;
+        const { user } = this.props;
         return (
             <div>
-                {userType.toLowerCase() === "seller" ? (
-                    <SellerDashboard />
+                {user.userType.toLowerCase() === "seller" ? (
+                    <SellerDashboard user={user} />
                 ) : (
-                    <BuyerDashboard />
+                    <BuyerDashboard user={user} />
                 )}
             </div>
         );
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        userType: state.loggedIn.userType
-    };
-}
-
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;

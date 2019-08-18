@@ -1,9 +1,5 @@
 import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import * as loginActions from "../../actions/login";
-import * as logoutActions from "../../actions/logout";
 import API from "../../api/helpers";
 import TopNav from "../../components/TopNav";
 import NavBar from "../../components/BreadcrumbNav";
@@ -41,7 +37,7 @@ class Dashboard extends React.Component {
 
     getOffers = () => {
         const { userId } = this.props;
-        API.getOffersFromBuyer(this.props.user.id).then(res => {
+        API.getOffersFromBuyer(this.props.user._id).then(res => {
             this.setState({ offers: res.data });
         });
     };
@@ -56,7 +52,7 @@ class Dashboard extends React.Component {
                 () => {
                     API.getOfferForCurrentProperty(
                         this.state.property,
-                        this.props.user.user
+                        this.props.user
                     ).then(res => {
                         this.setState({
                             currentOffer: res.data[0]
@@ -69,7 +65,7 @@ class Dashboard extends React.Component {
 
     render() {
         const { currentOffer, currentHouse, property, offers } = this.state;
-        const { user, email } = this.props;
+        const { user } = this.props;
 
         const sellerPurchaseAgreement = get(
             currentOffer,
@@ -106,26 +102,26 @@ class Dashboard extends React.Component {
                     </div>
 
                     <Financing
-                        userEmail={email}
+                        userEmail={user.email}
                         home={property}
                         user={user}
                         currentOffer={currentOffer}
                     />
                     <PurchaseAgreement
-                        userEmail={email}
+                        userEmail={user.email}
                         home={property}
                         user={user}
                         currentOffer={currentOffer}
                     />
                     <SubmitOffer
-                        userEmail={email}
+                        userEmail={user.email}
                         home={property}
                         user={user}
                         currentOffer={currentOffer}
                     />
                     {offers.length > 0 && property && (
                         <Decisioning
-                            userEmail={email}
+                            userEmail={user.email}
                             home={property}
                             user={user}
                             offers={offers}
@@ -143,23 +139,4 @@ class Dashboard extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        id: state.loggedIn.id,
-        email: state.loggedIn.name,
-        user: state.loggedIn.user
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        loginaction: bindActionCreators(loginActions, dispatch),
-        logoutaction: bindActionCreators(logoutActions, dispatch)
-    };
-}
-export default withRouter(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(Dashboard)
-);
+export default withRouter(Dashboard);

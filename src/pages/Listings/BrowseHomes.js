@@ -5,8 +5,6 @@ import UserSearch from "./components/Search";
 import HousePics from "./components/HousePics";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as loginActions from "../../actions/login";
-import * as logoutActions from "../../actions/logout";
 import * as actions from "./Listings.ducks";
 
 class BrowseListings extends React.Component {
@@ -40,16 +38,12 @@ class BrowseListings extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        id: state.loggedIn.id,
-        email: state.loggedIn.name,
         properties: state.listings
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        loginaction: bindActionCreators(loginActions, dispatch),
-        logoutaction: bindActionCreators(logoutActions, dispatch),
         listings: bindActionCreators(actions, dispatch)
     };
 }

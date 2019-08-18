@@ -1,8 +1,4 @@
 import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import * as loginActions from "../../actions/login";
-import * as logoutActions from "../../actions/logout";
 import API from "../../api/helpers";
 import "../../styles/dashboard.css";
 import TopNav from "../../components/TopNav";
@@ -22,7 +18,7 @@ class OfferAccepted extends React.Component {
 
     componentDidMount = () => {
         API.getOffer(this.props.match.params.id).then(res => {
-            if (res.data.home.userId === this.props.user.user._id) {
+            if (res.data.home.userId === this.props.user._id) {
                 this.setState({
                     isSeller: true,
                     isBuyer: false,
@@ -100,19 +96,4 @@ class OfferAccepted extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        user: state.loggedIn.user
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        loginaction: bindActionCreators(loginActions, dispatch),
-        logoutaction: bindActionCreators(logoutActions, dispatch)
-    };
-}
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(OfferAccepted);
+export default OfferAccepted;

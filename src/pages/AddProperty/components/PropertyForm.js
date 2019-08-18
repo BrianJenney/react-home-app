@@ -11,9 +11,6 @@ import ContentAdd from "material-ui/svg-icons/content/add";
 import TextField from "material-ui/TextField";
 import Dropzone from "react-dropzone";
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import * as loginActions from "../../../actions/login";
 import EditIcon from "../../../img/icon-edit-small.png";
 import PicPreview from "./PicPreview";
 import isNumber from "../../../utils/is-number";
@@ -110,8 +107,8 @@ class AddProp extends React.Component {
             return;
         }
 
-        this.state.form.append("email", this.props.email);
-        this.state.form.append("userId", this.props.id);
+        this.state.form.append("email", this.props.user.email);
+        this.state.form.append("userId", this.props.user._id);
         this.state.form.append("price", this.state.price);
         this.state.form.append("address", this.state.address);
         this.state.form.append("propertyType", this.state.propertyType);
@@ -145,7 +142,6 @@ class AddProp extends React.Component {
     postHome = form => {
         API.posthome(this.state.form)
             .then(response => {
-                console.log(response);
                 if (response.errors) {
                     alert(
                         `Oops, something went wrong. Try uploading your property again.`
@@ -389,21 +385,5 @@ class AddProp extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        id: state.loggedIn.id,
-        email: state.loggedIn.name
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(loginActions, dispatch)
-    };
-}
-
 const WrappedContainer = GoogleApiHOC(AddProp);
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(WrappedContainer);
+export default WrappedContainer;
