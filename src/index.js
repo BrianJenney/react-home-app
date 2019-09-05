@@ -35,6 +35,7 @@ StoreInstance.subscribe(
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     const user = StoreInstance.getState().auth;
+    console.log({ user });
     return (
         <Route
             {...rest}

@@ -1,7 +1,7 @@
 export default (state = {}, action) => {
     switch (action.type) {
         case "LOGIN":
-            const { _id, type, ...rest } = action;
+            const { type, ...rest } = action;
             return Object.assign({}, state, {
                 ...rest,
                 userType: "buyer"

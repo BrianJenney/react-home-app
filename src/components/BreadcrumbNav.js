@@ -178,7 +178,7 @@ class NavBar extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        userType: state.userType
+        userType: state.auth.userType
     };
 }
 
