@@ -26,7 +26,6 @@ class SubmitOffer extends React.Component {
         const { user, home } = prevProps;
         if (prevProps.currentOffer !== this.props.currentOffer) {
             let userObj = {};
-            user._id = user._id;
             this.getOfferData(user, home);
         }
     }
