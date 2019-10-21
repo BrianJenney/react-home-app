@@ -13,7 +13,6 @@ const Quiz = () => {
     const optionChangeHandler = (val, modelName) => {
         form.append(modelName, val);
         setForm(form);
-        debugger;
 
         if (page + 1 > Object.keys(config).length - 1) {
             //TODO: send form
