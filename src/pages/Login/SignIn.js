@@ -6,7 +6,6 @@ import * as logoutActions from "../../actions/logout";
 import API from "../../api/helpers.js";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
 import NavBar from "../../components/BreadcrumbNav";
 import "../../styles/sign-in.css";
 

@@ -1,8 +1,7 @@
 import React from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse } from "reactstrap";
 import API from "../../../api/helpers";
 import FileUpload from "../../../components/FileUpload";
-import { Link } from "react-router-dom";
 
 class DisclosureAgreement extends React.Component {
     constructor(props) {
@@ -18,11 +17,6 @@ class DisclosureAgreement extends React.Component {
             statewideAdvisory: "",
             supplementalQuestionaire: "",
             form: new FormData()
-        };
-
-        const styles = {
-            display: "flex",
-            alignItems: "center"
         };
     }
 

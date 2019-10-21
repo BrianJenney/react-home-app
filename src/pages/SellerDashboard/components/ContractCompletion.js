@@ -1,12 +1,10 @@
 import React from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse } from "reactstrap";
 import API from "../../../api/helpers";
-import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import FileUpload from "../../../components/FileUpload";
 import "../../../styles/dashboard.css";
-import moment from "moment";
-import { find, isEmpty, get } from "lodash";
+import { find, get } from "lodash";
 
 class ContractCompletion extends React.Component {
     constructor(props) {
@@ -56,7 +54,6 @@ class ContractCompletion extends React.Component {
 
     handleDrop = (documentType, files) => {
         const { offer } = this.state;
-        const { user } = this.props;
         files.forEach(file => {
             this.state.form.set("file", file);
             this.state.form.set("documentType", documentType);

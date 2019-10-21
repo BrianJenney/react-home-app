@@ -4,8 +4,6 @@ import NavBar from "../../../components/BreadcrumbNav";
 import TopNav from "../../../components/TopNav";
 import { GoogleApiWrapper } from "google-maps-react";
 import GoogleApiHOC from "../../../components/GoogleApiHOC";
-
-import RaisedButton from "material-ui/RaisedButton";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import TextField from "material-ui/TextField";
@@ -246,7 +244,7 @@ class AddProp extends React.Component {
                                 <small>Price</small>
                             </p>
                             <div className="edit-price">
-                                <img src={EditIcon} />
+                                <img src={EditIcon} alt="edit-icon" />
                                 <input
                                     className="no-border text-center"
                                     placeholder="$300,000"
@@ -268,7 +266,7 @@ class AddProp extends React.Component {
                 </div>
 
                 <div className="add-address container-fluid ml-3">
-                    <img src={EditIcon} />
+                    <img src={EditIcon} alt="edit-icon" />
                     <input
                         value={this.state.address}
                         className="no-border"
@@ -311,7 +309,7 @@ class AddProp extends React.Component {
                         </div>
 
                         <div className="edit-sqfeet form-inline">
-                            <img src={EditIcon} />
+                            <img src={EditIcon} alt="edit-icon" />
                             <input
                                 value={this.state.sqFeet || null}
                                 className="no-border"
@@ -324,7 +322,7 @@ class AddProp extends React.Component {
                         </div>
 
                         <div className="edit-sqfeet-lot form-inline">
-                            <img src={EditIcon} />
+                            <img src={EditIcon} alt="edit-icon" />
                             <input
                                 value={this.state.sqFeetLot || null}
                                 className="no-border"

@@ -1,8 +1,7 @@
 import React from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse } from "reactstrap";
 import API from "../../../api/helpers";
 import { Link } from "react-router-dom";
-import NavBar from "../../../components/BreadcrumbNav";
 
 class Messages extends React.Component {
     constructor(props) {
@@ -11,11 +10,6 @@ class Messages extends React.Component {
         this.state = {
             collapse: false,
             unreadMessages: 0
-        };
-
-        const styles = {
-            display: "flex",
-            alignItems: "center"
         };
     }
 

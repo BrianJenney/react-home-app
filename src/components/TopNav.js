@@ -29,7 +29,7 @@ class TopNav extends React.Component {
         return (
             <div className="top-nav">
                 <div className="logo">
-                    <img src={Logo} />
+                    <img src={Logo} alt="micasa-logo" />
                 </div>
                 <div className="nav-options">
                     <p onClick={() => this.select(0)}>Buy</p>

@@ -1,7 +1,6 @@
 import React from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import API from "../../api/helpers.js";
@@ -98,7 +97,6 @@ class RegistrationPage extends React.Component {
     };
 
     confirmPassword = e => {
-        let passwordMatches = false;
         const confirmedPass = e.target.value;
         const { password } = this.state;
         if (confirmedPass === password) {
@@ -250,8 +248,8 @@ class RegistrationPage extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        id: state.user._id,
-        email: state.user.name
+        id: state.auth.id,
+        email: state.auth.name
     };
 }
 

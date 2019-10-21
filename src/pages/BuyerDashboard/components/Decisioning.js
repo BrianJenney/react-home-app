@@ -1,15 +1,8 @@
 import React from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse } from "reactstrap";
 import API from "../../../api/helpers";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
-import * as actions from "../BuyerOffers.ducks";
-import TopNav from "../../../components/TopNav";
-import NavBar from "../../../components/BreadcrumbNav";
 import ChatIcon from "../../../img/icon-chat.svg";
 import DialogModal from "../../../components/modals/Message";
-import moment from "moment";
-import currencyFormatter from "../../../utils/currency-formatter";
 import { find } from "lodash";
 
 class Dashboard extends React.Component {
@@ -29,7 +22,6 @@ class Dashboard extends React.Component {
 
     componentDidUpdate = prevProps => {
         const { home, user } = this.props;
-        const { offers } = this.state;
         if (prevProps.home !== home) {
             this.props.offerActions.getOffers(user._id);
         }

@@ -1,6 +1,5 @@
-import React, { PropTypes } from "react";
+import React from "react";
 import Popover from "@material-ui/core/Popover";
-import FontIcon from "material-ui/FontIcon";
 import { withRouter } from "react-router";
 import "../styles/breadcrumb-nav.css";
 import { bindActionCreators } from "redux";
@@ -8,7 +7,6 @@ import { connect } from "react-redux";
 import { switchUser } from "../actions/switchUser";
 
 const home = <i className="material-icons">home</i>;
-const list = <FontIcon className="material-icons">view_list</FontIcon>;
 const search = <i className="material-icons">location_searching</i>;
 const signout = <i className="material-icons">highlight_off</i>;
 const envelope = <i className="material-icons">message</i>;
@@ -71,7 +69,6 @@ class NavBar extends React.Component {
     render() {
         const { userType } = this.props;
         const { anchorEl, open } = this.state;
-        const isActive = this.selectedPage;
 
         return (
             <footer>
@@ -82,6 +79,7 @@ class NavBar extends React.Component {
                                 <a
                                     className="crumb-link"
                                     onClick={this.handleClick}
+                                    href="JavaScript:Void(0);"
                                 >
                                     {userType.toUpperCase()}
                                 </a>
@@ -124,6 +122,7 @@ class NavBar extends React.Component {
                                     className="crumb-link"
                                     icon={search}
                                     onClick={() => this.select("listings")}
+                                    href="JavaScript:Void(0);"
                                 >
                                     House Hunt
                                 </a>
@@ -134,6 +133,7 @@ class NavBar extends React.Component {
                                     className="crumb-link"
                                     icon={home}
                                     onClick={() => this.select("dash")}
+                                    href="JavaScript:Void(0);"
                                 >
                                     Dashboard
                                 </a>
@@ -144,6 +144,7 @@ class NavBar extends React.Component {
                                     className="crumb-link"
                                     icon={envelope}
                                     onClick={() => this.select("messages")}
+                                    href="JavaScript:Void(0);"
                                 >
                                     Messages
                                 </a>
@@ -154,6 +155,7 @@ class NavBar extends React.Component {
                                     className="crumb-link"
                                     icon={signout}
                                     onClick={() => this.select("register")}
+                                    href="JavaScript:Void(0);"
                                 >
                                     Sign Up
                                 </a>
@@ -164,6 +166,7 @@ class NavBar extends React.Component {
                                     className="crumb-link"
                                     icon={signout}
                                     onClick={() => this.select("login")}
+                                    href="JavaScript:Void(0);"
                                 >
                                     Log In
                                 </a>

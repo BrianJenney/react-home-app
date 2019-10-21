@@ -1,12 +1,7 @@
 import React from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
-import API from "../../../api/helpers";
-import { Link } from "react-router-dom";
+import { Collapse } from "reactstrap";
 import { withRouter } from "react-router";
-import FileUpload from "../../../components/FileUpload";
 import "../../../styles/dashboard.css";
-import moment from "moment";
-import { find, isEmpty, get } from "lodash";
 
 class ContractCompletion extends React.Component {
     constructor(props) {
@@ -24,7 +19,6 @@ class ContractCompletion extends React.Component {
 
     render() {
         const { offer } = this.props;
-        const userFirstName = get(offer, "users[0].firstName", "");
         return (
             <div className="card p-3">
                 <div style={{ display: "flex", alignItems: "center" }}>

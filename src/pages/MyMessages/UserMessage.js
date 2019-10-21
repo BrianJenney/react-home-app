@@ -106,7 +106,7 @@ class UserMessages extends React.Component {
                                 refreshConvo={this.refreshConvo}
                                 picID={this.state.picID}
                                 recipient={this.state.recipient}
-                                sender={this.props.email}
+                                sender={this.props.user.email}
                                 open={this.state.open}
                                 messages={this.state.convo}
                             />

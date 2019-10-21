@@ -3,7 +3,6 @@ import NavBar from "../../components/BreadcrumbNav";
 import TopNav from "../../components/TopNav";
 import API from "../../api/helpers";
 import moment from "moment";
-import { Link } from "react-router-dom";
 import "../../styles/propertyInfo.css";
 import DialogModal from "../../components/modals/Message";
 

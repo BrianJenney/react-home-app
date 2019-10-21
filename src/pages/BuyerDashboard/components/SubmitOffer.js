@@ -1,10 +1,6 @@
 import React from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse } from "reactstrap";
 import API from "../../../api/helpers";
-import Dropzone from "react-dropzone";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-import ContentAdd from "material-ui/svg-icons/content/add";
-import { Link } from "react-router-dom";
 import FileUpload from "../../../components/FileUpload";
 
 class SubmitOffer extends React.Component {
@@ -25,7 +21,6 @@ class SubmitOffer extends React.Component {
     componentDidUpdate(prevProps) {
         const { user, home } = prevProps;
         if (prevProps.currentOffer !== this.props.currentOffer) {
-            let userObj = {};
             this.getOfferData(user, home);
         }
     }

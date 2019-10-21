@@ -5,7 +5,7 @@ import Dropzone from "react-dropzone";
 import "../styles/fileUpload.css";
 
 const FileUpload = ({
-    fileType = "image/*",
+    fileType = "image",
     documentType = "fileName",
     title = "File Upload",
     handleUpload,

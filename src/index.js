@@ -9,7 +9,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 //we import our component from our component folder to use here
 import SignIn from "./pages/Login/SignIn";
-import SignUp from "./pages/Registration/Index";
+import SignUp from "./pages/Registration/Registration";
 import AddProperty from "./pages/AddProperty/Index";
 import EditProperty from "./pages/EditProperty/Index";
 import Listings from "./pages/Listings/BrowseHomes";
@@ -18,6 +18,7 @@ import UserMessages from "./pages/MyMessages/UserMessage";
 import Dashboard from "./pages/Dashboard/Index";
 import BuyerDashboard from "./pages/BuyerDashboard/Index";
 import AcceptedOffer from "./pages/OfferAccepted/Index";
+import Wizard from "./pages/Wizard/Wizard";
 import ErrorBoundary from "./ErrorBoundary";
 
 import { saveState } from "./actions/localstorage";
@@ -33,9 +34,9 @@ StoreInstance.subscribe(
     }, 1000)
 );
 
+const user = StoreInstance.getState().auth;
+
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const user = StoreInstance.getState().auth;
-    console.log({ user });
     return (
         <Route
             {...rest}
@@ -75,7 +76,12 @@ ReactDOM.render(
                             path="/messages"
                             component={UserMessages}
                         />
-                        <PrivateRoute path="/dashboard" component={Dashboard} />
+                        <PrivateRoute
+                            path="/dashboard"
+                            component={
+                                user.hasCompletedWizard ? Dashboard : Wizard
+                            }
+                        />
                         <PrivateRoute
                             path="/buyerdashboard/:id?"
                             component={BuyerDashboard}

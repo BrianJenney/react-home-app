@@ -1,10 +1,6 @@
 import React from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse } from "reactstrap";
 import API from "../../../api/helpers";
-import Dropzone from "react-dropzone";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-import ContentAdd from "material-ui/svg-icons/content/add";
-import { Link } from "react-router-dom";
 import PurchaseDoc from "../../../documents/residential_purchase.pdf";
 import FileUpload from "../../../components/FileUpload";
 import { debounce } from "throttle-debounce";
@@ -18,11 +14,6 @@ class PurchaseAgreement extends React.Component {
             form: new FormData(),
             currentOffer: null,
             purchaseAgreement: ""
-        };
-
-        const styles = {
-            display: "flex",
-            alignItems: "center"
         };
     }
 

@@ -1,13 +1,10 @@
 import React from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse } from "reactstrap";
 import API from "../../../api/helpers";
-import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import "../../../styles/dashboard.css";
 import ChatIcon from "../../../img/icon-chat.svg";
 import DialogModal from "../../../components/modals/Message";
-import moment from "moment";
-import currencyFormatter from "../../../utils/currency-formatter";
 
 class Offers extends React.Component {
     constructor(props) {

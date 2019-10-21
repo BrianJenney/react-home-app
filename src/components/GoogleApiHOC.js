@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { GoogleApiWrapper } from "google-maps-react";
 import keys from "../../src/config";
 

@@ -9,8 +9,8 @@ class OfferAccepted extends React.Component {
         super(props);
 
         this.state = {
-            isBuyer: new Boolean(),
-            isSeller: new Boolean(),
+            isBuyer: false,
+            isSeller: false,
             home: null,
             offer: null
         };

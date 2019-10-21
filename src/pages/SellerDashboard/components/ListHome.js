@@ -1,9 +1,8 @@
 import React from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse } from "reactstrap";
 import API from "../../../api/helpers";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
-import NavBar from "../../../components/BreadcrumbNav";
 
 class ListHome extends React.Component {
     constructor(props) {
@@ -14,16 +13,10 @@ class ListHome extends React.Component {
             homes: [],
             numbers: 0
         };
-
-        const styles = {
-            display: "flex",
-            alignItems: "center"
-        };
     }
 
     componentDidMount() {
         let homes = [];
-        let numbers = 0;
 
         API.getListingHomes(this.props.userEmail)
             .then(responses => {

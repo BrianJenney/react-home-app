@@ -3,8 +3,6 @@ import { withRouter } from "react-router";
 import API from "../../api/helpers";
 import TopNav from "../../components/TopNav";
 import NavBar from "../../components/BreadcrumbNav";
-
-import Messages from "./components/Messages";
 import PurchaseAgreement from "./components/PurchaseAgreement";
 import SubmitOffer from "./components/SubmitOffer";
 import Financing from "./components/Financing";
@@ -36,7 +34,6 @@ class Dashboard extends React.Component {
     };
 
     getOffers = () => {
-        const { userId } = this.props;
         API.getOffersFromBuyer(this.props.user._id).then(res => {
             this.setState({ offers: res.data });
         });
