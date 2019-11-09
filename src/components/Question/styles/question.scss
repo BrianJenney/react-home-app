@@ -1,6 +1,7 @@
 .question-body {
     margin: auto;
     text-align: center;
+    margin-top: 5em;
 }
 
 .options-container {
@@ -28,6 +29,7 @@
     border: 1px solid gray;
     border-radius: 16px;
     margin: 0.25em;
+    padding: 0 0.5em;
     &:hover {
         cursor: pointer;
     }

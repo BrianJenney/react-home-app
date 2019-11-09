@@ -42,10 +42,31 @@ const Quiz = () => {
             modelName: "test"
         },
         {
+            text: "Would you like Micasa to represent you? - file",
+            componentType: "binaryOption",
+            showOptionsValue: false,
+            hideOptionsValue: true,
+            subComponentType: "fileUpload",
+            options: [
+                {
+                    label: "Yes",
+                    value: true
+                },
+                {
+                    label: "No",
+                    value: false
+                }
+            ],
+            subTitle: "Upload contract agreement...",
+            optionChangeHandler: optionChangeHandler,
+            modelName: "someFile"
+        },
+        {
             text: "Would you like Micasa to represent you?1",
             componentType: "binaryOption",
             showOptionsValue: true,
             hideOptionsValue: false,
+            subComponentType: "multiOptions",
             options: [
                 {
                     label: "Yes",
@@ -86,7 +107,9 @@ const Quiz = () => {
             <div className="wizard-body">
                 <Question {...config[page]} />
                 <div class="progress-bar-container">
-                    <i class="material-icons">arrow_back</i>
+                    <i onClick={() => setPage(page - 1)} class="material-icons">
+                        arrow_back
+                    </i>
                     <div class="progress-line">
                         <LinearProgress
                             variant="determinate"

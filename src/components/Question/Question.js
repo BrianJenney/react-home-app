@@ -6,6 +6,7 @@ import "./styles/question.css";
 const Question = ({
     text,
     componentType,
+    subComponentType,
     fileName,
     options = [],
     subOptions = [],
@@ -18,19 +19,6 @@ const Question = ({
     const [showOption, setShowOption] = useState(hideOptionsValue);
     const inputRef = useRef(null);
 
-    const fileUpload = () => (
-        <div>
-            <span>Browse...</span>
-            <Dropzone
-                className="file-upload"
-                onDrop={optionChangeHandler.bind(null, modelName)}
-                accept="*"
-            >
-                <span>Upload</span>
-            </Dropzone>
-        </div>
-    );
-
     const handleClick = val => {
         if (showOptionsValue !== undefined) {
             showOptionsValue === val
@@ -40,6 +28,19 @@ const Question = ({
             optionChangeHandler(val, modelName);
         }
     };
+
+    const fileUpload = () => (
+        <div class="options-container">
+            <span>{subTitle}</span>
+            <Dropzone
+                className="multi-options"
+                onDrop={optionChangeHandler.bind(null, modelName)}
+                accept="*"
+            >
+                <span>Browse File</span>
+            </Dropzone>
+        </div>
+    );
 
     const binaryOption = () => (
         <div class="options-container">
@@ -98,10 +99,12 @@ const Question = ({
         multiOptions,
         freeText
     };
-    const hasSubOptions = subOptions.length > 0;
+    const hasSubOptions = !!subComponentType;
 
     const OptionComponent = componentTypeMap[componentType];
-    const SubOptionComponent = multiOptions;
+    const SubOptionComponent = componentTypeMap[subComponentType];
+
+    console.log(SubOptionComponent);
 
     return (
         <div className="question-body">
