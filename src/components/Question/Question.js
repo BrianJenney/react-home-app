@@ -30,7 +30,7 @@ const Question = ({
     };
 
     const fileUpload = () => (
-        <div class="options-container">
+        <div className="options-container">
             <span>{subTitle}</span>
             <Dropzone
                 className="multi-options"
@@ -43,7 +43,7 @@ const Question = ({
     );
 
     const binaryOption = () => (
-        <div class="options-container">
+        <div className="options-container">
             {options.map(option => {
                 return (
                     <div
@@ -61,7 +61,7 @@ const Question = ({
     );
 
     const multiOptions = () => (
-        <div class="options-container">
+        <div className="options-container">
             <span>{subTitle}</span>
             {subOptions.map(option => {
                 return (
@@ -88,7 +88,7 @@ const Question = ({
                     optionChangeHandler(inputRef.current.value, modelName)
                 }
             >
-                <i class="material-icons">keyboard_arrow_right</i>
+                <i className="material-icons">keyboard_arrow_right</i>
             </div>
         </div>
     );
@@ -99,12 +99,10 @@ const Question = ({
         multiOptions,
         freeText
     };
-    const hasSubOptions = !!subComponentType;
 
+    const hasSubOptions = !!subComponentType;
     const OptionComponent = componentTypeMap[componentType];
     const SubOptionComponent = componentTypeMap[subComponentType];
-
-    console.log(SubOptionComponent);
 
     return (
         <div className="question-body">

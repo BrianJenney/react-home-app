@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import NavBar from "../../components/BreadcrumbNav";
 import "./styles/wizard.css";
+import { compileFunction } from "vm";
 
 const Quiz = () => {
     const [form, setForm] = useState(new FormData());
@@ -19,7 +20,7 @@ const Quiz = () => {
         } else {
             setPage(page => page + 1);
         }
-        setCompleted((100 / Object.keys(config).length) * (page + 1));
+        setCompleted((100 / config.length) * (page + 1));
     };
 
     const config = [
@@ -102,21 +103,37 @@ const Quiz = () => {
         }
     ];
 
+    const changePage = page => {
+        const pageLimit = Math.floor(((completed || 1) / 100) * config.length);
+        if (page < 0 || page >= config.length || page > pageLimit) {
+            return;
+        }
+        setPage(page);
+    };
+
     return (
         <div>
             <div className="wizard-body">
                 <Question {...config[page]} />
-                <div class="progress-bar-container">
-                    <i onClick={() => setPage(page - 1)} class="material-icons">
+                <div className="progress-bar-container">
+                    <i
+                        onClick={() => changePage(page - 1)}
+                        className="material-icons"
+                    >
                         arrow_back
                     </i>
-                    <div class="progress-line">
+                    <div className="progress-line">
                         <LinearProgress
                             variant="determinate"
                             value={completed}
                         />
                     </div>
-                    <i class="material-icons">arrow_forward</i>
+                    <i
+                        onClick={() => changePage(page + 1)}
+                        className="material-icons"
+                    >
+                        arrow_forward
+                    </i>
                 </div>
             </div>
             <NavBar />
