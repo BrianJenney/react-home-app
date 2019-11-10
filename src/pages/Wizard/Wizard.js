@@ -25,25 +25,8 @@ const Quiz = () => {
 
     const config = [
         {
-            text: "Would you like Micasa to represent you?0",
-            componentType: "binaryOption",
-            options: [
-                {
-                    label: "Yes",
-                    value: true
-                },
-                {
-                    label: "No",
-                    value: false
-                }
-            ],
-            subOptions: [],
-            subTitle: "",
-            optionChangeHandler: optionChangeHandler,
-            modelName: "test"
-        },
-        {
-            text: "Would you like Micasa to represent you? - file",
+            text:
+                "Would you like Micasa to represent you? Select no if you'd prefer to use an existing realtor",
             componentType: "binaryOption",
             showOptionsValue: false,
             hideOptionsValue: true,
@@ -58,16 +41,101 @@ const Quiz = () => {
                     value: false
                 }
             ],
-            subTitle: "Upload contract agreement...",
+            subOptions: [],
+            subTitle: "Upload contract agreement",
             optionChangeHandler: optionChangeHandler,
-            modelName: "someFile"
+            modelName: "authorizeToRepresent"
         },
         {
-            text: "Would you like Micasa to represent you?1",
+            text: "Are you the owner of the home?",
             componentType: "binaryOption",
-            showOptionsValue: true,
-            hideOptionsValue: false,
+            showOptionsValue: "non-owner",
+            hideOptionsValue: "owner",
             subComponentType: "multiOptions",
+            options: [
+                {
+                    label: "Yes",
+                    value: "owner"
+                },
+                {
+                    label: "No",
+                    value: "non-owner"
+                }
+            ],
+            subOptions: [
+                {
+                    label: "Power of Attorney",
+                    value: "poa"
+                },
+                {
+                    label: "trustee",
+                    value: "trustee"
+                },
+                {
+                    label: "Adminstrator/Conservator",
+                    value: "admin"
+                },
+                {
+                    label: "Neither",
+                    value: "n/a"
+                }
+            ],
+            subTitle: "I'm the...",
+            optionChangeHandler: optionChangeHandler,
+            modelName: "ownerType"
+        },
+        {
+            text: "What is the full name of ownership?",
+            componentType: "freeText",
+            options: [],
+            subTitle: "",
+            optionChangeHandler: optionChangeHandler,
+            modelName: "ownershipName"
+        },
+        {
+            text: "Have you ever sold a home?",
+            componentType: "binaryOption",
+            showOptionsValue: "hasSoldBefore",
+            hideOptionsValue: "n/a",
+            subComponentType: "multiOptions",
+            options: [
+                {
+                    label: "Yes",
+                    value: "hasSoldBefore"
+                },
+                {
+                    label: "No",
+                    value: "n/a"
+                }
+            ],
+            subOptions: [
+                {
+                    label: "Realtor",
+                    value: "realtor"
+                },
+                {
+                    label: "Attorney",
+                    value: "attorney"
+                },
+                {
+                    label: "Sold it myself",
+                    value: "independent"
+                },
+                {
+                    label: "Other",
+                    value: "other"
+                }
+            ],
+            subTitle: "Via which method?",
+            optionChangeHandler: optionChangeHandler,
+            modelName: "previousSellingMethod"
+        },
+        {
+            text:
+                "Do you, a relative, or one of the owners of the property hold an active California Real Estate License?",
+            componentType: "binaryOption",
+            showOptionsValue: false,
+            hideOptionsValue: true,
             options: [
                 {
                     label: "Yes",
@@ -78,28 +146,30 @@ const Quiz = () => {
                     value: false
                 }
             ],
-            subOptions: [
-                {
-                    label: "Yes",
-                    value: true
-                },
-                {
-                    label: "No",
-                    value: false
-                }
-            ],
-            subTitle: "Other stuff...",
+            subOptions: [],
             optionChangeHandler: optionChangeHandler,
-            modelName: "test1"
+            modelName: "isRelativeAgent"
         },
         {
-            text: "Would you like Micasa to represent you?2",
-            componentType: "freeText",
-            options: [],
+            text: "Ideally how soon do you want the property sold?",
+            componentType: "binaryOption",
+            options: [
+                {
+                    label: "ASAP",
+                    value: "asap"
+                },
+                {
+                    label: "3 Months",
+                    value: "3mos"
+                },
+                {
+                    label: "6 Months",
+                    value: "6mos"
+                }
+            ],
             subOptions: [],
-            subTitle: "",
             optionChangeHandler: optionChangeHandler,
-            modelName: "test3"
+            modelName: "idealTimeframe"
         }
     ];
 
