@@ -27,9 +27,8 @@ class BrowseListings extends React.Component {
         return (
             <div>
                 {/* {TODO: add these back in when/if we decide to use google maps for search again} */}
-                {/* <MapWrapper /> */}
-                {/* <UserSearch /> */}
-                <HousePics pics={this.props.properties} />
+                <MapWrapper />
+                <UserSearch />
                 <NavBar selectedIndex={2} />
             </div>
         );

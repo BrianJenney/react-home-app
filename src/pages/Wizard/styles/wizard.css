@@ -8,7 +8,14 @@
   padding: 1.5em;
   position: relative;
   margin-top: 1.5em;
-  border-radius: 5px; }
+  border-radius: 5px;
+  color: white; }
+
+.wizard-backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-image: url("https://s3-alpha-sig.figma.com/img/c8f2/aad3/af00362fddc6cd6d75111196f4f2fc8c?Expires=1574640000&Signature=T0igBjazXZsqAUW3ppHHArMAwS-FwNY-itD-4muqe~So9ozSDuT4mau2ArZUXqK~2fjxXQ2GAF9e4AxK5mjewkYZv-dslRYhPxMJ6LjEgIom1pfNwzcctBEg1bqU55pAiCp4wvOJIi9EXLajhnvWueCCulLLLfYpR-l8BIb8eRz2LXGAdDgvLYIfmWuYMhVRkVohZVD1TgP10anPLHuz9ewX4xQsTDD~BJmJZ~oUFqQ23dqZoJtyniEH48jtdc9KR64nr7Dm9g25O3JDXDD81kRrAlXN0d5lKkG0g56WmvFCfwWdNd0~YuuPGZp2BD-xWXclnyfG2iLR1-1WFrk1Mg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"); }
 
 .progress-bar-container {
   position: absolute;

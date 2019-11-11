@@ -182,7 +182,7 @@ const Quiz = () => {
     };
 
     return (
-        <div>
+        <div className="wizard-backdrop">
             <div className="wizard-body">
                 <Question {...config[page]} />
                 <div className="progress-bar-container">
@@ -196,6 +196,7 @@ const Quiz = () => {
                         <LinearProgress
                             variant="determinate"
                             value={completed}
+                            color="primary"
                         />
                     </div>
                     <i
