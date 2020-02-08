@@ -20,10 +20,6 @@ class SignIn extends React.Component {
         };
     }
 
-    // componentDidMount = () => {
-    //     this.props.logoutaction.logout();
-    // };
-
     onChange = e => {
         let user = {};
         user[e.target.id] = e.target.value;

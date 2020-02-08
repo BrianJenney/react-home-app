@@ -20,13 +20,14 @@ class BrowseListings extends React.Component {
             listings: { addMapMarker }
         } = this.props;
 
-        addMapMarker();
+        //add map markers when user first enters
+        //TODO: need to get geolocation info from user
+        addMapMarker({});
     };
 
     render() {
         return (
             <div>
-                {/* {TODO: add these back in when/if we decide to use google maps for search again} */}
                 <MapWrapper />
                 <UserSearch />
                 <NavBar selectedIndex={2} />
