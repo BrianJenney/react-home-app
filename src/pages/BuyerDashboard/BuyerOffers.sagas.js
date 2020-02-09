@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeLatest } from "redux-saga/effects";
+import { all, fork, put, takeLatest } from "redux-saga/effects";
 import {
     //actions
     GET_OFFERS,
@@ -9,9 +9,9 @@ import API from "../../api/helpers";
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* getOffers(action) {
-    const { userId, homeId } = action;
+    const { userId } = action;
     try {
-        const user = yield API.getOffersByUserAndHome(userId, homeId);
+        const user = yield API.getOffersFromBuyer(userId);
         yield put(getOffersSucceeded(user));
     } catch (e) {
         yield console.log(e);

@@ -1,0 +1,39 @@
+{
+    "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true,
+        "mocha": true
+    },
+    "rules": {
+        "comma-dangle": ["error", "never"],
+        "no-underscore-dangle": [0],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/forbid-prop-types": [0],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": [
+                    ".storybook/**",
+                    "**/*.stories.js",
+                    "**/*.spec.js"
+                ]
+            }
+        ],
+        "jsx-a11y/anchor-is-valid": [
+            "error",
+            {
+                "components": [],
+                "specialLink": ["hrefLeft", "hrefRight"],
+                "aspects": ["noHref", "invalidHref", "preferButton"]
+            }
+        ]
+    },
+    "settings": {
+        "import/resolver": [
+            "webpack",
+            { "node": { "moduleDirectory": ["test/"] } }
+        ]
+    }
+}

@@ -24,13 +24,8 @@
 }
 
 .house-pics {
-    //temporary css
-    width: 60%;
-    margin-left: auto;
-    padding-bottom: 3rem;
-    //end
     overflow: scroll;
-    // height: calc(100vh - 165px);
+    height: calc(100vh - 165px);
     background-color: #edeeef;
     img {
         width: 98%;

@@ -1,0 +1,36 @@
+.wizard-body {
+  margin-top: 1%;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 75vh;
+  border: 1px solid gray;
+  padding: 1.5em;
+  position: relative;
+  margin-top: 1.5em;
+  border-radius: 5px;
+  color: white; }
+
+.wizard-backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-image: url("https://s3-alpha-sig.figma.com/img/c8f2/aad3/af00362fddc6cd6d75111196f4f2fc8c?Expires=1581897600&Signature=hTWtMArKJsOJxXRvmyUdbk0IstMwybv9jFBiEFgCVw2JE4g0GqUVOdYmFQ9W8nuHcoqE6SBn3VFIwhaD4SNlf8HU1IfmFWucAoL8lyYWWl7c6dqheCFRMDjwSNLwiH0IqaEk5s3bK9MgFCrw13nLaTtExw5O6UigdNl9MsflonMwv272blHF-b93ojkpZdk~5Q5UI37l01KEpjJ0OGZYSxVyAbr~NALqt7uRcXsFVWe40JisXXotfp1v0E7R2vbDujqntSqGbIqR8lvdOyxE9G9omhnsiCXZNxZh3j2cUph-PLqEvh8WZ~5Rve26g-i8zSF16SM93cLyOL5w-t7YYg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"); }
+
+.progress-bar-container {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  width: 80%;
+  margin: auto; }
+
+.progress-line {
+  width: 88%;
+  margin: auto; }
+
+i {
+  color: gray; }
+  i:hover {
+    cursor: pointer; }
