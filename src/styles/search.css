@@ -19,9 +19,12 @@
   height: 100%; }
 
 .user-select {
-  width: 60px !important; }
+  width: 120px !important; }
+  .user-select hr {
+    display: none !important; }
   .user-select label {
-    font-size: 1.2em; }
+    font-size: 1.2em;
+    line-height: 0 !important; }
 
 .horizontal-scroll {
   display: flex;

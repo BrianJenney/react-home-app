@@ -3,6 +3,7 @@ import Question from "../../components/Question/Question";
 import { withRouter } from "react-router";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import NavBar from "../../components/BreadcrumbNav";
+import API from '../../api/helpers';
 import "./styles/wizard.css";
 import { compileFunction } from "vm";
 
@@ -17,6 +18,9 @@ const Quiz = () => {
 
         if (page + 1 > Object.keys(config).length - 1) {
             //TODO: send form
+            API.submitWizardInfo(form).then((data) => {
+                console.log(data)
+            });
         } else {
             setPage(page => page + 1);
         }

@@ -125,5 +125,9 @@ export default {
     //get specific offer and associated house
     getOffer: id => {
         return axios.get(`${url}/api/offers/offer/${id}`);
-    }
+    },
+
+    //send wizard info
+    submitWizardInfo: (formObj) => axios.post(`${url}/api/wizard`, formObj)
+
 };

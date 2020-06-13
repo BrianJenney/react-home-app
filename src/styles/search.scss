@@ -24,10 +24,13 @@
 }
 
 .user-select {
-  width: 60px !important;
-  
+  width: 120px !important;
+  hr{
+    display: none !important;
+  }
   label {
     font-size: 1.2em;
+    line-height: 0 !important;
   }
 }
 

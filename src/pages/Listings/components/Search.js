@@ -158,7 +158,7 @@ class UserSearch extends Component {
                             menuStyle={MStyle}
                             iconStyle={IStyle}
                         >
-                            <MenuItem value={"all"} primaryText="All" />
+                            <MenuItem value={Infinity} primaryText="All" />
                             <MenuItem value={500000} primaryText="<500K" />
                             <MenuItem value={1000000} primaryText="<1M" />
                         </SelectField>
