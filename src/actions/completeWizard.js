@@ -1,5 +1,5 @@
-export const completeWizard = userType => {
-    return {
-        type: "COMPLETE_WIZARD"
-    };
+export const completeWizard = () => {
+	return {
+		type: 'COMPLETED_WIZARD'
+	};
 };
