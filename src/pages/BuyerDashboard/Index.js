@@ -89,19 +89,11 @@ class Dashboard extends React.Component {
 						})}
 					</div>
 
-					<Financing userEmail={user.email} home={property} user={user} currentOffer={currentOffer} />
-					<PurchaseAgreement userEmail={user.email} home={property} user={user} currentOffer={currentOffer} />
-					<SubmitOffer userEmail={user.email} home={property} user={user} currentOffer={currentOffer} />
+					<Financing home={property} user={user} currentOffer={currentOffer} />
+					<PurchaseAgreement home={property} user={user} currentOffer={currentOffer} />
+					<SubmitOffer home={property} user={user} currentOffer={currentOffer} />
 					{offers.length > 0 &&
-					property && (
-						<Decisioning
-							userEmail={user.email}
-							home={property}
-							user={user}
-							offers={offers}
-							currentOffer={currentOffer}
-						/>
-					)}
+					property && <Decisioning home={property} user={user} offers={offers} currentOffer={currentOffer} />}
 					{sellerPurchaseAgreement.length > 0 && <ContractCompletion offer={currentOffer} />}
 					{/* <Messages userEmail={this.props.email} /> */}
 				</div>

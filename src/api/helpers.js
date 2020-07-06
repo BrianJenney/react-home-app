@@ -41,6 +41,21 @@ export default {
 		return axios.post(url + '/api/property/searchlistings', searchObj);
 	},
 
+	//add a userid under a homes likes array
+	favoriteHome: (userId, id) =>
+		axios.post(`${url}/api/property/graphql`, {
+			query: `mutation addLike ($id: String!, $userId: String!) {
+				addLike (id: $id, userId: $userId){
+					id,
+					likes
+				}
+			}`,
+			variables: {
+				id,
+				userId
+			}
+		}),
+
 	//upload disclosure package
 	uploadDisclosure: function(disclosureForm) {
 		return axios.post(url + '/api/property/disclosure', disclosureForm);
@@ -117,6 +132,7 @@ export default {
 		return axios.post(`${url}/api/offers/getoffers`, obj);
 	},
 
+	//get all offers belonging to a buyer
 	getOffersFromBuyer: (userId) => {
 		return axios.get(`${url}/api/offers/buyeroffers/${userId}`);
 	},

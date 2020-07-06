@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { Card } from 'material-ui/Card';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import { GoogleApiWrapper } from 'google-maps-react';
 import GoogleApiHOC from '../../../components/GoogleApiHOC';
 import TopNav from '../../../components/TopNav';
-import API from '../../../api/helpers.js';
 import HousePics from './HousePics';
 import '../../../styles/search.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../Listings.ducks';
-import Logo from '../../../img/logo-micasa.png';
 
 const CardStyle = {
 	borderTopLeftRadius: '8px',
@@ -180,8 +177,8 @@ class UserSearch extends Component {
 						</SelectField>
 					</div>
 				</div>
-
-				<HousePics pics={this.props.properties} />
+				{console.log(this.props.user)}
+				<HousePics pics={this.props.properties} userId={this.props.user._id} />
 			</Card>
 		);
 	}
@@ -189,7 +186,8 @@ class UserSearch extends Component {
 
 function mapStateToProps(state) {
 	return {
-		properties: state.listings
+		properties: state.listings,
+		user: state.auth
 	};
 }
 
