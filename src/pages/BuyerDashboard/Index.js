@@ -7,9 +7,8 @@ import SubmitOffer from './components/SubmitOffer';
 import Financing from './components/Financing';
 import Decisioning from './components/Decisioning';
 import ContractCompletion from './components/ContractCompletion';
+import WithBackground from '../../components/WithBackground';
 import { get } from 'lodash';
-
-import gradientBackground from '../../img/bg-gradient.png';
 
 class Dashboard extends React.Component {
 	constructor(props) {
@@ -69,7 +68,7 @@ class Dashboard extends React.Component {
 		};
 
 		return (
-			<div style={{ backgroundImage: `url(${gradientBackground})`, height: '100vh', overflow: 'scroll' }}>
+			<div>
 				<div className='container buyer-dash w-80 mb-10 h-100'>
 					<h1>Buyer Dashboard</h1>
 					<img src={currentHouse} alt='' />
@@ -103,4 +102,4 @@ class Dashboard extends React.Component {
 	}
 }
 
-export default withRouter(Dashboard);
+export default withRouter(WithBackground(Dashboard));

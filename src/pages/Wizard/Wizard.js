@@ -4,8 +4,8 @@ import { withRouter } from 'react-router';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import NavBar from '../../components/BreadcrumbNav';
 import API from '../../api/helpers';
+import withBackground from '../../components/WithBackground';
 import './styles/wizard.css';
-import gradientBackground from '../../img/bg-gradient.png';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -190,7 +190,7 @@ const Quiz = ({ user, history, completeWizard }) => {
 	};
 
 	return (
-		<div style={{ backgroundImage: `url(${gradientBackground})` }} className='wizard-backdrop'>
+		<div>
 			<div className='wizard-body'>
 				<Question {...config[page]} />
 				<div className='progress-bar-container'>
@@ -215,4 +215,4 @@ function mapDispatchToProps(dispatch) {
 		completeWizard: bindActionCreators(completeWizard, dispatch)
 	};
 }
-export default withRouter(connect(null, mapDispatchToProps)(Quiz));
+export default withRouter(connect(null, mapDispatchToProps)(withBackground(Quiz)));
