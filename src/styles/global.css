@@ -1,9 +1,8 @@
+#root {
+	min-width: 1000px;
+}
 md-dialog {
 	max-height: 300px !important;
-}
-
-#root {
-	min-width: 900px;
 }
 
 .row {

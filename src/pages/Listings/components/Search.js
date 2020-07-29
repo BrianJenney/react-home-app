@@ -3,12 +3,11 @@ import { Card } from 'material-ui/Card';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import GoogleApiHOC from '../../../components/GoogleApiHOC';
-import TopNav from '../../../components/TopNav';
 import HousePics from './HousePics';
-import '../../../styles/search.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../Listings.ducks';
+import '../../../styles/search.css';
 
 const CardStyle = {
 	borderTopLeftRadius: '8px',
@@ -88,9 +87,6 @@ class UserSearch extends Component {
 	render() {
 		return (
 			<Card className='col-md-5 user-search' style={CardStyle}>
-				<div className='header row' style={CardStyle}>
-					<TopNav />
-				</div>
 				<div className='search-input'>
 					<span className='fa fa-search' />
 					<input
@@ -177,7 +173,6 @@ class UserSearch extends Component {
 						</SelectField>
 					</div>
 				</div>
-				{console.log(this.props.user)}
 				<HousePics pics={this.props.properties} userId={this.props.user._id} />
 			</Card>
 		);

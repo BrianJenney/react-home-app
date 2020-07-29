@@ -55,7 +55,7 @@ ReactDOM.render(
 						<PrivateRoute path='/listings' component={Listings} />
 						<PrivateRoute path='/property/:id' component={Property} />
 						<PrivateRoute path='/messages' component={UserMessages} />
-						<PrivateRoute path='/dashboard' component={user.hasCompletedWizard ? Dashboard : Wizard} />
+						<PrivateRoute path='/dashboard' component={user.hasCompletedWizard ? Wizard : Wizard} />
 						<PrivateRoute path='/buyerdashboard/:id?' component={BuyerDashboard} />
 						<PrivateRoute path='/offeraccepted/:id' component={AcceptedOffer} />
 					</div>

@@ -5,6 +5,9 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import NavBar from '../../components/BreadcrumbNav';
 import API from '../../api/helpers';
 import withBackground from '../../components/WithBackground';
+import WiseOwl from '../../img/wise_owl.png';
+import gradientBackground from '../../img/bg-gradient.png';
+
 import './styles/wizard.css';
 
 import { bindActionCreators } from 'redux';
@@ -22,10 +25,10 @@ const Quiz = ({ user, history, completeWizard }) => {
 
 		if (page + 1 > Object.keys(config).length - 1) {
 			form.append('userId', user._id);
-			API.submitWizardInfo(form).then((data) => {
-				completeWizard();
-				history.push('/Dashboard');
-			});
+			// API.submitWizardInfo(form).then((data) => {
+			// 	completeWizard();
+			// 	history.push('/Dashboard');
+			// });
 		} else {
 			setPage((page) => page + 1);
 		}
@@ -191,7 +194,10 @@ const Quiz = ({ user, history, completeWizard }) => {
 
 	return (
 		<div>
-			<div className='wizard-body'>
+			<div className='wizard-body' style={{ backgroundImage: `url(${gradientBackground})` }}>
+				<div className='wise-owl'>
+					<img src={WiseOwl} />
+				</div>
 				<Question {...config[page]} />
 				<div className='progress-bar-container'>
 					<i onClick={() => changePage(page - 1)} className='material-icons'>

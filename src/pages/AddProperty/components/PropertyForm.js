@@ -2,7 +2,6 @@ import React from 'react';
 import API from '../../../api/helpers.js';
 import NavBar from '../../../components/BreadcrumbNav';
 import TopNav from '../../../components/TopNav';
-import { GoogleApiWrapper } from 'google-maps-react';
 import GoogleApiHOC from '../../../components/GoogleApiHOC';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "antd": "^4.4.2",
     "axios": ">=0.18.1",
     "google-maps-react": "^1.1.2",
     "lodash": "^4.17.11",

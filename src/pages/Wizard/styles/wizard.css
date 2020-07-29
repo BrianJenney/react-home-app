@@ -1,40 +1,39 @@
 .wizard-body {
-	margin-top: 1%;
-	width: 75%;
-	margin-left: auto;
-	margin-right: auto;
-	height: 75vh;
-	border: 1px solid gray;
-	padding: 1.5em;
-	position: relative;
-	margin-top: 1.5em;
-	border-radius: 5px;
-	color: white;
-}
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 75vh;
+  border: 1px solid gray;
+  padding: 1.5em;
+  position: relative;
+  margin-top: 3.5em;
+  border-radius: 5px;
+  color: white; }
+  .wizard-body .wise-owl {
+    margin-top: -4em; }
+    .wizard-body .wise-owl img {
+      display: block;
+      margin: auto; }
 
 .wizard-backdrop {
-	position: absolute;
-	width: 100%;
-	height: 100vh;
-}
+  position: absolute;
+  width: 100%;
+  height: 100vh; }
+
 .progress-bar-container {
-	position: absolute;
-	bottom: 20px;
-	left: 0;
-	right: 0;
-	display: flex;
-	width: 80%;
-	margin: auto;
-}
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  width: 80%;
+  margin: auto; }
 
 .progress-line {
-	width: 88%;
-	margin: auto;
-}
+  width: 88%;
+  margin: auto; }
 
 i {
-	color: gray;
-}
-i:hover {
-	cursor: pointer;
-}
+  color: gray; }
+  i:hover {
+    cursor: pointer; }

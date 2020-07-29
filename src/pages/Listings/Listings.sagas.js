@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
+import { all, fork, put, takeLatest } from 'redux-saga/effects';
 import { ADD_MARKERS, addMapMarkerSucceeded } from './Listings.ducks';
 import API from '../../api/helpers';
 

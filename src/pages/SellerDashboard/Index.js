@@ -8,26 +8,18 @@ import Offers from './components/Offers';
 import ContractCompletion from './components/ContractCompletion';
 import withBackground from '../../components/WithBackground';
 
-class Dashboard extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
-	render() {
-		return (
-			<div>
-				<div className='container dashboard w-80 h-100'>
-					<h1>Dashboard</h1>
-					<ListHome userEmail={this.props.user.email} />
-					<DisclosureAgreement userEmail={this.props.user.email} />
-					<Messages userEmail={this.props.user.email} />
-					<Offers user={this.props.user} />
-					<ContractCompletion user={this.props.user} />
-				</div>
-				<NavBar />
-			</div>
-		);
-	}
-}
+const Dashboard = ({ user }) => (
+	<div>
+		<div className='container dashboard w-80 h-100'>
+			<h1>Dashboard</h1>
+			<ListHome userEmail={user.email} />
+			<DisclosureAgreement userEmail={user.email} />
+			<Messages userEmail={user.email} />
+			<Offers user={user} />
+			<ContractCompletion user={user} />
+		</div>
+		<NavBar />
+	</div>
+);
 
 export default withBackground(Dashboard);
