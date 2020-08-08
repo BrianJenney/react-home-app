@@ -12,6 +12,7 @@ const Question = ({
 	subTitle,
 	showOptionsValue,
 	hideOptionsValue,
+	getNextPage = noop,
 	optionChangeHandler = noop,
 	modelName
 }) => {
@@ -19,8 +20,9 @@ const Question = ({
 	const inputRef = useRef(null);
 
 	const handleClick = (val) => {
+		const nextPage = getNextPage ? getNextPage(val) : 0;
 		if (showOptionsValue !== undefined) {
-			showOptionsValue === val ? setShowOption(val) : optionChangeHandler(val, modelName);
+			showOptionsValue === val ? setShowOption(val) : optionChangeHandler(val, modelName, nextPage);
 		} else {
 			optionChangeHandler(val, modelName);
 		}
@@ -46,7 +48,7 @@ const Question = ({
 							handleClick(option.value);
 						}}
 					>
-						{option.label}
+						<p>{option.label}</p>
 					</div>
 				);
 			})}
@@ -62,10 +64,10 @@ const Question = ({
 						className='multi-options'
 						key={option.value}
 						onClick={() => {
-							optionChangeHandler(option.value, modelName);
+							handleClick(option.value);
 						}}
 					>
-						{option.label}
+						<p>{option.label}</p>
 					</button>
 				);
 			})}
@@ -75,7 +77,7 @@ const Question = ({
 	const freeText = () => (
 		<div className='text-container'>
 			<input className='free-text' ref={inputRef} />
-			<div className='text-submit' onClick={() => optionChangeHandler(inputRef.current.value, modelName)}>
+			<div className='text-submit' onClick={() => handleClick(inputRef.current.value)}>
 				<i className='material-icons'>keyboard_arrow_right</i>
 			</div>
 		</div>

@@ -19,6 +19,7 @@ import Dashboard from './pages/Dashboard/Index';
 import BuyerDashboard from './pages/BuyerDashboard/Index';
 import AcceptedOffer from './pages/OfferAccepted/Index';
 import Wizard from './pages/Wizard/Wizard';
+import BuyerWizard from './pages/BuyerWizard/BuyerWizard';
 import ErrorBoundary from './ErrorBoundary';
 
 import { saveState } from './actions/localstorage';
@@ -55,7 +56,10 @@ ReactDOM.render(
 						<PrivateRoute path='/listings' component={Listings} />
 						<PrivateRoute path='/property/:id' component={Property} />
 						<PrivateRoute path='/messages' component={UserMessages} />
-						<PrivateRoute path='/dashboard' component={user.hasCompletedWizard ? Wizard : Wizard} />
+						<PrivateRoute
+							path='/dashboard'
+							component={user.hasCompletedWizard ? BuyerWizard : BuyerWizard}
+						/>
 						<PrivateRoute path='/buyerdashboard/:id?' component={BuyerDashboard} />
 						<PrivateRoute path='/offeraccepted/:id' component={AcceptedOffer} />
 					</div>

@@ -11,12 +11,14 @@
   color: white;
   background: linear-gradient(0deg, rgba(255, 255, 255, 0.148683), rgba(255, 255, 255, 0.148683));
   backdrop-filter: blur(19.028px); }
-  .wizard-body .wise-owl {
-    margin-top: -4em; }
-    .wizard-body .wise-owl img {
-      display: block;
-      margin: auto;
-      width: 8em; }
+
+.wizard-body .wise-owl {
+  margin-top: -4em; }
+
+.wizard-body .wise-owl img {
+  display: block;
+  margin: auto;
+  width: 8em; }
 
 .wizard-backdrop {
   position: absolute;
@@ -38,5 +40,6 @@
 
 i {
   color: gray; }
-  i:hover {
-    cursor: pointer; }
+
+i:hover {
+  cursor: pointer; }
