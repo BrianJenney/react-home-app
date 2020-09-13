@@ -1,15 +1,9 @@
-#root {
-	min-width: 1000px;
-}
 md-dialog {
-	max-height: 300px !important;
-}
+  max-height: 300px !important; }
 
 .row {
-	margin-right: 0px !important;
-	margin-left: 0px !important;
-}
+  margin-right: 0px !important;
+  margin-left: 0px !important; }
 
 body {
-	position: relative;
-}
+  position: relative; }
