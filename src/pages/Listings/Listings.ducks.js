@@ -1,6 +1,6 @@
-const ADD_MARKERS = "listings/ADD_MARKERS";
-const REMOVE_MARKERS = "listings/REMOVE_MARKERS";
-const ADD_MARKERS_SUCCEEDED = "listings/ADD_MARKERS_SUCCEEDED";
+const ADD_MARKERS = 'listings/ADD_MARKERS';
+const REMOVE_MARKERS = 'listings/REMOVE_MARKERS';
+const ADD_MARKERS_SUCCEEDED = 'listings/ADD_MARKERS_SUCCEEDED';
 
 const reducer = (state = [], action) => {
     switch (action.type) {
@@ -15,20 +15,20 @@ const reducer = (state = [], action) => {
     }
 };
 
-const addMapMarker = searchObj => {
+const addMapMarker = (searchObj) => {
     return { type: ADD_MARKERS, searchObj };
 };
 
-const addMapMarkerSucceeded = payload => {
+const addMapMarkerSucceeded = (payload) => {
     return {
         type: ADD_MARKERS_SUCCEEDED,
-        payload
+        payload,
     };
 };
 
 const removeMapMarkers = () => {
     return {
-        type: REMOVE_MARKERS
+        type: REMOVE_MARKERS,
     };
 };
 
@@ -40,5 +40,5 @@ export {
     addMapMarker,
     addMapMarkerSucceeded,
     removeMapMarkers,
-    reducer
+    reducer,
 };
