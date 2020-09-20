@@ -35,7 +35,7 @@ const Question = ({
             <span>{subTitle}</span>
             <Dropzone
                 className="multi-options"
-                onDrop={optionChangeHandler.bind(null, modelName)}
+                onDrop={(files) => optionChangeHandler(files, modelName)}
                 accept="*"
             >
                 <span>Browse File</span>

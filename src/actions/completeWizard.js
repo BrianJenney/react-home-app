@@ -1,5 +1,6 @@
-export const completeWizard = () => {
-	return {
-		type: 'COMPLETED_WIZARD'
-	};
+export const completeWizard = (wizardType) => {
+    return {
+        type: 'COMPLETED_WIZARD',
+        payload: wizardType,
+    };
 };

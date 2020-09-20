@@ -12,7 +12,7 @@ import * as logoutActions from '../../actions/logout';
 import NavBar from '../../components/BreadcrumbNav';
 import '../../styles/registration.css';
 
-const keys = [
+const formProps = [
     'email',
     'phoneNumber',
     'password',
@@ -32,36 +32,36 @@ class RegistrationPage extends React.Component {
             userType: '',
             email: '',
             password: '',
-            error: '',
             form: new FormData(),
             processing: false,
             picPreview: '',
             passwordMatch: true,
-            errorMessage: '',
+            errorMessage: null,
         };
     }
 
     resetForm = () => {
-        for (const key of keys) {
+        for (const key of formProps) {
             this.state.form.delete(key);
         }
     };
 
     registerUser = () => {
-        this.setState({ errorMessage: '', processing: true });
+        this.setState({ errorMessage: null, processing: true });
 
-        for (const key of keys) {
-            this.state.form.append(key, this.state[key]);
+        for (const key of formProps) {
+            this.state.form.set(key, this.state[key]);
         }
 
+        const _this = this;
         API.register(this.state.form).then((response) => {
             if (response.data.errors) {
-                this.setState({ errorMessage: response.data.message });
+                _this.setState({ errorMessage: response.data.message });
                 return;
             }
             if (typeof response.data.errmsg !== `undefined`) {
-                this.setState({
-                    error: response.data.errmsg.indexOf('duplicate')
+                _this.setState({
+                    errorMessage: response.data.errmsg.indexOf('duplicate')
                         ? 'That username is already taken'
                         : response.data.errmsg,
                     processing: false,
@@ -69,23 +69,23 @@ class RegistrationPage extends React.Component {
                 return;
             }
 
-            this.addUserToStore(response);
+            _this.addUserToStore(response);
 
             const user = {
                 isLogged: true,
-                name: this.state.email,
+                name: _this.state.email,
                 id: response.data.userInfo._id,
                 user: response.data.userInfo,
-                userType: this.state.userType,
+                userType: _this.state.userType,
             };
 
             const redirectRoute =
-                this.state.userType.toLocaleLowerCase() === 'seller'
+                _this.state.userType.toLocaleLowerCase() === 'seller'
                     ? '/dashboard'
                     : '/listings';
 
-            this.props.loginaction.login(user);
-            this.props.history.push('/listings');
+            _this.props.loginaction.login(user);
+            _this.props.history.push(redirectRoute);
         });
     };
 
@@ -103,11 +103,7 @@ class RegistrationPage extends React.Component {
     confirmPassword = (e) => {
         const confirmedPass = e.target.value;
         const { password } = this.state;
-        if (confirmedPass === password) {
-            this.setState({ passwordMatch: true });
-        } else {
-            this.setState({ passwordMatch: false });
-        }
+        this.setState({ passwordMatch: confirmedPass === password });
     };
 
     handleDrop = (files) => {
@@ -118,7 +114,7 @@ class RegistrationPage extends React.Component {
     };
 
     onChange = (e) => {
-        this.setState({ [e.target.id]: e.target.value });
+        this.setState({ [e.target.id]: e.target.value, errorMessage: null });
     };
 
     changeUserType = (event, index, val, type) => {
@@ -221,10 +217,10 @@ class RegistrationPage extends React.Component {
                         )}
                     </div>
 
-                    <p className="text-muted">{this.state.error}</p>
-
-                    {this.state.errorMessage.length > 0 && (
-                        <span>{this.state.errorMessage}</span>
+                    {this.state.errorMessage && (
+                        <span className="text-muted">
+                            {this.state.errorMessage}
+                        </span>
                     )}
 
                     <RaisedButton
