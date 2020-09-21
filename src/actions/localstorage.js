@@ -1,9 +1,20 @@
+import Store from '../store';
+
 export const loadState = () => {
-    const myState = localStorage.getItem("state");
-    return myState === null ? undefined : JSON.parse(myState);
+    const localState = localStorage.getItem('state');
+    try {
+        return JSON.parse(localState);
+    } catch (ex) {
+        return JSON.parse('{}');
+    }
 };
 
-export const saveState = state => {
-    const myState = JSON.stringify(state);
-    localStorage.setItem("state", myState);
+export const saveState = () => {
+    const localState = JSON.stringify(_getStoreState());
+    localStorage.setItem('state', localState);
+};
+
+const _getStoreState = () => {
+    const storeInstance = Store();
+    return storeInstance.getState();
 };

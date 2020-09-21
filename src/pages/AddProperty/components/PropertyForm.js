@@ -1,7 +1,6 @@
 import React from 'react';
 import API from '../../../api/helpers.js';
 import NavBar from '../../../components/BreadcrumbNav';
-import TopNav from '../../../components/TopNav';
 import GoogleApiHOC from '../../../components/GoogleApiHOC';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -109,18 +108,18 @@ class AddProp extends React.Component {
             return;
         }
 
-        this.state.form.append('email', this.props.user.email);
-        this.state.form.append('userId', this.props.user._id);
-        this.state.form.append('price', this.state.price);
-        this.state.form.append('address', this.state.address);
-        this.state.form.append('propertyType', this.state.propertyType);
-        this.state.form.append('description', this.state.description);
-        this.state.form.append('bedRooms', this.state.bedRooms);
-        this.state.form.append('bathRooms', this.state.bathRooms);
-        this.state.form.append('yearBuilt', this.state.yearBuilt);
-        this.state.form.append('sqFeetLot', this.state.sqFeetLot);
-        this.state.form.append('sqFeet', this.state.sqFeet);
-        this.state.form.append('status', status);
+        this.state.form.set('email', this.props.user.email);
+        this.state.form.set('userId', this.props.user._id);
+        this.state.form.set('price', this.state.price);
+        this.state.form.set('address', this.state.address);
+        this.state.form.set('propertyType', this.state.propertyType);
+        this.state.form.set('description', this.state.description);
+        this.state.form.set('bedRooms', this.state.bedRooms);
+        this.state.form.set('bathRooms', this.state.bathRooms);
+        this.state.form.set('yearBuilt', this.state.yearBuilt);
+        this.state.form.set('sqFeetLot', this.state.sqFeetLot);
+        this.state.form.set('sqFeet', this.state.sqFeet);
+        this.state.form.set('status', status);
 
         if (this.state.imgsToDelete.length) {
             this.state.form.append('imgsToDelete', this.state.imgsToDelete);
@@ -212,7 +211,6 @@ class AddProp extends React.Component {
     render() {
         return (
             <div>
-                <TopNav />
                 <div className="saveDraft-publish-buttons">
                     {/* <button onClick={this.submitProperty.bind(this, "draft")}>
                         Save As Draft

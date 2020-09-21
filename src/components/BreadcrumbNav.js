@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { switchUser } from '../actions/switchUser';
 import greenLogo from '../img/micasa_green_logo.svg';
+import API from '../api/helpers';
 import '../styles/breadcrumb-nav.css';
 
 const home = <i className="material-icons">home</i>;
@@ -62,9 +63,14 @@ class NavBar extends React.Component {
         }
     };
 
-    switchUserType = (type) => {
+    switchUserType = (userType) => {
         this.handleClose();
-        this.props.switchUser(type);
+        const { id, switchUser } = this.props;
+        API.updateProfile({
+            id,
+            userType,
+        });
+        switchUser(userType);
     };
 
     render() {
@@ -183,6 +189,7 @@ class NavBar extends React.Component {
 function mapStateToProps(state) {
     return {
         userType: state.auth.userType,
+        id: state.auth._id,
     };
 }
 

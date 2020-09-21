@@ -22,7 +22,7 @@
     p {
         color: #4a6f9d;
     }
-    input[type="text"],
+    input[type='text'],
     textarea {
         background-color: #f9fbfe;
     }
@@ -95,7 +95,8 @@ span {
     }
 
     #pubButton {
-        background-color: #25b797 !important;
+        background-color: #25b797;
         color: #f9fbfe;
+        border: 0;
     }
 }

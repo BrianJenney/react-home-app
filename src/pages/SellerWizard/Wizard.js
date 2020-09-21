@@ -15,8 +15,6 @@ const Quiz = ({ completeWizard }) => {
     const user = useSelector((state) => state.auth);
     const [form, setForm] = useState(new FormData());
 
-    console.log(user);
-
     const optionChangeHandlerCallback = (val, modelName) => {
         form.set(modelName, val);
         setForm(form);
@@ -24,9 +22,13 @@ const Quiz = ({ completeWizard }) => {
 
     const submitForm = async () => {
         form.set('wizardType', 'seller');
-        form.set('userId', user.id);
-        const res = await API.submitWizardInfo(form);
-        completeWizard('seller');
+        form.set('userId', user._id);
+        try {
+            await API.submitWizardInfo(form);
+            completeWizard('seller');
+        } catch (ex) {
+            throw ex;
+        }
     };
 
     const config = [

@@ -46,11 +46,14 @@ class SignIn extends React.Component {
                     });
                     return;
                 }
-
                 this.addUserToStore(response);
                 const user = response.data.userInfo;
                 this.props.loginaction.login(user);
-                this.props.history.push('/listings');
+                const redirect =
+                    user.userType.toLowerCase() === 'buyer'
+                        ? '/listings'
+                        : '/dashboard';
+                this.props.history.push(redirect);
             })
             .finally(() => {
                 this.setState({ processing: false });
@@ -130,4 +133,4 @@ function mapDispatchToProps(dispatch) {
         logoutaction: bindActionCreators(logoutActions, dispatch),
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(null, mapDispatchToProps)(SignIn);

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route, Redirect } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
-import Store from './store';
+import store from './store';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -20,22 +20,10 @@ import BuyerDashboard from './pages/BuyerDashboard/Index';
 import AcceptedOffer from './pages/OfferAccepted/Index';
 import ErrorBoundary from './ErrorBoundary';
 
-import { saveState } from './actions/localstorage';
-import throttle from 'lodash/throttle';
-
 import './styles/global.css';
 
-const StoreInstance = Store();
-
-StoreInstance.subscribe(
-    throttle(() => {
-        saveState(StoreInstance.getState());
-    }, 1000)
-);
-
-const user = StoreInstance.getState().auth;
-
 const PrivateRoute = ({ component: Component, ...rest }) => {
+    const user = store.getState().auth;
     return (
         <Route
             {...rest}
@@ -52,7 +40,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
 ReactDOM.render(
     <MuiThemeProvider>
-        <Provider store={StoreInstance}>
+        <Provider store={store}>
             <ErrorBoundary>
                 <Router>
                     <div>

@@ -29,7 +29,7 @@ class RegistrationPage extends React.Component {
             lastName: '',
             phoneNumber: '',
             userPic: '',
-            userType: '',
+            userType: 'buyer',
             email: '',
             password: '',
             form: new FormData(),
@@ -73,10 +73,7 @@ class RegistrationPage extends React.Component {
 
             const user = {
                 isLogged: true,
-                name: _this.state.email,
-                id: response.data.userInfo._id,
-                user: response.data.userInfo,
-                userType: _this.state.userType,
+                ...response.data.userInfo,
             };
 
             const redirectRoute =

@@ -1,12 +1,11 @@
-import React from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
-import Dropzone from "react-dropzone";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-import ContentAdd from "material-ui/svg-icons/content/add";
-import PicPreview from "../../AddProperty/components/PicPreview";
-import "../../../styles/FillOutProfile.css";
-import API from "../../../api/helpers.js";
-import { updateLocale } from "moment";
+import React from 'react';
+import { Collapse } from 'reactstrap';
+import Dropzone from 'react-dropzone';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import PicPreview from '../../AddProperty/components/PicPreview';
+import '../../../styles/FillOutProfile.css';
+import API from '../../../api/helpers.js';
 
 class FillOutProfile extends React.Component {
     constructor(props) {
@@ -15,23 +14,18 @@ class FillOutProfile extends React.Component {
 
         this.state = {
             collapse: false,
-            phoneNumber: "",
+            phoneNumber: '',
             file: null,
             form: new FormData(),
-            profilePic: ""
-        };
-
-        const styles = {
-            display: "flex",
-            alignItems: "center"
+            profilePic: '',
         };
     }
 
     componentDidMount() {
-        API.userInfo(this.props.user._id).then(res => {
+        API.userInfo(this.props.user._id).then((res) => {
             this.setState({
-                phoneNumber: res.data.phoneNumber || "",
-                profilePic: res.data.userPic || ""
+                phoneNumber: res.data.phoneNumber || '',
+                profilePic: res.data.userPic || '',
             });
         });
     }
@@ -40,24 +34,25 @@ class FillOutProfile extends React.Component {
         this.setState({ collapse: !this.state.collapse });
     }
 
-    handleDrop = files => {
-        files.forEach(file => {
-            this.state.form.set("file", file);
+    handleDrop = (files) => {
+        files.forEach((file) => {
+            this.state.form.set('file', file);
         });
 
         this.updateProfile();
     };
 
-    handleChange = e => {
+    handleChange = (e) => {
         this.setState({ phoneNumber: e.target.value });
     };
 
     updateProfile = () => {
-        this.state.form.set("phoneNumber", this.state.phoneNumber);
-        this.state.form.set("userEmail", this.props.userEmail);
-        API.updateProfile(this.state.form).then(res => {
+        this.state.form.set('id', this.props.user._id);
+        this.state.form.set('phoneNumber', this.state.phoneNumber);
+        this.state.form.set('email', this.props.userEmail);
+        API.updateProfile(this.state.form).then((res) => {
             this.setState({
-                profilePic: res.data.userPic || ""
+                profilePic: res.data.userPic || '',
             });
         });
     };
@@ -65,14 +60,14 @@ class FillOutProfile extends React.Component {
     render() {
         return (
             <div className="card p-3">
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <h1 className="pr-4">2</h1>
                     <span className="section-title">Fill Out Your Profile</span>
                     <span
                         className={
                             this.state.collapse
-                                ? "fa fa-2x fa-angle-up pl-4"
-                                : "fa fa-2x fa-angle-down pl-4"
+                                ? 'fa fa-2x fa-angle-up pl-4'
+                                : 'fa fa-2x fa-angle-down pl-4'
                         }
                         onClick={this.toggle}
                     />
@@ -87,8 +82,8 @@ class FillOutProfile extends React.Component {
                             className="d-inline m-2 ml-0"
                         />
                         <p className="paragraph d-inline">
-                            {" "}
-                            Upload your profile photo{" "}
+                            {' '}
+                            Upload your profile photo{' '}
                             <span className="purple">
                                 (this will only be shown to buyers if you reply
                                 to a message they send you)
@@ -136,7 +131,7 @@ class FillOutProfile extends React.Component {
                             placeholder="Add your phone number"
                         />
                         <span className="purple">
-                            {" "}
+                            {' '}
                             (this will only be shown to buyers after you approve
                             their offer)
                         </span>

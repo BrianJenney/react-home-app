@@ -16,7 +16,7 @@
   background-color: #f9fbfe; }
   .add-property-info p {
     color: #4a6f9d; }
-  .add-property-info input[type="text"],
+  .add-property-info input[type='text'],
   .add-property-info textarea {
     background-color: #f9fbfe; }
 
@@ -74,5 +74,6 @@ span {
     padding: 0.4rem 4rem;
     border-radius: 0.3rem; }
   .saveDraft-publish-buttons #pubButton {
-    background-color: #25b797 !important;
-    color: #f9fbfe; }
+    background-color: #25b797;
+    color: #f9fbfe;
+    border: 0; }
