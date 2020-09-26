@@ -170,6 +170,27 @@ const Quiz = ({ completeWizard }) => {
             ],
             subOptions: [],
             modelName: 'idealTimeframe',
+        },
+        {
+            text:
+                "Based on your needs we recommend our [x] service. As part of this service,  you'/ll have us guiding the process of selling your home. Select your service to proceed",
+            componentType: 'binaryOption',
+            options: [
+                {
+                    label: 'Full Serv',
+                    value: 'fullserv',
+                },
+                {
+                    label: 'Limited',
+                    value: 'limited',
+                },
+                {
+                    label: 'Premium',
+                    value: 'premium',
+                },
+            ],
+            subOptions: [],
+            modelName: 'customerType',
             isLastQuestion: true,
         },
     ];
