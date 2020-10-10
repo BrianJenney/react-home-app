@@ -1,8 +1,8 @@
-import React from "react";
-import { Collapse } from "reactstrap";
-import API from "../../../api/helpers";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
+import React from 'react';
+import { Collapse } from 'reactstrap';
+import API from '../../../api/helpers';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 class ListHome extends React.Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class ListHome extends React.Component {
         this.state = {
             collapse: false,
             homes: [],
-            numbers: 0
+            numbers: 0,
         };
     }
 
@@ -19,20 +19,20 @@ class ListHome extends React.Component {
         let homes = [];
 
         API.getListingHomes(this.props.userEmail)
-            .then(responses => {
+            .then((responses) => {
                 const data = responses.data;
 
-                data.forEach(home => {
+                data.forEach((home) => {
                     homes.push(home);
                 });
             })
             .then(() => {
-                this.setState({ homes: homes });
+                this.setState({ homes });
             });
     }
 
     goToListHome = () => {
-        this.props.history.push("addproperty");
+        this.props.history.push('addproperty');
     };
 
     toggle() {
@@ -40,16 +40,17 @@ class ListHome extends React.Component {
     }
 
     render() {
+        const { order } = this.props;
         return (
             <div className="card p-3">
-                <div style={{ display: "flex", alignItems: "center" }}>
-                    <h1 className="pr-4">1</h1>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <h1 className="pr-4">{order}</h1>
                     <span className="section-title">ListHome</span>
                     <span
                         className={
                             this.state.collapse
-                                ? "fa fa-2x fa-angle-up pl-4"
-                                : "fa fa-2x fa-angle-down pl-4"
+                                ? 'fa fa-2x fa-angle-up pl-4'
+                                : 'fa fa-2x fa-angle-down pl-4'
                         }
                         onClick={this.toggle}
                     />
@@ -60,14 +61,14 @@ class ListHome extends React.Component {
                     )}
 
                     <ul>
-                        {this.state.homes.map(function(home, index) {
+                        {this.state.homes.map(function (home, index) {
                             return (
                                 <div>
                                     <li
                                         key={index}
                                         style={{
-                                            display: "flex",
-                                            width: "100%"
+                                            display: 'flex',
+                                            width: '100%',
                                         }}
                                     >
                                         <img src={home.imgs[0]} alt="" />

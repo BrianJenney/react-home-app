@@ -47,10 +47,11 @@ class SignIn extends React.Component {
                     return;
                 }
                 this.addUserToStore(response);
+
                 const user = response.data.userInfo;
                 this.props.loginaction.login(user);
                 const redirect =
-                    user.userType.toLowerCase() === 'buyer'
+                    (user.userType || 'buyer').toLowerCase() === 'buyer'
                         ? '/listings'
                         : '/dashboard';
                 this.props.history.push(redirect);
@@ -118,13 +119,6 @@ class SignIn extends React.Component {
             </div>
         );
     }
-}
-
-function mapStateToProps(state) {
-    return {
-        id: state.auth.id,
-        email: state.auth.name,
-    };
 }
 
 function mapDispatchToProps(dispatch) {
