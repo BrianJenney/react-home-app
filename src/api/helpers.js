@@ -5,10 +5,10 @@ axios.defaults.headers.common['Authorization'] =
 
 const url = window.location.href.includes('localhost')
     ? 'http://localhost:8081'
-    : 'http://node-express-env.eba-ct39mmi5.us-east-1.elasticbeanstalk.com';
+    : 'https://micasa-services.com';
 
 //testing when blocked by firewall
-//const url = `http://node-express-env.eba-ct39mmi5.us-east-1.elasticbeanstalk.com`
+//const url = `https://micasa-services.com`
 
 export default {
     login: function (user) {
