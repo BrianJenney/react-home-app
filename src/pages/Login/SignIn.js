@@ -6,7 +6,6 @@ import * as logoutActions from '../../actions/logout';
 import API from '../../api/helpers.js';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import NavBar from '../../components/BreadcrumbNav';
 import '../../styles/sign-in.css';
 
 class SignIn extends React.Component {
@@ -115,7 +114,6 @@ class SignIn extends React.Component {
                         />
                     </div>
                 </div>
-                <NavBar />
             </div>
         );
     }

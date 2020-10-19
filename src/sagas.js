@@ -14,7 +14,7 @@ function* saveReduxState() {
 //listens for any instance of GET_OFFERS to be called to dispatch the action
 const userSaga = function* () {
     yield takeLatest(
-        ['LOGIN', 'LOGOUT', 'COMPLETED_WIZARD', 'SWITCH_USER_TYPE'],
+        ['LOGIN', 'LOGOUT', 'COMPLETED_WIZARD', 'UPDATE_USER'],
         saveReduxState
     );
 };

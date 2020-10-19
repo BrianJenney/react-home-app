@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '../../components/BreadcrumbNav';
 import MapWrapper from './components/MapWrapper';
 import UserSearch from './components/Search';
 import { bindActionCreators } from 'redux';
@@ -29,7 +28,6 @@ class BrowseListings extends React.Component {
             <div>
                 <MapWrapper />
                 <UserSearch />
-                <NavBar selectedIndex={2} />
             </div>
         );
     }

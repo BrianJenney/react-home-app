@@ -9,7 +9,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as loginActions from '../../actions/login';
 import * as logoutActions from '../../actions/logout';
-import NavBar from '../../components/BreadcrumbNav';
 import '../../styles/registration.css';
 
 const formProps = [
@@ -237,7 +236,6 @@ class RegistrationPage extends React.Component {
                         }
                     />
                 </div>
-                <NavBar />
             </div>
         );
     }

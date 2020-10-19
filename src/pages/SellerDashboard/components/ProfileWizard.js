@@ -1,20 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import DashboardItem from '../../../components/DashboardItem';
+import API from '../../../api/helpers';
 
-const ProfileWizard = ({ order }) => {
+const ProfileWizard = () => {
     const [selectedCustomerType, setCustomerType] = useState(null);
-    const [isOpen, setOpen] = useState(false);
-    const auth = useSelector((state) => state.auth);
+    const user = useSelector((state) => state.auth);
+    const { customerType } = user;
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const { customerType } = auth;
         setCustomerType(customerType);
-    }, [auth]);
+    }, [user]);
 
-    const { customerType = 'premium' } = auth;
+    const updateProfile = async (selectedService) => {
+        const updatedUser = { ...user, customerType: selectedService };
+        try {
+            await API.updateProfile(updatedUser);
+            setCustomerType(selectedService);
+            dispatch({
+                type: 'UPDATE_USER',
+                updatedVals: { customerType: selectedService },
+            });
+        } catch (ex) {
+            throw ex;
+        }
+    };
+
     return (
         <DashboardItem order={1} title="Profile Wizard">
             <div style={{ display: 'inline-flex' }}>
@@ -26,7 +40,7 @@ const ProfileWizard = ({ order }) => {
                 <SelectField
                     floatingLabelText=""
                     value={selectedCustomerType}
-                    onChange={(event, index, val) => setCustomerType(val)}
+                    onChange={(event, index, val) => updateProfile(val)}
                     autoWidth={true}
                     floatingLabelStyle={{
                         transform: 'scale(0.75) translate(0px, -28px)',

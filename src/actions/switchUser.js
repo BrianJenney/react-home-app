@@ -1,6 +1,6 @@
-export const switchUser = userType => {
+export const switchUser = (updatedVals) => {
     return {
-        type: "SWITCH_USER_TYPE",
-        userType
+        type: 'UPDATE_USER',
+        updatedVals,
     };
 };

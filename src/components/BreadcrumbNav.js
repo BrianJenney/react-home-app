@@ -7,6 +7,7 @@ import { switchUser } from '../actions/switchUser';
 import greenLogo from '../img/micasa_green_logo.svg';
 import API from '../api/helpers';
 import '../styles/breadcrumb-nav.css';
+import { logout } from '../actions/logout';
 
 const home = <i className="material-icons">home</i>;
 const search = <i className="material-icons">location_searching</i>;
@@ -35,6 +36,11 @@ class NavBar extends React.Component {
             anchorEl: null,
             open: false,
         });
+    };
+
+    logoutAndExit = () => {
+        this.props.logout();
+        this.props.history.push('/');
     };
 
     select = (page) => {
@@ -70,11 +76,11 @@ class NavBar extends React.Component {
             id,
             userType,
         });
-        switchUser(userType);
+        switchUser({ userType });
     };
 
     render() {
-        const { userType } = this.props;
+        const { userType, user } = this.props;
         const { anchorEl, open } = this.state;
 
         return (
@@ -112,7 +118,7 @@ class NavBar extends React.Component {
                                         className="pop-over-item"
                                         onClick={this.switchUserType.bind(
                                             null,
-                                            'buyer'
+                                            { userType: 'buyer' }
                                         )}
                                     >
                                         Buyer
@@ -121,7 +127,7 @@ class NavBar extends React.Component {
                                         className="pop-over-item"
                                         onClick={this.switchUserType.bind(
                                             null,
-                                            'seller'
+                                            { userType: 'seller' }
                                         )}
                                     >
                                         Seller
@@ -158,24 +164,30 @@ class NavBar extends React.Component {
                                     Messages
                                 </a>
                             </li>
-                            <li>
-                                <a
-                                    label="Sign Up"
-                                    className="crumb-link"
-                                    icon={signout}
-                                    onClick={() => this.select('register')}
-                                >
-                                    Sign Up
-                                </a>
-                            </li>
+                            {!user && (
+                                <li>
+                                    <a
+                                        label="Sign Up"
+                                        className="crumb-link"
+                                        icon={signout}
+                                        onClick={() => this.select('register')}
+                                    >
+                                        Sign Up
+                                    </a>
+                                </li>
+                            )}
                             <li>
                                 <a
                                     label="Log In"
                                     className="crumb-link"
                                     icon={signout}
-                                    onClick={() => this.select('login')}
+                                    onClick={() =>
+                                        user
+                                            ? this.logoutAndExit()
+                                            : this.select('login')
+                                    }
                                 >
-                                    Log In
+                                    {user ? 'Log Out' : 'Log In'}
                                 </a>
                             </li>
                         </ul>
@@ -196,6 +208,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         switchUser: bindActionCreators(switchUser, dispatch),
+        logout: bindActionCreators(logout, dispatch),
     };
 }
 

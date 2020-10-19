@@ -19,11 +19,11 @@ export default (state = {}, action) => {
                 [wizardTypeMap[payload]]: true,
             };
 
-        case 'SWITCH_USER_TYPE':
-            const { userType } = action;
+        case 'UPDATE_USER':
+            const { updatedVals = {} } = action;
             return {
                 ...state,
-                userType,
+                ...updatedVals,
             };
         default:
             return state;

@@ -19,7 +19,8 @@ import Dashboard from './pages/Dashboard/Index';
 import BuyerDashboard from './pages/BuyerDashboard/Index';
 import AcceptedOffer from './pages/OfferAccepted/Index';
 import ErrorBoundary from './ErrorBoundary';
-
+import withNavBar from './components/withNavBar';
+import withBackground from './components/WithBackground';
 import './styles/global.css';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -38,39 +39,55 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     );
 };
 
+const ComponentWithNavBar = (Component) => withNavBar(Component);
+
 ReactDOM.render(
     <MuiThemeProvider>
         <Provider store={store}>
             <ErrorBoundary>
                 <Router>
                     <div>
-                        <Route exact path="/" component={SignIn} />
-                        <Route exact path="/sign-up" component={SignUp} />
+                        <Route
+                            exact
+                            path="/"
+                            component={ComponentWithNavBar(SignIn)}
+                        />
+                        <Route
+                            exact
+                            path="/sign-up"
+                            component={ComponentWithNavBar(SignUp)}
+                        />
                         <PrivateRoute
                             path="/addproperty"
-                            component={AddProperty}
+                            component={ComponentWithNavBar(AddProperty)}
                         />
                         <PrivateRoute
                             path="/edit/property/:id"
-                            component={EditProperty}
+                            component={ComponentWithNavBar(EditProperty)}
                         />
-                        <PrivateRoute path="/listings" component={Listings} />
+                        <PrivateRoute
+                            path="/listings"
+                            component={ComponentWithNavBar(Listings)}
+                        />
                         <PrivateRoute
                             path="/property/:id"
-                            component={Property}
+                            component={ComponentWithNavBar(Property)}
                         />
                         <PrivateRoute
                             path="/messages"
-                            component={UserMessages}
+                            component={ComponentWithNavBar(UserMessages)}
                         />
-                        <PrivateRoute path="/dashboard" component={Dashboard} />
+                        <PrivateRoute
+                            path="/dashboard"
+                            component={ComponentWithNavBar(Dashboard)}
+                        />
                         <PrivateRoute
                             path="/buyerdashboard/:id?"
-                            component={BuyerDashboard}
+                            component={ComponentWithNavBar(BuyerDashboard)}
                         />
                         <PrivateRoute
                             path="/offeraccepted/:id"
-                            component={AcceptedOffer}
+                            component={ComponentWithNavBar(AcceptedOffer)}
                         />
                     </div>
                 </Router>

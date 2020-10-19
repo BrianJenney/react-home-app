@@ -1,20 +1,19 @@
-import React from "react";
-import API from "../../api/helpers.js";
-import NavBar from "../../components/BreadcrumbNav";
-import Divider from "material-ui/Divider";
-import ChatBox from "./components/ChatBox";
-import TopNav from "../../components/TopNav";
-import { List, ListItem } from "material-ui/List";
+import React from 'react';
+import API from '../../api/helpers.js';
+import Divider from 'material-ui/Divider';
+import ChatBox from './components/ChatBox';
+import TopNav from '../../components/TopNav';
+import { List, ListItem } from 'material-ui/List';
 
 class UserMessages extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             open: false,
-            picID: "",
+            picID: '',
             messages: [],
-            recipient: "",
-            convo: []
+            recipient: '',
+            convo: [],
         };
         this.refreshConvo = this.refreshConvo.bind(this);
     }
@@ -22,12 +21,12 @@ class UserMessages extends React.Component {
     componentDidMount = () => {
         let self = this;
         const { user } = this.props;
-        API.getMessages(user.email).then(response => {
+        API.getMessages(user.email).then((response) => {
             const messages = response.data;
             //only show the user in the message that is not the logged in user
-            messages.map(message => {
+            messages.map((message) => {
                 return (message.participants = message.participants.filter(
-                    name => {
+                    (name) => {
                         return name !== self.props.user.email;
                     }
                 ));
@@ -36,30 +35,30 @@ class UserMessages extends React.Component {
         });
     };
 
-    getConvo = message => {
+    getConvo = (message) => {
         //set viewed of this message to true
         const { user } = this.props;
-        let unviewedMessages = message.messages.filter(item => {
+        let unviewedMessages = message.messages.filter((item) => {
             return item.to === user.email && !item.viewed;
         });
         //if any message sent to user is not read, set all to read after opening convo
-        unviewedMessages.forEach(convo => {
+        unviewedMessages.forEach((convo) => {
             API.setMessageToViewed(message._id, convo._id);
         });
 
         this.setState({
             convo: message.messages,
             recipient: message.participants[0],
-            picID: message.id
+            picID: message.id,
         });
     };
 
     refreshConvo = (recipient, sender) => {
-        API.getConvo(recipient, sender).then(response => {
+        API.getConvo(recipient, sender).then((response) => {
             this.setState({
                 convo: response.data[0].messages,
                 recipient,
-                picId: response.data[0].id
+                picId: response.data[0].id,
             });
         });
     };
@@ -68,7 +67,6 @@ class UserMessages extends React.Component {
         return (
             <div>
                 <TopNav />
-                <NavBar selectedIndex={3} />
                 <div className="row">
                     <div className="text-center">
                         <h1 className="text-center">My Messages</h1>

@@ -31,7 +31,6 @@ const Dashboard = () => {
                 <Offers user={user} />
                 <ContractCompletion user={user} />
             </div>
-            <NavBar />
         </div>
     );
 };
