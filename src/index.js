@@ -20,7 +20,6 @@ import BuyerDashboard from './pages/BuyerDashboard/Index';
 import AcceptedOffer from './pages/OfferAccepted/Index';
 import ErrorBoundary from './ErrorBoundary';
 import withNavBar from './components/withNavBar';
-import withBackground from './components/WithBackground';
 import './styles/global.css';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../../styles/picbox.css';
 import API from '../../../api/helpers';
@@ -13,6 +13,9 @@ const heartIconFilled = (
 
 const HousePics = ({ pics, userId }) => {
     const [allPics, setLikedPics] = useState(pics);
+    useEffect(() => {
+        setLikedPics(pics);
+    }, [pics]);
 
     const horizontalScroll = (imgs, picId) => {
         return imgs.map((img, idx) => {
@@ -27,30 +30,33 @@ const HousePics = ({ pics, userId }) => {
     };
 
     const favoriteHouse = (id, userId, index) => {
-        API.favoriteHome(userId, id).then((res) => {
-            const {
-                data: {
+        API.favoriteHome(userId, id)
+            .then((res) => {
+                console.log(res);
+                const {
                     data: {
-                        addLike: { likes },
+                        data: {
+                            updateLikes: { likes },
+                        },
                     },
-                },
-            } = res;
-            setLikedPics(
-                allPics.map((pic, idx) => {
-                    if (idx === index) {
-                        return { ...pic, likes: [...likes] };
-                    } else {
+                } = res;
+                setLikedPics(
+                    allPics.map((pic, idx) => {
+                        if (idx === index) {
+                            return { ...pic, likes: [...likes] };
+                        }
                         return pic;
-                    }
-                })
-            );
-        });
+                    })
+                );
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
         <div>
             <div className="house-pics">
-                {pics.map((pic, id) => {
+                {console.log(allPics)}
+                {allPics.map((pic, id) => {
                     const isLiked = pic && pic.likes.includes(userId);
                     return (
                         <div key={id} className="property-wrapper">

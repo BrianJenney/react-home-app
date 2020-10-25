@@ -29,10 +29,16 @@ const ProfileWizard = () => {
         }
     };
 
+    const options = [
+        { val: 'fullserv', name: 'Full Service' },
+        { val: 'premium', name: 'Premium' },
+        { val: 'limited', name: 'Limited' },
+    ];
+
     return (
         <DashboardItem order={1} title="Profile Wizard">
             <div style={{ display: 'inline-flex' }}>
-                <input type="checkbox" className="d-inline m-2 ml-0" />
+                <input type="checkbox" checked className="d-inline m-2 ml-0" />
                 <p>Fill out your profile</p>
             </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -47,9 +53,9 @@ const ProfileWizard = () => {
                         color: '#495057',
                     }}
                 >
-                    <MenuItem value={'fullserv'} primaryText="full service" />
-                    <MenuItem value={'premium'} primaryText="premium" />
-                    <MenuItem value={'limited'} primaryText="limited" />
+                    {options.map(({ name, val }) => (
+                        <MenuItem key={val} value={val} primaryText={name} />
+                    ))}
                 </SelectField>
             </div>
         </DashboardItem>

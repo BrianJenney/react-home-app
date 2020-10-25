@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Collapse } from 'reactstrap';
 import './DashboardItem.style.css';
 
-const ProfileWizard = ({ order, title, children }) => {
+const DashboardItem = ({ order, title, children }) => {
     const [isOpen, setOpen] = useState(false);
     return (
         <div className="dashboard-item card p-3">
@@ -18,7 +18,7 @@ const ProfileWizard = ({ order, title, children }) => {
                     onClick={() => setOpen(!isOpen)}
                 />
             </div>
-            <Collapse isOpen={isOpen}>
+            <Collapse isOpen={isOpen} style={{ marginLeft: '5%' }}>
                 <p className="todo-header">Things left to do...</p>
                 {children}
             </Collapse>
@@ -26,4 +26,4 @@ const ProfileWizard = ({ order, title, children }) => {
     );
 };
 
-export default ProfileWizard;
+export default DashboardItem;

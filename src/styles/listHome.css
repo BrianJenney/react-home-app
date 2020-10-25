@@ -1,0 +1,7 @@
+.add-listing {
+  background: none;
+  border: 1px solid gray;
+  border-radius: 0.15em;
+  padding: 0 1em; }
+  .add-listing:hover {
+    cursor: pointer; }

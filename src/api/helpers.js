@@ -45,8 +45,8 @@ export default {
     //add a userid under a homes likes array
     favoriteHome: (userId, id) =>
         axios.post(`${url}/api/property/graphql`, {
-            query: `mutation addLike ($id: String!, $userId: String!) {
-				addLike (id: $id, userId: $userId){
+            query: `mutation updateLikes ($id: String!, $userId: String!) {
+				updateLikes (id: $id, userId: $userId){
 					id,
 					likes
 				}

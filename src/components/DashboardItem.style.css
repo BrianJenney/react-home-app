@@ -1,2 +1,8 @@
-.todo-header p {
-  color: #5665c0; }
+.todo-header {
+  color: #5665c0;
+  font-weight: 400;
+  font-family: Arial, Helvetica, sans-serif; }
+
+.collapse,
+.collapse > .show {
+  margin-left: 5%; }

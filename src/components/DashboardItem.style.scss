@@ -1,3 +1,10 @@
-.todo-header p {
+.todo-header {
     color: #5665c0;
+    font-weight: 400;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.collapse,
+.collapse > .show {
+    margin-left: 5%;
 }
