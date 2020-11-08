@@ -4,6 +4,8 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import DashboardItem from '../../../components/DashboardItem';
 import API from '../../../api/helpers';
+import EditIcon from '../../../img/icon-edit.png';
+import '../../../styles/profileWizard.css';
 
 const ProfileWizard = () => {
     const [selectedCustomerType, setCustomerType] = useState(null);
@@ -38,12 +40,21 @@ const ProfileWizard = () => {
     return (
         <DashboardItem order={1} title="Profile Wizard">
             <div style={{ display: 'inline-flex' }}>
-                <input type="checkbox" checked className="d-inline m-2 ml-0" />
+                <input
+                    type="checkbox"
+                    checked
+                    onChange={() => {}}
+                    className="d-inline m-2 ml-0"
+                />
                 <p>Fill out your profile</p>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div
+                className="customer-type-select"
+                style={{ display: 'flex', alignItems: 'center' }}
+            >
                 <b style={{ marginRight: '1em' }}>Selected service...</b>
                 <SelectField
+                    style={{ width: '150px' }}
                     floatingLabelText=""
                     value={selectedCustomerType}
                     onChange={(event, index, val) => updateProfile(val)}
@@ -57,6 +68,11 @@ const ProfileWizard = () => {
                         <MenuItem key={val} value={val} primaryText={name} />
                     ))}
                 </SelectField>
+                <img
+                    className="profile-edit-icon"
+                    alt="edit icon"
+                    src={EditIcon}
+                />
             </div>
         </DashboardItem>
     );

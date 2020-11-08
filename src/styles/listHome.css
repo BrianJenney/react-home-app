@@ -1,7 +1,22 @@
 .add-listing {
   background: none;
-  border: 1px solid gray;
+  border: 1px solid #dfe7f0;
   border-radius: 0.15em;
-  padding: 0 1em; }
+  padding: 5px 3.5em;
+  margin-left: 10px; }
   .add-listing:hover {
     cursor: pointer; }
+
+.edit-current-home {
+  display: flex; }
+  .edit-current-home .list-home-info {
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    border: 1px solid #dfe7f0;
+    padding: 1em 5em 0 3em; }
+
+.cutoff {
+  background-image: -webkit-linear-gradient(145deg, transparent 50%, white 50%);
+  position: absolute; }
+  .cutoff img {
+    height: 40px; }
