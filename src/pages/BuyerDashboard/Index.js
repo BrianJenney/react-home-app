@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import API from '../../api/helpers';
 import PurchaseAgreement from './components/PurchaseAgreement';
@@ -7,126 +8,67 @@ import Financing from './components/Financing';
 import Decisioning from './components/Decisioning';
 import ContractCompletion from './components/ContractCompletion';
 import WithBackground from '../../components/WithBackground';
-import { get } from 'lodash';
+import BuyerWizard from '../BuyerWizard/BuyerWizard';
 
-class Dashboard extends React.Component {
-    constructor(props) {
-        super(props);
+const BuyerDashboard = ({ match }) => {
+    const user = useSelector((state) => state.auth);
+    const [allOffers, setOffers] = useState([]);
+    const { buyerWizardCompleted } = user;
 
-        this.state = {
-            property: null,
-            currentHouse: null,
-            open: false,
-            user: null,
-            currentOffer: null,
-            offers: [],
-        };
+    useEffect(() => {
+        API.getOffersFromBuyer(user._id).then((res) => {
+            setOffers(res.data);
+        });
+    }, [user]);
 
-        this.refreshOfferData = this.refreshOfferData.bind(this);
+    if (!buyerWizardCompleted) {
+        return <BuyerWizard />;
     }
 
-    componentDidMount = () => {
-        this.getOffers();
-        if (this.props.match.params.id) {
-            this.refreshOfferData(this.props.match.params.id);
-        }
-    };
+    const {
+        params: { id },
+    } = match;
+    const currentOffer = id
+        ? allOffers.filter(({ _id }) => {
+              return _id === id;
+          })
+        : null;
 
-    getOffers = () => {
-        API.getOffersFromBuyer(this.props.user._id).then((res) => {
-            this.setState({ offers: res.data });
-        });
-    };
+    // TODO: offer should include property doc
+    const currentProperty = currentOffer && currentOffer.property;
 
-    refreshOfferData = (houseId) => {
-        API.getHome(houseId).then((response) => {
-            this.setState(
-                {
-                    currentHouse: response.data.doc.imgs[0],
-                    property: response.data.doc,
-                },
-                () => {
-                    API.getOfferForCurrentProperty(
-                        this.state.property,
-                        this.props.user
-                    ).then((res) => {
-                        this.setState({
-                            currentOffer: res.data[0],
-                        });
-                    });
-                }
-            );
-        });
-    };
-
-    render() {
-        const { currentOffer, currentHouse, property, offers } = this.state;
-        const { user } = this.props;
-
-        const sellerPurchaseAgreement = get(
-            currentOffer,
-            'sellerPurchaseAgreement',
-            ''
-        );
-
-        const maybeTruncate = (word) => {
-            return word.length < 12 ? word : `${word.slice(0, 12)}...`;
-        };
-
-        return (
-            <div>
-                <div className="container buyer-dash w-80 mb-10 h-100">
-                    <h1>Buyer Dashboard</h1>
-                    <img src={currentHouse} alt="" />
-
-                    <div>
-                        {offers.map((offer, idx) => {
-                            return (
-                                <span
-                                    key={idx}
-                                    onClick={() => {
-                                        this.props.history.replace(
-                                            `/buyerdashboard/${offer.homeId}`
-                                        );
-                                    }}
-                                >
-                                    {maybeTruncate(offer.home.address)} |
-                                </span>
-                            );
-                        })}
-                    </div>
-
-                    <Financing
-                        home={property}
+    return (
+        <div>
+            <div className="container dashboard w-80 h-100">
+                <Financing
+                    home={currentProperty}
+                    user={user}
+                    currentOffer={currentOffer}
+                />
+                <PurchaseAgreement
+                    home={currentProperty}
+                    user={user}
+                    currentOffer={currentOffer}
+                />
+                <SubmitOffer
+                    home={currentProperty}
+                    user={user}
+                    currentOffer={currentOffer}
+                />
+                {allOffers.length > 0 && currentProperty && (
+                    <Decisioning
+                        home={currentProperty}
                         user={user}
+                        offers={allOffers}
                         currentOffer={currentOffer}
                     />
-                    <PurchaseAgreement
-                        home={property}
-                        user={user}
-                        currentOffer={currentOffer}
-                    />
-                    <SubmitOffer
-                        home={property}
-                        user={user}
-                        currentOffer={currentOffer}
-                    />
-                    {offers.length > 0 && property && (
-                        <Decisioning
-                            home={property}
-                            user={user}
-                            offers={offers}
-                            currentOffer={currentOffer}
-                        />
-                    )}
-                    {sellerPurchaseAgreement.length > 0 && (
-                        <ContractCompletion offer={currentOffer} />
-                    )}
-                    {/* <Messages userEmail={this.props.email} /> */}
-                </div>
+                )}
+                {currentOffer && currentOffer.sellerPurchaseAgreement > 0 && (
+                    <ContractCompletion offer={currentOffer} />
+                )}
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
-export default withRouter(WithBackground(Dashboard));
+export default withRouter(WithBackground(BuyerDashboard));

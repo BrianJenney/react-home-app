@@ -21,7 +21,10 @@ const Quiz = ({
         if (config[page].isLastQuestion) {
             completeWizard();
         } else {
-            const newPage = nextPage || page + 1;
+            let newPage = nextPage || page + 1;
+            if (config[page].getNextPage) {
+                newPage = config[page].getNextPage(val);
+            }
             setPage(newPage);
             setPageHistory((hist) => [...hist, newPage]);
         }
@@ -56,7 +59,7 @@ const Quiz = ({
             <div className="progress-bar-container">
                 {page > 0 ? (
                     <i
-                        onClick={() => changePageBackward}
+                        onClick={() => changePageBackward()}
                         className="material-icons"
                         style={{ color: 'white' }}
                     >

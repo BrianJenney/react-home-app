@@ -12,7 +12,6 @@ const Question = ({
     subTitle,
     showOptionsValue,
     hideOptionsValue,
-    getNextPage = noop,
     optionChangeHandler = noop,
     modelName,
 }) => {
@@ -20,11 +19,10 @@ const Question = ({
     const inputRef = useRef(null);
 
     const handleClick = (val) => {
-        const nextPage = getNextPage ? getNextPage(val) : 0;
         if (showOptionsValue !== undefined) {
             showOptionsValue === val
                 ? setShowOption(val)
-                : optionChangeHandler(val, modelName, nextPage);
+                : optionChangeHandler(val, modelName);
         } else {
             optionChangeHandler(val, modelName);
         }
@@ -92,11 +90,36 @@ const Question = ({
         </div>
     );
 
+    const optionsWithDivider = () => (
+        <div className="options-container-divider">
+            {options.map((option) => {
+                return (
+                    <div>
+                        <div
+                            dangerouslySetInnerHTML={{ __html: option.html }}
+                        ></div>
+                        <button
+                            className="multi-options"
+                            key={option.value}
+                            onClick={() => {
+                                handleClick(option.value);
+                            }}
+                        >
+                            <p>{option.label}</p>
+                        </button>
+                        <div className="verticalDivider"></div>
+                    </div>
+                );
+            })}
+        </div>
+    );
+
     const componentTypeMap = {
         fileUpload,
         binaryOption,
         multiOptions,
         freeText,
+        optionsWithDivider,
     };
 
     const hasSubOptions = !!subComponentType;

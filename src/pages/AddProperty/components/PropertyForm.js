@@ -77,7 +77,7 @@ class AddProp extends React.Component {
         });
     };
 
-    callAddressAutoComplete = (input) => {
+    callAddressAutoComplete = () => {
         const { google } = this.props;
         let autoComplete = new google.maps.places.Autocomplete(
             document.getElementById('address'),

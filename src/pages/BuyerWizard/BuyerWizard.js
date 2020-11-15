@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import withBackground from '../../components/WithBackground';
 import Wizard from '../../components/Wizard/Wizard';
+import API from '../../api/helpers';
 import './styles/BuyerWizard.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { completeWizard } from '../../actions/completeWizard';
 
-const BuyerWizard = ({ user, history, completeWizard }) => {
+const BuyerWizard = () => {
+    const user = useSelector((state) => state.auth);
     const [form, setForm] = useState(new FormData());
 
     const optionChangeHandlerCallback = (val, modelName) => {
@@ -16,7 +19,19 @@ const BuyerWizard = ({ user, history, completeWizard }) => {
         setForm(form);
     };
 
+    const submitForm = async () => {
+        form.set('wizardType', 'buyer');
+        form.set('userId', user._id);
+        try {
+            await API.submitWizardInfo(form);
+            completeWizard('buyer');
+        } catch (ex) {
+            throw ex;
+        }
+    };
+
     const config = [
+        //0
         {
             text: 'When are you planning to buy?',
             componentType: 'multiOptions',
@@ -48,8 +63,30 @@ const BuyerWizard = ({ user, history, completeWizard }) => {
             subTitle: null,
             modelName: 'timelineToBuy',
         },
+        //1
         {
             text: `You don't need an agent with Micasa which cuts out pricey closing fees. But we have to check... do you have a real estate agent?`,
+            componentType: 'binaryOption',
+            hideOptionsValue: false,
+            subComponentType: null,
+            options: [
+                {
+                    label: 'Yes',
+                    value: true,
+                },
+                {
+                    label: 'No',
+                    value: false,
+                },
+            ],
+            subOptions: [],
+            subTitle: null,
+            getNextPage: (val) => (val ? 2 : 4),
+            modelName: 'hasAgent', //TODO: might not need this since they cannot proceed if using an agent....
+        },
+        //2
+        {
+            text: 'Would you rather do this without an agent?',
             componentType: 'binaryOption',
             showOptionsValue: false,
             hideOptionsValue: false,
@@ -66,59 +103,66 @@ const BuyerWizard = ({ user, history, completeWizard }) => {
             ],
             subOptions: [],
             subTitle: null,
-            getNextPage: (val) => (val ? 2 : 1),
-            modelName: 'hasAgent', //TODO: might not need this since they cannot proceed if using an agent....
+            getNextPage: (val) => (val ? 4 : 3),
         },
+        //3
         {
-            text: 'What is the full name of ownership?',
-            componentType: 'freeText',
-            options: [],
-            subTitle: '',
-            modelName: 'ownershipName',
-        },
-        {
-            text: 'Have you ever sold a home?',
-            componentType: 'binaryOption',
-            showOptionsValue: 'hasSoldBefore',
-            hideOptionsValue: 'n/a',
-            subComponentType: 'multiOptions',
-            options: [
-                {
-                    label: 'Yes',
-                    value: 'hasSoldBefore',
-                },
-                {
-                    label: 'No',
-                    value: 'n/a',
-                },
-            ],
-            subOptions: [
-                {
-                    label: 'Realtor',
-                    value: 'realtor',
-                },
-                {
-                    label: 'Attorney',
-                    value: 'attorney',
-                },
-                {
-                    label: 'Sold it myself',
-                    value: 'independent',
-                },
-                {
-                    label: 'Other',
-                    value: 'other',
-                },
-            ],
-            subTitle: 'Via which method?',
-            modelName: 'previousSellingMethod',
-        },
-        {
-            text:
-                'Do you, a relative, or one of the owners of the property hold an active California Real Estate License?',
+            text: `We're not able to help you`,
             componentType: 'binaryOption',
             showOptionsValue: false,
-            hideOptionsValue: true,
+            hideOptionsValue: false,
+            subComponentType: null,
+            options: [],
+            subOptions: [],
+            subTitle: null,
+        },
+        //4
+        {
+            text:
+                'Based on your needs, either of these options match well with you. Which would you prefer?',
+            componentType: 'optionsWithDivider',
+            showOptionsValue: false,
+            hideOptionsValue: false,
+            subComponentType: null,
+            options: [
+                {
+                    label: 'This One',
+                    value: 'micasaAgent',
+                    html: `<div style="text-align:initial">
+                            <h3>Micasa's Buyer Agents</h3>
+                            <p>Features a...</p>
+                            <ul>
+                                <li>1% Commission</li>
+                                <li>Dashboard that guides progress</li>
+                                <li>Our consultation</li>
+                            </ul>
+                        </div>`,
+                },
+                {
+                    label: 'This One',
+                    value: 'traditionalAgent',
+                    html: `<div style="text-align:initial">
+                            <h3>Traditional Service</h3>
+                            <p>Features a...</p>
+                            <ul>
+                                <li>3% Commission</li>
+                                <li>A partner real estate agent</li>
+                            </ul>
+                        </div>`,
+                },
+            ],
+            subOptions: [],
+            subTitle: null,
+            modelName: 'repAgent',
+        },
+        //5
+        {
+            text:
+                'Do you need to sell your property before you can purchase another',
+            componentType: 'binaryOption',
+            showOptionsValue: true,
+            hideOptionsValue: false,
+            subComponentType: 'multiOptions',
             options: [
                 {
                     label: 'Yes',
@@ -129,28 +173,19 @@ const BuyerWizard = ({ user, history, completeWizard }) => {
                     value: false,
                 },
             ],
-            subOptions: [],
-            modelName: 'isRelativeAgent',
-        },
-        {
-            text: 'Ideally how soon do you want the property sold?',
-            componentType: 'binaryOption',
-            options: [
+            subOptions: [
                 {
-                    label: 'ASAP',
-                    value: 'asap',
+                    label: 'Yes',
+                    value: true,
                 },
                 {
-                    label: '3 Months',
-                    value: '3mos',
-                },
-                {
-                    label: '6 Months',
-                    value: '6mos',
+                    label: 'No',
+                    value: false,
                 },
             ],
-            subOptions: [],
-            modelName: 'idealTimeframe',
+            subTitle: 'Would you you like us to help you sell your home',
+            modelName: 'assistanceWithCurrentHomeSale',
+            isLastQuestion: true,
         },
     ];
 
@@ -160,7 +195,7 @@ const BuyerWizard = ({ user, history, completeWizard }) => {
                 optionChangeHandlerCallback={optionChangeHandlerCallback}
                 config={config}
                 total={10}
-                completeWizard={(form) => console.log(form)}
+                completeWizard={submitForm}
             />
         </div>
     );

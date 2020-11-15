@@ -44,7 +44,7 @@ const ListHome = ({ history }) => {
                             <p>{homes[0].address}</p>
                             <ListHomeButton
                                 text="Edit Listing"
-                                url={`/editproperty/${homes[0]._id}`}
+                                url={`/edit/property/${homes[0]._id}`}
                             />
                         </div>
                     </div>

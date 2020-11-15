@@ -14,8 +14,6 @@ const Dashboard = () => {
     const user = useSelector((state) => state.auth);
     const { sellerWizardCompleted } = user;
 
-    useEffect(() => {}, [user]);
-
     if (!sellerWizardCompleted) {
         return <Wizard />;
     }

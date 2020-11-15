@@ -84,9 +84,9 @@ class NavBar extends React.Component {
         const { anchorEl, open } = this.state;
 
         return (
-            <footer>
+            <footer className="bread-crumb-nav">
                 <div>
-                    <nav className="bottom-nav">
+                    <nav>
                         <ul>
                             <li>
                                 <img
@@ -118,7 +118,7 @@ class NavBar extends React.Component {
                                         className="pop-over-item"
                                         onClick={this.switchUserType.bind(
                                             null,
-                                            { userType: 'buyer' }
+                                            'buyer'
                                         )}
                                     >
                                         Buyer
@@ -127,7 +127,7 @@ class NavBar extends React.Component {
                                         className="pop-over-item"
                                         onClick={this.switchUserType.bind(
                                             null,
-                                            { userType: 'seller' }
+                                            'seller'
                                         )}
                                     >
                                         Seller
