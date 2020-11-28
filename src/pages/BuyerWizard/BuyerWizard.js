@@ -20,6 +20,7 @@ const BuyerWizard = () => {
     };
 
     const submitForm = async () => {
+        debugger;
         form.set('wizardType', 'buyer');
         form.set('userId', user._id);
         try {
@@ -194,7 +195,7 @@ const BuyerWizard = () => {
             <Wizard
                 optionChangeHandlerCallback={optionChangeHandlerCallback}
                 config={config}
-                total={10}
+                total={5}
                 completeWizard={submitForm}
             />
         </div>

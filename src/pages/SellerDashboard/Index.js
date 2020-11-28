@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Messages from './components/Messages';
-import DisclosureAgreement from './components/DisclosureAgreement';
+import ListingDocuments from './components/ListingDocuments';
 import ListHome from './components/ListHome';
 import Offers from './components/Offers';
 import ContractCompletion from './components/ContractCompletion';
@@ -23,7 +23,7 @@ const Dashboard = () => {
                 <h1>Dashboard</h1>
                 <ProfileWizard order={1} />
                 <ListHome order={2} userEmail={user.email} />
-                <DisclosureAgreement userEmail={user.email} />
+                <ListingDocuments order={3} userEmail={user.email} />
                 <Messages userEmail={user.email} />
                 <Offers user={user} />
                 <ContractCompletion user={user} />

@@ -5,6 +5,8 @@
   background-color: #fafafa !important; }
   .bottom-nav .material-icons {
     display: none !important; }
+  .bottom-nav li {
+    list-style: none !important; }
   .bottom-nav div {
     border-right: 1px solid lightgray; }
   .bottom-nav p {
