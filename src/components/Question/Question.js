@@ -19,6 +19,10 @@ const Question = ({
     const inputRef = useRef(null);
 
     const handleClick = (val) => {
+        // need to not trigger if choosing a value from suboption
+        // that will not go to next page
+        // the main option should trigger the option change handler
+        // if clicked
         if (showOptionsValue !== undefined) {
             showOptionsValue === val
                 ? setShowOption(val)
