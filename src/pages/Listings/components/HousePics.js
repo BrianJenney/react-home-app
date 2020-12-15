@@ -32,7 +32,6 @@ const HousePics = ({ pics, userId }) => {
     const favoriteHouse = (id, userId, index) => {
         API.favoriteHome(userId, id)
             .then((res) => {
-                console.log(res);
                 const {
                     data: {
                         data: {
@@ -55,7 +54,6 @@ const HousePics = ({ pics, userId }) => {
     return (
         <div>
             <div className="house-pics">
-                {console.log(allPics)}
                 {allPics.map((pic, id) => {
                     const isLiked = pic && pic.likes.includes(userId);
                     return (

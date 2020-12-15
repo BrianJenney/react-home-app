@@ -11,7 +11,6 @@ function* saveReduxState() {
 }
 
 //take latest allows for concurrency - only takes the latest request
-//listens for any instance of GET_OFFERS to be called to dispatch the action
 const userSaga = function* () {
     yield takeLatest(
         ['LOGIN', 'LOGOUT', 'COMPLETED_WIZARD', 'UPDATE_USER'],

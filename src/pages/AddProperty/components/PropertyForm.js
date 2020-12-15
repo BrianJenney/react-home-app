@@ -157,7 +157,7 @@ class AddProp extends React.Component {
 
     editHome = (form) => {
         API.editHome(this.state.form)
-            .then((response) => {
+            .then(() => {
                 this.props.history.push('/dashboard');
             })
             .catch((e) => {

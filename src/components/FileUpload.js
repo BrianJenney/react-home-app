@@ -1,29 +1,85 @@
-import React from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
+import BtnDownload from '../img/btn-bg.png';
+import DocDownload from '../img/doc_download.png';
 import '../styles/fileUpload.css';
 
-const FileUpload = ({ fileType = 'image', documentType = 'fileName', title = 'File Upload', handleUpload }) => {
-	return (
-		<div>
-			<Dropzone
-				className='fileUpload-dropzone-wrapper'
-				onDrop={handleUpload.bind(null, documentType)}
-				accept={fileType}
-			>
-				<div className='fileUpload-actions'>
-					<FloatingActionButton mini className='mt-3'>
-						<ContentAdd />
-					</FloatingActionButton>
+const FileUpload = ({
+    fileType = 'image',
+    documentType = 'fileName',
+    title = 'File Upload',
+    hasUploaded = false,
+    downloadUrl,
+    handleUpload,
+}) => {
+    const [showUpload, setShowUpload] = useState(hasUploaded);
 
-					<span>
-						<p className='text-primary'>{title}</p>
-					</span>
-				</div>
-			</Dropzone>
-		</div>
-	);
+    const toggleActions = (bool) => {
+        setShowUpload(bool);
+    };
+
+    const activeStyle = {
+        width: '70%',
+        transition: 'ease .5s',
+    };
+
+    const defaultStyle = {
+        width: '30%',
+        transition: 'ease .5s',
+    };
+
+    return (
+        <div className="uplopad-download">
+            <div className="title">
+                <a href={downloadUrl}>{title}</a>
+            </div>
+
+            <div className="actions-container">
+                <div
+                    onMouseOver={() => toggleActions(false)}
+                    onMouseLeave={() =>
+                        toggleActions(hasUploaded ? true : false)
+                    }
+                    style={showUpload ? defaultStyle : activeStyle}
+                    className="download-section"
+                >
+                    <div className="download-actions">
+                        <img
+                            width="20"
+                            height="20"
+                            src={DocDownload}
+                            alt="download doc"
+                        />
+
+                        {!showUpload && <p>Download</p>}
+                    </div>
+                </div>
+                <div
+                    onMouseOver={() => toggleActions(true)}
+                    onMouseLeave={() => toggleActions(false)}
+                    style={showUpload ? activeStyle : defaultStyle}
+                    class="upload-section"
+                >
+                    <Dropzone
+                        className="fileUpload-dropzone-wrapper"
+                        onDrop={handleUpload.bind(null, documentType)}
+                        accept={fileType}
+                    >
+                        <div className="fileUpload-actions">
+                            {showUpload && <p>Upload</p>}
+                            <img
+                                style={{ transform: 'rotate(180deg)' }}
+                                width="20"
+                                height="20"
+                                src={DocDownload}
+                                alt="download doc"
+                            />
+                        </div>
+                    </Dropzone>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default FileUpload;

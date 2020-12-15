@@ -59,13 +59,6 @@ const ListingDocuments = ({ userEmail }) => {
                 </div>
                 {docsToFill.map(({ title, type }) => (
                     <div>
-                        <img className="doc-download" src={DownloadIcon} />
-                        <a
-                            href="src/documents/residential_purchase.pdf"
-                            download
-                        >
-                            <span>{title}</span>
-                        </a>
                         <FileUpload
                             title={title}
                             handleUpload={handleDrop}
@@ -84,10 +77,6 @@ const ListingDocuments = ({ userEmail }) => {
                 </div>
 
                 <div>
-                    <img className="doc-download" src={DownloadIcon} />
-                    <a href="src/documents/residential_purchase.pdf" download>
-                        <span>Brokerage/Escrow Relationship Disclosure</span>
-                    </a>
                     <FileUpload
                         title={'Brokerage/Escrow Relationship Disclosure'}
                         handleUpload={handleDrop}
@@ -95,12 +84,6 @@ const ListingDocuments = ({ userEmail }) => {
                     />
                 </div>
                 <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
-                    <input
-                        type="checkbox"
-                        checked
-                        onChange={() => {}}
-                        className="d-inline m-2 ml-0"
-                    />
                     <p>
                         Below is your termite report, this will be sent to the
                         buyer later on in the transaction.
@@ -108,10 +91,6 @@ const ListingDocuments = ({ userEmail }) => {
                 </div>
 
                 <div>
-                    <img className="doc-download" src={DownloadIcon} />
-                    <a href="src/documents/residential_purchase.pdf" download>
-                        <span>Termite Inspection</span>
-                    </a>
                     <FileUpload
                         title={'Termite Inspection'}
                         handleUpload={handleDrop}

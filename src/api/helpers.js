@@ -44,7 +44,7 @@ export default {
 
     //add a userid under a homes likes array
     favoriteHome: (userId, id) =>
-        axios.post(`${url}/api/property/graphql`, {
+        axios.post(`${url}/api/property/graphqlProperty`, {
             query: `mutation updateLikes ($id: String!, $userId: String!) {
 				updateLikes (id: $id, userId: $userId){
 					id,
@@ -93,11 +93,6 @@ export default {
     //gets a list of homes by a user email
     getListingHomes: function (userEmail) {
         return axios.get(url + `/api/property/getlistingsbyuser/${userEmail}`);
-    },
-
-    //gets a list of homes by a user email
-    getAllListings: function () {
-        return axios.get(url + `/api/property/properties`);
     },
 
     //upsert offer obj

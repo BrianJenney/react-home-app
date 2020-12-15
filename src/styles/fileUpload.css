@@ -1,12 +1,52 @@
-.fileUpload-dropzone-wrapper {
-  width: 100%;
-  border: 1px dashed lightgrey;
-  margin-top: 1rem; }
-
-.fileUpload-actions {
-  display: inline flex;
-  margin-left: 3rem; }
-  .fileUpload-actions .text-primary {
-    display: inline-flex;
-    margin-left: 3rem;
-    font-size: 1.5rem; }
+.uplopad-download {
+  width: 20%;
+  border: 1px solid lightgrey;
+  border-radius: 1em;
+  position: relative;
+  height: 150px; }
+  .uplopad-download .title {
+    color: #5665c0;
+    font-size: 20px;
+    width: 95%;
+    margin-top: 0.5em;
+    margin-left: 1em; }
+  .uplopad-download .actions-container {
+    text-align: center;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    font-size: 0.75em;
+    max-height: 40px; }
+    .uplopad-download .actions-container p {
+      margin: 1em; }
+  .uplopad-download .download-section {
+    background: #5665c0;
+    border-bottom-left-radius: 1em;
+    color: white;
+    align-items: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-content: center; }
+  .uplopad-download .download-actions,
+  .uplopad-download .fileUpload-actions {
+    justify-content: center;
+    align-items: center;
+    display: flex; }
+  .uplopad-download .upload-section {
+    width: 100%;
+    background: #4fb7a6;
+    border-bottom-right-radius: 1em;
+    color: white;
+    display: flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; }
+  .uplopad-download .fileUpload-dropzone-wrapper {
+    width: 100%; }

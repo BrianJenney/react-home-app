@@ -164,7 +164,7 @@ class NavBar extends React.Component {
                                     Messages
                                 </a>
                             </li>
-                            {!user && (
+                            {user && !user.isLogged && (
                                 <li>
                                     <a
                                         label="Sign Up"
@@ -187,7 +187,9 @@ class NavBar extends React.Component {
                                             : this.select('login')
                                     }
                                 >
-                                    {user ? 'Log Out' : 'Log In'}
+                                    {user && user.isLogged
+                                        ? 'Log Out'
+                                        : 'Log In'}
                                 </a>
                             </li>
                         </ul>

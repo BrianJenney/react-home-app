@@ -1,11 +1,4 @@
-.listing-docs img {
-  width: 45px;
-  height: 45px;
-  position: relative;
-  background: #ffff;
-  z-index: 2; }
-
-.listing-docs a {
+.listing-docs .download-doc {
   outline: 1px solid gray;
   padding: 5px 10px 10px 10px;
   position: absolute;
@@ -13,22 +6,5 @@
   margin-bottom: 10px;
   margin-left: -5px;
   z-index: 1; }
-  .listing-docs a span {
+  .listing-docs .download-doc span {
     margin-left: 10px; }
-
-.listing-docs .fileUpload-dropzone-wrapper {
-  width: 25%;
-  text-align: center; }
-  .listing-docs .fileUpload-dropzone-wrapper .mt-3 {
-    margin: 0 !important; }
-  .listing-docs .fileUpload-dropzone-wrapper .fileUpload-actions {
-    margin-left: 0;
-    margin-top: 0;
-    padding: 0.5em;
-    display: flex;
-    align-items: center; }
-    .listing-docs .fileUpload-dropzone-wrapper .fileUpload-actions p {
-      margin-left: 1em; }
-  .listing-docs .fileUpload-dropzone-wrapper .text-primary {
-    font-size: 0.5em;
-    margin: auto; }
