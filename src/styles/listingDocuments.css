@@ -8,3 +8,8 @@
   z-index: 1; }
   .listing-docs .download-doc span {
     margin-left: 10px; }
+
+.listing-docs .upload-container {
+  width: 20%;
+  margin: 0 1em;
+  margin-bottom: 1em; }

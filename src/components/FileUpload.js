@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
-import BtnDownload from '../img/btn-bg.png';
 import DocDownload from '../img/doc_download.png';
 import '../styles/fileUpload.css';
 
@@ -8,9 +7,10 @@ const FileUpload = ({
     fileType = 'image',
     documentType = 'fileName',
     title = 'File Upload',
-    hasUploaded = false,
+    hasUploaded,
     downloadUrl,
     handleUpload,
+    downloadOnly,
 }) => {
     const [showUpload, setShowUpload] = useState(hasUploaded);
 
@@ -23,7 +23,14 @@ const FileUpload = ({
         transition: 'ease .5s',
     };
 
-    const defaultStyle = {
+    if (downloadOnly) {
+        Object.assign(activeStyle, {
+            borderBottomRightRadius: '1em',
+            width: '100%',
+        });
+    }
+
+    const nonActiveStyle = {
         width: '30%',
         transition: 'ease .5s',
     };
@@ -40,7 +47,7 @@ const FileUpload = ({
                     onMouseLeave={() =>
                         toggleActions(hasUploaded ? true : false)
                     }
-                    style={showUpload ? defaultStyle : activeStyle}
+                    style={showUpload ? nonActiveStyle : activeStyle}
                     className="download-section"
                 >
                     <div className="download-actions">
@@ -54,29 +61,33 @@ const FileUpload = ({
                         {!showUpload && <p>Download</p>}
                     </div>
                 </div>
-                <div
-                    onMouseOver={() => toggleActions(true)}
-                    onMouseLeave={() => toggleActions(false)}
-                    style={showUpload ? activeStyle : defaultStyle}
-                    class="upload-section"
-                >
-                    <Dropzone
-                        className="fileUpload-dropzone-wrapper"
-                        onDrop={handleUpload.bind(null, documentType)}
-                        accept={fileType}
+                {!downloadOnly && (
+                    <div
+                        onMouseOver={() => toggleActions(true)}
+                        onMouseLeave={() =>
+                            toggleActions(hasUploaded ? false : true)
+                        }
+                        style={showUpload ? activeStyle : nonActiveStyle}
+                        class="upload-section"
                     >
-                        <div className="fileUpload-actions">
-                            {showUpload && <p>Upload</p>}
-                            <img
-                                style={{ transform: 'rotate(180deg)' }}
-                                width="20"
-                                height="20"
-                                src={DocDownload}
-                                alt="download doc"
-                            />
-                        </div>
-                    </Dropzone>
-                </div>
+                        <Dropzone
+                            className="fileUpload-dropzone-wrapper"
+                            onDrop={handleUpload.bind(null, documentType)}
+                            accept={fileType}
+                        >
+                            <div className="fileUpload-actions">
+                                {showUpload && <p>Upload</p>}
+                                <img
+                                    style={{ transform: 'rotate(180deg)' }}
+                                    width="20"
+                                    height="20"
+                                    src={DocDownload}
+                                    alt="download doc"
+                                />
+                            </div>
+                        </Dropzone>
+                    </div>
+                )}
             </div>
         </div>
     );

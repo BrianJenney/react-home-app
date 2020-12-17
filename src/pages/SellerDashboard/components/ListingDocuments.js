@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import DashboardItem from '../../../components/DashboardItem';
 import API from '../../../api/helpers';
 import FileUpload from '../../../components/FileUpload';
-import DownloadIcon from '../../../img/icon-download.png';
 import '../../../styles/listingDocuments.css';
 
 const ListingDocuments = ({ userEmail }) => {
@@ -36,6 +35,30 @@ const ListingDocuments = ({ userEmail }) => {
             title: 'SBSA: Statewide Buyer and Seller Advisory',
             type: 'sbsa',
         },
+        {
+            title: 'SBSA: Statewide Buyer and Seller Advisory',
+            type: 'sbsa',
+        },
+        {
+            title: 'SBSA: Statewide Buyer and Seller Advisory',
+            type: 'sbsa',
+        },
+        {
+            title: 'SBSA: Statewide Buyer and Seller Advisory',
+            type: 'sbsa',
+        },
+        {
+            title: 'SBSA: Statewide Buyer and Seller Advisory',
+            type: 'sbsa',
+        },
+        {
+            title: 'SBSA: Statewide Buyer and Seller Advisory',
+            type: 'sbsa',
+        },
+        {
+            title: 'SBSA: Statewide Buyer and Seller Advisory',
+            type: 'sbsa',
+        },
     ];
 
     return (
@@ -57,15 +80,24 @@ const ListingDocuments = ({ userEmail }) => {
                         when filling out the Disclosure Package
                     </p>
                 </div>
-                {docsToFill.map(({ title, type }) => (
-                    <div>
-                        <FileUpload
-                            title={title}
-                            handleUpload={handleDrop}
-                            documentType={type}
-                        />
-                    </div>
-                ))}
+                <div
+                    style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        flexDirection: 'row',
+                    }}
+                >
+                    {docsToFill.map(({ title, type }) => (
+                        <div className="upload-container">
+                            <FileUpload
+                                title={title}
+                                handleUpload={handleDrop}
+                                documentType={type}
+                            />
+                        </div>
+                    ))}
+                </div>
+
                 <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
                     <input
                         type="checkbox"
@@ -76,8 +108,9 @@ const ListingDocuments = ({ userEmail }) => {
                     <p>Accept our Brokerage/Escrow Relationship Disclosure</p>
                 </div>
 
-                <div>
+                <div className="upload-container">
                     <FileUpload
+                        downloadOnly
                         title={'Brokerage/Escrow Relationship Disclosure'}
                         handleUpload={handleDrop}
                         documentType={'brokerageEscrow'}
@@ -90,10 +123,10 @@ const ListingDocuments = ({ userEmail }) => {
                     </p>
                 </div>
 
-                <div>
+                <div className="upload-container">
                     <FileUpload
+                        downloadOnly
                         title={'Termite Inspection'}
-                        handleUpload={handleDrop}
                         documentType={'termiteInspection'}
                     />
                 </div>

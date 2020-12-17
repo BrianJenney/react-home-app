@@ -4,6 +4,7 @@ import Messages from './components/Messages';
 import ListingDocuments from './components/ListingDocuments';
 import ListHome from './components/ListHome';
 import Offers from './components/Offers';
+import ShowYourHome from './components/ShowYourHome';
 import ContractCompletion from './components/ContractCompletion';
 import Wizard from '../../pages/SellerWizard/Wizard';
 import ProfileWizard from './components/ProfileWizard';
@@ -24,6 +25,7 @@ const Dashboard = () => {
                 <ProfileWizard order={1} />
                 <ListHome order={2} userEmail={user.email} />
                 <ListingDocuments order={3} userEmail={user.email} />
+                <ShowYourHome order={4} userEmail={user.email} />
                 <Messages userEmail={user.email} />
                 <Offers user={user} />
                 <ContractCompletion user={user} />
