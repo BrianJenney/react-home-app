@@ -57,6 +57,34 @@ export default {
             },
         }),
 
+    getUser: (userId) => {
+        return axios.post(`${url}/api/user/graphqlUser`, {
+            query: `
+            query User($id: String!){
+                user(id:$id) {
+                  _id
+                  firstName
+                  lastName
+                  email
+                  address
+                  documents{
+                      name
+                      signatureId
+                      completed
+                  }
+                }
+              }
+          `,
+            variables: {
+                id: userId,
+            },
+        });
+    },
+
+    getEmbeddedSignUrl: (signatureId) => {
+        return axios.post(`${url}/api/documents/getSignUrl`, { signatureId });
+    },
+
     //upload disclosure package
     uploadDisclosure: function (disclosureForm) {
         return axios.post(url + '/api/property/disclosure', disclosureForm);
@@ -91,7 +119,7 @@ export default {
     },
 
     //gets a list of homes by a user email
-    getListingHomes: function (userEmail) {
+    getHomesByUser: function (userEmail) {
         return axios.get(url + `/api/property/getlistingsbyuser/${userEmail}`);
     },
 

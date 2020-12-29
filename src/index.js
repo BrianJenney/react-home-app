@@ -21,6 +21,7 @@ import AcceptedOffer from './pages/OfferAccepted/Index';
 import ErrorBoundary from './ErrorBoundary';
 import withNavBar from './components/withNavBar';
 import './styles/global.css';
+import 'bootstrap-daterangepicker/daterangepicker.css';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     const user = store.getState().auth;

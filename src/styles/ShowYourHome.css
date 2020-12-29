@@ -1,0 +1,8 @@
+.listing-docs .calendar-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em;
+  width: 90%; }
+
+.listing-docs .calendar-input {
+  width: 135px; }

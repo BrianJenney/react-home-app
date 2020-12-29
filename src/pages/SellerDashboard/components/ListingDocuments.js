@@ -3,29 +3,24 @@ import DashboardItem from '../../../components/DashboardItem';
 import API from '../../../api/helpers';
 import FileUpload from '../../../components/FileUpload';
 import '../../../styles/listingDocuments.css';
+import HelloSign from 'hellosign-embedded';
 
-const ListingDocuments = ({ userEmail }) => {
-    const [formData, setFormData] = useState(new FormData());
-    const [userDocs, setUserDocs] = useState({});
+const client = new HelloSign();
+
+const ListingDocuments = ({ user, order }) => {
+    const [userDocs, setUserDocs] = useState([]);
 
     useEffect(() => {
-        API.getHome(userEmail).then((res) => {
-            if (res.data.doc) {
-                setUserDocs({ ...res.data.docs });
-            }
+        API.getUser(user._id).then((res) => {
+            setUserDocs(res?.data?.data?.user.documents);
         });
-    });
+    }, []);
 
-    const handleDrop = (documentType, files) => {
-        files.forEach((file) => {
-            formData.set('file', file);
-            formData.set('userEmail', this.props.userEmail);
-            formData.set('documentType', documentType);
-            setFormData(formData);
-            API.uploadDisclosure(formData).then((res) => {
-                this.setState({
-                    ...res.data,
-                });
+    const openDocument = (signatureId) => {
+        API.getEmbeddedSignUrl(signatureId).then((data) => {
+            client.open(`${data?.data?.data?.embedded.sign_url}`, {
+                clientId: process.env.REACT_APP_HELLO_SIGN_KEY,
+                skipDomainVerification: true,
             });
         });
     };
@@ -36,16 +31,16 @@ const ListingDocuments = ({ userEmail }) => {
             type: 'sbsa',
         },
         {
-            title: 'SBSA: Statewide Buyer and Seller Advisory',
-            type: 'sbsa',
+            title: 'SPQ: Seller Property Questionnaire',
+            type: 'spq',
         },
         {
-            title: 'SBSA: Statewide Buyer and Seller Advisory',
-            type: 'sbsa',
+            title: 'WHSD: Water Heater Smoke Detector',
+            type: 'whsd',
         },
         {
-            title: 'SBSA: Statewide Buyer and Seller Advisory',
-            type: 'sbsa',
+            title: 'TDS: Transfer Disclosure Statement',
+            type: 'tds',
         },
         {
             title: 'SBSA: Statewide Buyer and Seller Advisory',
@@ -61,8 +56,15 @@ const ListingDocuments = ({ userEmail }) => {
         },
     ];
 
+    const getDocName = (name) => {
+        const docObject = docsToFill.find(
+            ({ type }) => type === name.toLocaleLowerCase()
+        );
+        return docObject?.title;
+    };
+
     return (
-        <DashboardItem order={3} title="Fill Out Listing Documents">
+        <DashboardItem order={order} title="Fill Out Listing Documents">
             <div className="listing-docs">
                 <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
                     <input
@@ -74,21 +76,21 @@ const ListingDocuments = ({ userEmail }) => {
                     <p>
                         Based off of seller preliminary questionnaire, you must
                         fill out the appropriate disclosure documents through
-                        docusign, These documents will later be sent to a buyer
+                        hellosign, These documents will later be sent to a buyer
                         who has made an offer on your property, informing them
                         the condition of property, etc Be sure to be truthful
                         when filling out the Disclosure Package
                     </p>
                 </div>
-                <div
+                {/*<div
                     style={{
                         display: 'flex',
                         flexWrap: 'wrap',
                         flexDirection: 'row',
                     }}
                 >
-                    {docsToFill.map(({ title, type }) => (
-                        <div className="upload-container">
+                    {docsToFill.map(({ title, type }, idx) => (
+                        <div key={`type${idx}`} className="upload-container">
                             <FileUpload
                                 title={title}
                                 handleUpload={handleDrop}
@@ -96,6 +98,19 @@ const ListingDocuments = ({ userEmail }) => {
                             />
                         </div>
                     ))}
+                    </div>*/}
+
+                <div>
+                    {userDocs.map((doc) => {
+                        return (
+                            <p
+                                key={doc.name}
+                                onClick={() => openDocument(doc.signatureId)}
+                            >
+                                {getDocName(doc.name)}
+                            </p>
+                        );
+                    })}
                 </div>
 
                 <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
@@ -112,7 +127,7 @@ const ListingDocuments = ({ userEmail }) => {
                     <FileUpload
                         downloadOnly
                         title={'Brokerage/Escrow Relationship Disclosure'}
-                        handleUpload={handleDrop}
+                        handleUpload={() => {}}
                         documentType={'brokerageEscrow'}
                     />
                 </div>

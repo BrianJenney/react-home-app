@@ -68,7 +68,7 @@ const FileUpload = ({
                             toggleActions(hasUploaded ? false : true)
                         }
                         style={showUpload ? activeStyle : nonActiveStyle}
-                        class="upload-section"
+                        className="upload-section"
                     >
                         <Dropzone
                             className="fileUpload-dropzone-wrapper"

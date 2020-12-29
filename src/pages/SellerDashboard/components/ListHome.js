@@ -12,11 +12,11 @@ const ListHome = ({ history }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const { data } = await API.getListingHomes(user.email);
+            const { data } = await API.getHomesByUser(user.email);
             setHome(data);
         };
         fetchData();
-    }, [user]);
+    }, []);
 
     const ListHomeButton = ({ text, url }) => (
         <>
