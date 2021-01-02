@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DashboardItem from '../../../components/DashboardItem';
 import API from '../../../api/helpers';
 import FileUpload from '../../../components/FileUpload';
+import EditIcon from '../../../img/icon-edit.png';
 import '../../../styles/listingDocuments.css';
 import HelloSign from 'hellosign-embedded';
 
@@ -16,12 +17,21 @@ const ListingDocuments = ({ user, order }) => {
         });
     }, []);
 
-    const openDocument = (signatureId) => {
+    const openDocument = (signatureId, docName) => {
         API.getEmbeddedSignUrl(signatureId).then((data) => {
             client.open(`${data?.data?.data?.embedded.sign_url}`, {
                 clientId: process.env.REACT_APP_HELLO_SIGN_KEY,
                 skipDomainVerification: true,
             });
+
+            const docs = [...userDocs];
+            docs.forEach((doc) => {
+                if (doc.name === docName) {
+                    doc.completed = true;
+                }
+            });
+
+            setUserDocs(docs);
         });
     };
 
@@ -43,16 +53,37 @@ const ListingDocuments = ({ user, order }) => {
             type: 'tds',
         },
         {
-            title: 'SBSA: Statewide Buyer and Seller Advisory',
-            type: 'sbsa',
+            title: 'WCCM: Water Conserving Carbon Monoxide',
+            type: 'wccm',
         },
         {
-            title: 'SBSA: Statewide Buyer and Seller Advisory',
-            type: 'sbsa',
+            title: 'WHSD: Water Heater and Smoke Detector',
+            type: 'whsd',
+        },
+
+        {
+            title: 'EEBR: Earthquake/Environmental Booklet Receipt',
+            type: 'eebr',
         },
         {
-            title: 'SBSA: Statewide Buyer and Seller Advisory',
-            type: 'sbsa',
+            title: 'EHD: Earthquake Hazards Disclosure',
+            type: 'ehd',
+        },
+        {
+            title: 'LPD: Lead-based Paint Disclosure',
+            type: 'lpd',
+        },
+        {
+            title: 'MCA: Market Condition Advisory',
+            type: 'mca',
+        },
+        {
+            title: 'LPD: Lead-based Paint Disclosure',
+            type: 'lpd',
+        },
+        {
+            title: 'AVID: Agent Visual Inspection Disclosure',
+            type: 'avid',
         },
     ];
 
@@ -103,12 +134,38 @@ const ListingDocuments = ({ user, order }) => {
                 <div>
                     {userDocs.map((doc) => {
                         return (
-                            <p
-                                key={doc.name}
-                                onClick={() => openDocument(doc.signatureId)}
+                            <div
+                                className={`user-doc-container ${
+                                    doc.completed ? 'completed' : 'incomplete'
+                                }`}
+                                style={{ display: 'flex' }}
                             >
-                                {getDocName(doc.name)}
-                            </p>
+                                <img
+                                    className="doc-sign-icon"
+                                    alt="edit icon"
+                                    src={EditIcon}
+                                />
+                                <p
+                                    className="user-doc"
+                                    key={doc.name}
+                                    onClick={
+                                        doc.completed
+                                            ? null
+                                            : () =>
+                                                  openDocument(
+                                                      doc.signatureId,
+                                                      doc.name
+                                                  )
+                                    }
+                                >
+                                    {getDocName(doc.name)}
+                                    {doc.completed && (
+                                        <span class="material-icons">
+                                            check_circle_outline
+                                        </span>
+                                    )}
+                                </p>
+                            </div>
                         );
                     })}
                 </div>

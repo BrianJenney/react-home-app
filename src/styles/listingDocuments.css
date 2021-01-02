@@ -13,3 +13,25 @@
   width: 20%;
   margin: 0 1em;
   margin-bottom: 1em; }
+
+.listing-docs .doc-sign-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 1em; }
+
+.listing-docs .user-doc-container {
+  margin-left: 2em;
+  color: #5665c0; }
+  .listing-docs .user-doc-container p {
+    display: flex;
+    margin-right: 1em; }
+    .listing-docs .user-doc-container p .material-icons {
+      margin-left: 1em; }
+
+.listing-docs .user-doc-container.incomplete:hover {
+  cursor: pointer;
+  opacity: 0.7; }
+
+.listing-docs .user-doc-container.completed:hover {
+  cursor: pointer;
+  opacity: 1; }

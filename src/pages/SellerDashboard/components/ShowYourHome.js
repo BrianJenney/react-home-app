@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import DashboardItem from '../../../components/DashboardItem';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 import moment from 'moment';
