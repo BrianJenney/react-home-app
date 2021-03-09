@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DashboardItem from '../../../components/DashboardItem';
 import API from '../../../api/helpers';
-import FileUpload from '../../../components/FileUpload';
 import EditIcon from '../../../img/icon-edit.png';
 import '../../../styles/listingDocuments.css';
 import HelloSign from 'hellosign-embedded';
@@ -19,71 +18,42 @@ const ListingDocuments = ({ user, order }) => {
 
     const openDocument = (signatureId, docName) => {
         API.getEmbeddedSignUrl(signatureId).then((data) => {
-            client.open(`${data?.data?.data?.embedded.sign_url}`, {
-                clientId: process.env.REACT_APP_HELLO_SIGN_KEY,
-                skipDomainVerification: true,
-            });
+            if (data?.data?.data?.embedded.sign_url) {
+                client.open(`${data?.data?.data?.embedded.sign_url}`, {
+                    clientId: process.env.REACT_APP_HELLO_SIGN_KEY,
+                    skipDomainVerification: true,
+                });
 
-            const docs = [...userDocs];
-            docs.forEach((doc) => {
-                if (doc.name === docName) {
-                    doc.completed = true;
-                }
-            });
+                const docs = [...userDocs];
+                docs.forEach((doc) => {
+                    if (doc.name === docName) {
+                        doc.completed = true;
+                    }
+                });
 
-            setUserDocs(docs);
+                setUserDocs(docs);
+            } else {
+                console.log('ERROR');
+            }
         });
     };
 
     const docsToFill = [
         {
-            title: 'SBSA: Statewide Buyer and Seller Advisory',
-            type: 'sbsa',
+            title: 'BCO: Buyer Counter Offer',
+            type: 'bco',
         },
         {
             title: 'SPQ: Seller Property Questionnaire',
             type: 'spq',
         },
         {
-            title: 'WHSD: Water Heater Smoke Detector',
-            type: 'whsd',
+            title: 'SCO: Seller Counter Offer',
+            type: 'sco',
         },
         {
-            title: 'TDS: Transfer Disclosure Statement',
-            type: 'tds',
-        },
-        {
-            title: 'WCCM: Water Conserving Carbon Monoxide',
-            type: 'wccm',
-        },
-        {
-            title: 'WHSD: Water Heater and Smoke Detector',
-            type: 'whsd',
-        },
-
-        {
-            title: 'EEBR: Earthquake/Environmental Booklet Receipt',
-            type: 'eebr',
-        },
-        {
-            title: 'EHD: Earthquake Hazards Disclosure',
-            type: 'ehd',
-        },
-        {
-            title: 'LPD: Lead-based Paint Disclosure',
-            type: 'lpd',
-        },
-        {
-            title: 'MCA: Market Condition Advisory',
-            type: 'mca',
-        },
-        {
-            title: 'LPD: Lead-based Paint Disclosure',
-            type: 'lpd',
-        },
-        {
-            title: 'AVID: Agent Visual Inspection Disclosure',
-            type: 'avid',
+            title: 'RPA: Residential Purchase Agreement',
+            type: 'rpa',
         },
     ];
 
@@ -132,9 +102,10 @@ const ListingDocuments = ({ user, order }) => {
                     </div>*/}
 
                 <div>
-                    {userDocs.map((doc) => {
+                    {userDocs.map((doc, idx) => {
                         return (
                             <div
+                                key={idx}
                                 className={`user-doc-container ${
                                     doc.completed ? 'completed' : 'incomplete'
                                 }`}
@@ -160,7 +131,7 @@ const ListingDocuments = ({ user, order }) => {
                                 >
                                     {getDocName(doc.name)}
                                     {doc.completed && (
-                                        <span class="material-icons">
+                                        <span className="material-icons">
                                             check_circle_outline
                                         </span>
                                     )}
@@ -178,29 +149,6 @@ const ListingDocuments = ({ user, order }) => {
                         className="d-inline m-2 ml-0"
                     />
                     <p>Accept our Brokerage/Escrow Relationship Disclosure</p>
-                </div>
-
-                <div className="upload-container">
-                    <FileUpload
-                        downloadOnly
-                        title={'Brokerage/Escrow Relationship Disclosure'}
-                        handleUpload={() => {}}
-                        documentType={'brokerageEscrow'}
-                    />
-                </div>
-                <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
-                    <p>
-                        Below is your termite report, this will be sent to the
-                        buyer later on in the transaction.
-                    </p>
-                </div>
-
-                <div className="upload-container">
-                    <FileUpload
-                        downloadOnly
-                        title={'Termite Inspection'}
-                        documentType={'termiteInspection'}
-                    />
                 </div>
             </div>
         </DashboardItem>

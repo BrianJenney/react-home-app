@@ -67,10 +67,20 @@ export default {
                   lastName
                   email
                   address
+                  buyers{
+                    name
+                    counterOffers{
+                        name
+                        signatureId
+                        counterOfferId
+                        completed
+                        expirationTime
+                    }
+                }   
                   documents{
-                      name
-                      signatureId
-                      completed
+                    name
+                    signatureId
+                    completed
                   }
                 }
               }

@@ -1,0 +1,32 @@
+.offers-download {
+  width: 35%;
+  position: relative;
+  display: flex; }
+
+img:hover {
+  cursor: pointer; }
+
+.offers-user-doc {
+  border: 1px solid #a2aab6;
+  padding: 0.25em 1.5em 0.35em 3em;
+  position: absolute;
+  left: 30px;
+  top: 20px; }
+  .offers-user-doc:hover {
+    cursor: pointer; }
+
+.call-us {
+  font-size: 12px;
+  width: 75%; }
+
+.white-out {
+  background-color: white;
+  position: absolute;
+  z-index: 1;
+  width: 30px;
+  height: 20px;
+  left: 29px;
+  top: 5px; }
+
+.counter-offer-link {
+  margin-left: 2em; }

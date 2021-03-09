@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Messages from './components/Messages';
 import ListingDocuments from './components/ListingDocuments';
-import ListHome from './components/ListHome';
 import Offers from './components/Offers';
 import ShowYourHome from './components/ShowYourHome';
 import ContractCompletion from './components/ContractCompletion';
@@ -38,7 +36,7 @@ const Dashboard = () => {
                 <ListingDocuments order={2} user={user} />
                 <ShowYourHome order={4} userEmail={user.email} />
                 {/*<Messages userEmail={user.email} />*/}
-                <Offers user={user} />
+                <Offers order={5} user={user} />
                 <ContractCompletion user={user} />
             </div>
         </div>
