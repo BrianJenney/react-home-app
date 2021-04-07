@@ -41,6 +41,10 @@ const Offers = ({ user, order }) => {
             title: 'Their Counter Offer',
             type: 'bco',
         },
+        {
+            title: 'Proof of Funds',
+            type: 'pdpf',
+        },
     ];
 
     const getDocName = (name) => {
@@ -86,6 +90,11 @@ const Offers = ({ user, order }) => {
                             >
                                 <div style={{ width: '15%' }}>
                                     <p>{buyer.name}</p>
+                                    {buyer.supportingDocuments.map((doc) => (
+                                        <a href={doc.url}>
+                                            <p>{getDocName(doc.name)}</p>
+                                        </a>
+                                    ))}
                                 </div>
 
                                 <div style={{ width: '85%' }}>

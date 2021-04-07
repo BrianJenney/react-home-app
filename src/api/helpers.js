@@ -76,11 +76,16 @@ export default {
                         completed
                         expirationTime
                     }
+                    supportingDocuments{
+                        name
+                        url
+                    }
                 }   
                   documents{
                     name
                     signatureId
                     completed
+                    expirationTime
                   }
                 }
               }
