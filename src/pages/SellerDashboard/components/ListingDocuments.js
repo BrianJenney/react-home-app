@@ -7,31 +7,14 @@ import HelloSign from 'hellosign-embedded';
 
 const client = new HelloSign();
 
-const ListingDocuments = ({ user, order }) => {
-    const [userDocs, setUserDocs] = useState([]);
-
-    useEffect(() => {
-        API.getUser(user._id).then((res) => {
-            setUserDocs(res?.data?.data?.user.documents);
-        });
-    }, []);
-
-    const openDocument = (signatureId, docName) => {
+const ListingDocuments = ({ order, userDocs }) => {
+    const openDocument = (signatureId) => {
         API.getEmbeddedSignUrl(signatureId).then((data) => {
             if (data?.data?.data?.embedded.sign_url) {
                 client.open(`${data?.data?.data?.embedded.sign_url}`, {
                     clientId: process.env.REACT_APP_HELLO_SIGN_KEY,
                     skipDomainVerification: true,
                 });
-
-                const docs = [...userDocs];
-                docs.forEach((doc) => {
-                    if (doc.name === docName) {
-                        doc.completed = true;
-                    }
-                });
-
-                setUserDocs(docs);
             } else {
                 console.log('ERROR');
             }
@@ -40,22 +23,44 @@ const ListingDocuments = ({ user, order }) => {
 
     const docsToFill = [
         {
-            title: 'BCO: Buyer Counter Offer',
-            type: 'bco',
-        },
-        {
             title: 'SPQ: Seller Property Questionnaire',
             type: 'spq',
         },
         {
-            title: 'SCO: Seller Counter Offer',
-            type: 'sco',
+            title: 'TDS: Transfer Disclosure Statement',
+            type: 'tds',
         },
         {
-            title: 'RPA: Residential Purchase Agreement',
-            type: 'rpa',
+            title: 'WCCM: Water Conserving Carbon Monoxide',
+            type: 'wccm',
+        },
+        {
+            title: 'WHSD: Water Heater and Smoke Detector',
+            type: 'whsd',
+        },
+        {
+            title: 'EHD: Earthquake Hazard Disclosure',
+            type: 'ehd',
+        },
+        {
+            title: 'EEBR: Earthquare/Environmental Booklet Receipt',
+            type: 'eebr',
+        },
+        {
+            title: 'LPD: Lead Based Paint Disclosure',
+            type: 'lpd',
+        },
+        {
+            title: 'MCA: Market Condition Advisory',
+            type: 'mca',
+        },
+        {
+            title: 'AVID: Agent Visual Inspection Disclosure',
+            type: 'avid',
         },
     ];
+
+    const docTypes = docsToFill.map(({ type }) => type);
 
     const getDocName = (name) => {
         const docObject = docsToFill.find(
@@ -63,6 +68,8 @@ const ListingDocuments = ({ user, order }) => {
         );
         return docObject?.title;
     };
+
+    const berdDoc = userDocs.find((doc) => doc.name === 'BERD');
 
     return (
         <DashboardItem order={order} title="Fill Out Listing Documents">
@@ -83,73 +90,106 @@ const ListingDocuments = ({ user, order }) => {
                         when filling out the Disclosure Package
                     </p>
                 </div>
-                {/*<div
-                    style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        flexDirection: 'row',
-                    }}
-                >
-                    {docsToFill.map(({ title, type }, idx) => (
-                        <div key={`type${idx}`} className="upload-container">
-                            <FileUpload
-                                title={title}
-                                handleUpload={handleDrop}
-                                documentType={type}
-                            />
-                        </div>
-                    ))}
-                    </div>*/}
 
                 <div>
-                    {userDocs.map((doc, idx) => {
-                        return (
-                            <div
-                                key={idx}
-                                className={`user-doc-container ${
-                                    doc.completed ? 'completed' : 'incomplete'
-                                }`}
-                                style={{ display: 'flex' }}
-                            >
-                                <img
-                                    className="doc-sign-icon"
-                                    alt="edit icon"
-                                    src={EditIcon}
-                                />
-                                <p
-                                    className="user-doc"
-                                    key={doc.name}
-                                    onClick={
+                    {userDocs
+                        .filter((userDoc) =>
+                            docTypes.includes(userDoc.name.toLocaleLowerCase())
+                        )
+                        .map((doc, idx) => {
+                            return (
+                                <div
+                                    key={idx}
+                                    className={`user-doc-container ${
                                         doc.completed
-                                            ? null
-                                            : () =>
-                                                  openDocument(
-                                                      doc.signatureId,
-                                                      doc.name
-                                                  )
-                                    }
+                                            ? 'completed'
+                                            : 'incomplete'
+                                    }`}
+                                    style={{ display: 'flex' }}
                                 >
-                                    {getDocName(doc.name)}
-                                    {doc.completed && (
-                                        <span className="material-icons">
-                                            check_circle_outline
-                                        </span>
-                                    )}
-                                </p>
-                            </div>
-                        );
-                    })}
+                                    <img
+                                        className="doc-sign-icon"
+                                        alt="edit icon"
+                                        src={EditIcon}
+                                    />
+                                    <p
+                                        className="user-doc"
+                                        key={doc.name}
+                                        onClick={
+                                            doc.completed
+                                                ? null
+                                                : () =>
+                                                      openDocument(
+                                                          doc.signatureId,
+                                                          doc.name
+                                                      )
+                                        }
+                                    >
+                                        {getDocName(doc.name)}
+                                        {doc.completed && (
+                                            <span className="material-icons">
+                                                check_circle_outline
+                                            </span>
+                                        )}
+                                    </p>
+                                </div>
+                            );
+                        })}
                 </div>
 
-                <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
-                    <input
-                        type="checkbox"
-                        checked
-                        onChange={() => {}}
-                        className="d-inline m-2 ml-0"
-                    />
-                    <p>Accept our Brokerage/Escrow Relationship Disclosure</p>
-                </div>
+                {berdDoc && (
+                    <>
+                        <div
+                            style={{
+                                display: 'inline-flex',
+                                marginTop: '1.25em',
+                            }}
+                        >
+                            <input
+                                type="checkbox"
+                                checked
+                                onChange={() => {}}
+                                className="d-inline m-2 ml-0"
+                            />
+                            <p>
+                                Accept our Brokerage/Escrow Relationship
+                                Disclosure
+                            </p>
+                        </div>
+
+                        <div
+                            className={`user-doc-container ${
+                                berdDoc.completed ? 'completed' : 'incomplete'
+                            }`}
+                            style={{ display: 'flex' }}
+                        >
+                            <img
+                                className="doc-sign-icon"
+                                alt="edit icon"
+                                src={EditIcon}
+                            />
+                            <p
+                                className="user-doc"
+                                onClick={
+                                    berdDoc.completed
+                                        ? null
+                                        : () =>
+                                              openDocument(
+                                                  berdDoc.signatureId,
+                                                  berdDoc.name
+                                              )
+                                }
+                            >
+                                Brokerage/Escrow Relationship Disclosure
+                                {berdDoc.completed && (
+                                    <span className="material-icons">
+                                        check_circle_outline
+                                    </span>
+                                )}
+                            </p>
+                        </div>
+                    </>
+                )}
             </div>
         </DashboardItem>
     );

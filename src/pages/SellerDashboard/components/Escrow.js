@@ -6,15 +6,7 @@ import moment from 'moment';
 
 const client = new HelloSign();
 
-const Escrow = ({ user, order }) => {
-    const [userDocs, setUserDocs] = useState([]);
-
-    useEffect(() => {
-        API.getUser(user._id).then((res) => {
-            setUserDocs(res?.data?.data?.user.documents);
-        });
-    }, []);
-
+const Escrow = ({ userDocs, buyer, order }) => {
     const openDocument = (signatureId) => {
         API.getEmbeddedSignUrl(signatureId).then((data) => {
             if (data?.data?.data?.embedded.sign_url) {
@@ -45,20 +37,24 @@ const Escrow = ({ user, order }) => {
         },
         {
             title: 'Buyers Approval of HOA & CC&Rs',
-            type: 'bahcc',
+            type: 'bapr',
         },
     ];
 
-    const getEarliestExpirationDate = (docs) => {
+    const relevantDocs = docsToFill.map(({ type }) => type);
+    const getEarliestExpirationDate = (docs = []) => {
         const expirationTimes = docs
             .filter((contract) => {
                 return contract.expirationTime;
             })
-            .map(({ expirationTime }) =>
-                moment(expirationTime, 'x').format('MMM DD YYYY hh:mm a')
-            );
+            .map(({ expirationTime }) => moment(Number(expirationTime)));
 
-        return moment.max(expirationTimes);
+        console.log(moment.min(expirationTimes).format('YYYY-MM-DD HH:mm:ss'));
+        return moment.min(expirationTimes).format('YYYY-MM-DD HH:mm:ss');
+    };
+
+    const getDaysLeft = (date) => {
+        return moment(date).diff(moment(), 'days');
     };
 
     const getDocName = (name) => {
@@ -101,6 +97,22 @@ const Escrow = ({ user, order }) => {
                     </p>
                 </div>
 
+                {buyer && (
+                    <div>
+                        <p>
+                            <a
+                                href={
+                                    (buyer?.supportingDocuments || []).find(
+                                        (doc) => doc.name === 'RPAC'
+                                    )?.url
+                                }
+                            >
+                                Residential Purchase Agreement Copy
+                            </a>
+                        </p>
+                    </div>
+                )}
+
                 <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
                     <input
                         type="checkbox"
@@ -115,6 +127,21 @@ const Escrow = ({ user, order }) => {
                         receipt. Download and save it for your records.
                     </p>
                 </div>
+                {buyer && (
+                    <div>
+                        <p>
+                            <a
+                                href={
+                                    (buyer?.supportingDocuments || []).find(
+                                        (doc) => doc.name === 'EMD'
+                                    )?.url
+                                }
+                            >
+                                EMD Receipt
+                            </a>
+                        </p>
+                    </div>
+                )}
 
                 <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
                     <input
@@ -127,49 +154,60 @@ const Escrow = ({ user, order }) => {
                         Sign the following documents to close escrow and
                         official sell your home! Do so as soon as possible as
                         escrow must be closed based off the timer above. Based
-                        off your contract, you have [X] days to complete all the
-                        escrow steps below before the timer above ends or the
-                        deal will expire.
+                        off your contract, you have{' '}
+                        {getDaysLeft(getEarliestExpirationDate(userDocs))} days
+                        to complete all the escrow steps below before the timer
+                        above ends or the deal will expire.
+                    </p>
+                </div>
+
+                <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
+                    <p>
+                        The documents below are due by{' '}
+                        {userDocs && getEarliestExpirationDate(userDocs)}{' '}
                     </p>
                 </div>
 
                 <div>
-                    <p style={{ color: '#5665C0' }}>
-                        The documents below are due by{' '}
-                        {getEarliestExpirationDate(userDocs).toString()}
-                    </p>
-                    {userDocs.map((doc, idx) => {
-                        return (
-                            <div
-                                key={idx}
-                                className={`user-doc-container ${
-                                    doc.completed ? 'completed' : 'incomplete'
-                                }`}
-                                style={{ display: 'flex' }}
-                            >
-                                <p
-                                    className="user-doc"
-                                    key={doc.name}
-                                    onClick={
+                    <p style={{ color: '#5665C0' }}></p>
+                    {(userDocs || [])
+                        .filter((doc) =>
+                            relevantDocs.includes(doc.name.toLocaleLowerCase())
+                        )
+                        .map((doc, idx) => {
+                            return (
+                                <div
+                                    key={idx}
+                                    className={`user-doc-container ${
                                         doc.completed
-                                            ? null
-                                            : () =>
-                                                  openDocument(
-                                                      doc.signatureId,
-                                                      doc.name
-                                                  )
-                                    }
+                                            ? 'completed'
+                                            : 'incomplete'
+                                    }`}
+                                    style={{ display: 'flex' }}
                                 >
-                                    {getDocName(doc.name)}
-                                    {doc.completed && (
-                                        <span className="material-icons">
-                                            check_circle_outline
-                                        </span>
-                                    )}
-                                </p>
-                            </div>
-                        );
-                    })}
+                                    <p
+                                        className="user-doc"
+                                        key={doc.name}
+                                        onClick={
+                                            doc.completed
+                                                ? null
+                                                : () =>
+                                                      openDocument(
+                                                          doc.signatureId,
+                                                          doc.name
+                                                      )
+                                        }
+                                    >
+                                        {getDocName(doc.name)}
+                                        {doc.completed && (
+                                            <span className="material-icons">
+                                                check_circle_outline
+                                            </span>
+                                        )}
+                                    </p>
+                                </div>
+                            );
+                        })}
                 </div>
 
                 <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>

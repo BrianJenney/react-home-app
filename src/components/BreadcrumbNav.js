@@ -134,6 +134,7 @@ class NavBar extends React.Component {
                                     </li>
                                 </Popover>
                             </li>
+                            {/*
                             <li>
                                 <a
                                     label="House Hunt"
@@ -144,6 +145,7 @@ class NavBar extends React.Component {
                                     House Hunt
                                 </a>
                             </li>
+                            */}
                             <li>
                                 <a
                                     label="Dashboard"

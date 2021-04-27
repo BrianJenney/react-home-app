@@ -67,7 +67,9 @@ export default {
                   lastName
                   email
                   address
+                  purchaser
                   buyers{
+                    _id
                     name
                     counterOffers{
                         name

@@ -47,6 +47,8 @@ const Offers = ({ user, order }) => {
         },
     ];
 
+    const relevantSupportingDocs = ['pdpf'];
+
     const getDocName = (name) => {
         const docObject = docsToFill.find(
             ({ type }) => type === name.toLocaleLowerCase()
@@ -90,14 +92,20 @@ const Offers = ({ user, order }) => {
                             >
                                 <div style={{ width: '15%' }}>
                                     <p>{buyer.name}</p>
-                                    {buyer.supportingDocuments.map((doc) => (
-                                        <a href={doc.url}>
-                                            <p>{getDocName(doc.name)}</p>
-                                        </a>
-                                    ))}
+                                    {buyer.supportingDocuments
+                                        .filter((doc) =>
+                                            relevantSupportingDocs.includes(
+                                                doc.name.toLocaleLowerCase()
+                                            )
+                                        )
+                                        .map((doc) => (
+                                            <a key={doc.url} href={doc.url}>
+                                                <p>{getDocName(doc.name)}</p>
+                                            </a>
+                                        ))}
                                 </div>
 
-                                <div style={{ width: '85%' }}>
+                                <div style={{ width: '100%' }}>
                                     {buyer.counterOffers
                                         .filter((offer) =>
                                             ['BCO', 'RPA'].includes(offer.name)
@@ -105,6 +113,7 @@ const Offers = ({ user, order }) => {
                                         .map((doc, i) => {
                                             return (
                                                 <div
+                                                    key={i}
                                                     style={{
                                                         display: 'flex',
                                                         alignItems: 'center',
@@ -113,10 +122,12 @@ const Offers = ({ user, order }) => {
                                                 >
                                                     <div className="offers-download">
                                                         <img
+                                                            height="35px"
+                                                            width="35px"
                                                             alt="download-img"
                                                             src={DocDownload}
                                                         />
-                                                        <div class="white-out" />
+                                                        <div className="white-out" />
                                                         <p
                                                             className="offers-user-doc"
                                                             key={doc.name}

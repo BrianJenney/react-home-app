@@ -1,9 +1,8 @@
-import React from "react";
-import { Collapse } from "reactstrap";
-import API from "../../../api/helpers";
-import PurchaseDoc from "../../../documents/residential_purchase.pdf";
-import FileUpload from "../../../components/FileUpload";
-import { debounce } from "throttle-debounce";
+import React from 'react';
+import { Collapse } from 'reactstrap';
+import API from '../../../api/helpers';
+import FileUpload from '../../../components/FileUpload';
+import { debounce } from 'throttle-debounce';
 
 class PurchaseAgreement extends React.Component {
     constructor(props) {
@@ -13,16 +12,16 @@ class PurchaseAgreement extends React.Component {
             collapse: false,
             form: new FormData(),
             currentOffer: null,
-            purchaseAgreement: ""
+            purchaseAgreement: '',
         };
     }
 
-    componentWillReceiveProps = nextProps => {
+    componentWillReceiveProps = (nextProps) => {
         if (nextProps.currentOffer) {
             this.setState({
                 currentOffer: nextProps.currentOffer.offer || null,
                 purchaseAgreement:
-                    nextProps.currentOffer.purchaseAgreement || ""
+                    nextProps.currentOffer.purchaseAgreement || '',
             });
         }
     };
@@ -32,27 +31,27 @@ class PurchaseAgreement extends React.Component {
     }
 
     handleDrop = (documentType, files) => {
-        files.forEach(file => {
-            this.state.form.set("file", file);
+        files.forEach((file) => {
+            this.state.form.set('file', file);
 
-            this.state.form.set("homeId", this.props.home._id);
-            this.state.form.set("userId", this.props.user.user._id);
-            this.state.form.set("documentType", documentType);
-            API.makeOffer(this.state.form).then(res => {
+            this.state.form.set('homeId', this.props.home._id);
+            this.state.form.set('userId', this.props.user.user._id);
+            this.state.form.set('documentType', documentType);
+            API.makeOffer(this.state.form).then((res) => {
                 this.setState({
-                    purchaseAgreement: res.data.purchaseAgreement || ""
+                    purchaseAgreement: res.data.purchaseAgreement || '',
                 });
             });
         });
     };
 
-    updatePurchasePrice = e => {
+    updatePurchasePrice = (e) => {
         this.setState({ currentOffer: e.target.value });
 
         let obj = {
             homeId: this.props.home._id,
             userId: this.props.user._id,
-            offer: e.target.value
+            offer: e.target.value,
         };
 
         debounce(1000, API.makeOffer(obj));
@@ -61,7 +60,7 @@ class PurchaseAgreement extends React.Component {
     render() {
         return (
             <div className="card p-3">
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <h1 className="pr-4">2</h1>
                     <span className="section-title">
                         Fill Out Purchase Agreement
@@ -69,8 +68,8 @@ class PurchaseAgreement extends React.Component {
                     <span
                         className={
                             this.state.collapse
-                                ? "fa fa-2x fa-angle-up pl-4"
-                                : "fa fa-2x fa-angle-down pl-4"
+                                ? 'fa fa-2x fa-angle-up pl-4'
+                                : 'fa fa-2x fa-angle-down pl-4'
                         }
                         onClick={this.toggle}
                     />
@@ -138,16 +137,13 @@ class PurchaseAgreement extends React.Component {
                         className="d-inline m-2 ml-0"
                     />
                     <p className="paragraph d-inline">
-                        <a className="mr-1" href={PurchaseDoc} download>
-                            Download
-                        </a>
                         and fill out Purchase Agreement
                     </p>
 
                     <FileUpload
-                        title={"Upload Purchase Agreement"}
+                        title={'Upload Purchase Agreement'}
                         handleUpload={this.handleDrop}
-                        documentType={"purchaseAgreement"}
+                        documentType={'purchaseAgreement'}
                     />
 
                     {this.state.purchaseAgreement.length > 0 && (

@@ -1,13 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route, Redirect } from 'react-router-dom';
-
 import { Provider } from 'react-redux';
 import store from './store';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-//we import our component from our component folder to use here
 import SignIn from './pages/Login/SignIn';
 import SignUp from './pages/Registration/Registration';
 import AddProperty from './pages/AddProperty/Index';
