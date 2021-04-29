@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import EditIcon from '../../../img/icon-edit.png';
 import DashboardItem from '../../../components/DashboardItem';
 import API from '../../../api/helpers';
 import HelloSign from 'hellosign-embedded';
 import moment from 'moment';
+import { times } from 'lodash';
 
 const client = new HelloSign();
 
@@ -64,6 +66,19 @@ const Escrow = ({ userDocs, buyer, order }) => {
         return docObject?.title;
     };
 
+    const emdReceipt = (buyer?.supportingDocuments || []).find(
+        (doc) => doc.name === 'EMD'
+    );
+    const rpac = (buyer?.supportingDocuments || []).find(
+        (doc) => doc.name === 'RPAC'
+    );
+
+    const berdDoc = (userDocs || []).find((doc) => doc.name === 'BERD');
+
+    const timeSensitiveDocs = (userDocs || []).filter((doc) =>
+        relevantDocs.includes(doc.name.toLocaleLowerCase())
+    );
+
     return (
         <DashboardItem order={order} title="Escrow">
             <div className="listing-docs">
@@ -97,117 +112,125 @@ const Escrow = ({ userDocs, buyer, order }) => {
                     </p>
                 </div>
 
-                {buyer && (
+                {rpac && (
                     <div>
                         <p>
-                            <a
-                                href={
-                                    (buyer?.supportingDocuments || []).find(
-                                        (doc) => doc.name === 'RPAC'
-                                    )?.url
-                                }
-                            >
+                            <a href={rpac.url}>
                                 Residential Purchase Agreement Copy
                             </a>
                         </p>
                     </div>
                 )}
 
-                <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
-                    <input
-                        type="checkbox"
-                        checked
-                        onChange={() => {}}
-                        className="d-inline m-2 ml-0"
-                    />
-                    <p>
-                        Congratulations, your buyer has offially submitted their
-                        earnest money deposit into escrow. Now both of you are
-                        officially in escrow! Below is the earnest money deposit
-                        receipt. Download and save it for your records.
-                    </p>
-                </div>
-                {buyer && (
-                    <div>
-                        <p>
-                            <a
-                                href={
-                                    (buyer?.supportingDocuments || []).find(
-                                        (doc) => doc.name === 'EMD'
-                                    )?.url
-                                }
-                            >
-                                EMD Receipt
-                            </a>
-                        </p>
-                    </div>
+                {emdReceipt && (
+                    <>
+                        <div
+                            style={{
+                                display: 'inline-flex',
+                                marginTop: '1.25em',
+                            }}
+                        >
+                            <input
+                                type="checkbox"
+                                checked
+                                onChange={() => {}}
+                                className="d-inline m-2 ml-0"
+                            />
+                            <p>
+                                Congratulations, your buyer has offially
+                                submitted their earnest money deposit into
+                                escrow. Now both of you are officially in
+                                escrow! Below is the earnest money deposit
+                                receipt. Download and save it for your records.
+                            </p>
+                        </div>
+
+                        <div>
+                            <p>
+                                <a href={emdReceipt.url}>EMD Receipt</a>
+                            </p>
+                        </div>
+                    </>
                 )}
+                {timeSensitiveDocs.length > 0 && (
+                    <>
+                        <div
+                            style={{
+                                display: 'inline-flex',
+                                marginTop: '1.25em',
+                            }}
+                        >
+                            <input
+                                type="checkbox"
+                                checked
+                                onChange={() => {}}
+                                className="d-inline m-2 ml-0"
+                            />
+                            <p>
+                                Sign the following documents to close escrow and
+                                official sell your home! Do so as soon as
+                                possible as escrow must be closed based off the
+                                timer above. Based off your contract, you have{' '}
+                                {getDaysLeft(
+                                    getEarliestExpirationDate(userDocs)
+                                )}{' '}
+                                days to complete all the escrow steps below
+                                before the timer above ends or the deal will
+                                expire.
+                            </p>
+                        </div>
 
-                <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
-                    <input
-                        type="checkbox"
-                        checked
-                        onChange={() => {}}
-                        className="d-inline m-2 ml-0"
-                    />
-                    <p>
-                        Sign the following documents to close escrow and
-                        official sell your home! Do so as soon as possible as
-                        escrow must be closed based off the timer above. Based
-                        off your contract, you have{' '}
-                        {getDaysLeft(getEarliestExpirationDate(userDocs))} days
-                        to complete all the escrow steps below before the timer
-                        above ends or the deal will expire.
-                    </p>
-                </div>
-
-                <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
-                    <p>
-                        The documents below are due by{' '}
-                        {userDocs && getEarliestExpirationDate(userDocs)}{' '}
-                    </p>
-                </div>
+                        <div
+                            style={{
+                                display: 'inline-flex',
+                                marginTop: '1.25em',
+                            }}
+                        >
+                            <p>
+                                The documents below are due by{' '}
+                                {timeSensitiveDocs &&
+                                    getEarliestExpirationDate(
+                                        timeSensitiveDocs
+                                    )}{' '}
+                            </p>
+                        </div>
+                    </>
+                )}
 
                 <div>
                     <p style={{ color: '#5665C0' }}></p>
-                    {(userDocs || [])
-                        .filter((doc) =>
-                            relevantDocs.includes(doc.name.toLocaleLowerCase())
-                        )
-                        .map((doc, idx) => {
-                            return (
-                                <div
-                                    key={idx}
-                                    className={`user-doc-container ${
+                    {timeSensitiveDocs.map((doc, idx) => {
+                        return (
+                            <div
+                                key={idx}
+                                className={`user-doc-container ${
+                                    doc.completed ? 'completed' : 'incomplete'
+                                }`}
+                                style={{ display: 'flex' }}
+                            >
+                                <p
+                                    className="user-doc"
+                                    key={doc.name}
+                                    onClick={
                                         doc.completed
-                                            ? 'completed'
-                                            : 'incomplete'
-                                    }`}
-                                    style={{ display: 'flex' }}
+                                            ? null
+                                            : () =>
+                                                  openDocument(
+                                                      doc.signatureId,
+                                                      doc.name
+                                                  )
+                                    }
                                 >
-                                    <p
-                                        className="user-doc"
-                                        key={doc.name}
-                                        onClick={
-                                            doc.completed
-                                                ? null
-                                                : () =>
-                                                      openDocument(
-                                                          doc.signatureId,
-                                                          doc.name
-                                                      )
-                                        }
-                                    >
-                                        {getDocName(doc.name)}
-                                        {doc.completed && (
-                                            <span className="material-icons">
-                                                check_circle_outline
-                                            </span>
-                                        )}
-                                    </p>
-                                </div>
-                            );
-                        })}
+                                    {getDocName(doc.name)}
+                                    {doc.completed && (
+                                        <span className="material-icons">
+                                            check_circle_outline
+                                        </span>
+                                    )}
+                                </p>
+                            </div>
+                        );
+                    })}
                 </div>
 
                 <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
@@ -218,6 +241,37 @@ const Escrow = ({ userDocs, buyer, order }) => {
                         className="d-inline m-2 ml-0"
                     />
                     <p>Accept our Brokerage/Escrow Relationship Disclosure</p>
+                </div>
+                <div
+                    className={`user-doc-container ${
+                        berdDoc.completed ? 'completed' : 'incomplete'
+                    }`}
+                    style={{ display: 'flex' }}
+                >
+                    <img
+                        className="doc-sign-icon"
+                        alt="edit icon"
+                        src={EditIcon}
+                    />
+                    <p
+                        className="user-doc"
+                        onClick={
+                            berdDoc.completed
+                                ? null
+                                : () =>
+                                      openDocument(
+                                          berdDoc.signatureId,
+                                          berdDoc.name
+                                      )
+                        }
+                    >
+                        Brokerage/Escrow Relationship Disclosure
+                        {berdDoc.completed && (
+                            <span className="material-icons">
+                                check_circle_outline
+                            </span>
+                        )}
+                    </p>
                 </div>
             </div>
         </DashboardItem>

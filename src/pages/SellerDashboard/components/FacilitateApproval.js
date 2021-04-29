@@ -31,38 +31,43 @@ const FacilitateApproval = ({ buyer, order }) => {
                         Please coordinate with the appraiser.
                     </p>
                 </div>
-                <div>
-                    <p>
-                        Congratulations, your buyer has been approved by their
-                        loan officer! Below is the buyer’s conditional loan
-                        approval.
-                    </p>
-                </div>
+
                 <div>
                     {conditionalLoanApproval && (
-                        <p>
-                            <a href={conditionalLoanApproval?.url}>
-                                Conditional Loan Approval
-                            </a>
-                        </p>
+                        <>
+                            <p>
+                                Congratulations, your buyer has been approved by
+                                their loan officer! Below is the buyer’s
+                                conditional loan approval.
+                            </p>
+                            <p>
+                                <a href={conditionalLoanApproval?.url}>
+                                    Conditional Loan Approval
+                                </a>
+                            </p>
+                        </>
                     )}
                 </div>
 
-                <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
-                    <input
-                        type="checkbox"
-                        checked
-                        onChange={() => {}}
-                        className="d-inline m-2 ml-0"
-                    />
-                    <p>
-                        Below is the buyer’s loan contingency removal. This
-                        means that the buyer is commiting to a firm intent to
-                        close escrow & purchase your property. If they fail to
-                        do so, they will have to forfeit their Earnest Money
-                        Deposit.
-                    </p>
-                </div>
+                {loanContingencyRemoval && (
+                    <div
+                        style={{ display: 'inline-flex', marginTop: '1.25em' }}
+                    >
+                        <input
+                            type="checkbox"
+                            checked
+                            onChange={() => {}}
+                            className="d-inline m-2 ml-0"
+                        />
+                        <p>
+                            Below is the buyer’s loan contingency removal. This
+                            means that the buyer is commiting to a firm intent
+                            to close escrow & purchase your property. If they
+                            fail to do so, they will have to forfeit their
+                            Earnest Money Deposit.
+                        </p>
+                    </div>
+                )}
 
                 <div>
                     {loanContingencyRemoval && (

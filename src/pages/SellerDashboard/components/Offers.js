@@ -63,20 +63,31 @@ const Offers = ({ user, order }) => {
     return (
         <DashboardItem order={order} title="Offers">
             <div className="listing-docs">
-                <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
-                    <input
-                        type="checkbox"
-                        checked
-                        onChange={() => {}}
-                        className="d-inline m-2 ml-0"
-                    />
-                    <p>
-                        Congratulations, you’ve got an offer! Now you must
-                        review the offer to see if it matches your needs! After
-                        reading the offer you can accept,decline, or counter
-                        offer the buyer if there's anything missing.
-                    </p>
-                </div>
+                {buyersWithPurchaseAgreements.length < 1 && (
+                    <div
+                        style={{ display: 'inline-flex', marginTop: '1.25em' }}
+                    >
+                        <p>No offers yet.</p>
+                    </div>
+                )}
+                {buyersWithPurchaseAgreements.length > 0 && (
+                    <div
+                        style={{ display: 'inline-flex', marginTop: '1.25em' }}
+                    >
+                        <input
+                            type="checkbox"
+                            checked
+                            onChange={() => {}}
+                            className="d-inline m-2 ml-0"
+                        />
+                        <p>
+                            Congratulations, you’ve got an offer! Now you must
+                            review the offer to see if it matches your needs!
+                            After reading the offer you can accept,decline, or
+                            counter offer the buyer if there's anything missing.
+                        </p>
+                    </div>
+                )}
 
                 <div>
                     {buyersWithPurchaseAgreements.map((buyer, idx) => {

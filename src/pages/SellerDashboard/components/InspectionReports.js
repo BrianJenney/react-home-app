@@ -62,7 +62,7 @@ const InspectionReports = ({ buyer, order }) => {
                         to coordinate a day and time to conduct inspections with
                         their general inspector & specialized inspectors
                         thereafter. There may be multiple inspections depending
-                        on the buyer’s.
+                        on the buyer.
                     </p>
                 </div>
 
@@ -76,7 +76,7 @@ const InspectionReports = ({ buyer, order }) => {
                     <p>
                         Be present for the inspections allowing property access
                         and answering any questions the inspectors may have.
-                        Inspections must be conducted within [X] days. Follow
+                        Inspections must be conducted within a few days. Follow
                         the timer above for further reference.
                     </p>
                 </div>
@@ -204,12 +204,12 @@ const InspectionReports = ({ buyer, order }) => {
                         className="d-inline m-2 ml-0"
                     />
                     <p>
-                        Now that both Lori and you have agreed upon the
-                        respective home repairs if any, Lori has signed a
-                        Contingency removal. This means that Lori is committing
-                        to a firm intent of closing escrow, waiving their
-                        ability to reclaim their Earnest Money Deposit (EMD)
-                        from the intiation of Escrow for reasons on home
+                        Once {buyer.name} and you have agreed upon the
+                        respective home repairs if any, {buyer.name} has signed
+                        a Contingency removal. This means that {buyer.name} is
+                        committing to a firm intent of closing escrow, waiving
+                        their ability to reclaim their Earnest Money Deposit
+                        (EMD) from the intiation of Escrow for reasons on home
                         repair.Below is a copy for your records of the signed
                         physical inspection contingency removal.
                     </p>

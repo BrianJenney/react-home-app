@@ -27,6 +27,10 @@ const ListingDocuments = ({ order, userDocs }) => {
             type: 'spq',
         },
         {
+            title: 'SBSA: Statewide Buyer Seller Advisory',
+            type: 'sbsa',
+        },
+        {
             title: 'TDS: Transfer Disclosure Statement',
             type: 'tds',
         },

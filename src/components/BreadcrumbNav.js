@@ -95,12 +95,10 @@ class NavBar extends React.Component {
                                 />
                             </li>
                             <li>
-                                <a
-                                    className="crumb-link"
-                                    onClick={this.handleClick}
-                                >
-                                    {userType.toUpperCase()}
+                                <a className="crumb-link">
+                                    {(user?.name || '').toUpperCase()}
                                 </a>
+                                {/*
                                 <Popover
                                     id="simple-popper"
                                     open={open}
@@ -133,6 +131,7 @@ class NavBar extends React.Component {
                                         Seller
                                     </li>
                                 </Popover>
+                            */}
                             </li>
                             {/*
                             <li>
@@ -156,6 +155,7 @@ class NavBar extends React.Component {
                                     Dashboard
                                 </a>
                             </li>
+                            {/*
                             <li className="last-li">
                                 <a
                                     label="Messages"
@@ -166,6 +166,7 @@ class NavBar extends React.Component {
                                     Messages
                                 </a>
                             </li>
+                            */}
                             {user && !user.isLogged && (
                                 <li>
                                     <a

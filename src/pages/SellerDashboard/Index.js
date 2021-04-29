@@ -23,7 +23,7 @@ const Dashboard = () => {
             const user = res?.data?.data?.user;
             setUserDocs(user?.documents);
             const purchaser = (user?.buyers || []).find(
-                (buyer) => buyer._id === user?.purchaser
+                (buyer) => buyer?._id === user?.purchaser
             );
 
             setBuyer(purchaser);
@@ -54,7 +54,7 @@ const Dashboard = () => {
                 <ProfileWizard order={1} />
                 <ListingDocuments order={2} user={user} userDocs={userDocs} />
                 <Offers order={3} user={user} userDocs={userDocs} />
-                {buyer.name && (
+                {buyer?.name && (
                     <>
                         <Escrow
                             order={4}
