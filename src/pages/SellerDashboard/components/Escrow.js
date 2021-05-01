@@ -232,47 +232,6 @@ const Escrow = ({ userDocs, buyer, order }) => {
                         );
                     })}
                 </div>
-
-                <div style={{ display: 'inline-flex', marginTop: '1.25em' }}>
-                    <input
-                        type="checkbox"
-                        checked
-                        onChange={() => {}}
-                        className="d-inline m-2 ml-0"
-                    />
-                    <p>Accept our Brokerage/Escrow Relationship Disclosure</p>
-                </div>
-                <div
-                    className={`user-doc-container ${
-                        berdDoc.completed ? 'completed' : 'incomplete'
-                    }`}
-                    style={{ display: 'flex' }}
-                >
-                    <img
-                        className="doc-sign-icon"
-                        alt="edit icon"
-                        src={EditIcon}
-                    />
-                    <p
-                        className="user-doc"
-                        onClick={
-                            berdDoc.completed
-                                ? null
-                                : () =>
-                                      openDocument(
-                                          berdDoc.signatureId,
-                                          berdDoc.name
-                                      )
-                        }
-                    >
-                        Brokerage/Escrow Relationship Disclosure
-                        {berdDoc.completed && (
-                            <span className="material-icons">
-                                check_circle_outline
-                            </span>
-                        )}
-                    </p>
-                </div>
             </div>
         </DashboardItem>
     );
