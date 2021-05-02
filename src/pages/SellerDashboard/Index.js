@@ -36,7 +36,6 @@ const Dashboard = () => {
         return <Wizard />;
     }
 
-    console.log(process.env, 'ENV');
     const ws = new WebSocket(`${process.env.REACT_APP_SOCKET_URL}/${user._id}`);
 
     ws.onmessage = function (e) {

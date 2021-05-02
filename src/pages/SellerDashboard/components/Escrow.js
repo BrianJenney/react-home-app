@@ -4,7 +4,6 @@ import DashboardItem from '../../../components/DashboardItem';
 import API from '../../../api/helpers';
 import HelloSign from 'hellosign-embedded';
 import moment from 'moment';
-import { times } from 'lodash';
 
 const client = new HelloSign();
 
@@ -208,6 +207,11 @@ const Escrow = ({ userDocs, buyer, order }) => {
                                 }`}
                                 style={{ display: 'flex' }}
                             >
+                                <img
+                                    className="doc-sign-icon"
+                                    alt="edit icon"
+                                    src={EditIcon}
+                                />
                                 <p
                                     className="user-doc"
                                     key={doc.name}
