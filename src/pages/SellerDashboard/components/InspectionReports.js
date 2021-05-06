@@ -33,6 +33,10 @@ const InspectionReports = ({ buyer, order }) => {
             title: 'Their Counter Request',
             type: 'rrco',
         },
+        {
+            title: 'Inspection Report',
+            type: 'ir',
+        },
     ];
 
     const getDocName = (name) => {
@@ -45,6 +49,7 @@ const InspectionReports = ({ buyer, order }) => {
     const physicalContingency = buyer.supportingDocuments.find(
         (doc) => doc.name === 'PICR'
     );
+
     return (
         <DashboardItem order={order} title="Facilitate Inspections">
             <div className="listing-docs">
@@ -92,13 +97,13 @@ const InspectionReports = ({ buyer, order }) => {
                     >
                         <div style={{ width: '15%' }}>
                             <p>{buyer?.name}</p>
-                            {(buyer?.supportingDocuments || []).map(
-                                (doc, i) => (
+                            {(buyer?.supportingDocuments || [])
+                                .filter((doc) => doc.name === 'IR')
+                                .map((doc, i) => (
                                     <a key={i} href={doc.url}>
                                         <p>{getDocName(doc.name)}</p>
                                     </a>
-                                )
-                            )}
+                                ))}
                         </div>
 
                         <div style={{ width: '100%' }}>

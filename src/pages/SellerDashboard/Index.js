@@ -30,11 +30,12 @@ const Dashboard = () => {
         });
     }, []);
 
-    const { sellerWizardCompleted } = user;
+    // NOTE: Removed for MVP
+    // const { sellerWizardCompleted } = user;
 
-    if (!sellerWizardCompleted) {
-        return <Wizard />;
-    }
+    // if (!sellerWizardCompleted) {
+    //     return <Wizard />;
+    // }
 
     const ws = new WebSocket(`${process.env.REACT_APP_SOCKET_URL}/${user._id}`);
 
@@ -51,31 +52,31 @@ const Dashboard = () => {
         <div>
             <div className="container dashboard w-80 h-100">
                 <h1>Dashboard</h1>
-                <ProfileWizard order={1} />
-                <ListingDocuments order={2} user={user} userDocs={userDocs} />
-                <Offers order={3} user={user} userDocs={userDocs} />
+
+                <ListingDocuments order={1} user={user} userDocs={userDocs} />
+                <Offers order={2} user={user} userDocs={userDocs} />
                 {buyer?.name && (
                     <>
                         <Escrow
-                            order={4}
+                            order={3}
                             user={user}
                             userDocs={userDocs}
                             buyer={buyer}
                         />
                         <InspectionReports
-                            order={5}
+                            order={4}
                             user={user}
                             userDocs={userDocs}
                             buyer={buyer}
                         />
                         <FacilitateApproval
-                            order={6}
+                            order={5}
                             user={user}
                             userDocs={userDocs}
                             buyer={buyer}
                         />
                         <FinishLine
-                            order={7}
+                            order={6}
                             user={user}
                             userDocs={userDocs}
                             buyer={buyer}

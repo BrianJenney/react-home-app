@@ -50,7 +50,6 @@ const Escrow = ({ userDocs, buyer, order }) => {
             })
             .map(({ expirationTime }) => moment(Number(expirationTime)));
 
-        console.log(moment.min(expirationTimes).format('YYYY-MM-DD HH:mm:ss'));
         return moment.min(expirationTimes).format('YYYY-MM-DD HH:mm:ss');
     };
 
@@ -71,8 +70,6 @@ const Escrow = ({ userDocs, buyer, order }) => {
     const rpac = (buyer?.supportingDocuments || []).find(
         (doc) => doc.name === 'RPAC'
     );
-
-    const berdDoc = (userDocs || []).find((doc) => doc.name === 'BERD');
 
     const timeSensitiveDocs = (userDocs || []).filter((doc) =>
         relevantDocs.includes(doc.name.toLocaleLowerCase())
