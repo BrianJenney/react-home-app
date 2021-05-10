@@ -222,7 +222,7 @@ const FinishLine = ({ user, order, userDocs, buyer }) => {
                                 className="d-inline m-2 ml-0"
                             />
                             <p>
-                                Please call us at 510-555-5555 with any
+                                Please call us at 415-939-6521 with any
                                 questions or if you are having trouble
                                 completing the transaction
                             </p>

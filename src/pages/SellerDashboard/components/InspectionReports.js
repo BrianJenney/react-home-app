@@ -97,16 +97,20 @@ const InspectionReports = ({ buyer, order }) => {
                     >
                         <div style={{ width: '15%' }}>
                             <p>{buyer?.name}</p>
-                            {(buyer?.supportingDocuments || [])
-                                .filter((doc) => doc.name === 'IR')
-                                .map((doc, i) => (
-                                    <a key={i} href={doc.url}>
-                                        <p>{getDocName(doc.name)}</p>
-                                    </a>
-                                ))}
                         </div>
 
                         <div style={{ width: '100%' }}>
+                            {(buyer?.supportingDocuments || [])
+                                .filter((doc) => doc.name === 'IR')
+                                .map((doc, i) => (
+                                    <a
+                                        key={i}
+                                        href={doc.url}
+                                        style={{ marginLeft: 0 }}
+                                    >
+                                        <p>{getDocName(doc.name)}</p>
+                                    </a>
+                                ))}
                             {(buyer?.counterOffers || [])
                                 .filter((offer) =>
                                     ['RR', 'RRCO'].includes(offer.name)
@@ -163,14 +167,14 @@ const InspectionReports = ({ buyer, order }) => {
                                                         color: '#A2AAB6',
                                                     }}
                                                 >
-                                                    Expires In:{' '}
+                                                    Expires On:{' '}
                                                 </span>
                                                 <p>
                                                     {moment(
                                                         doc.expirationTime,
                                                         'x'
                                                     ).format(
-                                                        'DD MMM YYYY hh:mm a'
+                                                        'MMMM DD YYYY hh:mm a'
                                                     )}
                                                 </p>
                                             </div>
@@ -181,7 +185,7 @@ const InspectionReports = ({ buyer, order }) => {
                                             >
                                                 <p className="call-us">
                                                     Need Help? Call Us at
-                                                    555-555-1234
+                                                    415-939-6521
                                                 </p>
                                             </div>
                                             <div>

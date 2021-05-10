@@ -196,7 +196,7 @@ const Offers = ({ user, order }) => {
                                                     >
                                                         <p className="call-us">
                                                             Need Help? Call Us
-                                                            at 555-555-1234
+                                                            at 415-939-6521
                                                         </p>
                                                     </div>
                                                     <div>

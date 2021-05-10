@@ -50,7 +50,7 @@ const Escrow = ({ userDocs, buyer, order }) => {
             })
             .map(({ expirationTime }) => moment(Number(expirationTime)));
 
-        return moment.min(expirationTimes).format('YYYY-MM-DD HH:mm:ss');
+        return moment.min(expirationTimes).format('MMMM DD YYYY hh:mm a');
     };
 
     const getDaysLeft = (date) => {
