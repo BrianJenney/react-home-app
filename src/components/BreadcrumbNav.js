@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { switchUser } from '../actions/switchUser';
-import greenLogo from '../img/micasa_green_logo.svg';
+import greenLogo from '../img/logo-micasa-deepgreen-text.svg';
 import API from '../api/helpers';
 import '../styles/breadcrumb-nav.css';
 import { logout } from '../actions/logout';
@@ -94,11 +94,11 @@ class NavBar extends React.Component {
                                     src={greenLogo}
                                 />
                             </li>
+                            {/*
                             <li>
                                 <a className="crumb-link">
                                     {(user?.name || '').toUpperCase()}
                                 </a>
-                                {/*
                                 <Popover
                                     id="simple-popper"
                                     open={open}
@@ -131,8 +131,8 @@ class NavBar extends React.Component {
                                         Seller
                                     </li>
                                 </Popover>
-                            */}
                             </li>
+                            */}
                             {/*
                             <li>
                                 <a

@@ -6,4 +6,12 @@ md-dialog {
   margin-left: 0px !important; }
 
 body {
-  position: relative; }
+  position: relative;
+  background-image: linear-gradient(to bottom right, #5ed2d2, #5665c0);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }

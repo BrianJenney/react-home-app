@@ -24,12 +24,12 @@
     height: 56px;
     width: 90%;
     background-color: #f5f5f5;
-    border-radius: 1em; }
+    border-radius: 60px; }
   .bread-crumb-nav nav {
     display: table;
     overflow: hidden;
     width: 100%;
-    border-radius: 1em; }
+    border-radius: 60px; }
   .bread-crumb-nav ul {
     display: table-row;
     list-style: none;
@@ -38,11 +38,12 @@
     background-color: #f5f5f5 !important; }
   .bread-crumb-nav li {
     list-style-type: none;
-    display: table-cell;
-    vertical-align: middle; }
+    display: inline-block;
+    vertical-align: middle;
+    width: 25%; }
   .bread-crumb-nav .crumb-link {
     font-size: 0.8rem;
-    font-weight: 100;
+    font-weight: 500;
     display: block;
     padding: 18px 0;
     position: relative;
@@ -50,7 +51,8 @@
     color: dimgrey !important;
     background: #f5f5f5; }
   .bread-crumb-nav .micasa-nav-logo {
-    width: 80px; }
+    width: 94px;
+    /*margin-left: -144px;*/ }
   .bread-crumb-nav a,
   .bread-crumb-nav a:link,
   .bread-crumb-nav a:visited,

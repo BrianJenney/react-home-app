@@ -75,7 +75,22 @@ class SignIn extends React.Component {
         return (
             <div>
                 <div className="col-xs-6 col-xs-offset-3 sign-up-wrapper">
-                    <h1 className="sign-up-header">Welcome to Micasa</h1>
+                    <center>
+                        <div class="banner1"></div>
+                    </center>
+                    <div class="signupinput">
+                        <TextField
+                            floatingLabelText="Enter your email to join!"
+                            onChange={this.onChange.bind(this)}
+                            fullWidth={true}
+                            id="email"
+                            type="text"
+                        />
+                        <a
+                            className="sign-up-actions"
+                            href="https://www.micasa.app/#/sign-up"
+                        ></a>
+                    </div>
                     <div className="sign-up-fields">
                         <TextField
                             floatingLabelText="Email"
@@ -84,35 +99,36 @@ class SignIn extends React.Component {
                             id="email"
                             type="text"
                         />
-
-                        <TextField
-                            floatingLabelText="Password"
-                            onChange={this.onChange.bind(this)}
-                            fullWidth={true}
-                            id="password"
-                            maxLength="12"
-                            type="password"
-                        />
+                        <span>
+                            <TextField
+                                floatingLabelText="Password"
+                                onChange={this.onChange.bind(this)}
+                                fullWidth={true}
+                                id="password"
+                                maxLength="12"
+                                type="password"
+                            />
+                        </span>
+                        <a className="sign-in-actions">
+                            <RaisedButton
+                                primary={true}
+                                disabled={
+                                    this.state.password.length < 1 ||
+                                    this.state.email.length < 1 ||
+                                    this.state.processing
+                                }
+                                onClick={this.login}
+                                label={
+                                    this.state.processing
+                                        ? 'Processing...'
+                                        : 'Login'
+                                }
+                            />
+                        </a>
                     </div>
                     <p style={{ marginTop: '1em' }} className="text-muted">
                         {this.state.error}
                     </p>
-                    <div className="sign-in-actions">
-                        <RaisedButton
-                            primary={true}
-                            disabled={
-                                this.state.password.length < 1 ||
-                                this.state.email.length < 1 ||
-                                this.state.processing
-                            }
-                            onClick={this.login}
-                            label={
-                                this.state.processing
-                                    ? 'Processing...'
-                                    : 'Login'
-                            }
-                        />
-                    </div>
                 </div>
             </div>
         );

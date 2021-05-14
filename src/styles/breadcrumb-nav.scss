@@ -25,7 +25,7 @@
         height: 56px;
         width: 90%;
         background-color: #f5f5f5;
-        border-radius: 1em;
+        border-radius: 60px;
     }
     z-index: 1;
 
@@ -33,7 +33,7 @@
         display: table;
         overflow: hidden;
         width: 100%;
-        border-radius: 1em;
+        border-radius: 60px;
     }
 
     ul {
@@ -46,13 +46,14 @@
 
     li {
         list-style-type: none;
-        display: table-cell;
+        display: inline-block;
         vertical-align: middle;
+        width: 25%;
     }
 
     .crumb-link {
         font-size: 0.8rem;
-        font-weight: 100;
+        font-weight: 500;
         display: block;
         padding: 18px 0;
         position: relative;
@@ -62,7 +63,8 @@
     }
 
     .micasa-nav-logo {
-        width: 80px;
+        width: 94px;
+        /*margin-left: -144px;*/
     }
 
     a,
