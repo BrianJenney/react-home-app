@@ -226,7 +226,7 @@ const InspectionReports = ({ buyer, order }) => {
                 <div>
                     {physicalContingency && (
                         <p>
-                            <a href={physicalContingency?.url}>
+                            <a target="_blank" href={physicalContingency?.url}>
                                 Physical Contingency
                             </a>
                         </p>

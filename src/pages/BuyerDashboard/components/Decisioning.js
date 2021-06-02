@@ -1,9 +1,9 @@
-import React from "react";
-import { Collapse } from "reactstrap";
-import API from "../../../api/helpers";
-import ChatIcon from "../../../img/icon-chat.svg";
-import DialogModal from "../../../components/modals/Message";
-import { find } from "lodash";
+import React from 'react';
+import { Collapse } from 'reactstrap';
+import API from '../../../api/helpers';
+import ChatIcon from '../../../img/icon-chat.svg';
+import DialogModal from '../../../components/modals/Message';
+import { find } from 'lodash';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class Dashboard extends React.Component {
         this.state = {
             open: false,
             collapse: false,
-            offerUser: { email: "" }
+            offerUser: { email: '' },
         };
     }
 
@@ -20,18 +20,18 @@ class Dashboard extends React.Component {
         this.setState({ collapse: !this.state.collapse });
     }
 
-    componentDidUpdate = prevProps => {
+    componentDidUpdate = (prevProps) => {
         const { home, user } = this.props;
         if (prevProps.home !== home) {
             this.props.offerActions.getOffers(user._id);
         }
     };
 
-    openMessage = offer => {
+    openMessage = (offer) => {
         this.setState({
             open: true,
             currentHome: { _id: offer.homeId },
-            offerUser: { email: offer.seller[0].email }
+            offerUser: { email: offer.seller[0].email },
         });
     };
 
@@ -39,9 +39,9 @@ class Dashboard extends React.Component {
         this.setState({ open: false });
     };
 
-    acceptOffer = offer => {
+    acceptOffer = (offer) => {
         //TODO: make sure this works as expected
-        API.buyerAcceptOffer(offer).then(res => {
+        API.buyerAcceptOffer(offer).then((res) => {
             console.log(res);
         });
     };
@@ -70,7 +70,7 @@ class Dashboard extends React.Component {
                     </span>
                 </div>
                 <div className="col-4 text-center">
-                    <a href={offer.purchaseAgreement}>
+                    <a target="_blank" href={offer.purchaseAgreement}>
                         <i className="lightGrey fa fa-2x fa-file d-inline" />
                     </a>
                 </div>
@@ -131,20 +131,20 @@ class Dashboard extends React.Component {
         const { offers, home } = this.props;
         return (
             <div className="card p-3">
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <h1 className="pr-4">4</h1>
                     <span className="section-title">Decisioning</span>
                     <span
                         className={
                             this.state.collapse
-                                ? "fa fa-2x fa-angle-up pl-4"
-                                : "fa fa-2x fa-angle-down pl-4"
+                                ? 'fa fa-2x fa-angle-up pl-4'
+                                : 'fa fa-2x fa-angle-down pl-4'
                         }
                         onClick={this.toggle}
                     />
                 </div>
                 <Collapse isOpen={this.state.collapse}>
-                    {offers && home ? this.renderOffers(offers, home) : ""}
+                    {offers && home ? this.renderOffers(offers, home) : ''}
                     {home && (
                         <DialogModal
                             closeModal={this.closeModal.bind(this)}

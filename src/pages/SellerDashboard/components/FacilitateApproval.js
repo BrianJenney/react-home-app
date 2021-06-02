@@ -41,7 +41,10 @@ const FacilitateApproval = ({ buyer, order }) => {
                                 conditional loan approval.
                             </p>
                             <p>
-                                <a href={conditionalLoanApproval?.url}>
+                                <a
+                                    target="_blank"
+                                    href={conditionalLoanApproval?.url}
+                                >
                                     Conditional Loan Approval
                                 </a>
                             </p>
@@ -72,7 +75,10 @@ const FacilitateApproval = ({ buyer, order }) => {
                 <div>
                     {loanContingencyRemoval && (
                         <p>
-                            <a href={loanContingencyRemoval?.url}>
+                            <a
+                                target="_blank"
+                                href={loanContingencyRemoval?.url}
+                            >
                                 Loan Contingency Removal
                             </a>
                         </p>

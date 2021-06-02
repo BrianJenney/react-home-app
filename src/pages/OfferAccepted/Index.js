@@ -49,7 +49,10 @@ class OfferAccepted extends React.Component {
                                 Contact your buyer informing them to contact
                                 their mortgage lender. They will need to submit
                                 the{' '}
-                                <a href={this.state.offer.purchaseAgreement}>
+                                <a
+                                    target="_blank"
+                                    href={this.state.offer.purchaseAgreement}
+                                >
                                     accepted purchase agreement
                                 </a>{' '}
                                 . Your lender will handle the rest of the
@@ -73,7 +76,10 @@ class OfferAccepted extends React.Component {
 
                             <p>
                                 Contact your mortgage lender & submit your{' '}
-                                <a href={this.state.offer.purchaseAgreement}>
+                                <a
+                                    target="_blank"
+                                    href={this.state.offer.purchaseAgreement}
+                                >
                                     accepted purchase agreement
                                 </a>{' '}
                                 . Your lender will handle the rest of the

@@ -38,7 +38,9 @@ const FileUpload = ({
     return (
         <div className="uplopad-download">
             <div className="title">
-                <a href={downloadUrl}>{title}</a>
+                <a target="_blank" href={downloadUrl}>
+                    {title}
+                </a>
             </div>
 
             <div className="actions-container">

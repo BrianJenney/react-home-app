@@ -152,7 +152,10 @@ class PurchaseAgreement extends React.Component {
                                 className="fa fa-file-pdf-o d-inline mr-2"
                                 aria-hidden="true"
                             />
-                            <a href={this.state.purchaseAgreement}>
+                            <a
+                                target="_blank"
+                                href={this.state.purchaseAgreement}
+                            >
                                 {this.state.purchaseAgreement}
                             </a>
                         </div>

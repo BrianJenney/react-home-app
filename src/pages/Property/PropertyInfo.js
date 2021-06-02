@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import NavBar from "../../components/BreadcrumbNav";
-import TopNav from "../../components/TopNav";
-import API from "../../api/helpers";
-import moment from "moment";
-import "../../styles/propertyInfo.css";
-import DialogModal from "../../components/modals/Message";
+import React, { Component } from 'react';
+import NavBar from '../../components/BreadcrumbNav';
+import TopNav from '../../components/TopNav';
+import API from '../../api/helpers';
+import moment from 'moment';
+import '../../styles/propertyInfo.css';
+import DialogModal from '../../components/modals/Message';
 
-const FontAwesome = require("react-fontawesome");
+const FontAwesome = require('react-fontawesome');
 
 class Property extends Component {
     state = {
@@ -15,16 +15,16 @@ class Property extends Component {
         monthlyPayment: 0,
         open: false,
         messages: [],
-        user: null
+        user: null,
     };
 
     componentDidMount = () => {
-        API.getHome(this.props.match.params.id).then(response => {
+        API.getHome(this.props.match.params.id).then((response) => {
             this.setState({
                 mainImg: response.data.doc.imgs[0],
                 property: response.data.doc,
                 monthlyPayment: response.data.monthly,
-                user: response.data.user
+                user: response.data.user,
             });
         });
     };
@@ -62,9 +62,7 @@ class Property extends Component {
                                     <button
                                         onClick={() => {
                                             this.props.history.replace(
-                                                `/buyerdashboard/${
-                                                    this.state.property._id
-                                                }`
+                                                `/buyerdashboard/${this.state.property._id}`
                                             );
                                         }}
                                         className="btn btn-default btn-offer"
@@ -72,7 +70,10 @@ class Property extends Component {
                                         Make an Offer
                                     </button>
                                     <div className="btn-toolbar">
-                                        <a href="https://rocketmortgage.com">
+                                        <a
+                                            target="_blank"
+                                            href="https://rocketmortgage.com"
+                                        >
                                             <button className="btn btn-default">
                                                 Get Prequalified
                                             </button>
@@ -92,9 +93,9 @@ class Property extends Component {
                         <div className="details">
                             <div className="address-details">
                                 <h3>
-                                    {this.state.property.address},{" "}
-                                    {this.state.property.city}{" "}
-                                    {this.state.property.state},{" "}
+                                    {this.state.property.address},{' '}
+                                    {this.state.property.city}{' '}
+                                    {this.state.property.state},{' '}
                                     {this.state.property.zipCode}
                                 </h3>
                             </div>
@@ -114,7 +115,7 @@ class Property extends Component {
                                 <span>
                                     <FontAwesome name="wrench" />
                                     {moment(this.state.property.yearBuilt).get(
-                                        "year"
+                                        'year'
                                     )}
                                 </span>
                                 <span className="details-property-type">

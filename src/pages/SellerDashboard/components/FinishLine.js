@@ -109,7 +109,9 @@ const FinishLine = ({ user, order, userDocs, buyer }) => {
                             </p>
                         </div>
                         <p>
-                            <a href={essDoc?.url}>Buyer's ESS Wire Receipt</a>
+                            <a target="_blank" href={essDoc?.url}>
+                                Buyer's ESS Wire Receipt
+                            </a>
                         </p>
                     </>
                 )}

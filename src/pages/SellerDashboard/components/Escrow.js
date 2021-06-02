@@ -111,7 +111,7 @@ const Escrow = ({ userDocs, buyer, order }) => {
                 {rpac && (
                     <div>
                         <p>
-                            <a href={rpac.url}>
+                            <a target="_blank" href={rpac.url}>
                                 Residential Purchase Agreement Copy
                             </a>
                         </p>
@@ -143,7 +143,9 @@ const Escrow = ({ userDocs, buyer, order }) => {
 
                         <div>
                             <p>
-                                <a href={emdReceipt.url}>EMD Receipt</a>
+                                <a target="_blank" href={emdReceipt.url}>
+                                    EMD Receipt
+                                </a>
                             </p>
                         </div>
                     </>
